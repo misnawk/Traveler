@@ -1,0 +1,211 @@
+
+main {
+    padding-top:141px; /* header와 nav의 높이에 따라 조정 */
+    padding-bottom: 50px;
+  }
+body, html {
+    height: 100%;
+    margin: 0;
+    
+}
+.bgimg {
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search-box {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    width: 600px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.search-box input {
+    border: none;
+    width:500px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+.search-box button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+.search-box button:hover {
+    background-color: #0056b3;
+}
+
+
+/* best 여행지 */
+
+.best-trip {
+    display: flex;
+    gap: 40px;
+    padding-left: 80px;
+}
+.best_btn {
+    background-color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.best_btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.best_btn img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.best_btn h3 {
+    margin-top: 10px;
+    font-size: 1.2em;
+    
+}
+.best_text {
+    font-weight:bolder;
+   padding-left: 80px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+
+}   
+/* 게시판 */
+.community_text{
+    
+    font-weight:bolder;
+   
+  
+    
+}
+.coummunity_top{
+    display: flex;
+    margin-top: 100px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+.community_detail_btn{
+    background-color: #007bff;
+    width: 150px;
+    height: 50px;
+    margin-right: 20px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight:bolder;
+    border-radius: 10px;
+    transition: all 0.3s;
+ 
+    
+}
+.community_detail_btn:hover{
+    background-color: lightskyblue;
+ 
+    
+}
+
+
+
+
+.coummunity_title{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.coummunity_title button{
+    width: 100%;
+    text-align: left;
+    font-weight:bolder;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid  lightslategray;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.coummunity_title button p{
+  margin-left: 40px;
+}
+.coummunity_title button:hover{
+    background-color: #5050FF;
+    color: #fff;
+    font-weight:bolder;
+}
+.package_text{
+    padding-left: 20px;
+    margin-bottom: 20px;
+    margin-top: 100px;
+}
+.package_top{
+    margin-bottom: 50px;
+}
+.package_container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+.package_btn{
+    background-color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.package_btn img {
+    width: 400px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.package_btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.more{
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.more_btn{
+    width: 500px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff;
+    cursor: pointer;
+
+
+}
+.more_btn:hover{
+
+    background-color: #5050FF;
+    
+
+}
+
+
+
+.trip_container{
+    display: none;
+
+    
+}

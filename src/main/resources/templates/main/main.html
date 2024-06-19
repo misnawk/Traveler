@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="/css/main/main.css">
+    <script src="/js/header_foter/header.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<script src="/js/header_foter/header.js"></script>
+<main>
+    <div class="bgimg" style="background-image: url('./imgs/serchimg.jpg');">
+        <div class="search-box">
+            <input type="text" placeholder="여행지를 검색해보세요">
+            <button>검색</button>
+        </div>
+    </div>
+
+    <div class="best-container">
+        <div class="best_top"><h3 class="best_text">BEST 여행지 추천</h3></div>
+        <div class="best-trip">
+            <button type="button" class="best_btn">
+                <img src="/imgs/일본1.jpeg" alt="도쿄">
+                <h3>도쿄</h3>
+            </button>
+            <!-- 반복된 버튼들 생략 -->
+        </div>
+    </div>
+
+    <div class="community_container">
+        <div class="coummunity_top">
+            <h3 class="community_text">trabeler들의 진짜 여행후기</h3>
+            <button class="community_detail_btn">더보기</button>
+        </div>
+        <div class="coummunity_box">
+            <div class="coummunity_title">
+                <button><p>제목제목</p></button>
+            </div>
+            <!-- 반복된 제목들 생략 -->
+        </div>
+    </div>
+    <div class="package">
+        <div class="package_top">
+            <h3 class="package_text">현재 뜨고 있는 패키지상품들</h3>
+        </div>
+        <div class="package_container">
+            <button type="button" class="package_btn">
+                <img src="/imgs/파타야.jpg" alt="도쿄">
+                <h3>방콕&파타야 5/6</h3>
+            </button>
+        </div>
+    </div>
+
+    <div class="more" id="more">
+        <button type="button" class="more_btn">더보기</button>
+    </div>
+
+    <div class="trip_container" id="trip_container" style="display: none;">
+        <div class="package_top">
+            <h3 class="package_text">현재 뜨고 있는 패키지상품들</h3>
+        </div>
+        <div>
+            <button type="button" class="package_btn">
+                <img src="/imgs/파타야.jpg" alt="방콕&파타야 5/6">
+                <h3>방콕&파타야 5/6</h3>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $("#header-placeholder").load("/header.html");
+            $("#foter-placeholder").load("/footer.html");
+
+            $("#more").click(function(){
+                $("#trip_container").show();
+                $("#more").hide();
+            });
+        });
+    </script>
+</main>
+<div id="foter-placeholder"></div>
+</body>
+</html>
