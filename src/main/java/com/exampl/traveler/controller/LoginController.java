@@ -16,7 +16,7 @@ public class LoginController {
         return "/login/binLogin";
     }
 
-    @RequestMapping("/signUP")
+    @RequestMapping("/signUp")
     public String signUp(){
         return "/login/signUp";
     }
