@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
+
+    @RequestMapping("/")
+    public String main(Model model){
+        return "/main/main";
+    }
     @GetMapping("/header")
     public String Header(Model model) {
         return "header";
@@ -15,10 +20,5 @@ public class MainController {
     public String Footer(Model model){
         return "foter";
     }
-    @RequestMapping("/")
-    public String main(Model model){
-        return "/main/main";
-    }
-
 
 }

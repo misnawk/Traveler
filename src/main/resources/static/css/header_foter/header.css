@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+
 }
 
 header {
@@ -10,6 +10,7 @@ header {
   left: 0;
   background-color: white;
   border-bottom: 1px solid #eaeaea;
+  z-index: 1;
 }
 
 .header_content {
@@ -17,6 +18,10 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+}
+.logo a{
+  text-decoration: none;
+  color: #3b75ff;
 }
 
 .logo {
@@ -37,8 +42,7 @@ header {
   margin-right: 5px;
 }
 
-.schedule,
-.mypage {
+.schedule, .mypage {
   margin-left: 20px;
   padding: 8px 16px;
   border: 1px solid #ccc;
@@ -51,7 +55,7 @@ nav {
   background-color: #f8f8f8;
   border-top: 1px solid #eaeaea;
   position: fixed;
-  top: 100px; /* header의 높이에 따라 조정 */
+  top : 80px;
   left: 0;
   z-index: 999;
 }
@@ -70,12 +74,18 @@ nav {
   flex-grow: 1;
   text-align: center;
 }
-
-#menu li.fre {
-  font-weight: bold;
+#menu li a{
+  text-decoration: none;
+  color: black;
 }
+
 
 #menu li.active {
   background-color: #3b75ff;
   color: white;
 }
+
+#menu li.active a{
+  color: white;
+}
+
