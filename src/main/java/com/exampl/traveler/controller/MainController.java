@@ -12,6 +12,10 @@ public class MainController {
     public String main(Model model){
         return "/main/main";
     }
+    @RequestMapping("/nation")
+    public String nation(Model model){
+        return "/nation/nation";
+    }
     @GetMapping("/header")
     public String Header(Model model) {
         return "header";

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exampl.traveler.mapper.NationMapper">
+    <resultMap id="nation" type="com.exampl.traveler.vo.NationVO">
+        <result property="NatNO" column="NatNO"/>
+        <result property="NatName" column="NatName"/>
+        <result property="NatText" column="NatText"/>
+        <result property="NatMonth" column="NatMonth"/>
+        <result property="NatAirTime" column="NatAirTime"/>
+        <result property="Exchange" column="Exchange"/>
+    </resultMap>
+
+    <select id="getAllNation" resultMap="nation">
+        SELECT * FROM nation
+    </select>
+
+    <select id="getNationById" resultMap="nation" parameterType="String">
+        SELECT * FROM nation WHERE NatNO = #{natNO}
+    </select>
+</mapper>

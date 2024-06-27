@@ -30,6 +30,23 @@
                 <img src="/imgs/일본1.jpeg" alt="도쿄">
                 <h3>도쿄</h3>
             </button>
+            <button type="button" class="best_btn">
+                <img src="/imgs/푸꾸옥.jpeg" alt="도쿄">
+                <h3>푸꾸옥</h3>
+            </button>
+            <button type="button" class="best_btn">
+                <img src="/imgs/타이베이.jpeg" alt="도쿄">
+                <h3>타이베이</h3>
+            </button>
+            <button type="button" class="best_btn">
+                <img src="/imgs/오사카.jpeg" alt="도쿄">
+                <h3>오사카</h3>
+            </button>
+            <button type="button" class="best_btn">
+                <img src="/imgs/다낭.jpeg" alt="도쿄">
+                <h3>다낭</h3>
+            </button>
+
             <!-- 반복된 버튼들 생략 -->
         </div>
     </div>
@@ -77,16 +94,6 @@
 
 </main>
 <div th:replace="header_foter/foter :: foter"></div>
-<script>
-    $(document).ready(function(){
-        $("#header-placeholder").load("/header.html");
-        $("#foter-placeholder").load("/footer.html");
 
-        $("#more").click(function(){
-            $("#trip_container").show();
-            $("#more").hide();
-        });
-    });
-</script>
 </body>
 </html>
