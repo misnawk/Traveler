@@ -5,19 +5,28 @@
     <title>나라 상세 정보</title>
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css">
-    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="/css/main/nationDetail.css">
 </head>
 <body>
 <div th:replace="header_foter/header :: header"></div>
 <main>
-    <div class="nation-detail">
+
+    <div class="nation_detail_con">
         <h1 th:text="${nation.natName}"></h1>
-        <p th:text="${nation.natText}"></p>
-        <p>추천 방문 시기: <span th:text="${nation.natMonth}"></span></p>
-        <p>항공 시간: <span th:text="${nation.natAirTime}"></span></p>
-        <p>환율: <span th:text="${nation.exchange}"></span></p>
+        <p class="nat_text" th:text="${nation.natText}"></p>
+        <div class="country_information">
+        <div class="nat_month">
+            <div class="icon_mon"></div>
+            <p>추천 방문 시기:</p><span th:text="${nation.natMonth}">dfd</span>
+        </div>
+        <p class="nat_airtime">항공 시간: <span th:text="${nation.natAirTime}"></span></p>
+        <p class="nat_exchange">환율: <span th:text="${nation.exchange}"></span></p>
+        </div>
     </div>
+
+
+
+
 </main>
 <div th:replace="header_foter/foter :: foter"></div>
 </body>

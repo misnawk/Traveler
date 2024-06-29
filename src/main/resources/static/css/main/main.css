@@ -2,9 +2,11 @@
 main {
     padding-top:141px; /* header와 nav의 높이에 따라 조정 */
     padding-bottom: 50px;
+    height: 100%;
   }
 body, html {
-    height: 100%;
+    height: auto;
+
     margin: 0;
     
 }

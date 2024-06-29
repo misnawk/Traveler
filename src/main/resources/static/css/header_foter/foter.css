@@ -1,10 +1,16 @@
 body {
-    margin: 0;
-    padding: 0;
-  }
-  
-.foter{
-    width: 100%;
-    height: 100px;
-    background-color: slategray;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+}
+.footer-content {
+
+            bottom: 0;
+            width: 100%;
+            background-color: #f1f1f1; /* 배경 색상 변경 가능 */
+            text-align: center;
+            padding: 10px 0; /* 패딩 조정 가능 */
 }
