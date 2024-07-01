@@ -23,8 +23,8 @@ public class MemberService {
     }
 
     // 로그인 체크
-    public boolean loginCheck(String id, String pw){
-        return memberMapper.loginCheck(id, pw);
+    public boolean loginCheck(MemberVO vo){
+        return memberMapper.loginCheck(vo);
     }
 
     // 아이디 중복 체크

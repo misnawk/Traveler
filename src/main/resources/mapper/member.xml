@@ -18,8 +18,8 @@
     </select>
 
     <!-- 로그인 체크 -->
-    <select id="loginCheck">
-        select * from user where userID = #{id} and userPW = #{pw}
+    <select id="loginCheck" resultType="boolean">
+        select count(*) from user where userID = #{userID} and userPW = #{userPW}
     </select>
 
     <!-- 아이디 중복 체크 -->

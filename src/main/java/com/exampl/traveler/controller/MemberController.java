@@ -2,6 +2,8 @@ package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.MemberService;
 import com.exampl.traveler.vo.MemberVO;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,23 +36,24 @@ public class MemberController {
 
     // 로그인 체크
     @PostMapping("user/login")
-    public ResponseEntity<Boolean> loginCheck(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw){
+    public ResponseEntity<Boolean> loginCheck(@RequestParam("id") String id,
+                                              @RequestParam("pw") String pw,
+                                              MemberVO vo,
+                                              HttpServletRequest request){
         boolean result = false;
+        HttpSession session = request.getSession();
 
-        if(memberService.loginCheck(id, pw)){
+        vo.setUserID(id);
+        vo.setUserPW(pw);
+
+        if(memberService.loginCheck(vo)){
+            session.setMaxInactiveInterval(3600); //세션 1시간 유지
+            session.setAttribute("id",id);
             result = true;
         } else {
             result = false;
         }
-
-
         return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    // 회원가입 페이지
-    @GetMapping("signUp")
-    public String signUp(){
-        return"login/signUp";
     }
 
     // 아이디 중복체크

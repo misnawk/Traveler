@@ -1,7 +1,7 @@
 // 로그인 체크
 function login(){
-   var id = document.getElementById("userId").value;
-   var pw = document.getElementById("userPw").value;
+   let id = document.getElementById("userId").value;
+   let pw = document.getElementById("userPw").value;
 
    if(id == ''){
         alert("아이디를 입력해주세요")
@@ -23,7 +23,8 @@ function login(){
        dataType : 'json',
        success : function(result) {
            if (result == true) {
-                alert("성공~")
+                alert("로그인에 성공했습니다")
+                location.href="/";
            } else {
                alert("아이디 또는 비밀번호를 확인해주세요")
                return

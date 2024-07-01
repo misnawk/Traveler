@@ -11,7 +11,7 @@ public interface MemberMapper {
     List<MemberVO> selectAll();
 
     // 로그인 체크
-    boolean loginCheck(String id, String pw);
+    boolean loginCheck(MemberVO vo);
 
     // 아이디 중복 체크
     boolean idCheck(String id);
