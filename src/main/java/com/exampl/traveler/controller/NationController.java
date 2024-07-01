@@ -19,8 +19,9 @@ public class NationController {
 
     @GetMapping("/nation/detail/{natNO}")
     public String getNationDetail(@PathVariable("natNO") String natNO, Model model) {
-        NationVO nation = nationService.getNationById(natNO);
+        NationVO nation = nationService.getNationDetails(natNO);
         model.addAttribute("nation", nation);
         return "/nation/natDetaile";
     }
+
 }

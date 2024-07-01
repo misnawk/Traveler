@@ -3,19 +3,32 @@
 
 <mapper namespace="com.exampl.traveler.mapper.NationMapper">
     <resultMap id="nation" type="com.exampl.traveler.vo.NationVO">
-        <result property="NatNO" column="NatNO"/>
-        <result property="NatName" column="NatName"/>
-        <result property="NatText" column="NatText"/>
-        <result property="NatMonth" column="NatMonth"/>
-        <result property="NatAirTime" column="NatAirTime"/>
-        <result property="Exchange" column="Exchange"/>
+        <result property="natNO" column="natNO"/>
+        <result property="natName" column="natName"/>
+        <result property="natText" column="natText"/>
+        <result property="natMonth" column="natMonth"/>
+        <result property="natAirTime" column="natAirTime"/>
+        <result property="exchange" column="exchange"/>
+        <collection property="cities" ofType="com.exampl.traveler.vo.CityVO">
+            <id property="cityNO" column="cityNO" />
+            <result property="cityName" column="cityName" />
+            <result property="cityText" column="cityText" />
+            <result property="cityMonth" column="cityMonth" />
+            <result property="cityAirTime" column="cityAirTime" />
+        </collection>
     </resultMap>
 
-    <select id="getAllNation" resultMap="nation">
-        SELECT * FROM nation
-    </select>
 
-    <select id="getNationById" resultMap="nation" parameterType="String">
-        SELECT * FROM nation WHERE NatNO = #{natNO}
+    <select id="selectNationById" resultMap="nation" parameterType="String">
+        SELECT
+        n.*,
+        c.cityNO AS cityNO,
+        c.cityName AS cityName,
+        c.cityText AS cityText,
+        c.cityMonth AS cityMonth,
+        c.cityAirTime AS cityAirTime
+        FROM nation n
+        LEFT JOIN city c ON n.natNO = c.natNO
+        WHERE n.natNO = #{natNO}
     </select>
 </mapper>

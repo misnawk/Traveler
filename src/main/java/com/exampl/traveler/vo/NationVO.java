@@ -2,14 +2,17 @@ package com.exampl.traveler.vo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class NationVO {
-    private int NatNO;
-    private String NatName;
-    private String NatText;
-    private String NatMonth;
-    private String NatAirTime;
-    private String Exchange;
+    private int natNO;
+    private String natName;
+    private String natText;
+    private String natMonth;
+    private String natAirTime;
+    private String exchange;
+    private List<CityVO> cities;
 
 
 }

@@ -16,11 +16,10 @@ public class NationService {
         this.nationMapper = nationMapper;
     }
 
-    public List<NationVO> getAllNation() {
-        return nationMapper.getAllNation();
-    }
 
-    public NationVO getNationById(String natNO) {
-        return nationMapper.getNationById(natNO);
+
+
+    public NationVO getNationDetails(String natNO) {
+        return nationMapper.selectNationById(natNO);
     }
 }

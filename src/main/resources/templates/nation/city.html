@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>City Information</title>
+    <link rel="stylesheet" href="/css/main/cityDetail.css">
+    <link rel="stylesheet" href="/css/header_foter/header.css">
+    <link rel="stylesheet" href="/css/header_foter/foter.css">
+</head>
+<body>
+<div th:replace="header_foter/header :: header"></div>
+<main>
+    <div class="city_detail_con">
+        <h1 th:text="${city.cityName}"></h1>
+        <div id="image_con" class="image_con"></div>
+
+        <p class="city_text" th:text="${city.cityText}"></p>
+        <div class="country_information">
+            <div class="city_month_con">
+                <div class="city_month">
+                    <div class="icon_mon"><p>추천</p></div>
+                    <span th:text="${city.cityMonth}"></span>
+                </div>
+            </div>
+
+            <div class="city_airtime_con">
+                <div class="city_airtime">
+                    <div class="icon_airtime"><p>항공</p></div>
+                    <span th:text="${city.cityAirTime}"></span>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+<div th:replace="header_foter/foter :: foter"></div>
+
+<script th:inline="javascript">
+    // Thymeleaf에서 변수를 JavaScript로 가져오기 위해 사용합니다
+    var cityName = /*[[${city.cityName}]]*/ '일본';
+
+    // 이미지 폴더에서 가져올 이미지들의 정보를 객체 배열로 정의합니다
+    var images = [
+        { title: '도쿄', filenames: ['도쿄1.jpeg', '도쿄2.jpeg', '도쿄3.png'] },
+    ];
+
+    // natName과 일치하는 국가의 이미지 파일들을 가져와서 표시합니다
+    images.forEach(function(item) {
+        if (item.title === cityName) {
+            item.filenames.forEach(function(filename) {
+                var imgElement = document.createElement('img');
+                imgElement.src = '/imgs/' + filename;
+                imgElement.alt = cityName + ' 사진';
+                document.getElementById('image_con').appendChild(imgElement);
+            });
+        }
+    });
+</script>
+</body>
+</html>

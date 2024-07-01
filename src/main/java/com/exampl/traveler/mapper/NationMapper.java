@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface NationMapper {
 
-    List<NationVO> getAllNation();
 
-    NationVO getNationById(String natNO);
+
+    NationVO selectNationById(String natNO);
 }

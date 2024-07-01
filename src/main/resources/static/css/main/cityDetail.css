@@ -1,0 +1,167 @@
+main {
+    padding-top:141px; /* header와 nav의 높이에 따라 조정 */
+    padding-bottom: 50px;
+    height: 100%;
+
+  }
+body, html {
+    height: 300vh;
+    margin: 0;
+    background : rgba(240,240,243,1);
+
+}
+.city_btn_con{
+    display: flex;
+
+}
+.image_con{
+    margin-top: 20px;
+    margin-bottom : 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.image_con img{
+    border-radius : 20px;
+    width: 280px;
+    height : 150px;
+}
+.city_btn{
+    margin-left : 30px;
+    width : 100px;
+    height : 50px;
+    background: inherit;
+    border : 1px solid #0000003d;
+    border-radius : 20px;
+    cursor: pointer;
+}
+.city_btn:hover{
+    background-color: #3b75ff;
+    color : white;
+}
+
+
+.city_detail_con{
+    background : white;
+    border : 1px solid #0000001a;
+    border-radius: 10px;
+    width : 950px;
+    height: 600px;
+    position: absolute;
+    top: 450px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.city_detail_con h1{
+    margin-left : 10px;
+
+}
+.city_text{
+   margin-left : 10px;
+
+
+}
+
+.country_information{
+    display : flex;
+    margin-left : 10px;
+    gap: 30px;
+
+}
+/*추천월*/
+.icon_mon{
+
+    background-image: url(/imgs/icon.png);
+    background-size: 415px auto;
+    background-position: -250px -296px;
+    width: 17px;
+    height: 18px;
+
+}
+.city_month_con{
+    width: 300px;
+    height: auto;
+
+    background : rgba(246,247,247,1);
+    border-radius: 12px;
+
+}
+.city_month{
+    margin-left : 30px
+}
+.city_month span{
+    font-weight : bold;
+    font-size : 24px;
+}
+.city_month p{
+    margin-left : 20px;
+    height : 10px;
+    width: 50px;
+    font-weight : bold;
+
+}
+/* 비행 시간*/
+
+.icon_airtime{
+
+    background-image: url(/imgs/icon.png);
+       background-size: 415px auto;
+       background-position: -240px -189px;
+       width: 18px;
+       height: 17px;
+}
+.city_airtime_con{
+    width: 250px;
+    height: auto;
+
+    background : rgba(246,247,247,1);
+    border-radius: 12px;
+
+}
+.city_airtime{
+    margin-left : 30px
+}
+.city_airtime span{
+    font-weight : bold;
+    font-size : 24px;
+}
+.city_airtime p{
+    margin-left : 30px;
+    height : 15px;
+    width: 50px;
+    font-weight : bold;
+
+}
+/* 환율*/
+
+.icon_exchange{
+    background-image: url(/imgs/icon.png);
+    background-size: 415px auto;
+    background-position: -134px -52px;
+    width: 13px;
+    height: 17px;
+}
+.nat_exchange_con{
+    width: 200px;
+    height: auto;
+
+    background : rgba(246,247,247,1);
+    border-radius: 12px;
+
+}
+.nat_exchange{
+    margin-left : 30px
+}
+.nat_exchange span{
+    font-weight : bold;
+    font-size : 24px;
+}
+.nat_exchange p{
+    margin-left : 30px;
+    height : 15px;
+    width: 50px;
+    font-weight : bold;
+
+}
+
