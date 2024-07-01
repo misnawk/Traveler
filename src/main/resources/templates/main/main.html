@@ -55,11 +55,12 @@
             <h3 class="community_text">trabeler들의 진짜 여행후기</h3>
             <button class="community_detail_btn">더보기</button>
         </div>
-        <div class="coummunity_box">
-            <div class="coummunity_title">
-                <button><p>제목제목</p></button>
+        <div class="coummunity_box" th:if="${not #lists.isEmpty(board)}">
+            <div class="coummunity_title" th:each="board : ${board}">
+                <button>
+                    <p th:text="${board.tripTitle}">제목제목</p>
+                </button>
             </div>
-            <!-- 반복된 제목들 생략 -->
         </div>
     </div>
     <div class="package">
