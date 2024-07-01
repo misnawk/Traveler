@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>항공권 검색 결과</title>
+    <link rel="stylesheet" href="../css/airplane/airplane_search_result.css" />
+</head>
+<body>
+<h1>항공권 검색 결과</h1>
+<div th:each="air : ${airs}" class="air-item">
+    <div class="airline-name" th:text="${air.airTitle}"></div>
+    <div class="air-details">
+        <span class="departure" th:text="${#temporals.format(air.departureTime, 'HH:mm')} + ' ' + ${air.departureAirport}"></span>
+        <span class="arrow">→</span>
+        <span class="arrival" th:text="${#temporals.format(air.arrivalTime, 'HH:mm')} + ' ' + ${air.arrivalAirport}"></span>
+    </div>
+    <div class="air-duration" th:text="${T(java.time.Duration).between(air.departureTime, air.arrivalTime).toHours() + '시간 ' + (T(java.time.Duration).between(air.departureTime, air.arrivalTime).toMinutes() % 60) + '분'}"></div>
+    <div class="price" th:text="${#numbers.formatDecimal(air.airPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></div>
+    <button class="select-btn">선택</button>
+</div>
+</body>
+</html>

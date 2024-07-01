@@ -1,45 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      rel="stylesheet"
+     rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
       integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="../../../../../../trip/css/header.css" />
-    <link rel="stylesheet" href="../../../../../../trip/css/pack/pack.css" />
-    <script src="../../../../../../trip/js/header.js" defer></script>
-    <script src="../../../../../../trip/js/pack.js" defer></script>
+    <script src="../js/header_foter/header.js" defer></script>
+    <link rel="stylesheet" href="../css/pack/pack.css" />
+    <link rel="stylesheet" href="../css/header_foter/header.css" />
+    <script src="../js/pack/pack.js" defer></script>
+
+
     <title>Document</title>
   </head>
-
-  <header>
-    <div class="header_content">
-      <h1>traveler</h1>
-      <div class="header_content__cart">
-        <span>장바구니<i class="fa-solid fa-cart-shopping"></i></span>
-        <span></span>
-      </div>
-      <button class="login">로그인/회원가입</button>
-    </div>
-  </header>
-  <nav>
-    <ul id="menu">
-      <li>국가별</li>
-      <li>항공</li>
-      <li>숙박</li>
-      <li>티켓</li>
-      <li>패키지</li>
-      <li class="fre">자유게시판</li>
-    </ul>
-  </nav>
+  <div th:replace="header_foter/header :: header"></div>
 
   <div class="pack_content">
-    <div class="search-bar">
+    <div class="search_bar">
       <select>
         <option>출발지</option>
         <option>서울</option>
@@ -50,6 +32,7 @@
         <input type="text" placeholder="도시/또는 단체번호/상품코드 입력" />
         <button class="search-bar__Btn"><i class="fas fa-search"></i></button>
       </select>
+
     </div>
 
     <div class="header_icons">
@@ -58,8 +41,8 @@
     </div>
   </div>
 
-  <div class="search-results">
-    <div class="total-count">
+  <div class="search_results">
+    <div class="total_count">
       총 <span class="count">199</span>건의 상품이 검색되었습니다.
     </div>
     <div class="wishlist">내찜목록 <i class="fas fa-heart"></i></div>
