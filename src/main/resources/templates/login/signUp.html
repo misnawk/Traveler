@@ -1,28 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="/css/login/sign.css" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/login/signUp.js" defer></script>
 </head>
 
 <body>
-    <div class="header_content">
-        <h1>traveler</h1>
-    </div>
-    <form action="">
-        <div class="sign_content">
-            <div class="id_content">
-                <input type="text" name="userId" placeholder="아이디">
-                <input type="button" class="" onclick="#" value="중복확인">
-            </div>
-            <input type="password" name="userPw" placeholder="비밀번호">
-            <input type="password" placeholder="비밀번호 확인">
-            <input type="text" name="userTell" placeholder="전화번호">
-            <input type="text" name="userEmail" placeholder="이메일">
-            <input type="button" name="singUp" value="회원가입">
+<div class="header_content">
+    <h1>traveler</h1>
+</div>
+<form name="f" th:action="@{/user/insert}" th:object="${vo}" method="post">
+    <div class="sign_content">
+        <div class="id_content">
+            <input type="text" name="userID" id="userId" placeholder="아이디">
+            <input type="button" onclick="idCheck()" value="중복확인">
+            <span id="idMsg"></span>
         </div>
-    </form>
+        <div class="content">
+            <input type="text" name="userName" id="userName" placeholder="이름">
+            <span id="userMsg"></span>
+        </div>
+        <div class="content">
+            <input type="password" name="userPW" id="userPw" onkeydown="pwRange()" placeholder="비밀번호 (8~12자 영문, 숫자, 특수문자 조합)">
+            <span id="rangeMsg"></span>
+        </div>
+        <div class="content">
+            <input type="password" id="checkPw" onkeydown="pwCheck()" placeholder="비밀번호 확인 (8~12자 영문, 숫자, 특수문자 조합)">
+            <span id="checkMsg"></span>
+        </div>
+        <div class="birth_content" id="info_birth">
+            <div class="birth_year">
+                <select class="box" id="year" th:name="year">
+                    <option disabled selected>출생 연도</option>
+                </select>
+            </div>
+            <div class="birth_month">
+                <select class="box" id="month" th:name="month">
+                    <option disabled selected>월</option>
+                </select>
+            </div>
+            <div class="birth_day">
+                <select class="box" id="day" th:name="day">
+                    <option disabled selected>일</option>
+                </select>
+            </div>
+            <span id="birthMsg"></span>
+        </div>
+        <div class="content">
+            <input type="text" name="userTell" id="userTell" placeholder="전화번호">
+            <span id="tellMsg"></span>
+        </div>
+        <div class="content">
+            <input type="text" name="userEmail" id="userEmail" placeholder="이메일">
+            <span id="emailMsg"></span>
+        </div>
+        <div class="content">
+            <input type="button" id="singUp" onclick="save()" value="회원가입">
+        </div>
+    </div>
+</form>
 </body>
 </html>

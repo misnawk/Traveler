@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="/css/login/sign.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/login/login.js" defer></script>
 </head>
 
 <body>
     <div class="header_content">
         <h1>traveler</h1>
     </div>
-    <form action="">
-        <div class="sign_content">
-            <input type="text" name="userId" placeholder="아이디">
-            <input type="password" name="userPw" placeholder="비밀번호">
-            <input type="button" name="signIn" value="로그인">
-            <input type="button" name="singUp" value="회원가입">
+    <form name="f" th:action="@{/user/login}" method="post">
+        <div class="login_content">
+            <input type="text" name="userId" id="userId" placeholder="아이디">
+            <input type="password" name="userPw" id="userPw" placeholder="비밀번호">
+            <input type="button" name="signIn" id="signIn" onclick="login()" value="로그인">
+            <input type="button" name="singUp" onclick="signUp()" value="회원가입">
         </div>
     </form>
-    <div class="idFind" onclick="#">아이디/비밀번호를 잊어버리셨나요?</div>
-    <div class="binSing" onclick="#">비즈니스 로그인/회원가입</div>
+    <div class="idFind" onclick="idFind()">아이디/비밀번호를 잊어버리셨나요?</div>
+    <div class="binSign" onclick="binSign()">비즈니스 로그인/회원가입</div>
 </body>
 </html>

@@ -8,19 +8,35 @@ body{
 
 .header_content{
     display: flex;
+    position: relative;
     justify-content: center;
     color: #1273E4;
     margin-top: 50px;
 }
 
-.sign_content{
+.sign_content, .login_content{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.sign_content > input {
+.id_content{
+    display: flex;
+    align-items: center;
+}
+
+.id_content > input {
+    height: 40px;
+    width: 170px;
+    border: solid 1px #AEAEAE;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.login_content input, .content input{
     height: 40px;
     width: 350px;
     border: solid 1px #AEAEAE;
@@ -28,6 +44,12 @@ body{
     margin: 5px;
     font-size: 12px;
     cursor: pointer;
+}
+
+div span {
+    font-size: 12px;
+    position: absolute;
+    margin-top: 20px;
 }
 
 .idFind{
@@ -39,7 +61,7 @@ body{
     cursor: pointer;
 }
 
-.binSing{
+.binSign{
     margin-top: 50px;
     text-align: center;
     font-size: 12px;
@@ -66,24 +88,26 @@ body{
     font-size: 12px;
 }
 
-.id_content{
-    display: flex;
-    align-items: center;
-}
-
-.id_content > input {
-    height: 40px;
-    width: 170px;
-    border: solid 1px #AEAEAE;
-    border-radius: 5px;
-    margin: 5px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
 .bin_header_content{
     display: flex;
     justify-content: center;
     color: #1273E4;
     margin: 50px;
+}
+
+select.box {
+    height: 40px;
+    width: 115px;
+    border: solid 1px #AEAEAE;
+    border-radius: 5px;
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+.birth_content#info_birth {
+    display: flex;
+}
+
+.birth_month select, .birth_day select {
+    margin-left : 7px;
 }
