@@ -17,7 +17,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String main(Model model){
-        List<boardVO> board = boardService.getAllBoard();
+        List<boardVO> board = boardService.getBoard();
         model.addAttribute("board",board);
 
         return "/main/main";

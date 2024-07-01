@@ -12,8 +12,8 @@ public class BoardService {
     @Autowired
     BoardMapper boardMapper;
 
-    public List<boardVO> getAllBoard(){
-        return boardMapper.getAllBoard();
+    public List<boardVO> getBoard(){
+        return boardMapper.getBoard();
     }
 
 }

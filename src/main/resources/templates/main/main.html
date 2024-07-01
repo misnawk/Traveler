@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="/css/main/main.css">
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css" />
@@ -53,7 +52,7 @@
     <div class="community_container">
         <div class="coummunity_top">
             <h3 class="community_text">trabeler들의 진짜 여행후기</h3>
-            <button class="community_detail_btn">더보기</button>
+            <button class="community_detail_btn" > <a href="/board">더보기</a></button>
         </div>
         <div class="coummunity_box" th:if="${not #lists.isEmpty(board)}">
             <div class="coummunity_title" th:each="board : ${board}">

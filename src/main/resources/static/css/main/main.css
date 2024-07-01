@@ -47,7 +47,10 @@ body, html {
 .search-box button:hover {
     background-color: #0056b3;
 }
-
+.community_detail_btn a{
+    text-decoration: none;
+    color : white;
+}
 
 /* best 여행지 */
 
