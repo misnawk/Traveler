@@ -1,6 +1,6 @@
 package com.exampl.traveler.controller;
 
-import com.exampl.traveler.service.MemberService;
+import com.exampl.traveler.service.LoginService;
 import com.exampl.traveler.vo.MemberVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -17,13 +17,13 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class MemberController {
-    private final MemberService memberService;
+public class LoginController {
+    private final LoginService loginService;
 
     // 회원 전체 조회
     @GetMapping("user")
     public String selectAll(Model model){
-        List<MemberVO> user = memberService.selectAll();
+        List<MemberVO> user = loginService.selectAll();
         model.addAttribute("user", user);
         return "user";
     }
@@ -46,7 +46,7 @@ public class MemberController {
         vo.setUserID(id);
         vo.setUserPW(pw);
 
-        if(memberService.loginCheck(vo)){
+        if(loginService.loginCheck(vo)){
             session.setMaxInactiveInterval(3600); //세션 1시간 유지
             session.setAttribute("id",id);
             result = true;
@@ -62,7 +62,7 @@ public class MemberController {
         boolean result = true;
 
         // 전달 받은 id값이 이미 존재한지 체크
-        if(memberService.idCheck(id)){
+        if(loginService.idCheck(id)){
             result = false;
         } else {
             result = true;
@@ -84,7 +84,7 @@ public class MemberController {
         vo.setUserBirth(year+"-"+month+"-"+day);
         System.out.println(vo);
 
-        memberService.idInsert(vo);
+        loginService.idInsert(vo);
         return "redirect:/login";
     }
 }

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface MemberMapper {
+public interface LoginMapper {
     // 회원 전체 조회
     List<MemberVO> selectAll();
 
