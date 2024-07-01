@@ -1,0 +1,73 @@
+.air-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.air-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.airline-name {
+    font-weight: bold;
+    width: 150px;
+}
+
+.air-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.departure, .arrival {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.airport {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.arrow {
+    margin: 0 20px;
+}
+
+.air-duration {
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #0077be;
+    width: 120px;
+    text-align: right;
+}
+
+.select-btn {
+    padding: 10px 20px;
+    background-color: #0077be;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.select-btn:hover {
+    background-color: #005fa3;
+}

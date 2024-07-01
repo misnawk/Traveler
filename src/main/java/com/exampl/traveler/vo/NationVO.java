@@ -10,6 +10,4 @@ public class NationVO {
     private String NatMonth;
     private String NatAirTime;
     private String Exchange;
-
-
 }
