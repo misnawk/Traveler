@@ -42,11 +42,20 @@ header {
   margin-right: 5px;
 }
 
-.schedule, .mypage {
-  margin-left: 20px;
+.schedule, .mypage, .login {
+  margin-left: 8px;
   padding: 8px 16px;
   border: 1px solid #ccc;
   background-color: white;
+  cursor: pointer;
+}
+
+.logout{
+  margin-left: 8px;
+  padding: 8px 16px;
+  border: 1px solid #3b75ff;
+  background-color: #3b75ff;
+  color : #fff;
   cursor: pointer;
 }
 
