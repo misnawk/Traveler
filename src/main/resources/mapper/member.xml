@@ -25,6 +25,10 @@
         )
     </insert>
 
+    <select id="selectOne">
+        select * from user where userID = #{id}
+    </select>
+
     <select id="binIdCheck" resultType="boolean">
         select count(*) from businessUser where binID = #{id}
     </select>
