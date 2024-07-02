@@ -32,3 +32,7 @@ function login(){
        }
    });
 }
+
+function signUp(){
+    location.href="/signUp"
+}

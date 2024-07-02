@@ -42,7 +42,7 @@ header {
   margin-right: 5px;
 }
 
-.schedule, .mypage {
+.schedule, .mypage, .login {
   margin-left: 20px;
   padding: 8px 16px;
   border: 1px solid #ccc;

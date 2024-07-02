@@ -16,11 +16,7 @@ public class LoginService {
         this.loginMapper = loginMapper;
     }
 
-    // 회원 전체 조회
-    public List<MemberVO> selectAll(){
-        return loginMapper.selectAll();
-    }
-
+    //// 일반회원 로그인 & 회원가입 Service
     // 로그인 체크
     public boolean loginCheck(MemberVO vo){
         return loginMapper.loginCheck(vo);
@@ -34,5 +30,11 @@ public class LoginService {
     // 회원가입
     public boolean idInsert(MemberVO vo){
         return loginMapper.idInsert(vo);
+    }
+
+    //// 기업회원 로그인 & 회원가입 Service
+    // 기업 아이디 중복 체크
+    public boolean binIdCheck(String id){
+        return loginMapper.binIdCheck(id);
     }
 }

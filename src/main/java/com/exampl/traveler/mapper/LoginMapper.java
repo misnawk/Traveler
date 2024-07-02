@@ -7,9 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface LoginMapper {
-    // 회원 전체 조회
-    List<MemberVO> selectAll();
 
+    //// 일반회원 로그인 & 회원가입 mapper
     // 로그인 체크
     boolean loginCheck(MemberVO vo);
 
@@ -18,4 +17,8 @@ public interface LoginMapper {
 
     // 회원가입
     boolean idInsert(MemberVO vo);
+
+    //// 기업회원 로그인 & 회원가입 mapper
+    // 기업 아이디 중복 체크
+    boolean binIdCheck(String id);
 }

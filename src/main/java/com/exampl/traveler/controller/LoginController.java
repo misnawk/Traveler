@@ -20,14 +20,7 @@ import java.util.List;
 public class LoginController {
     private final LoginService loginService;
 
-    // 회원 전체 조회
-    @GetMapping("user")
-    public String selectAll(Model model){
-        List<MemberVO> user = loginService.selectAll();
-        model.addAttribute("user", user);
-        return "user";
-    }
-
+    //// 일반회원 로그인 & 회원가입 Controller
     // 로그인 페이지
     @GetMapping("login")
     public String login(){
@@ -40,6 +33,8 @@ public class LoginController {
                                               @RequestParam("pw") String pw,
                                               MemberVO vo,
                                               HttpServletRequest request){
+
+        // ResponseEntity :  HttpStatus, HttpHeaders, HttpBody 포함된 어노테이션
         boolean result = false;
         HttpSession session = request.getSession();
 
@@ -54,6 +49,12 @@ public class LoginController {
             result = false;
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    // 기업회원 로그인 페이지
+    @GetMapping("signUp")
+    public String signUp(){
+        return "/login/signUp";
     }
 
     // 아이디 중복체크
@@ -86,5 +87,33 @@ public class LoginController {
 
         loginService.idInsert(vo);
         return "redirect:/login";
+    }
+
+    //// 기업회원 로그인 & 회원가입 Controller
+    // 기업회원 로그인 페이지
+    @GetMapping("binLogin")
+    public String binLogin(){
+        return "/login/binLogin";
+    }
+
+    // 기업 회원가입 페이지
+    @GetMapping("binSignUp")
+    public String binSign(){
+        return "/login/binSignUp";
+    }
+
+    // 기업 아이디 중복 체크
+    @PostMapping("bin/idCheck")
+    public ResponseEntity<Boolean> binIdCheck(@RequestParam("id") String id){
+        boolean result = true;
+
+        // 전달 받은 id값이 이미 존재한지 체크
+        if(loginService.binIdCheck(id)){
+            result = false;
+        } else {
+            result = true;
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
