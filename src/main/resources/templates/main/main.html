@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/header_foter/foter.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/includeHTML.js" defer></script>
+
 </head>
 <body>
 <div th:replace="header_foter/header :: header"></div>
@@ -57,7 +57,7 @@
         <div class="coummunity_box" th:if="${not #lists.isEmpty(board)}">
             <div class="coummunity_title" th:each="board : ${board}">
                 <button>
-                    <p th:text="${board.tripTitle}">제목제목</p>
+                    <p th:text="${board.tripTitle}"></p>
                 </button>
             </div>
         </div>
@@ -97,8 +97,8 @@
 </body>
 <script>
     function goToDetail(button) {
-        const natNO = button.getAttribute('data-id');
-        window.location.href = `/nation/detail/${natNO}`;
+        const cityNO = button.getAttribute('data-id');
+        window.location.href = `/city?cityNO=${cityNO}`;
     }
 </script>
 </html>

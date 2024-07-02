@@ -10,10 +10,22 @@ import java.util.List;
 @Service
 public class BoardService {
     @Autowired
-    BoardMapper boardMapper;
+    private BoardMapper boardMapper;
 
-    public List<boardVO> getBoard(){
+    public List<boardVO> getBoard() {
         return boardMapper.getBoard();
     }
 
+    public List<boardVO> getBoardAll() {
+        return boardMapper.getBoard();
+    }
+
+    public List<boardVO> getBoardPage(int page, int pageSize) {
+        int offset = (page - 1) * pageSize;
+        return boardMapper.getBoardPage(offset, pageSize);
+    }
+
+    public int getTotalBoardCount() {
+        return boardMapper.getTotalBoardCount();
+    }
 }
