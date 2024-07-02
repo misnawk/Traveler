@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="header.css" />
     <script type="text/javascript" src="/js/header_foter/header.js"></script>
-   
 </head>
 
 <div class="container">
@@ -15,8 +14,13 @@
   <div class="header_content">
       <h1 class="logo"><a href="/">traveler</a></h1>
     <div class="button_content">
-      <button class="schedule">나의 일정</button>
-      <button class="mypage">마이페이지</button>
+        <th:block th:if="${session.id != null}">
+            <button class="schedule">나의 일정</button>
+            <button class="mypage">마이페이지</button>
+        </th:block>
+        <th:block th:if="${session.id == null}">
+            <button class="login" onclick="loginPage()">로그인/회원가입</button>
+        </th:block>
 
     </div>
      
@@ -24,26 +28,30 @@
   <nav>
     <ul id="menu">
         <li><a href="/nation">국가별</a></li>
-        <li><a href="/">항공</a></li>
-        <li><a href="/">숙박</a></li>
-        <li><a href="/">티켓</a></li>
-        <li><a href="/">패키지</a></li>
+        <li><a href="/air">항공</a></li>
+        <li><a href="/hotel">숙박</a></li>
+        <li><a href="/ticket">티켓</a></li>
+        <li><a href="/pack">패키지</a></li>
         <li>자유게시판</li>
     </ul>
   </nav>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-        // 네비게이션 메뉴 항목에 클릭 이벤트 리스너 추가
-        const menuItems = document.querySelectorAll('#menu li');
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                // 모든 항목에서 active 클래스 제거
-                menuItems.forEach(i => i.classList.remove('active'));
-                // 클릭된 항목에 active 클래스 추가
-                this.classList.add('active');
+            // 네비게이션 메뉴 항목에 클릭 이벤트 리스너 추가
+            const menuItems = document.querySelectorAll('#menu li');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // 모든 항목에서 active 클래스 제거
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    // 클릭된 항목에 active 클래스 추가
+                    this.classList.add('active');
+                });
             });
-        });
-    });
+        })
+
+        function loginPage(){
+             location.href="/login";
+        }
     </script>
 </header>
 

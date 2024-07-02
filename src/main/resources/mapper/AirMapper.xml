@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exampl.traveler.mapper.AirMapper">
+    <select id="getAllAirs" resultType="com.exampl.traveler.vo.AirVO">
+        SELECT * FROM airline
+        ORDER BY departureTime
+    </select>
+
+    <select id="searchAirs" resultType="com.exampl.traveler.vo.AirVO">
+        SELECT * FROM airline
+        WHERE departureAirport LIKE CONCAT('%', #{departure}, '%')
+        AND arrivalAirport LIKE CONCAT('%', #{destination}, '%')
+        AND DATE(departureTime) = #{departureDate}
+        ORDER BY departureTime
+    </select>
+</mapper>

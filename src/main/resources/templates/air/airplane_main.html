@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traveler</title>
+  <link rel="stylesheet" href="../css/header_foter/header.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" defer></script>
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+  <link rel="stylesheet" href="../css/airplane/airplane_main_first.css" />
+  <link rel="stylesheet" href="../css/airplane/airplane_main_second.css" />
+////////////////////////////////////////////////////////////////////////////////////////////////
+  <script src="../js/airplane/airplane_main.js" defer></script>
+  <script src="../js/airplane/airplane_data.js" defer></script>
+////////////////////////////////////////////////////////////////////////////////////////////////
+</head>
+
+
+<header>
+  <div th:replace="~{header_foter/header :: header}"></div>
+</header>
+
+<body>
+<main>
+  <section class="air_search">
+    <form id="airSearchForm" action="/search/air" method="GET" class="search_box">
+      <div class="trip_type">
+        <input type="radio" id="round_trip" name="trip_type" value="roundtrip" checked>
+        <label for="round_trip">왕복</label>
+        <input type="radio" id="one_way" name="trip_type" value="oneway">
+        <label for="one_way">편도</label>
+      </div>
+      <div class="field">
+        <input type="text" id="departure" name="departure" value="김포국제공항" readonly>
+      </div>
+      <div class="field">
+        <input type="text" id="destination" name="destination" placeholder="도착지" readonly>
+        <div class="dropdown_container">
+          <ul class="dropdown country_list hidden">
+            <!-- 나라 목록은 JavaScript로 동적 생성 -->
+          </ul>
+          <ul class="dropdown city_list hidden">
+            <!-- 도시 목록은 JavaScript로 동적 생성 -->
+          </ul>
+        </div>
+      </div>
+      <div class="field">
+        <input type="text" id="departure_date" name="departure_date" placeholder="여행가는날" readonly>
+      </div>
+      <div class="field">
+        <input type="text" id="return_date" name="return_date" placeholder="여행오는날" readonly>
+      </div>
+      <div class="field">
+        <input type="number" id="passengers" name="passengers" placeholder="인원" min="1" value="1">
+      </div>
+      <button type="submit" class="search_button">항공권 검색</button>
+    </form>
+  </section>
+  <div class="second__title">
+    <h1>추천 여행지</h1>
+  </div>
+  <section class="second"></section>
+</main>
+
+
+</body>
+</html>
