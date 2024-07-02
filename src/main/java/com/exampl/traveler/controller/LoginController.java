@@ -20,6 +20,13 @@ import java.util.List;
 public class LoginController {
     private final LoginService loginService;
 
+    // 로그아웃
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
+    }
+
     //// 일반회원 로그인 & 회원가입 Controller
     // 로그인 페이지
     @GetMapping("login")
@@ -42,8 +49,10 @@ public class LoginController {
         vo.setUserPW(pw);
 
         if(loginService.loginCheck(vo)){
+            MemberVO getVO = loginService.selectOne(id);
             session.setMaxInactiveInterval(3600); //세션 1시간 유지
             session.setAttribute("id",id);
+            session.setAttribute("name",getVO.getUserName());
             result = true;
         } else {
             result = false;
