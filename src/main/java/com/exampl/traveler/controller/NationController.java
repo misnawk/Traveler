@@ -16,7 +16,7 @@ public class NationController {
     public NationController(NationService nationService) {
         this.nationService = nationService;
     }
-
+    // 국가 페이지에서 국가 고유 번호 넘겨주면 받아서 국가 디테일 페이지로 이동
     @GetMapping("/nation/detail/{natNO}")
     public String getNationDetail(@PathVariable("natNO") String natNO, Model model) {
         NationVO nation = nationService.getNationDetails(natNO);

@@ -14,7 +14,7 @@ import java.util.List;
 public class MainController {
     @Autowired
     BoardService boardService;
-
+    //메인페이지 게시판에 5개만 보이게 설정
     @RequestMapping("/")
     public String main(Model model){
         List<boardVO> board = boardService.getBoard();

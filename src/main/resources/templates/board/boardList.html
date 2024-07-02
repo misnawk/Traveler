@@ -18,22 +18,26 @@
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
-
-
         </tr>
         </thead>
         <tbody class="board_list">
-
         <tr th:each="board : ${board}">
             <td th:text="${board.tripType == 1 ? '패키지' : '자유여행'}"></td>
             <td th:text="${board.tripTitle}"></td>
             <td th:text="${board.userId}"></td>
             <td th:text="${#dates.format(board.tripDate, 'yyyy-MM-dd')}"></td>
         </tr>
-
         </tbody>
-
     </table>
+
+    <div class="button-container">
+        <div class="write-btn" th:if="${session.id != null}">
+            <a th:href="@{/write}">작성하기</a>
+        </div>
+        <div class="write-btn" th:if="${session.id == null}">
+            <button onclick="showLoginAlert()">작성하기</button>
+        </div>
+    </div>
 
     <!-- 페이지 이동 버튼 -->
     <div class="pagination">
@@ -48,7 +52,15 @@
 
 </main>
 
-
 <div th:replace="header_foter/foter :: foter"></div>
+
+<!-- JavaScript 코드 추가 -->
+<script>
+    function showLoginAlert() {
+        alert("로그인을 해주세요.");
+        // 선택적: 로그인 페이지로 리다이렉트
+        // window.location.href = '/login';
+    }
+</script>
 </body>
 </html>

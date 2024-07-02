@@ -15,7 +15,7 @@ public class BoardController {
     @Autowired
     BoardService boardService;
 
-
+    //게시판 메인 페이지 한페이지에 5개씩 페이지 작업까지 완료
     @RequestMapping("/board")
     public String board(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
         int pageSize = 5;
