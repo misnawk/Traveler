@@ -13,7 +13,7 @@ public class CityController {
 
     @Autowired
     private CityService cityService;
-
+    //국가 페이지또는 메인페이지에서 도시 고유 번호 보내주면 디테일 페이지로 이동
     @GetMapping("/city")
     public String showCityPage(@RequestParam("cityNO") int cityNO, Model model) {
         CityVO city = cityService.getCityByNumber(cityNO);

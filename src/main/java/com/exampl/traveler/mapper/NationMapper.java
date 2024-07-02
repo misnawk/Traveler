@@ -10,6 +10,6 @@ import java.util.List;
 public interface NationMapper {
 
 
-
+    //국가 정보
     NationVO selectNationById(String natNO);
 }

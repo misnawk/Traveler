@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="/css/main/main.css">
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/js/includeHTML.js" defer></script>
+
 </head>
 <body>
 <div th:replace="header_foter/header :: header"></div>
 <main>
-z
     <div class="bgimg" style="background-image: url('./imgs/serchimg.jpg');">
         <div class="search-box">
             <input type="text" placeholder="여행지를 검색해보세요">
@@ -53,12 +51,12 @@ z
     <div class="community_container">
         <div class="coummunity_top">
             <h3 class="community_text">trabeler들의 진짜 여행후기</h3>
-            <button class="community_detail_btn">더보기</button>
+            <button class="community_detail_btn" > <a href="/board">더보기</a></button>
         </div>
         <div class="coummunity_box" th:if="${not #lists.isEmpty(board)}">
             <div class="coummunity_title" th:each="board : ${board}">
                 <button>
-                    <p th:text="${board.tripTitle}">제목제목</p>
+                    <p th:text="${board.tripTitle}"></p>
                 </button>
             </div>
         </div>
@@ -98,8 +96,8 @@ z
 </body>
 <script>
     function goToDetail(button) {
-        const natNO = button.getAttribute('data-id');
-        window.location.href = `/nation/detail/${natNO}`;
+        const cityNO = button.getAttribute('data-id');
+        window.location.href = `/city?cityNO=${cityNO}`;
     }
 </script>
 </html>

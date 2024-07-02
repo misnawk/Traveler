@@ -18,7 +18,7 @@ public class NationService {
 
 
 
-
+    //국가 정보
     public NationVO getNationDetails(String natNO) {
         return nationMapper.selectNationById(natNO);
     }

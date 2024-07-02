@@ -14,11 +14,10 @@
   <div class="header_content">
       <h1 class="logo"><a href="/">traveler</a></h1>
     <div class="button_content">
-        <th:block th:if="${session.id != null}">
-            <span class="userName"><b>[[${session.name}]]</b> 님</span>
+        <th:block  th:if="${session.id != null}">
+
             <button class="schedule">나의 일정</button>
             <button class="mypage">마이페이지</button>
-            <button class="logout" onclick="logout()">로그아웃</button>
         </th:block>
         <th:block th:if="${session.id == null}">
             <button class="login" onclick="loginPage()">로그인/회원가입</button>
@@ -53,14 +52,6 @@
 
         function loginPage(){
              location.href="/login";
-        }
-
-        function logout(){
-            if(confirm("로그아웃 하시겠습니까?") == true){
-                location.href="/logout";
-            } else {
-                return false;
-            }
         }
     </script>
 </header>

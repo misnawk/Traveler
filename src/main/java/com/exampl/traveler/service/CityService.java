@@ -10,7 +10,7 @@ public class CityService {
 
     @Autowired
     private CityMapper cityMapper;
-
+    //도시정보
     public CityVO getCityByNumber(int cityNO) {
         return cityMapper.getCityByNumber(cityNO);
     }
