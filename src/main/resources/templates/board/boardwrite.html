@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 작성</title>
+    <link rel="stylesheet" href="/css/header_foter/header.css">
+    <link rel="stylesheet" href="/css/header_foter/foter.css"/>
+    <link rel="stylesheet" href="/css/board/boardwrite.css">
+</head>
+<body>
+<div th:replace="header_foter/header :: header"></div>
+<main>
+    <form class="write-form" th:action="@{/board/write/save}" method="post" enctype="multipart/form-data" th:object="${boardVO}">
+        <span class="userName"><b th:text="${session.name}"></b> 님</span>
+        <input type="hidden" name="userId" th:value="${session.id}"/>
+
+        <div class="form-group">
+            <label for="tripType">여행 유형</label>
+            <select id="tripType" name="tripType" th:field="*{tripType}" required>
+                <option value="1">패키지</option>
+                <option value="2">자유여행</option>
+            </select>
+            <div th:if="${#fields.hasErrors('tripType')}" th:errors="*{tripType}"></div>
+        </div>
+        <div class="form-group">
+            <label for="tripTitle">제목</label>
+            <input type="text" id="tripTitle" name="tripTitle" th:field="*{tripTitle}" required>
+            <div th:if="${#fields.hasErrors('tripTitle')}" th:errors="*{tripTitle}"></div>
+        </div>
+        <div class="form-group">
+            <label for="tripText">내용</label>
+            <textarea id="tripText" name="tripText" th:field="*{tripText}" required></textarea>
+            <div th:if="${#fields.hasErrors('tripText')}" th:errors="*{tripText}"></div>
+        </div>
+        <div class="form-group">
+            <label for="tripImg">이미지</label>
+            <input type="file" id="tripImg" name="tripImg">
+        </div>
+        <div class="form-group">
+            <label for="tripYn">글 유형</label>
+            <select id="tripYn" name="tripYn" th:field="*{tripYn}" required>
+                <option value="1">후기</option>
+                <option value="2">질문</option>
+            </select>
+            <div th:if="${#fields.hasErrors('tripYn')}" th:errors="*{tripYn}"></div>
+        </div>
+        <button type="submit">작성 완료</button>
+
+        <!-- 유효성 검사 실패 시 에러 메시지 표시 -->
+        <div th:if="${errors != null}">
+            <ul>
+                <li th:each="error : ${errors}" th:text="${error.defaultMessage}"></li>
+            </ul>
+        </div>
+    </form>
+</main>
+<div th:replace="header_foter/foter :: foter"></div>
+</body>
+</html>

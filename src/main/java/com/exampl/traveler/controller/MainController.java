@@ -1,7 +1,7 @@
 package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.BoardService;
-import com.exampl.traveler.vo.boardVO;
+import com.exampl.traveler.vo.BoardVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ public class MainController {
     //메인페이지 게시판에 5개만 보이게 설정
     @RequestMapping("/")
     public String main(Model model){
-        List<boardVO> board = boardService.getBoard();
+        List<BoardVO> board = boardService.getBoard();
         model.addAttribute("board",board);
 
         return "/main/main";
