@@ -1,0 +1,99 @@
+main {
+    padding-top:141px; /* header와 nav의 높이에 따라 조정 */
+    padding-bottom: 50px;
+    height: 100%;
+
+    flex-direction: column;
+    align-items: center;
+
+
+  }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.detail_view {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.image_container {
+    text-align: center;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.img_con {
+    max-width: 700px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.content_container {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.content_container h1 {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.meta_info {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #777;
+    font-size: 14px;
+}
+
+.meta_info span {
+    margin-right :10px;
+    text-align: center;
+}
+.content_text{
+    height: 300px;
+    margin-left:20px;
+}
+.content_text p {
+
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+.button_container {
+    text-align: right;
+    padding: 20px;
+    background-color:
+}
+
+.back_button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.back_button:hover {
+    background-color: #0056b3;
+}
+
+.none{
+    background-color:#f2f2f2;
+    padding:10px;
+}

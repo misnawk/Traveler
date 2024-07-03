@@ -5,10 +5,10 @@
     <select id="getBoard" resultType="boardVO">
         SELECT * FROM board LIMIT 5
     </select>
-    <select id="getBoardAll" resultType="boardVO">
+    <select id="getBoardAll" resultType="BoardVO">
         SELECT * FROM board
     </select>
-    <select id="getBoardPage" resultType="com.exampl.traveler.vo.boardVO">
+    <select id="getBoardPage" resultType="com.exampl.traveler.vo.BoardVO">
         SELECT * FROM board
         ORDER BY tripDate DESC
         LIMIT #{offset}, #{pageSize}
@@ -17,5 +17,16 @@
     <select id="getTotalBoardCount" resultType="int">
         SELECT COUNT(*) FROM board
     </select>
+
+    <insert id="insertBoard">
+        INSERT INTO board (userId, tripType, tripTitle, tripText, tripImgPath, tripDate, tripYn)
+        VALUES (#{userId}, #{tripType}, #{tripTitle}, #{tripText}, #{tripImgPath}, #{tripDate}, #{tripYn})
+    </insert>
+
+    <select id="selectOne" resultType="com.exampl.traveler.vo.BoardVO">
+        SELECT * FROM BOARD WHERE boardNO = #{boardNo}
+
+    </select>
+
 
 </mapper>

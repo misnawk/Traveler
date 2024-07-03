@@ -21,9 +21,9 @@
         </tr>
         </thead>
         <tbody class="board_list">
-        <tr th:each="board : ${board}">
+        <tr th:each="board : ${board}" >
             <td th:text="${board.tripType == 1 ? '패키지' : '자유여행'}"></td>
-            <td th:text="${board.tripTitle}"></td>
+            <td > <a th:href="@{/board/detail(boardNo=${board.boardNo}, page=${currentPage})}" th:text="${board.tripTitle}"></a></td>
             <td th:text="${board.userId}"></td>
             <td th:text="${#dates.format(board.tripDate, 'yyyy-MM-dd')}"></td>
         </tr>
@@ -32,7 +32,7 @@
 
     <div class="button-container">
         <div class="write-btn" th:if="${session.id != null}">
-            <a th:href="@{/write}">작성하기</a>
+            <a th:href="@{/board/write}">작성하기</a>
         </div>
         <div class="write-btn" th:if="${session.id == null}">
             <button onclick="showLoginAlert()">작성하기</button>
