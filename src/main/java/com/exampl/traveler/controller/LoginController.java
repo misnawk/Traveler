@@ -1,6 +1,7 @@
 package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.LoginService;
+import com.exampl.traveler.vo.BusinessVO;
 import com.exampl.traveler.vo.MemberVO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -60,7 +61,7 @@ public class LoginController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // 기업회원 로그인 페이지
+    // 회원 로그인 페이지
     @GetMapping("signUp")
     public String signUp(){
         return "/login/signUp";
@@ -92,17 +93,44 @@ public class LoginController {
         day = String.format("%2s", day).replace(" ", "0");
 
         vo.setUserBirth(year+"-"+month+"-"+day);
-        System.out.println(vo);
 
         loginService.idInsert(vo);
         return "redirect:/login";
     }
 
+
     //// 기업회원 로그인 & 회원가입 Controller
-    // 기업회원 로그인 페이지
+    // 기업 로그인 페이지
     @GetMapping("binLogin")
     public String binLogin(){
         return "/login/binLogin";
+    }
+
+    // 로그인 체크
+    @PostMapping("bin/login")
+    public ResponseEntity<Boolean> binLoginCheck(@RequestParam("id") String id,
+                                                @RequestParam("pw") String pw,
+                                                 BusinessVO vo,
+                                                 HttpServletRequest request){
+
+        // ResponseEntity :  HttpStatus, HttpHeaders, HttpBody 포함된 어노테이션
+        boolean result = false;
+        HttpSession session = request.getSession();
+
+        vo.setBinID(id);
+        vo.setBinPW(pw);
+
+        if(loginService.binLoginCheck(vo)){
+            BusinessVO getVO = loginService.binSelectOne(id);
+            session.setMaxInactiveInterval(3600); //세션 1시간 유지
+            session.setAttribute("binID",id);
+            session.setAttribute("binName",getVO.getBinName());
+            session.setAttribute("binCate",getVO.getBinCate());
+            result = true;
+        } else {
+            result = false;
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     // 기업 회원가입 페이지
@@ -124,5 +152,12 @@ public class LoginController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    // 기업 회원가입
+    @PostMapping("bin/insert")
+    public String binInsert(BusinessVO vo){
+        loginService.binIdInsert(vo);
+        return "redirect:/binLogin";
     }
 }

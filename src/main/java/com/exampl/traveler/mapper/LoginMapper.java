@@ -1,5 +1,6 @@
 package com.exampl.traveler.mapper;
 
+import com.exampl.traveler.vo.BusinessVO;
 import com.exampl.traveler.vo.MemberVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,6 +23,15 @@ public interface LoginMapper {
     MemberVO selectOne(String id);
 
     //// 기업회원 로그인 & 회원가입 mapper
+    // 기업 로그인 체크
+    boolean binLoginCheck(BusinessVO vo);
+
     // 기업 아이디 중복 체크
     boolean binIdCheck(String id);
+
+    // 기업 회원가입
+    boolean binIdInsert(BusinessVO vo);
+
+    // 기업 한개 찾기
+    BusinessVO binSelectOne(String id);
 }
