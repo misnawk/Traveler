@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seat Selection</title>
+    <link rel="stylesheet" href="/css/air/seatSelection.css">
+</head>
+<body>
+<main>
+    <h1>좌석 선택</h1>
+    <div>
+        <h2>선택된 항공편</h2>
+        <p th:text="${selectedFlight.aircompany}">항공사</p>
+        <p th:text="${selectedFlight.airNO}">항공편 번호</p>
+        <p th:text="${#temporals.format(selectedFlight.departureTime, 'yyyy-MM-dd HH:mm')}">출발 시간</p>
+        <p th:text="${#temporals.format(selectedFlight.arrivalTime, 'yyyy-MM-dd HH:mm')}">도착 시간</p>
+    </div>
+    <div th:if="${outboundFlight != null}">
+        <h2>가는 편 항공편</h2>
+        <p th:text="${outboundFlight.aircompany}">항공사</p>
+        <p th:text="${outboundFlight.airNO}">항공편 번호</p>
+        <p th:text="${#temporals.format(outboundFlight.departureTime, 'yyyy-MM-dd HH:mm')}">출발 시간</p>
+        <p th:text="${#temporals.format(outboundFlight.arrivalTime, 'yyyy-MM-dd HH:mm')}">도착 시간</p>
+    </div>
+    <button class="confirm-button">확인</button>
+</main>
+</body>
+</html>

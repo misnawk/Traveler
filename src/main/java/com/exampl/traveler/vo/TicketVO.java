@@ -17,4 +17,5 @@ public class TicketVO {
     private int tickPrice;
     private Date tickDate;
     private String tickPlace;
+    private String category;
 }

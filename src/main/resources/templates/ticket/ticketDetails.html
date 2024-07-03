@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/header_foter/header.css" />
+    <link rel="stylesheet" href="/css/ticket/ticketDetails.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"defer></script>
+    <script src="/js/ticket/ticketDetails.js" defer></script>
+    <title>티켓 상세 정보</title>
+</head>
+<body>
+<header>
+    <div th:replace="~{header_foter/header :: header}"></div>
+</header>
+
+<main class="ticket-details">
+    <div class="breadcrumb">
+        Travel > <span th:text="${ticket.category}"></span> > <span th:text="${ticket.tickPlace}"></span>
+    </div>
+
+    <h1 th:text="${ticket.tickTitle}">티켓 제목</h1>
+
+    <div class="location" th:text="${ticket.tickPlace}">장소</div>
+
+    <div class="ticket-content">
+        <div class="image-gallery">
+            <img th:src="${ticket.tickImg}" th:alt="${ticket.tickTitle}" class="main-image">
+        </div>
+
+        <div class="ticket-info">
+            <h2>패키지 옵션</h2>
+            <div class="package-option">
+                <h3 th:text="${ticket.tickTitle}">티켓 제목</h3>
+                <p th:text="${ticket.tickText}">티켓 설명</p>
+                <p th:text="${ticket.tickOp}">운영 시간</p>
+                <p>날짜: <span th:text="${#dates.format(ticket.tickDate, 'yyyy-MM-dd')}">날짜</span></p>
+                <p class="price" th:text="${#numbers.formatDecimal(ticket.tickPrice, 0, 'COMMA', 0, 'POINT')} + '원'">가격</p>
+                <button class="reserve-btn" onclick="payTicket()">결제하기</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+
+</footer>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var isLoggedIn = [[${session.id != null}]];
+    var ticketBindId = [[${ticket.binID}]];
+    /*]]>*/
+</script>
+</body>
+</html>

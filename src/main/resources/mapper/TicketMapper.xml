@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exampl.traveler.mapper.TicketMapper">
-    <select id="getAllTickets" resultType="com.exampl.traveler.vo.TicketVO">
+
+   <select id="getAllTickets" resultType="com.exampl.traveler.vo.TicketVO">
         SELECT * FROM tick
     </select>
+
+    <select id="getTicketByBinID" resultType="com.exampl.traveler.vo.TicketVO">
+        SELECT * FROM tick WHERE binID = #{binID}
+    </select>
+
+    <insert id="reserveTicket">
+        INSERT INTO userOrder (userID, binID)
+        VALUES (#{userId}, #{binID})
+    </insert>
+
 </mapper>

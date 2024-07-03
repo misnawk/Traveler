@@ -1,70 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/ticket/ticket.css" />
-  <link rel="stylesheet" href="../css/header_foter/header.css" />
-  <script src="/trip/js/header.js" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <title>티켓 검색</title>
+  <link rel="stylesheet" href="../css/ticket/ticket.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <script src="../js/header_foter/header.js" defer></script>
+  <link rel="stylesheet" href="/css/header_foter/header.css" />'
+  <script src="../js/ticket/ticketMain.js" defer></script>
 </head>
 <body>
 <div th:replace="header_foter/header :: header"></div>
 
-<div class="ticket_content">
-  <div class="search-container">
-    <input type="text" placeholder="어떤 즐거움을 찾으세요?" class="search-input" />
+<main class="ticket_page">
+  <div class="search_container">
+    <input type="text" placeholder="어떤 즐거움을 찾으세요?" class="search_input" />
     <button class="search_btn">검색하기</button>
   </div>
-</div>
 
-<div class="categories">
-  <div class="category">
-    <span class="icon">🎢</span>
-    <span class="label">테마파크</span>
+  <div class="categories">
+    <div class="category"><span class="icon">🎢</span><span class="label">테마파크</span></div>
+    <div class="category"><span class="icon">🏊‍♂️</span><span class="label">워터파크</span></div>
+    <div class="category"><span class="icon">🏛️</span><span class="label">박물관 & 미술관</span></div>
+    <div class="category"><span class="icon">🌳</span><span class="label">공원 & 자연</span></div>
+    <div class="category"><span class="icon">🐠</span><span class="label">아쿠아리움 & 동물원 & 농장</span></div>
+    <div class="category"><span class="icon">🚡</span><span class="label">케이블카</span></div>
+    <div class="category"><span class="icon">🗼</span><span class="label">전망대</span></div>
   </div>
-  <div class="category">
-    <span class="icon">🏊‍♂️</span>
-    <span class="label">워터파크</span>
-  </div>
-  <div class="category">
-    <span class="icon">🏛️</span>
-    <span class="label">박물관 & 미술관</span>
-  </div>
-  <div class="category">
-    <span class="icon">🌳</span>
-    <span class="label">공원 & 자연</span>
-  </div>
-  <div class="category">
-    <span class="icon">🐠</span>
-    <span class="label">아쿠아리움 & 동물원 & 농장</span>
-  </div>
-  <div class="category">
-    <span class="icon">🚡</span>
-    <span class="label">케이블카</span>
-  </div>
-  <div class="category">
-    <span class="icon">🗼</span>
-    <span class="label">전망대</span>
-  </div>
-</div>
 
+  <section class="ticket_sections">
 
-
-<section class="ticket-list">
-  <div class="ticket-grid">
-    <div th:each="ticket : ${tickets}" class="ticket-item">
-      <img th:src="${ticket.tickImg}" th:alt="${ticket.tickTitle}" class="ticket-image">
-      <div class="ticket-info">
-        <div class="ticket-title" th:text="${ticket.tickTitle}"></div>
-        <div class="ticket-price">
-          ₩<span th:text="${#numbers.formatDecimal(ticket.tickPrice, 0, 'COMMA', 0, 'POINT')}"></span>
-        </div>
-        <div th:text="${ticket.tickText}"></div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+</main>
 </body>
 </html>

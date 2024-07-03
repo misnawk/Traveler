@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/header_foter/header.css" />
+    <link rel="stylesheet" href="/css/hotel/hotel_pay.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/js/hotel/hotel_pay.js"></script>
+    <meta charset="UTF-8">
+    <title>결제하기</title>
+</head>
+<body>
+<header>
+    <div th:replace="~{header_foter/header :: header}"></div>
+</header>
+<div class="container">
+    <h1>결제 방법을 선택하세요</h1>
+    <div class="payment-methods">
+        <div class="method">
+            <input type="radio" id="bankTransfer" name="paymentMethod" checked>
+            <label for="bankTransfer">내통장결제</label>
+        </div>
+        <div class="method">
+            <input type="radio" id="creditCard" name="paymentMethod">
+            <label for="creditCard">신용카드/체크카드</label>
+        </div>
+        <div class="method">
+            <input type="radio" id="mobileCard" name="paymentMethod">
+            <label for="mobileCard">엠카드</label>
+        </div>
+        <div class="method">
+            <input type="radio" id="naverPay" name="paymentMethod">
+            <label for="naverPay">네이버페이</label>
+        </div>
+        <div class="method">
+            <input type="radio" id="kakaoPay" name="paymentMethod">
+            <label for="kakaoPay">카카오페이</label>
+        </div>
+        <div class="method">
+            <input type="radio" id="samsungPay" name="paymentMethod">
+            <label for="samsungPay">삼성페이</label>
+        </div>
+    </div>
+
+    <div class="summary">
+        <h2>예상 금액</h2>
+        <p>서울 -> 타이베이</p>
+        <ul>
+            <li>항공권: 949,800원</li>
+            <li>할인: -4,000원</li>
+        </ul>
+        <h3>총 금액: 945,800원</h3>
+    </div>
+
+    <div class="payment-button-container">
+        <button onclick="processPayment()">949,800원 결제</button>
+    </div>
+</div>
+</body>
+</html>
