@@ -36,3 +36,7 @@ function login(){
 function signUp(){
     location.href="/signUp"
 }
+
+function binSign(){
+    location.href="/binLogin"
+}

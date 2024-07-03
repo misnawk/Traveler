@@ -122,8 +122,9 @@ public class LoginController {
         if(loginService.binLoginCheck(vo)){
             BusinessVO getVO = loginService.binSelectOne(id);
             session.setMaxInactiveInterval(3600); //세션 1시간 유지
-            session.setAttribute("id",id);
-            session.setAttribute("name",getVO.getBinName());
+            session.setAttribute("binID",id);
+            session.setAttribute("binName",getVO.getBinName());
+            session.setAttribute("binCate",getVO.getBinCate());
             result = true;
         } else {
             result = false;
