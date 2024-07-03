@@ -53,6 +53,14 @@ body {
     background-color: #0056b3;
 }
 
+.myhotel_list {
+      text-align: right; /* 속성 이름 수정: text_align -> text-align */
+      color: black;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
 .hotel_list {
     display: flex;
     flex-direction: column;
@@ -96,6 +104,11 @@ body {
     font-size: 1.2em;
     font-weight: bold;
     color: #0066cc;
+}
+
+a#hotel_detail{
+    text-decoration: none;
+    color: inherit;
 }
 
 .hotel_details {
@@ -172,3 +185,4 @@ body {
     background: #0066cc;
     color: white;
 }
+
