@@ -2,8 +2,6 @@ package com.exampl.traveler.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class MemberVO {
     private String userID;

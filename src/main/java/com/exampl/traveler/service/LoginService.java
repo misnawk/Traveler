@@ -1,6 +1,7 @@
 package com.exampl.traveler.service;
 
 import com.exampl.traveler.mapper.LoginMapper;
+import com.exampl.traveler.vo.BusinessVO;
 import com.exampl.traveler.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +39,23 @@ public class LoginService {
     }
 
     //// 기업회원 로그인 & 회원가입 Service
+    // 기업 로그인 체크
+    public boolean binLoginCheck(BusinessVO vo){
+        return loginMapper.binLoginCheck(vo);
+    }
+
     // 기업 아이디 중복 체크
     public boolean binIdCheck(String id){
         return loginMapper.binIdCheck(id);
+    }
+
+    // 기업 회원가입
+    public boolean binIdInsert(BusinessVO vo){
+        return loginMapper.binIdInsert(vo);
+    }
+
+    // 기업 한개 찾기
+    public BusinessVO binSelectOne(String id){
+        return loginMapper.binSelectOne(id);
     }
 }
