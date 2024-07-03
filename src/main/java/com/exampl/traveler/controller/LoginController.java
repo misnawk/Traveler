@@ -98,6 +98,7 @@ public class LoginController {
         return "redirect:/login";
     }
 
+
     //// 기업회원 로그인 & 회원가입 Controller
     // 기업 로그인 페이지
     @GetMapping("binLogin")
