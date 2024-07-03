@@ -4,7 +4,7 @@ import com.exampl.traveler.service.BoardService;
 import com.exampl.traveler.vo.BoardVO;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -63,7 +63,7 @@ public class BoardController {
 
     //글등록
     @PostMapping("/write/save")
-    public String saveBoard(@Valid @ModelAttribute BoardVO boardVO, BindingResult bindingResult, HttpSession session, Model model) {
+    public String saveBoard( @ModelAttribute BoardVO boardVO, BindingResult bindingResult, HttpSession session, Model model) {
 
         // 현재 날짜 설정
         boardVO.setTripDate(new Date());
