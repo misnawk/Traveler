@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/header_foter/header.css" />
+    <link rel="stylesheet" href="/css/hotel/hotel_detail.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/js/hotel/hotel_detail_pay.js"></script>
+    <meta charset="UTF-8">
+    <title>호텔 상세</title>
+</head>
+<body>
+<header>
+    <div th:replace="~{header_foter/header :: header}"></div>
+</header>
+<div class="container">
+    <div class="hotel-images">
+        <img th:src="${hotel.hotelImg}" th:alt="${hotel.hotelName}">
+    </div>
+    <div class="hotel-info">
+        <h1 th:text="${hotel.hotelName}"></h1>
+    </div>
+    <div class="tabs-container">
+        <div class="tabs">
+            <button class="tablinks" onclick="openTab(event, 'Overview')" id="defaultOpen">개요</button>
+            <button class="tablinks" onclick="openTab(event, 'Rooms')">객실</button>
+            <button class="tablinks" onclick="openTab(event, 'Facilities')">편의 시설/서비스</button>
+            <button class="tablinks" onclick="openTab(event, 'Reviews')">이용후기</button>
+            <button class="tablinks" onclick="openTab(event, 'Location')">위치</button>
+            <button class="tablinks" onclick="openTab(event, 'Policy')">정책</button>
+        </div>
+        <div class="price">
+            <p th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelprice, 0, 'COMMA', 0, 'POINT')}"></p>
+        </div>
+    </div>
+    <div id="Overview" class="tabcontent">
+        <h3>개요</h3>
+        <p th:text="${hotel.hotelText}"></p>
+        <p th:text="'위치: ' + ${hotel.hotelplace}"></p>
+        <p th:text="${hotel.hotelTime}"></p>
+        <p th:text="${hotel.hotelCheck}"></p>
+    </div>
+    <div id="Rooms" class="tabcontent">
+        <h3>객실</h3>
+        <p>객실 정보가 여기에 표시됩니다.</p>
+    </div>
+    <div id="Facilities" class="tabcontent">
+        <h3>편의 시설/서비스</h3>
+        <ul class="facility-list">
+            <li th:each="facility : ${hotelFacilities}" th:text="${facility}"></li>
+        </ul>
+    </div>
+    <div id="Reviews" class="tabcontent">
+        <h3>이용후기</h3>
+        <p>이용후기 내용이 여기에 표시됩니다.</p>
+    </div>
+    <div id="Location" class="tabcontent">
+        <h3>위치</h3>
+        <p>위치 정보가 여기에 표시됩니다.</p>
+    </div>
+    <div id="Policy" class="tabcontent">
+        <h3>정책</h3>
+        <p>정책 내용이 여기에 표시됩니다.</p>
+    </div>
+    <div class="button-container">
+        <button id="payment-button">결제 페이지로 이동하기</button>
+    </div>
+</div>
+</body>
+</html>
