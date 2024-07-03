@@ -1,5 +1,5 @@
 // 로그인 체크
-function login(){
+function binLogin(){
    let id = document.getElementById("userId").value;
    let pw = document.getElementById("userPw").value;
 
@@ -14,7 +14,7 @@ function login(){
    }
 
    $.ajax({
-       url : '/user/login',
+       url : '/bin/login',
        data : {
            id : id,
            pw : pw
@@ -33,10 +33,7 @@ function login(){
    });
 }
 
-function signUp(){
-    location.href="/signUp"
+function binSign(){
+    location.href = "/binSignUp"
 }
 
-function binSign(){
-    location.href="/binLogin"
-}

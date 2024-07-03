@@ -5,24 +5,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/login/binSignUp.js" defer></script>
 </head>
 <body>
     <div class="bin_header_content">
         <h1>traveler</h1>
     </div>
-    <form zzaction="">
+    <form name="f" th:action="@{/bin/insert}" th:object="${vo}" method="post">
         <div class="sign_content">
             <div class="id_content">
-                <input type="text" name="binId" placeholder="아이디">
-                <input type="button" class="" onclick="#" value="중복확인">
+                <input type="text" name="binID" id="binID" placeholder="아이디">
+                <input type="button" onclick="idCheck()" value="중복확인">
+                <span id="idMsg"></span>
             </div>
-            <input type="password" name="binPw" placeholder="비밀번호">
-            <input type="password" placeholder="비밀번호 확인">
-            <input type="text" name="binName" placeholder="상호명">
-            <input type="text" name="binCode" placeholder="사업자등록번호">
-            <input type="text" name="binEmial" placeholder="대표이메일">
-            <input type="text" name="binTell" placeholder="대표전화번호">
-            <input type="button" name="singUp" value="회원가입">
+            <div class="content">
+                <input type="password" name="binPW" id="binPW" onkeydown="pwRange()" placeholder="비밀번호 (8~12자 영문, 숫자, 특수문자 조합)">
+                <span id="rangeMsg"></span>
+            </div>
+            <div class="content">
+                <input type="password" id="checkPW" onkeydown="pwCheck()" placeholder="비밀번호 확인 (8~12자 영문, 숫자, 특수문자 조합)">
+                <span id="checkMsg"></span>
+            </div>
+            <div class="type_content">
+                <input type="radio" name="binCate" id="1" value="1" checked>
+                <label for="1">티켓</label>
+                <input type="radio" name="binCate" id="2" value="2">
+                <label for="2">패키지</label>
+            </div>
+            <div class="content">
+                <input type="text" name="binName" id="binName" placeholder="상호명">
+                <span id="nameMsg"></span>
+            </div>
+            <div class="content">
+                <input type="text" name="binCode" id="binCode" placeholder="사업자등록번호">
+                <span id="codeMsg"></span>
+            </div>
+            <div class="content">
+                <input type="text" name="binTell" id="binTell" placeholder="전화번호">
+                <span id="tellMsg"></span>
+            </div>
+            <div class="content">
+                <input type="text" name="binEmail" id="binEmail" placeholder="이메일">
+                <span id="emailMsg"></span>
+            </div>
+            <div class="content">
+                <input type="button" id="singUp" onclick="save()" value="회원가입">
+            </div>
         </div>
     </form>
 </body>
