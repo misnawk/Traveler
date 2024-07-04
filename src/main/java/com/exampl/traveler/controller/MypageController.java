@@ -22,21 +22,6 @@ public class MypageController {
     private final LoginService loginService;
     private final MyPageService myPageService;
 
-    // 일반회원 마이페이지
-    @GetMapping("myPage/{id}")
-    public String myPage(@PathVariable("id") String id, Model model){
-        MemberVO vo = loginService.selectOne(id);
-        model.addAttribute("vo",vo);
-
-        return "/mypage/mypage";
-    }
-
-    // 기업회원 관리자
-    @GetMapping("binPage/{id}")
-    public String binPage(@PathVariable("id") String id){
-        return null;
-    }
-
     // 회원정보 수정 페이지
     @GetMapping("mypage/editor/{id}")
     public String proEditor(@PathVariable("id") String id, Model model){
@@ -85,6 +70,6 @@ public class MypageController {
         vo.setUserPW(pw);
 
         myPageService.pwInsert(vo);
-        return "redirect:/myPage/"+id;
+        return "redirect:/mypage/"+id;
     }
 }
