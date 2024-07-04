@@ -1,0 +1,18 @@
+.calendar_con{
+    width : 70%;
+    height : 600px;
+
+}
+
+main {
+    padding-top:141px; /* header와 nav의 높이에 따라 조정 */
+    padding-bottom: 50px;
+    height: 100%;
+    display: flex;
+  }
+body, html {
+    height: auto;
+
+    margin: 0;
+
+}
