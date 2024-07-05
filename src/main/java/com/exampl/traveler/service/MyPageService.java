@@ -10,7 +10,12 @@ import org.springframework.stereotype.Service;
 public class MyPageService {
     private final MyPageMapper myPageMapper;
 
-    // 수정한 비밀번호 저장
+    // 수정한 회원정보 업데이트
+    public boolean proUpdate(MemberVO vo){
+        return myPageMapper.proUpdate(vo);
+    }
+
+    // 수정한 비밀번호 업데이트
     public boolean pwInsert(MemberVO vo){
         return myPageMapper.pwInsert(vo);
     }

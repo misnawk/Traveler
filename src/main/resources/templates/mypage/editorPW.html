@@ -12,7 +12,7 @@
 <body>
     <main>
         <div th:replace="header_foter/header :: header"></div>
-        <form name="f" th:action="@{/mypage/pw/insert}" th:object="${vo}" method="post">
+        <form name="f" th:action="@{/mypage/pw/update}" th:object="${vo}" method="post">
             <input type="hidden" id="id" name="id" th:value="${session.id}">
             <div class="body_container">
                 <div class="table_container">

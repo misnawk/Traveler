@@ -31,24 +31,28 @@ public class MypageController {
         return "/mypage/editor";
     }
 
+    // 수정한 회원정보 업데이트
+    @PostMapping("mypage/editor/update")
+    public String proUpdate(MemberVO vo){
+        myPageService.proUpdate(vo);
+
+        return "redirect:/mypage/"+vo.getUserID();
+    }
+
     // 비밀번호 수정 페이지
     @GetMapping("mypage/pw/{id}")
-    public String editorPW(@PathVariable("id") String id){
-
+    public String PwEditor(@PathVariable("id") String id){
         return "/mypage/editorPW";
     }
 
     // 현재 사용중인 비밀번호 확인
     @PostMapping("mypage/pw/check")
-    public ResponseEntity<Boolean> pwCheck(@RequestParam("pw") String pw,
-                                           MemberVO vo,
-                                           HttpServletRequest request){
+    public ResponseEntity<Boolean> pwCheck(@RequestParam("id") String id,
+                                           @RequestParam("pw") String pw,
+                                           MemberVO vo){
         boolean result = false;
 
-        HttpSession session = request.getSession();
-        Object id = session.getAttribute("id");
-
-        vo.setUserID((String) id);
+        vo.setUserID(id);
         vo.setUserPW(pw);
 
         if(loginService.loginCheck(vo)){
@@ -60,13 +64,12 @@ public class MypageController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    // 수정한 비밀번호 저장
-    @PostMapping("mypage/pw/insert")
-    public String pwInsert(@RequestParam("newPW") String pw ,HttpServletRequest request, MemberVO vo){
-        HttpSession session = request.getSession();
-        Object id = session.getAttribute("id");
+    // 수정한 비밀번호 업데이트
+    @PostMapping("mypage/pw/update")
+    public String pwUdate(@RequestParam("newPW") String pw ,
+                           @RequestParam("id") String id, MemberVO vo){
 
-        vo.setUserID((String) id);
+        vo.setUserID(id);
         vo.setUserPW(pw);
 
         myPageService.pwInsert(vo);

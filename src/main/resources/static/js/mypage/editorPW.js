@@ -6,6 +6,7 @@ let blue = "#1273E4"
 
 // 현재 비밀번호 확인
 function nowPWCheck(){
+    let id = document.getElementById("id").value
     let pw = document.getElementById("nowPW").value
 
     if(pw == ''){
@@ -16,6 +17,7 @@ function nowPWCheck(){
     $.ajax({
         url : '/mypage/pw/check',
         data : {
+            id : id,
             pw : pw
         },
         type : 'POST',
@@ -36,12 +38,12 @@ function nowPWCheck(){
 
 // 비밀번호 설정 범위 확인
 function pwRange(){
-    let newPW = document.getElementById("newPW")
+    let newPW = document.getElementById("newPW").value
     let pwRange = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,12}$/
     let rangeMsg = document.getElementById("rangeMsg")
 
     setTimeout(() => {
-        if(!pwRange.test(newPW.value)){
+        if(!pwRange.test(newPW)){
             rangeMsg.style.color = red;
             rangeMsg.innerHTML = "영문, 숫자, 특수문자 8~12자 사이로 조합해주세요"
             pwRangeSccess = false
@@ -74,11 +76,20 @@ function pwCheck(){
 
 // 비밀번호 변경 페이지 - 수정하기 버튼
 function pwEditor(){
+    let pw = document.getElementById("nowPW").value
+    let newPW = document.getElementById("newPW").value
+
     let nowMsg = document.getElementById("nowMsg")
     let rangeMsg = document.getElementById("rangeMsg")
     let checkMsg = document.getElementById("checkMsg")
 
     let $sendBtn = $("input#saveBtn");
+
+    if(pw == newPW){
+        rangeMsg.style.color = red;
+        rangeMsg.innerHTML = "현재 사용중인 비밀번호와 동일합니다"
+        return;
+    }
 
     if(nowPWSccess == false){
         nowMsg.style.color = red;
