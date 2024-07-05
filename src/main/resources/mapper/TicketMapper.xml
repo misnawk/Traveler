@@ -2,17 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exampl.traveler.mapper.TicketMapper">
 
-   <select id="getAllTickets" resultType="com.exampl.traveler.vo.TicketVO">
+    <select id="getAllTickets" resultType="com.exampl.traveler.vo.TicketVO">
         SELECT * FROM tick
     </select>
 
-    <select id="getTicketByBinID" resultType="com.exampl.traveler.vo.TicketVO">
-        SELECT * FROM tick WHERE binID = #{binID}
+    <select id="getTicketByTickNO" resultType="com.exampl.traveler.vo.TicketVO">
+        SELECT * FROM tick WHERE tickNO = #{tickNO}
     </select>
 
-    <insert id="reserveTicket">
-        INSERT INTO userOrder (userID, binID)
-        VALUES (#{userId}, #{binID})
+    <insert id="createOrder" parameterType="map" useGeneratedKeys="true" keyProperty="orderID">
+        INSERT INTO orders (userID, comNO, totalcnt, orderdate)
+        VALUES (#{userId}, #{comNO}, #{totalcnt}, CURRENT_DATE())
     </insert>
+
+    <insert id="createDiary" parameterType="map">
+        INSERT INTO diary (userID, orderID, goday, diaryTitle, time)
+        VALUES (#{userId}, #{orderID}, #{goday}, #{diaryTitle}, #{time})
+    </insert>
+
+    <select id="getTicketByBinID" resultType="com.exampl.traveler.vo.TicketVO">
+        SELECT * FROM tick WHERE binID = #{binID} LIMIT 1
+    </select>
+
 
 </mapper>

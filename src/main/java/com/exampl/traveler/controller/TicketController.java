@@ -31,9 +31,9 @@ public class TicketController {
         return ticketService.getAllTickets();
     }
 
-    @GetMapping("/ticket/details/{binID}")
-    public String ticketDetails(@PathVariable("binID") String binID, Model model) {
-        TicketVO ticket = ticketService.getTicketByBinID(binID);
+    @GetMapping("/ticket/details/{tickNO}")
+    public String ticketDetails(@PathVariable("tickNO") String tickNO, Model model) {
+        TicketVO ticket = ticketService.getTicketByTickNO(tickNO);
         if (ticket == null) {
             return "error";
         }
@@ -43,13 +43,15 @@ public class TicketController {
 
     @PostMapping("/reserveTicket")
     @ResponseBody
-    public ResponseEntity<?> reserveTicket(@RequestParam("binID") String binID, HttpSession session) {
+    public ResponseEntity<?> reserveTicket(@RequestParam("tickNO") String tickNO,
+                                           @RequestParam("quantity") int quantity,
+                                           HttpSession session) {
         String userId = (String) session.getAttribute("id");
         if (userId == null) {
             return ResponseEntity.ok().body(Map.of("loggedIn", false));
         }
 
-        boolean reserved = ticketService.reserveTicket(userId, binID);
+        boolean reserved = ticketService.reserveTicket(userId, tickNO, quantity);
         return ResponseEntity.ok().body(Map.of("loggedIn", true, "reserved", reserved));
     }
 }

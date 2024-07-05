@@ -9,7 +9,6 @@ import java.util.List;
 
 @Service
 public class AirService {
-
     private final AirMapper airMapper;
 
     @Autowired
@@ -17,15 +16,15 @@ public class AirService {
         this.airMapper = airMapper;
     }
 
-    public List<AirVO> findAirlineRound(String departure, String destination, String departureDate, String returnDate) {
-        return airMapper.findAirlineRound(departure, destination, departureDate, returnDate);
+    public List<AirVO> findOutboundAirs(String departure, String destination, String departureDate) {
+        return airMapper.findOutboundAirs(departure, destination, departureDate);
     }
 
-    public List<AirVO> findAirlineOne(String departure, String destination, String departureDate) {
-        return airMapper.findAirlineOne(departure, destination, departureDate);
+    public List<AirVO> findReturnAirs(String departure, String destination, String returnDate) {
+        return airMapper.findReturnAirs(departure, destination, returnDate);
     }
 
-    public AirVO findAirlineById(String airNO) {
-        return airMapper.findAirlineById(airNO);
+    public List<AirVO> findOneWayAirs(String departure, String destination, String departureDate) {
+        return airMapper.findOneWayAirs(departure, destination, departureDate);
     }
 }

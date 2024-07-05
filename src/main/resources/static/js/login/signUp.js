@@ -110,7 +110,6 @@ function save(){
     if(idSccess == false){
         idMsg.style.color = red;
         idMsg.innerHTML = "아이디 중복 확인을 해주세요"
-        document.getElementById("userId").value = "";
         return;
     }
 

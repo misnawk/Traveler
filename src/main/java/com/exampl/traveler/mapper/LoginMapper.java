@@ -4,8 +4,6 @@ import com.exampl.traveler.vo.BusinessVO;
 import com.exampl.traveler.vo.MemberVO;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
-
 @Mapper
 public interface LoginMapper {
 
