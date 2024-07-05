@@ -2,27 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exampl.traveler.mapper.TicketMapper">
 
-    <select id="getAllTickets" resultType="com.exampl.traveler.vo.TicketVO">
+    <resultMap id="ticketResultMap" type="com.exampl.traveler.vo.TicketVO">
+        <id property="tickNO" column="tickNO"/>
+        <result property="binID" column="binID"/>
+        <result property="tickImg" column="tickImg"/>
+        <result property="tickTitle" column="tickTitle"/>
+        <result property="tickText" column="tickText"/>
+        <result property="tickOp" column="tickOp"/>
+        <result property="tickPrice" column="tickPrice"/>
+        <result property="tickDate" column="tickDate" jdbcType="TIMESTAMP"/>
+        <result property="tickPlace" column="tickPlace"/>
+        <result property="category" column="category"/>
+        <result property="tickTime" column="tickTime" jdbcType="TIME" javaType="java.time.LocalTime"/>
+    </resultMap>
+
+    <select id="getAllTickets" resultMap="ticketResultMap">
         SELECT * FROM tick
     </select>
 
-    <select id="getTicketByTickNO" resultType="com.exampl.traveler.vo.TicketVO">
+    <select id="getTicketByTickNO" resultMap="ticketResultMap">
         SELECT * FROM tick WHERE tickNO = #{tickNO}
     </select>
 
     <insert id="createOrder" parameterType="map" useGeneratedKeys="true" keyProperty="orderID">
-        INSERT INTO orders (userID, comNO, totalcnt, orderdate)
-        VALUES (#{userId}, #{comNO}, #{totalcnt}, CURRENT_DATE())
+        INSERT INTO orders (userID, comNO, bincate, totalcnt, orderdate)
+        VALUES (#{userId}, #{comNO}, #{bincate}, #{totalcnt}, NOW())
     </insert>
 
     <insert id="createDiary" parameterType="map">
-        INSERT INTO diary (userID, orderID, goday, diaryTitle, time)
-        VALUES (#{userId}, #{orderID}, #{goday}, #{diaryTitle}, #{time})
+        INSERT INTO DIARY (userID, ORDERID, GODAY, DIARYTITLE)
+        VALUES (#{userId}, #{orderID}, #{goday}, #{diaryTitle})
     </insert>
 
-    <select id="getTicketByBinID" resultType="com.exampl.traveler.vo.TicketVO">
+    <select id="getTicketByBinID" resultMap="ticketResultMap">
         SELECT * FROM tick WHERE binID = #{binID} LIMIT 1
     </select>
-
 
 </mapper>
