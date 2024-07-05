@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>일정 관리</title>
+    <link rel="stylesheet" href="/css/schedule/schedule.css">
+    <link rel="stylesheet" href="/css/header_foter/header.css">
+    <link rel="stylesheet" href="/css/header_foter/foter.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.14/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.14/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.14/index.global.min.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.14/main.min.css' rel='stylesheet' />
+</head>
+<body>
+<div th:replace="header_foter/header :: header"></div>
+<main>
+    <input type="hidden" id="id" name="id" th:value="${userId}">
+    <h3>일정 추가</h3>
+    <form id="event-form">
+        <label for="title">제목:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="start">시작 날짜:</label>
+        <input type="date" id="start" name="start" required><br><br>
+        <label for="end">종료 날짜:</label>
+        <input type="date" id="end" name="end"><br><br>
+        <label for="color">색상:</label>
+        <select id="color" name="color" required>
+            <option value="#FF5733" style="background-color: #FF5733;">빨간색</option>
+            <option value="#33FF57" style="background-color: #33FF57;">녹색</option>
+            <option value="#3357FF" style="background-color: #3357FF;">파란색</option>
+            <!-- 나머지 색상 옵션들... -->
+        </select><br><br>
+        <button type="submit">일정 추가</button>
+    </form>
+    <div class="calendar_con" id='calendar'></div>
+</main>
+<div th:replace="header_foter/foter :: foter"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            selectable: true,
+            dragScroll: true,
+            locale: "ko",
+            editable: true,
+            droppable: true,
+            events: function(fetchInfo, successCallback, failureCallback) {
+                var userId = $('#id').val();
+                if (userId) {
+                    loadDiaryEntries(userId, successCallback, failureCallback);
+                } else {
+                    console.error('User ID not found');
+                    failureCallback('User ID not found');
+                }
+            },
+            eventDrop: function(info) {
+                alert(info.event.title + "가 " + info.event.start.toISOString() + "로 이동되었습니다.");
+                // 여기에 서버에 업데이트된 일정을 저장하는 코드를 추가할 수 있습니다.
+            }
+        });
+
+        calendar.render();
+
+        $('#event-form').submit(function(e) {
+            e.preventDefault();
+            saveDiaryEntry(calendar);
+        });
+    });
+
+    function loadDiaryEntries(userId, successCallback, failureCallback) {
+        $.ajax({
+            url: '/diary/entries/' + userId,
+            type: 'GET',
+            success: function(data) {
+                var events = data.map(function(entry) {
+                    return {
+                        title: entry.diaryTitle,
+                        start: entry.goDay,
+                        end: entry.backDay,
+                        color: entry.diaryText || getRandomColor() // diaryText가 null일 경우 랜덤 색상 사용
+                    };
+                });
+                successCallback(events);
+            },
+            error: function(xhr, status, error) {
+                console.error('Error loading diary entries:', error);
+                failureCallback(error);
+            }
+        });
+    }
+
+    function saveDiaryEntry(calendar) {
+        var userId = $('#id').val();
+        if (!userId) {
+            console.error('User ID not found');
+            return;
+        }
+
+        var diaryEntry = {
+            userId: userId,
+            godDay: $('#start').val(),
+            backDay: $('#end').val(),
+            diaryTitle: $('#title').val(),
+            diaryText: $('#color').val() // 색상 값을 diaryText로 사용
+        };
+
+        $.ajax({
+            url: '/diary',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(diaryEntry),
+            success: function(response) {
+                alert('일정이 저장되었습니다.');
+                calendar.addEvent({
+                    title: diaryEntry.diaryTitle,
+                    start: diaryEntry.godDay,
+                    end: diaryEntry.backDay,
+                    color: diaryEntry.diaryText,
+                    editable: true
+                });
+                $('#event-form')[0].reset();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error saving diary entry:', error);
+            }
+        });
+    }
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+</body>
+</html>
