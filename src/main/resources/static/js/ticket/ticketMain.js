@@ -49,7 +49,7 @@ function renderTickets(tickets) {
                     <button class="arrow left_arrow" onclick="prevSlide(this)">&#9664;</button>
                     <div class="ticket_list">
                         ${countryTickets.map(ticket => `
-                            <div class="ticket_card" onclick="viewDetails('${ticket.binID}')">
+                        <div class="ticket_card" onclick="viewDetails('${ticket.tickNO}')">
                                 <img src="${ticket.tickImg}" alt="${ticket.tickTitle}">
                                 <h4>${ticket.tickTitle}</h4>
                                 <p>${ticket.tickText}</p>
@@ -76,6 +76,6 @@ function prevSlide(button) {
     ticketList.scrollBy({ left: -300, behavior: 'smooth' });
 }
 
-function viewDetails(binID) {
-    window.location.href = `/ticket/details/${binID}`;
+function viewDetails(tickNO) {
+    window.location.href = `/ticket/details/${tickNO}`;
 }

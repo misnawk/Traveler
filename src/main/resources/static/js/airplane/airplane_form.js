@@ -135,45 +135,79 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // 검색 버튼 클릭 이벤트
-  document.querySelector('#airSearchForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // 기본 제출 동작 방지
+  document.addEventListener('DOMContentLoaded', function() {
+      const tripTypeInputs = document.querySelectorAll('input[name="tripType"]');
+      const returnDateInput = document.getElementById('return_date');
 
-    // 필수 필드 검증
-    const destination = document.getElementById('destination').value;
-    const departureDate = document.getElementById('departure_date').value;
-    const returnDate = document.getElementById('return_date').value;
-    const passengers = document.getElementById('passengers').value;
+      tripTypeInputs.forEach(input => {
+          input.addEventListener('change', function() {
+              if (this.value === 'oneway') {
+                  returnDateInput.disabled = true;
+              } else {
+                  returnDateInput.disabled = false;
+              }
+          });
+      });
 
-    if (!destination || !departureDate || !passengers) {
-      alert('목적지, 출발일, 인원 수를 모두 입력해주세요.');
-      return;
-    }
+      const departureInput = document.getElementById('departure');
+      const destinationInput = document.getElementById('destination');
+      const countryList = document.querySelector('.country_list');
+      const cityList = document.querySelector('.city_list');
 
-    // 왕복 여행인 경우 돌아오는 날짜 확인
-    const tripType = document.querySelector('input[name="trip_type"]:checked').value;
-    if (tripType === 'roundtrip' && !returnDate) {
-      alert('왕복 여행의 경우 돌아오는 날짜를 입력해주세요.');
-      return;
-    }
+      if (departureInput && destinationInput && countryList && cityList) {
+          departureInput.value = '인천국제공항';
+          departureInput.readOnly = true;
 
-    // 폼 제출
-    this.submit();
+          const countries = [
+              { name: '일본', cities: [
+                  { name: '신치토세 공항', code: 'CTS' },
+                  { name: '주부 센트레아 국제공항', code: 'NGO' },
+                  { name: '히로시마 공항', code: 'HIJ' }
+              ]},
+              { name: '베트남', cities: [
+                  { name: '푸바이 국제공항', code: 'HUI' },
+                  { name: '반돈 국제공항', code: 'VDO' },
+                  { name: '깜라인 국제공항', code: 'CXR' }
+              ]},
+              // Add other countries and cities here
+          ];
+
+          function populateCountryList() {
+              countries.forEach(country => {
+                  const li = document.createElement('li');
+                  li.textContent = country.name;
+                  li.addEventListener('click', () => showCities(country.cities));
+                  countryList.appendChild(li);
+              });
+          }
+
+          function showCities(cities) {
+              countryList.classList.add('hidden');
+              cityList.innerHTML = '';
+              cities.forEach(city => {
+                  const li = document.createElement('li');
+                  li.textContent = `${city.name} (${city.code})`;
+                  li.addEventListener('click', () => {
+                      destinationInput.value = city.name;
+                      cityList.classList.add('hidden');
+                  });
+                  cityList.appendChild(li);
+              });
+              cityList.classList.remove('hidden');
+          }
+
+          populateCountryList();
+
+          destinationInput.addEventListener('click', () => {
+              countryList.classList.toggle('hidden');
+              cityList.classList.add('hidden');
+          });
+
+          document.addEventListener('click', function(e) {
+              if (!destinationInput.contains(e.target) && !countryList.contains(e.target) && !cityList.contains(e.target)) {
+                  countryList.classList.add('hidden');
+                  cityList.classList.add('hidden');
+              }
+          });
+      }
   });
-
-  // 인원수 입력 검증
-  document.querySelector('#airSearchForm').addEventListener('submit', function(e) {
-    const passengersInput = document.getElementById('passengers');
-    const passengers = parseInt(passengersInput.value);
-
-    if (isNaN(passengers) || passengers < 1 || passengers > 10) {
-      e.preventDefault();
-      alert('인원수는 1명에서 10명 사이여야 합니다.');
-      passengersInput.focus();
-    }
-  });
-
-  // 초기화 함수들 호출
-  populateCountryList(); // 국가 목록 채우기
-  initializeDatePickers(); // 날짜 선택기 초기화
-  handleTripTypeChange(); // 왕복/편도 선택에 따른 처리
-});

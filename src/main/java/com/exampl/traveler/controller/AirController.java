@@ -1,6 +1,5 @@
 package com.exampl.traveler.controller;
 
-import com.exampl.traveler.dto.SearchCriteria;
 import com.exampl.traveler.service.AirService;
 import com.exampl.traveler.vo.AirVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/air")
 public class AirController {
-
-    @GetMapping
-    public String showMainPage() {
-        return "air/airplane_main";
-    }
-
     private final AirService airService;
 
     @Autowired
@@ -26,34 +19,83 @@ public class AirController {
         this.airService = airService;
     }
 
-    @GetMapping("/round")
-    public List<AirVO> findAirlineRound(
+    @GetMapping("")
+    public String airMainPage() {
+        return "air/airplane_main";
+    }
+
+    @GetMapping("/outbound")
+    @ResponseBody
+    public List<AirVO> findOutboundAirs(
             @RequestParam("departure") String departure,
             @RequestParam("destination") String destination,
-            @RequestParam("departureDate") String departureDate,
+            @RequestParam("departureDate") String departureDate) {
+        return airService.findOutboundAirs(departure, destination, departureDate);
+    }
+
+    @GetMapping("/return")
+    @ResponseBody
+    public List<AirVO> findReturnAirs(
+            @RequestParam("departure") String departure,
+            @RequestParam("destination") String destination,
             @RequestParam("returnDate") String returnDate) {
-        return airService.findAirlineRound(departure, destination, departureDate, returnDate);
+        return airService.findReturnAirs(departure, destination, returnDate);
     }
 
     @GetMapping("/oneway")
-    public List<AirVO> findAirlineOne(
-            @RequestParam String departure,
-            @RequestParam String destination,
-            @RequestParam String departureDate) {
-        return airService.findAirlineOne(departure, destination, departureDate);
+    @ResponseBody
+    public List<AirVO> findOneWayAirs(
+            @RequestParam("departure") String departure,
+            @RequestParam("destination") String destination,
+            @RequestParam("departureDate") String departureDate) {
+        return airService.findOneWayAirs(departure, destination, departureDate);
     }
 
-    @GetMapping("/{airNO}")
-    public AirVO findAirlineById(@PathVariable String airNO) {
-        return airService.findAirlineById(airNO);
+    @GetMapping("/search")
+    public String searchAirs(@RequestParam("departure") String departure,
+                             @RequestParam("destination") String destination,
+                             @RequestParam("departureDate") String departureDate,
+                             @RequestParam(value = "returnDate", required = false) String returnDate,
+                             @RequestParam("tripType") String tripType,
+                             Model model) {
+        if ("roundtrip".equals(tripType)) {
+            List<AirVO> outbound = airService.findOutboundAirs(departure, destination, departureDate);
+            model.addAttribute("outboundFlights", outbound);
+            model.addAttribute("departure", departure);
+            model.addAttribute("destination", destination);
+            model.addAttribute("returnDate", returnDate);
+            return "air/choose_outbound";
+        } else {
+            List<AirVO> onewayFlights = airService.findOneWayAirs(departure, destination, departureDate);
+            model.addAttribute("onewayFlights", onewayFlights);
+            return "air/oneway_results";
+        }
+    }
+
+    @GetMapping("/select")
+    public String selectAirline(@RequestParam("airlineID") String airlineID,
+                                @RequestParam("departure") String departure,
+                                @RequestParam("destination") String destination,
+                                @RequestParam("returnDate") String returnDate,
+                                Model model) {
+        // 필요한 로직을 수행합니다.
+        // 모델에 필요한 데이터를 추가합니다.
+        model.addAttribute("airlineID", airlineID);
+        model.addAttribute("departure", departure);
+        model.addAttribute("destination", destination);
+        model.addAttribute("returnDate", returnDate);
+
+        // 귀국 항공편 선택 페이지로 리디렉션합니다.
+        return "redirect:/air/chooseReturn?departure=" + departure + "&destination=" + destination + "&returnDate=" + returnDate;
+    }
+
+    @GetMapping("/chooseReturn")
+    public String chooseReturnAirs(@RequestParam("departure") String departure,
+                                   @RequestParam("destination") String destination,
+                                   @RequestParam("returnDate") String returnDate,
+                                   Model model) {
+        List<AirVO> returnFlights = airService.findReturnAirs(departure, destination, returnDate);
+        model.addAttribute("returnFlights", returnFlights);
+        return "air/choose_return";
     }
 }
-
-
-
-
-
-
-
-
-

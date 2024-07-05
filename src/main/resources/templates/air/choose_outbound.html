@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/airplane/choose_outbound.css">
+    <title>Choose Outbound Flight</title>
+
+</head>
+<body>
+<h1>가는 편 항공편 선택</h1>
+<div class="flight-list">
+    <div class="flight-item" th:each="air : ${outboundFlights}">
+        <div class="flight-info">
+            <div>
+                <p th:text="${air.airTitle}"></p>
+                <p th:text="${air.departureAirport}"></p>
+                <p th:text="${air.arrivalAirport}"></p>
+                <p th:text="${air.departureTime}"></p>
+                <p th:text="${air.arrivalTime}"></p>
+            </div>
+            <div class="price" th:text="${air.airPrice + '원'}"></div>
+        </div>
+        <button class="select-button"
+                th:data-airline-id="${air.airlineID}"
+                th:data-departure="${departure}"
+                th:data-destination="${destination}"
+                th:data-return-date="${returnDate}"
+                onclick="redirectToSelect(this.getAttribute('data-airline-id'),
+                                          this.getAttribute('data-departure'),
+                                          this.getAttribute('data-destination'),
+                                          this.getAttribute('data-return-date'))">
+            항공편 선택
+        </button>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    function redirectToSelect(airlineID, departure, destination, returnDate) {
+        const url = '/air/select?airlineID=' + encodeURIComponent(airlineID) +
+                    '&departure=' + encodeURIComponent(departure) +
+                    '&destination=' + encodeURIComponent(destination) +
+                    '&returnDate=' + encodeURIComponent(returnDate);
+        location.href = url;
+    }
+</script>

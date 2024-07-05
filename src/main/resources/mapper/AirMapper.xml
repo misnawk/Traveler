@@ -4,32 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exampl.traveler.mapper.AirMapper">
-
-    <!-- 왕복 항공편 검색 -->
-    <select id="findAirlineRound" resultType="com.exampl.traveler.vo.AirVO">
+    <select id="findOutboundAirs" resultType="com.exampl.traveler.vo.AirVO">
         SELECT * FROM airline
         WHERE departureAirport = #{departure}
         AND arrivalAirport = #{destination}
-        AND DATE(departureTime) = #{departureDate}
-        UNION ALL
+        AND DATE(departureDate) = #{departureDate}
+    </select>
+
+    <select id="findReturnAirs" resultType="com.exampl.traveler.vo.AirVO">
         SELECT * FROM airline
         WHERE departureAirport = #{destination}
         AND arrivalAirport = #{departure}
-        AND DATE(departureTime) = #{returnDate}
+        AND DATE(departureDate) = #{returnDate}
     </select>
 
-    <!-- 편도 항공편 검색 -->
-    <select id="findAirlineOne" resultType="com.exampl.traveler.vo.AirVO">
+    <select id="findOneWayAirs" resultType="com.exampl.traveler.vo.AirVO">
         SELECT * FROM airline
         WHERE departureAirport = #{departure}
         AND arrivalAirport = #{destination}
-        AND DATE(departureTime) = #{departureDate}
+        AND DATE(departureDate) = #{departureDate}
     </select>
-
-    <!-- 항공편 번호로 항공권 정보 검색 -->
-    <select id="findAirlineById" resultType="com.exampl.traveler.vo.AirVO">
-        SELECT * FROM airline
-        WHERE airNO = #{airNO}
-    </select>
-
 </mapper>
