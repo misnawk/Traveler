@@ -1,0 +1,129 @@
+main{
+    padding-top:141px; /* header와 nav의 높이에 따라 조정 */
+    padding-bottom: 50px;
+    height: 100%;
+}
+
+.body_container{
+    padding : 30px 0px;
+}
+
+.profile_container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 30px;
+}
+
+.profile_container > input {
+    height: 40px;
+    width: 150px;
+    border: 1px solid #1273E4;
+    border-radius: 5px;
+    background-color: #fff;
+    font: bold;
+    font-size: 14px;
+    color: #1273E4;
+    cursor: pointer;
+}
+
+.profile_content > h4{
+    margin-bottom: 5px;
+}
+
+.profile_content > p{
+    margin: 0;
+    font-size: 14px;
+}
+
+.register_content{
+    float : right;
+    margin : 15px 30px 0;
+}
+
+.register_btn{
+    height: 40px;
+    width: 150px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1273E4;
+    font: bold;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.table_content{
+    width: 80%;
+    border: 1px solid #AEAEAE;
+    border-collapse: collapse;
+    margin: 20px auto 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table_content tr{
+    border: 1px solid #ddd;
+    height: 50px;
+    position: relative;
+}
+
+.table_content tr th {
+    border: 1px solid #ddd;
+    font-size: 15px;
+}
+
+.table_content tr td {
+    border: 1px solid #ddd;
+    font-size: 14px;
+    text-align: center;
+}
+
+.item_btn{
+    height: 30px;
+    width : 60px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #1273E4;
+    cursor: pointer;
+}
+
+.search_content{
+    display: flex;
+    justify-content: center;
+}
+
+select{
+    width: 150px;
+    height: 40px;
+    background-size: 20px;
+    padding: 5px 30px 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: 0 none;
+    margin-right: 5px;
+}
+
+.search_input{
+    height: 40px;
+    width: 500px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.search_btn{
+    height: 40px;
+    width: 70px;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    color: #fff;
+    background-color: #1273E4;
+    cursor: pointer;
+}
+
+.list_container{
+    margin-top : 80px
+}

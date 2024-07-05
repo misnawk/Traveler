@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/header_foter/foter.css" />
+    <link rel="stylesheet" href="header.css" />
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/js/admin/admin.js" defer></script>
+</head>
+<body>
+    <main>
+        <div class="header_content">
+            <h1 class="logo"><a href="/">traveler</a></h1>
+            <div class="button_content">
+                <th:block th:if="${session.id == 'admin'}">
+                    <input type="hidden" id="adminID" name="adminID" th:value="${session.id}">
+                    <span class="userName"><b>[[${session.name}]]</b> 님</span>
+                    <button class="mypage" onclick="adminPage()">관리자</button>
+                    <button class="logout" onclick="logout()">로그아웃</button>
+                </th:block>
+            </div>
+        </div>
+
+
+
+        <div th:replace="header_foter/foter :: foter"></div>
+    </main>
+</body>
+</html>
