@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/business/binWrite.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/header_foter/header.css">
+    <link rel="stylesheet" href="/css/header_foter/foter.css" />
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/js/business/binWrite.js" defer></script>
+</head>
+<body>
+<main>
+    <div th:replace="header_foter/header :: header"></div>
+
+    <input type="hidden" id="binID" name="binID" th:value="${session.binID}">
+
+    <div class="table_container">
+        <table class="table_content">
+            <tr>
+                <th>title</th>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <th>title</th>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <th>title</th>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <th>title</th>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <th>title</th>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+
+        <input type="button" class="save_btn" id="saveBtn" name="saveBtn" onclick="save()" value="저장하기">
+        <input type="button" class="back_btn" id="backBtn" name="backBtn" onclick="back()" value="뒤로가기">
+    </div>
+
+    <div th:replace="header_foter/foter :: foter"></div>
+</main>
+</body>
+</html>
