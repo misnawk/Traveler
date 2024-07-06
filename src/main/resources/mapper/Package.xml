@@ -10,4 +10,14 @@
         SELECT * FROM Package WHERE packageNo = #{id}
     </select>
 
+    <insert id="insertOrder" parameterType="com.exampl.traveler.vo.OrdersVO" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO orders (userID, comNO, bincate, totalcnt, orderdate)
+        VALUES (#{userId}, #{comNo}, #{bincate}, #{totalCnt}, #{orderDate})
+    </insert>
+
+    <insert id="insertDiary">
+        INSERT INTO DIARY (userID, ORDERID, GODAY, DIARYTITLE)
+        VALUES (#{userId}, #{orderId}, #{goDay}, #{diaryTitle})
+    </insert>
+
 </mapper>

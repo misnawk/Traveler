@@ -10,6 +10,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
     />
+    <script src="/js/package/packageDetail.js" defer></script>
     <link rel="stylesheet" href="../css/package/packageDetail.css"/>
     <link rel="stylesheet" href="/css/header_foter/header.css"/>
     <title>Package Detail</title>
@@ -17,15 +18,22 @@
 <body>
 <div th:replace="~{header_foter/header :: header}"></div>
 
-<div class="package_detail">
-    <div class="package_image">
+<div class="package-detail">
+    <div class="package-image">
         <img th:src="${package.imageUrl}" th:alt="${package.packageTitle}"/>
     </div>
-    <div class="package_info">
+    <div class="package-info">
         <h3 th:text="${package.packageTitle}"></h3>
         <p th:text="${package.packageText}"></p>
-        <p class="travel_period">여행기간: <span th:text="${#dates.format(package.startDateTime, 'yyyy-MM-dd')} + ' ~ ' + ${#dates.format(package.endDateTime, 'yyyy-MM-dd')}"></span></p>
+        <p class="travel-period">여행기간: <span th:text="${#dates.format(package.startDateTime, 'yyyy-MM-dd')} + ' ~ ' + ${#dates.format(package.endDateTime, 'yyyy-MM-dd')}"></span></p>
         <p class="price">상품가격: <span th:text="${#numbers.formatDecimal(package.packagePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span></p>
+        <p class="people-count">총인원: <span th:text="${package.packageMax}"></span></p>
+
+        <form id="orderForm" th:data-package-no="${package.packageNo}" method="post">
+            <label for="peopleCount">인원수:</label>
+            <input type="number" id="peopleCount" name="peopleCount" min="1" required>
+            <button type="button" id="orderButton">결제하기</button>
+        </form>
     </div>
 </div>
 </body>
