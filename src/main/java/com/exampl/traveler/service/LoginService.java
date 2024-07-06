@@ -1,12 +1,9 @@
 package com.exampl.traveler.service;
 
 import com.exampl.traveler.mapper.LoginMapper;
-import com.exampl.traveler.vo.BusinessVO;
 import com.exampl.traveler.vo.MemberVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LoginService {
