@@ -1,17 +1,25 @@
 package com.exampl.traveler.vo;
 
+import java.util.Date;
+
 public class UserOrderVO {
 
     private String userId;
+    private String comNO;
     private String binID;
+    private int totalcnt;
+    private Date orderdate;
 
     // 기본 생성자
     public UserOrderVO() {
     }
 
-    public UserOrderVO(String userId, String binID) {
+    public UserOrderVO(String userId, String comNO, String binID, int totalcnt, Date orderdate) {
         this.userId = userId;
+        this.comNO = comNO;
         this.binID = binID;
+        this.totalcnt = totalcnt;
+        this.orderdate = orderdate;
     }
 
     // Getters and setters
@@ -23,6 +31,14 @@ public class UserOrderVO {
         this.userId = userId;
     }
 
+    public String getComNO() {
+        return comNO;
+    }
+
+    public void setComNO(String comNO) {
+        this.comNO = comNO;
+    }
+
     public String getBinID() {
         return binID;
     }
@@ -31,11 +47,32 @@ public class UserOrderVO {
         this.binID = binID;
     }
 
+    public int getTotalcnt() {
+        return totalcnt;
+    }
+
+    public void setTotalcnt(int totalcnt) {
+        this.totalcnt = totalcnt;
+    }
+
+    public Date getOrderdate() {
+        return orderdate;
+    }
+
+    public void setOrderdate(Date orderdate) {
+        this.orderdate = orderdate;
+    }
+
     @Override
     public String toString() {
         return "UserOrderVO{" +
                 "userId='" + userId + '\'' +
+                ", comNO='" + comNO + '\'' +
                 ", binID='" + binID + '\'' +
+                ", totalcnt=" + totalcnt +
+                ", orderdate=" + orderdate +
                 '}';
     }
+
+
 }
