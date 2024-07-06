@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>사업자 등록</title>
+    <link href="/css/business/binWrite.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/header_foter/header.css">
+    <link rel="stylesheet" href="/css/header_foter/foter.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/js/business/binWrite.js" defer></script>
+</head>
+<body>
+<main>
+    <div th:replace="header_foter/header :: header"></div>
+
+    <form action="/binInsert" method="post">
+        <input type="hidden" id="binID" name="binID" th:value="${session.binID}">
+        <div class="container">
+            <h1>traveler</h1>
+            <div>
+                <input type="text" id="username" name="username" placeholder="아이디">
+                <input type="button" value="중복확인">
+            </div>
+            <div>
+                <input type="password" name="binPW" placeholder="비밀번호 (8~12자 영문, 숫자, 특수문자 조합)">
+            </div>
+            <div>
+                <input type="password" name="binPWConfirm" placeholder="비밀번호 확인 (8~12자 영문, 숫자, 특수문자 조합)">
+            </div>
+            <div class="category-container">
+                <input type="button" value="항공" onclick="selectCategory('1')">
+                <input type="button" value="숙박" onclick="selectCategory('2')">
+                <input type="button" value="티켓" onclick="selectCategory('3')">
+                <input type="button" value="패키지" onclick="selectCategory('4')">
+                <input type="hidden" id="binCate" name="binCate">
+            </div>
+            <div>
+                <input type="text" name="binName" placeholder="상호명">
+            </div>
+            <div>
+                <input type="text" name="binCode" placeholder="사업자등록번호">
+            </div>
+            <div>
+                <input type="text" name="binTell" placeholder="전화번호">
+            </div>
+            <div>
+                <input type="email" name="binEmail" placeholder="이메일">
+            </div>
+            <div>
+                <input type="button" value="회원가입" onclick="binWrite()">            </div>
+        </div>
+    </form>
+
+    <div th:replace="header_foter/foter :: foter"></div>
+</main>
+<script>
+    function selectCategory(category) {
+        document.getElementById("binCate").value = category;
+    }
+</script>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.exampl.traveler.controller;
 import com.exampl.traveler.service.BoardService;
 import com.exampl.traveler.service.LoginService;
 import com.exampl.traveler.vo.BoardVO;
+import com.exampl.traveler.vo.BusinessVO;
 import com.exampl.traveler.vo.MemberVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
