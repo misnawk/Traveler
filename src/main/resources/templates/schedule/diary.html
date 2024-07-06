@@ -29,7 +29,26 @@
             <option value="#FF5733" style="background-color: #FF5733;">빨간색</option>
             <option value="#33FF57" style="background-color: #33FF57;">녹색</option>
             <option value="#3357FF" style="background-color: #3357FF;">파란색</option>
-            <!-- 나머지 색상 옵션들... -->
+            <option value="#FF5733" style="background-color: #FF5733;">빨간색</option>
+            <option value="#33FF57" style="background-color: #33FF57;">녹색</option>
+            <option value="#3357FF" style="background-color: #3357FF;">파란색</option>
+            <option value="#F3FF33" style="background-color: #F3FF33;">노란색</option>
+            <option value="#FF33F6" style="background-color: #FF33F6;">분홍색</option>
+            <option value="#33FFF3" style="background-color: #33FFF3;">청록색</option>
+            <option value="#FF8633" style="background-color: #FF8633;">주황색</option>
+            <option value="#8633FF" style="background-color: #8633FF;">보라색</option>
+            <option value="#3386FF" style="background-color: #3386FF;">하늘색</option>
+            <option value="#86FF33" style="background-color: #86FF33;">연두색</option>
+            <option value="#FF3386" style="background-color: #FF3386;">자홍색</option>
+            <option value="#33FF86" style="background-color: #33FF86;">연한녹색</option>
+            <option value="#FF3386" style="background-color: #FF3386;">자홍색</option>
+            <option value="#FFB533" style="background-color: #FFB533;">밝은주황색</option>
+            <option value="#B533FF" style="background-color: #B533FF;">연보라색</option>
+            <option value="#33FFB5" style="background-color: #33FFB5;">연한청록색</option>
+            <option value="#FF33B5" style="background-color: #FF33B5;">밝은분홍색</option>
+            <option value="#B5FF33" style="background-color: #B5FF33;">밝은연두색</option>
+            <option value="#3335FF" style="background-color: #3335FF;">진한파란색</option>
+            <option value="#FF3335" style="background-color: #FF3335;">진한빨간색</option>
         </select><br><br>
         <button type="submit">일정 추가</button>
     </form>
@@ -47,6 +66,8 @@
             locale: "ko",
             editable: true,
             droppable: true,
+            dayMaxEventRows: true,
+
             events: function(fetchInfo, successCallback, failureCallback) {
                 var userId = $('#id').val();
                 if (userId) {
@@ -101,7 +122,7 @@
 
         var diaryEntry = {
             userId: userId,
-            godDay: $('#start').val(),
+            goDay: $('#start').val(),
             backDay: $('#end').val(),
             diaryTitle: $('#title').val(),
             diaryText: $('#color').val() // 색상 값을 diaryText로 사용
@@ -116,7 +137,7 @@
                 alert('일정이 저장되었습니다.');
                 calendar.addEvent({
                     title: diaryEntry.diaryTitle,
-                    start: diaryEntry.godDay,
+                    start: diaryEntry.goDay,
                     end: diaryEntry.backDay,
                     color: diaryEntry.diaryText,
                     editable: true
@@ -128,7 +149,6 @@
             }
         });
     }
-
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
         var color = '#';
