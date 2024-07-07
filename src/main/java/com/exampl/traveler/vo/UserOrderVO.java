@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class OrdersVO {
+public class UserOrderVO {
     private int orderId; // 자동 증가 ID
     private String userId;
     private String comNo;
@@ -15,10 +15,10 @@ public class OrdersVO {
     private String diaryTitle; // 패키지 제목
 
     // 기본 생성자
-    public OrdersVO() {
+    public UserOrderVO() {
     }
 
-    public OrdersVO(String userId, String comNo, String bincate, int totalCnt, Date orderDate, String diaryTitle) {
+    public UserOrderVO(String userId, String comNo, String bincate, int totalCnt, Date orderDate, String diaryTitle) {
         this.userId = userId;
         this.comNo = comNo;
         this.bincate = bincate;

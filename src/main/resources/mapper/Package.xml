@@ -10,7 +10,7 @@
         SELECT * FROM Package WHERE packageNo = #{id}
     </select>
 
-    <insert id="insertOrder" parameterType="com.exampl.traveler.vo.OrdersVO" useGeneratedKeys="true" keyProperty="orderId">
+    <insert id="insertOrder" parameterType="com.exampl.traveler.vo.UserOrderVO" useGeneratedKeys="true" keyProperty="orderId">
         INSERT INTO orders (userID, comNO, bincate, totalcnt, orderdate)
         VALUES (#{userId}, #{comNo}, #{bincate}, #{totalCnt}, #{orderDate})
     </insert>

@@ -1,7 +1,7 @@
 package com.exampl.traveler.service;
 
 import com.exampl.traveler.mapper.PackageMapper;
-import com.exampl.traveler.vo.OrdersVO;
+import com.exampl.traveler.vo.UserOrderVO;
 import com.exampl.traveler.vo.PackageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class PackageService {
         return packageMapper.getPackageById(id);
     }
 
-    public OrdersVO createOrder(String packageNo, int peopleCount, String userId) {
+    public UserOrderVO createOrder(String packageNo, int peopleCount, String userId) {
         PackageVO packageVO = getPackageById(packageNo);
         if (packageVO == null) {
             throw new RuntimeException("패키지를 찾을 수 없습니다: " + packageNo);
@@ -35,7 +35,7 @@ public class PackageService {
         Date orderDate = new Date();
 
         // OrdersVO 객체 생성 및 값 설정
-        OrdersVO order = new OrdersVO();
+        UserOrderVO order = new UserOrderVO();
         order.setUserId(userId);
         order.setComNo(packageNo);
         order.setBincate("4"); // 패키지 카테고리

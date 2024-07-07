@@ -1,7 +1,7 @@
 package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.PackageService;
-import com.exampl.traveler.vo.OrdersVO;
+import com.exampl.traveler.vo.UserOrderVO;
 import com.exampl.traveler.vo.PackageVO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class PackageController {
         }
 
         try {
-            OrdersVO order = packageService.createOrder(id, peopleCount, userId);
+            UserOrderVO order = packageService.createOrder(id, peopleCount, userId);
             return ResponseEntity.ok(Collections.singletonMap("orderId", order.getOrderId()));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
