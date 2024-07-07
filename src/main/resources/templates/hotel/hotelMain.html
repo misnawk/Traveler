@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" defer></script>
-    <script src="../js/hotel/hotel.js" defer></script>
+    <script src="/js/hotel/hotel.js" defer></script>
     <meta charset="UTF-8">
     <title>호텔 검색</title>
 </head>
@@ -15,11 +15,11 @@
     <div th:replace="~{header_foter/header :: header}"></div>
 </header>
 <div class="search_container">
-    <form class="hotel_text" id="hotelForm" action="/hotel/place" method="get">
-        <input type="text" id="destination" name="place" placeholder="어디로 떠나시나요?">
-        <input type="text" id="checkin" placeholder="체크인">
-        <input type="text" id="checkout" placeholder="체크아웃">
-        <select id="guestCount">
+    <form class="hotel_text" id="hotelForm">
+        <input type="text" id="destination" name="country" placeholder="어디로 떠나시나요?" required>
+        <input type="text" id="checkin" name="checkin" placeholder="체크인">
+        <input type="text" id="checkout" name="checkout" placeholder="체크아웃">
+        <select id="guestCount" name="guestCount">
             <option value="1">1명</option>
             <option value="2" selected>2명</option>
             <option value="3">3명</option>
@@ -29,17 +29,26 @@
     </form>
 </div>
 
+<div th:if="${error}" class="error-message">
+    <p th:text="${error}"></p>
+</div>
+
 <div class="hotel_list">
     <div th:each="hotel : ${hotels}" class="hotel_item">
-        <img th:src="@{${hotel.hotelImg}}" th:alt="${hotel.hotelName}">
+        <img th:src="${hotel.hotelImg}" th:alt="${hotel.hotelName}">
         <div class="hotel_info">
-            <a th:href="@{/hotel/hotelDetail/{hotelNO}(hotelNO=${hotel.hotelNO})}" id="hotel_detail">
+            <a th:href="@{/hotelDetail/{hotelNO}(hotelNO=${hotel.hotelNO}, checkin=${checkin}, checkout=${checkout}, guestCount=${guestCount})}"
+               th:data-hotel-no="${hotel.hotelNO}"
+               th:data-checkin="${checkin}"
+               th:data-checkout="${checkout}"
+               th:data-guest-count="${guestCount}"
+               id="hotel_detail">
                 <h2 th:text="${hotel.hotelName}"></h2>
             </a>
-            <p th:text="${hotel.hotelplace}"></p>
+            <p th:text="${hotel.hotelCountry}"></p>
             <p th:text="${hotel.hotelText}"></p>
             <div class="price">
-                <span class="discounted_price" th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelprice, 0, 'COMMA', 0, 'POINT')}"></span>
+                <span class="discounted_price" th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelPrice, 0, 'COMMA', 0, 'POINT')}"></span>
             </div>
             <div class="hotel_details">
                 <p th:text="'시설: ' + ${hotel.hotelFacility}"></p>
