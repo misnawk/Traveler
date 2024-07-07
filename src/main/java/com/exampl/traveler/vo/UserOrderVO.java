@@ -9,6 +9,7 @@ public class UserOrderVO {
     private String binID;
     private int totalcnt;
     private Date orderdate;
+    private int orderId; // 새로운 필드 추가
 
     // 기본 생성자
     public UserOrderVO() {
@@ -63,6 +64,14 @@ public class UserOrderVO {
         this.orderdate = orderdate;
     }
 
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public String toString() {
         return "UserOrderVO{" +
@@ -71,8 +80,7 @@ public class UserOrderVO {
                 ", binID='" + binID + '\'' +
                 ", totalcnt=" + totalcnt +
                 ", orderdate=" + orderdate +
+                ", orderId=" + orderId +
                 '}';
     }
-
-
 }

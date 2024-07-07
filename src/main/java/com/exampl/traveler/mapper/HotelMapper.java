@@ -1,6 +1,7 @@
 package com.exampl.traveler.mapper;
 
 import com.exampl.traveler.vo.HotelVO;
+import com.exampl.traveler.vo.MemberVO;
 import com.exampl.traveler.vo.UserOrderVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,6 +15,4 @@ public interface HotelMapper {
     List<HotelVO> getHotelsByPlace(@Param("country") String country);
     HotelVO getHotelById(@Param("hotelNO") String hotelNO);
     void insertOrder(UserOrderVO userOrderVO);
-    void insertDiary(@Param("userId") String userId, @Param("orderID") int orderID,
-                     @Param("goday") String goday, @Param("diaryTitle") String diaryTitle);
 }
