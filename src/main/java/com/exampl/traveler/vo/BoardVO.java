@@ -31,6 +31,8 @@ public class BoardVO{
 
     private String packageNo;
 
+    private Integer count;
+
 
 
 }
