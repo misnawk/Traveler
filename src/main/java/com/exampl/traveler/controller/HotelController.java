@@ -72,7 +72,7 @@ public class HotelController {
     @GetMapping("/check-login")
     @ResponseBody
     public Map<String, Boolean> checkLogin(HttpSession session) {
-        Boolean loggedIn = (session.getAttribute("user") != null);
+        Boolean loggedIn = (session.getAttribute("id") != null);
         Map<String, Boolean> response = new HashMap<>();
         response.put("loggedIn", loggedIn);
         return response;

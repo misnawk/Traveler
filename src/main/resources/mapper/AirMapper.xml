@@ -1,27 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exampl.traveler.mapper.AirMapper">
-    <select id="findOutboundAirs" resultType="com.exampl.traveler.vo.AirVO">
-        SELECT * FROM airline
+    <select id="findOneWayAir" resultType="com.exampl.traveler.vo.AirVO">
+        SELECT * FROM Airline
         WHERE departureAirport = #{departure}
         AND arrivalAirport = #{destination}
-        AND DATE(departureDate) = #{departureDate}
+        AND DATE(departureDateTime) = #{departureDate}
     </select>
 
-    <select id="findReturnAirs" resultType="com.exampl.traveler.vo.AirVO">
-        SELECT * FROM airline
-        WHERE departureAirport = #{destination}
-        AND arrivalAirport = #{departure}
-        AND DATE(departureDate) = #{returnDate}
-    </select>
-
-    <select id="findOneWayAirs" resultType="com.exampl.traveler.vo.AirVO">
-        SELECT * FROM airline
+    <select id="findDepartureAir" resultType="com.exampl.traveler.vo.AirVO">
+        SELECT * FROM Airline
         WHERE departureAirport = #{departure}
         AND arrivalAirport = #{destination}
-        AND DATE(departureDate) = #{departureDate}
+        AND DATE(departureDateTime) = #{departureDate}
     </select>
+
+    <select id="findReturnAir" resultType="com.exampl.traveler.vo.AirVO">
+        SELECT * FROM Airline
+        WHERE departureAirport = #{departure}
+        AND arrivalAirport = #{destination}
+        AND DATE(departureDateTime) = #{returnDate}
+    </select>
+
+    <select id="getAirById" resultType="com.exampl.traveler.vo.AirVO">
+        SELECT * FROM Airline WHERE airlineNo = #{airlineNo}
+    </select>
+
+    <select id="getAirByAirNo" resultType="com.exampl.traveler.vo.AirVO">
+        SELECT * FROM Airline WHERE airNo = #{airNo}
+    </select>
+
+    <update id="decreaseAvailableSeats">
+        UPDATE Airline
+        SET availableSeats = availableSeats - 1
+        WHERE airlineNo = #{airlineNo} AND availableSeats > 0
+    </update>
+
+    <update id="updateTotalAndAvailableSeats">
+        UPDATE Airline
+        SET totalSeats = #{totalSeats}, availableSeats = #{availableSeats}
+        WHERE airlineNo = #{airlineNo}
+    </update>
 </mapper>

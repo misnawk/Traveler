@@ -16,16 +16,18 @@ $(document).ready(function() {
                 url: '/check-login',
                 type: 'GET',
                 success: function(response) {
-                    if (response.loggedIn) {
-                        // 모든 정보가 입력되었으면 결제 페이지로 이동
+                    console.log("Login check response:", response); // 응답 로깅
+                    if (response.loggedIn === true) {
+                        // 로그인된 경우
                         window.location.href = `/hotelPayment/${hotelNO}?checkin=${checkin}&checkout=${checkout}&guestCount=${guestCount}`;
                     } else {
-                        // 로그인이 되어 있지 않으면 로그인 페이지로 이동
+                        // 로그인되지 않은 경우
                         alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.");
                         window.location.href = '/login';
                     }
                 },
-                error: function() {
+                error: function(xhr, status, error) {
+                    console.error("Error checking login status:", error);
                     alert('서버와의 통신 중 오류가 발생했습니다.');
                 }
             });

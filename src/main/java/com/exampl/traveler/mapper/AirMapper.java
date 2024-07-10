@@ -8,21 +8,25 @@ import java.util.List;
 
 @Mapper
 public interface AirMapper {
-    List<AirVO> findOutboundAirs(
-            @Param("departure") String departure,
-            @Param("destination") String destination,
-            @Param("departureDate") String departureDate
-    );
+    List<AirVO> findOneWayAir(@Param("departure") String departure,
+                              @Param("destination") String destination,
+                              @Param("departureDate") String departureDate);
 
-    List<AirVO> findReturnAirs(
-            @Param("departure") String departure,
-            @Param("destination") String destination,
-            @Param("returnDate") String returnDate
-    );
+    List<AirVO> findDepartureAir(@Param("departure") String departure,
+                                 @Param("destination") String destination,
+                                 @Param("departureDate") String departureDate);
 
-    List<AirVO> findOneWayAirs(
-            @Param("departure") String departure,
-            @Param("destination") String destination,
-            @Param("departureDate") String departureDate
-    );
+    List<AirVO> findReturnAir(@Param("departure") String departure,
+                              @Param("destination") String destination,
+                              @Param("returnDate") String returnDate);
+
+    AirVO getAirByAirNo(@Param("airNo") String airNo);
+
+    AirVO getAirById(@Param("airlineNo") String airlineNo);
+
+    int decreaseAvailableSeats(@Param("airlineNo") String airlineNo);
+
+    void updateTotalAndAvailableSeats(@Param("airlineNo") String airlineNo,
+                                      @Param("totalSeats") int totalSeats,
+                                      @Param("availableSeats") int availableSeats);
 }
