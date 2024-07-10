@@ -47,8 +47,8 @@
         insert into businessUser values(
             #{binID},
             #{binPW},
-            #{binCate},
             #{binName},
+            #{binCate},
             #{binCode},
             #{binEmail},
             #{binTell}

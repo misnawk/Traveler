@@ -104,7 +104,8 @@ div span {
     align-items: center;
     justify-content: center;
     color: #1273E4;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom : 30px;
 }
 
 .bin_header_content > h1 {
@@ -116,12 +117,6 @@ div span {
     font-size: 12px;
 }
 
-.bin_header_content{
-    display: flex;
-    justify-content: center;
-    color: #1273E4;
-    margin: 50px;
-}
 
 select.box {
     height: 40px;

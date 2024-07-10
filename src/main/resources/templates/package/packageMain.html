@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="../css/package/package.css"/>
+  <link rel="stylesheet" href="/css/header_foter/header.css"/>
+  <title>Package List</title>
+  <script>
+    function viewPackageDetail(packageNo) {
+        location.href = '/packages/' + packageNo;
+    }
+  </script>
+</head>
+<body>
+<div th:replace="~{header_foter/header :: header}"></div>
+<div class="pack_content">
+  <div class="search_bar">
+    <select>
+      <option>출발지</option>
+      <option>서울</option>
+      <option>인천</option>
+      <option>경기</option>
+      <option>부산</option>
+    </select>
+    <input type="text" placeholder="도시/또는 단체번호/상품코드 입력"/>
+    <button class="search-bar__Btn"><i class="fas fa-search"></i></button>
+  </div>
+</div>
+<div class="search_results">
+  <!-- 기존 검색 결과 수 및 찜 목록 유지 -->
+</div>
+<div class="package_list">
+  <div th:each="package : ${packages}" class="package_item">
+    <div class="package_image">
+      <img th:src="${package.imageUrl}" th:alt="${package.packageTitle}"/>
+      <i class="fas fa-heart wishlist_icon"></i>
+    </div>
+    <div class="package_info">
+      <h3 th:text="${package.packageTitle}"></h3>
+      <p th:text="${package.packageText}"></p>
+      <p class="travel_period">여행기간: <span th:text="${#dates.format(package.startDateTime, 'yyyy-MM-dd')} + ' ~ ' + ${#dates.format(package.endDateTime, 'yyyy-MM-dd')}"></span></p>
+      <p class="price">상품가격: <span th:text="${#numbers.formatDecimal(package.packagePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span></p>
+      <button class="detail_btn" th:data-package-no="${package.packageNo}" onclick="viewPackageDetail(this.getAttribute('data-package-no'))">자세히 보기</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

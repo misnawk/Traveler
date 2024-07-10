@@ -42,7 +42,6 @@ public class LoginController {
                                               MemberVO vo,
                                               HttpServletRequest request){
 
-        // ResponseEntity :  HttpStatus, HttpHeaders, HttpBody 포함된 어노테이션
         boolean result = false;
         HttpSession session = request.getSession();
 
@@ -126,6 +125,7 @@ public class LoginController {
             session.setAttribute("binID",id);
             session.setAttribute("binName",getVO.getBinName());
             session.setAttribute("binCate",getVO.getBinCate());
+            session.setAttribute("user", getVO);
             result = true;
         } else {
             result = false;

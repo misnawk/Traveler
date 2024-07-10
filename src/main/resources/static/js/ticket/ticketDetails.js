@@ -19,11 +19,11 @@ function payTicket() {
         alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.');
         window.location.href = '/login';
     } else {
-        var quantity = document.getElementById('ticketQuantity').value;
+        const quantity = parseInt(document.getElementById('ticketQuantity').value);
         $.ajax({
             url: '/reserveTicket',
             type: 'POST',
-            data: { 
+            data: {
                 tickNO: ticketTickNO,
                 quantity: quantity
             },

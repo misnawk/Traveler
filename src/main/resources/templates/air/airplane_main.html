@@ -5,47 +5,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Traveler</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" defer></script>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+  />
 
   <link rel="stylesheet" href="/css/header_foter/header.css" />
   <link rel="stylesheet" href="/css/airplane/airplane_main_first.css" />
   <link rel="stylesheet" href="/css/airplane/airplane_main_second.css" />
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <script
+          src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+          defer
+  ></script>
+  <script
+          src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+          defer
+  ></script>
   <script src="/js/header_foter/header.js" defer></script>
   <script src="/js/airplane/airplane_main.js" defer></script>
   <script src="/js/airplane/airplane_data.js" defer></script>
   <script src="/js/airplane/airplane_form.js" defer></script>
 </head>
-
+<body>
 <header>
   <div th:replace="~{header_foter/header :: header}"></div>
 </header>
-
-<body>
 <main>
   <section class="air_search">
     <form action="/air/search" method="get" id="airSearchForm">
-      <input type="text" name="departure" id="departure" placeholder="출발지" required>
-      <input type="text" name="destination" id="destination" placeholder="도착지" required>
-      <input type="text" name="departureDate" id="departure_date" required>
-      <input type="text" name="returnDate" id="return_date">
-      <div class="trip_type">
-        <label>
-          <input type="radio" name="tripType" value="oneway" checked> 편도
-        </label>
-        <label>
-          <input type="radio" name="tripType" value="roundtrip"> 왕복
-        </label>
+      <div class="search_box">
+        <div class="field">
+          <input
+                  type="text"
+                  name="departure"
+                  id="departure"
+                  placeholder="출발지"
+                  required
+                  readonly
+          />
+        </div>
+        <div class="field destination-field">
+          <input
+                  type="text"
+                  name="destination"
+                  id="destination"
+                  placeholder="도착지"
+                  required
+                  readonly
+          />
+          <div class="dropdown-container">
+            <ul class="country-list"></ul>
+            <ul class="city-list"></ul>
+          </div>
+        </div>
+        <div class="field">
+          <input
+                  type="text"
+                  name="departureDate"
+                  id="departure_date"
+                  placeholder="출발날짜"
+                  required
+          />
+        </div>
+        <div class="field" id="return_date_wrapper">
+          <input
+                  type="text"
+                  name="returnDate"
+                  id="return_date"
+                  placeholder="도착날짜"
+          />
+        </div>
+        <div class="trip_type">
+          <label>
+            <input
+                    type="radio"
+                    name="tripType"
+                    value="oneway"
+                    checked
+            />
+            편도
+          </label>
+          <label>
+            <input type="radio" name="tripType" value="roundtrip" />
+            왕복
+          </label>
+        </div>
+        <button type="submit" class="search_button">검색</button>
       </div>
-      <button type="submit" class="search_button">검색</button>
     </form>
-    <ul class="country_list hidden"></ul>
-    <ul class="city_list hidden"></ul>
   </section>
   <div class="second__title">
     <h1>추천 여행지</h1>

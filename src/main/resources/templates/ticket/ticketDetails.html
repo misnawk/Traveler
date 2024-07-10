@@ -33,9 +33,11 @@
                 <h3 th:text="${ticket.tickTitle}">티켓 제목</h3>
                 <p th:text="${ticket.tickText}">티켓 설명</p>
                 <p th:text="${ticket.tickOp}">운영 시간</p>
-                <p>날짜: <span th:text="${#dates.format(ticket.tickDate, 'yyyy-MM-dd')}">날짜</span></p>
-                <!-- 여기에 시간 정보 추가 -->
-                <p>이용 시간: <span th:text="${#dates.format(ticket.tickTime, 'HH:mm')}">이용 시간</span></p>
+                <p>날짜 및 시간:
+                    <span th:text="${#dates.format(ticket.tickDate, 'yyyy-MM-dd HH:mm')}">
+                    날짜 및 시간
+                    </span>
+                </p>
                 <p class="price" th:text="${#numbers.formatDecimal(ticket.tickPrice, 0, 'COMMA', 0, 'POINT')} + '원'">가격</p>
 
                 <div class="quantity-selector">
@@ -51,6 +53,7 @@
         </div>
     </div>
 </main>
+
 
 <footer>
     <!-- 푸터 내용 -->

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>왕복 항공편 선택 - 가는 편</title>
+    <link rel="stylesheet" href="/css/airplane/air_list.css" />
+    <script src="/js/airplane/roundtrip.js" defer></script>
+</head>
+<body>
+<header>
+    <h1>왕복 항공편 선택 - 가는 편</h1>
+    <div class="trip-info">
+        <span th:text="${departure} + ' → ' + ${destination}">출발지 → 도착지</span>
+        <span th:text="${departureDate}">출발 날짜</span>
+    </div>
+</header>
+<main>
+    <div class="flight-list">
+        <div th:each="air : ${airResults}" class="flight-item">
+            <div class="airline-logo" th:text="${air.airCompany}">항공사 로고</div>
+            <div class="flight-details">
+                <div class="flight-time">
+                    <span th:text="${#temporals.format(air.departureDateTime, 'yyyy-MM-dd HH:mm')}">출발 날짜 및 시간</span>
+                    <span class="arrow">→</span>
+                    <span th:text="${#temporals.format(air.arrivalDateTime, 'yyyy-MM-dd HH:mm')}">도착 날짜 및 시간</span>
+                </div>
+                <div class="flight-route">
+                    <span th:text="${air.departureAirport}">출발 공항</span>
+                    <span th:text="${air.arrivalAirport}">도착 공항</span>
+                </div>
+                <div class="flight-number" th:text="${air.airNo}">항공편 번호</div>
+            </div>
+            <div class="flight-price">
+                <span th:text="${#numbers.formatDecimal(air.airPrice, 0, 'COMMA', 0, 'POINT')}">가격</span>원
+            </div>
+            <button th:attr="data-airno=${air.airNo}" onclick="selectDepartureAir(this.getAttribute('data-airno'))">선택</button>
+        </div>
+    </div>
+</main>
+<script th:src="@{/js/airplane/roundtrip.js}"></script>
+</body>
+</html>

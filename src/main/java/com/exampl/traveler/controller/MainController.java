@@ -3,6 +3,7 @@ package com.exampl.traveler.controller;
 import com.exampl.traveler.service.BoardService;
 import com.exampl.traveler.service.LoginService;
 import com.exampl.traveler.vo.BoardVO;
+import com.exampl.traveler.vo.BusinessVO;
 import com.exampl.traveler.vo.MemberVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,12 @@ public class MainController {
         return "foter";
     }
 
+    // admin 페이지
+    @GetMapping("admin")
+    public String admin(){
+        return "/admin/admin";
+    }
+
     // 일반회원 마이페이지
     @GetMapping("mypage/{id}")
     public String myPage(@PathVariable("id") String id, Model model){
@@ -54,8 +61,11 @@ public class MainController {
 
     // 기업회원 관리자
     @GetMapping("binpage/{id}")
-    public String binPage(@PathVariable("id") String id){
-        return null;
+    public String binPage(@PathVariable("id") String id, Model model){
+        BusinessVO vo = loginService.binSelectOne(id);
+        model.addAttribute("vo",vo);
+
+        return "/business/binpage";
     }
 
 }

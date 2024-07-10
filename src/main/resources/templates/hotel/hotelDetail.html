@@ -16,55 +16,46 @@
 </header>
 <div class="container">
     <div class="hotel-images">
-        <img th:src="${hotel.hotelImg}" th:alt="${hotel.hotelName}">
+        <img class="main-img" th:src="${hotel.hotelImg}" th:alt="${hotel.hotelName}">
+        <div class="sub-images">
+            <div class="sub-images-row">
+                <img class="sub-img" th:src="${hotel.hotelImg1}" th:alt="${hotel.hotelName}">
+                <img class="sub-img" th:src="${hotel.hotelImg2}" th:alt="${hotel.hotelName}">
+                <img class="sub-img" th:src="${hotel.hotelImg3}" th:alt="${hotel.hotelName}">
+            </div>
+            <div class="sub-images-row">
+                <img class="sub-img" th:src="${hotel.hotelImg4}" th:alt="${hotel.hotelName}">
+                <img class="sub-img" th:src="${hotel.hotelImg5}" th:alt="${hotel.hotelName}">
+                <img class="sub-img" th:src="${hotel.hotelImg6}" th:alt="${hotel.hotelName}">
+            </div>
+        </div>
     </div>
     <div class="hotel-info">
         <h1 th:text="${hotel.hotelName}"></h1>
+        <p class="price" th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelPrice, 0, 'COMMA', 0, 'POINT')}"></p>
     </div>
-    <div class="tabs-container">
-        <div class="tabs">
-            <button class="tablinks" onclick="openTab(event, 'Overview')" id="defaultOpen">개요</button>
-            <button class="tablinks" onclick="openTab(event, 'Rooms')">객실</button>
-            <button class="tablinks" onclick="openTab(event, 'Facilities')">편의 시설/서비스</button>
-            <button class="tablinks" onclick="openTab(event, 'Reviews')">이용후기</button>
-            <button class="tablinks" onclick="openTab(event, 'Location')">위치</button>
-            <button class="tablinks" onclick="openTab(event, 'Policy')">정책</button>
-        </div>
-        <div class="price">
-            <p th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelprice, 0, 'COMMA', 0, 'POINT')}"></p>
-        </div>
+    <div class="description">
+        <p th:text="${hotel.hotelDescription}"></p>
     </div>
-    <div id="Overview" class="tabcontent">
-        <h3>개요</h3>
-        <p th:text="${hotel.hotelText}"></p>
-        <p th:text="'위치: ' + ${hotel.hotelplace}"></p>
-        <p th:text="${hotel.hotelTime}"></p>
-        <p th:text="${hotel.hotelCheck}"></p>
+    <div class="facility">
+        <h3>편의 시설 / 서비스</h3>
+        <p th:text="${hotel.hotelFacility}"></p>
     </div>
-    <div id="Rooms" class="tabcontent">
-        <h3>객실</h3>
-        <p>객실 정보가 여기에 표시됩니다.</p>
+    <div class="sights">
+        <h3>호텔 주변 명소</h3>
+        <p th:text="${hotel.hotelSights}"></p>
     </div>
-    <div id="Facilities" class="tabcontent">
-        <h3>편의 시설/서비스</h3>
-        <ul class="facility-list">
-            <li th:each="facility : ${hotelFacilities}" th:text="${facility}"></li>
-        </ul>
-    </div>
-    <div id="Reviews" class="tabcontent">
-        <h3>이용후기</h3>
-        <p>이용후기 내용이 여기에 표시됩니다.</p>
-    </div>
-    <div id="Location" class="tabcontent">
-        <h3>위치</h3>
-        <p>위치 정보가 여기에 표시됩니다.</p>
-    </div>
-    <div id="Policy" class="tabcontent">
-        <h3>정책</h3>
-        <p>정책 내용이 여기에 표시됩니다.</p>
+    <div class="selection">
+        <h3>객실을 선택하세요</h3>
+        <p>맞춤 숙소 검색: </p>
+        <div>조식 포함 (2)</div>
+        <div>후지불 가능 (1)</div>
+        <div>예약 무료 취소 (3)</div>
+        <div>숙소에서 요금 결제 (1)</div>
+        <div>퀸베드 (3)</div>
     </div>
     <div class="button-container">
-        <button id="payment-button">결제 페이지로 이동하기</button>
+        <button id="go-to-payment" data-hotel-no="${hotel.hotelNO}" data-checkin="${checkin}" data-checkout="${checkout}" data-guest-count="${guestCount}">결제 페이지로 이동하기</button>
     </div>
 </div>
 </body>

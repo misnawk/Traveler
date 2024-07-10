@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,29 +45,20 @@ public class TicketService {
             Map<String, Object> orderParams = new HashMap<>();
             orderParams.put("userId", userId);
             orderParams.put("comNO", tickNO);
+            orderParams.put("bincate", "3");
             orderParams.put("totalcnt", quantity);
 
             int result = ticketMapper.createOrder(orderParams);
 
             if (result > 0) {
                 Object orderIDObj = orderParams.get("orderID");
-                long orderID;
-                if (orderIDObj instanceof BigInteger) {
-                    orderID = ((BigInteger) orderIDObj).longValue();
-                } else if (orderIDObj instanceof Long) {
-                    orderID = (Long) orderIDObj;
-                } else if (orderIDObj instanceof Integer) {
-                    orderID = ((Integer) orderIDObj).longValue();
-                } else {
-                    throw new IllegalStateException("Unexpected type for orderID: " + orderIDObj.getClass());
-                }
+                long orderID = ((Number) orderIDObj).longValue();
 
                 Map<String, Object> diaryParams = new HashMap<>();
                 diaryParams.put("userId", userId);
                 diaryParams.put("orderID", orderID);
-                diaryParams.put("goday", ticket.getTickDate());
+                diaryParams.put("goday", ticket.getTickDate());  // Date 타입 그대로 사용
                 diaryParams.put("diaryTitle", ticket.getTickTitle());
-                diaryParams.put("time", ticket.getTickTime());  // 티켓 시간 추가
 
                 ticketMapper.createDiary(diaryParams);
                 return true;
