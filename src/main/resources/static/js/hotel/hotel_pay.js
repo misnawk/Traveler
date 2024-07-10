@@ -5,63 +5,88 @@ $(document).ready(function() {
 
     $('#payment-button').click(function() {
         const hotelNO = $(this).data('hotel-no');
+        const guestCount = $(this).data('guest-count');
         const checkin = $(this).data('checkin');
         const checkout = $(this).data('checkout');
-        const guestCount = $(this).data('guest-count');
-        const orderDate = new Date().toISOString().slice(0, 10);
+        const hotelName = $(this).data('hotel-name');
+        const hotelText = $(this).data('hotel-text');
+        const hotelTime = $(this).data('hotel-time');
 
-        if (!hotelNO || !checkin || !checkout || !guestCount) {
-            alert('예약 정보가 올바르지 않습니다. 날짜, 인원수 등을 입력해주세요.');
-            window.location.href = '/hotel';
-            return;
-        }
+        console.log('hotelNO:', hotelNO);
+        console.log('guestCount:', guestCount);
+        console.log('checkin:', checkin);
+        console.log('checkout:', checkout);
+        console.log('hotelName:', hotelName);
+        console.log('hotelText:', hotelText);
+        console.log('hotelTime:', hotelTime);
 
-        $.ajax({
-            url: '/check-login',
-            type: 'GET',
-            success: function(response) {
-                if (!response.loggedIn) {
-                    alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.");
-                    window.location.href = '/login';
-                } else {
-                    processPayment(hotelNO, checkin, checkout, guestCount, orderDate);
+        // 체크인 시간 추출
+        const checkInTime = extractCheckInTime(hotelTime);
+        console.log('checkInTime:', checkInTime);
+
+        if (confirm('결제하시겠습니까?')) {
+            $.ajax({
+                url: `/hotel/${hotelNO}/order`,
+                type: 'POST',
+                data: {
+                    peopleCount: guestCount
+                },
+                success: function(response) {
+                    console.log('Order Response:', response);
+                    if (response.orderId) {
+                        alert('결제가 완료되었습니다. 주문번호: ' + response.orderId);
+
+                        // 결제 완료 후 다이어리 생성
+                        createDiary(response.orderId, hotelNO, checkin, checkout, hotelName, hotelText, checkInTime);
+                    } else {
+                        alert('결제 처리 중 문제가 발생했습니다.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', xhr.responseText);
+                    alert('결제 처리 중 오류가 발생했습니다: ' + xhr.responseText);
                 }
-            },
-            error: function() {
-                alert('서버와의 통신 중 오류가 발생했습니다.');
-            }
-        });
+            });
+        }
     });
 
-    function processPayment(hotelNO, checkin, checkout, guestCount, orderDate) {
+    function createDiary(orderId, hotelNO, checkin, checkout, hotelName, hotelText, checkInTime) {
         $.ajax({
-            url: '/hotel/order',
+            url: `/hotel/${hotelNO}/diary`,
             type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                hotelNO: hotelNO,
-                checkin: checkin,
-                checkout: checkout,
-                guestCount: guestCount,
-                orderDate: orderDate
-            }),
+            data: {
+                orderId: orderId,
+                goday: checkin,
+                backday: checkout,
+                hotelName: hotelName,
+                hotelText: hotelText,
+                checkInTime: checkInTime
+            },
             success: function(response) {
-                if (response.loggedIn) {
-                    if (response.success) {
-                        alert('결제가 완료되었습니다.');
-                        window.location.href = '/payment/success';
-                    } else {
-                        alert('결제 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
-                    }
+                console.log('Diary Response:', response);
+                if (response.success) {
+                    console.log('다이어리가 생성되었습니다.');
+                    alert('여행 다이어리가 생성되었습니다.');
+                    window.location.href = "/hotel";
                 } else {
-                    alert('세션이 만료되었습니다. 다시 로그인해주세요.');
-                    window.location.href = '/login';
+                    console.error('다이어리 생성 중 문제가 발생했습니다.');
+                    alert('다이어리 생성 중 문제가 발생했습니다.');
                 }
             },
             error: function(xhr, status, error) {
-                console.error('Error:', error);
-                alert('결제 처리 중 오류가 발생했습니다.');
+                console.error('다이어리 생성 중 오류가 발생했습니다:', xhr.responseText);
+                alert('다이어리 생성 중 오류가 발생했습니다. 나중에 다시 시도해주세요.');
             }
         });
+    }
+
+    function extractCheckInTime(hotelTime) {
+        const checkInMatch = hotelTime.match(/체크인\s*(\d{2}:\d{2})/);
+        if (checkInMatch) {
+            return checkInMatch[1];
+        } else {
+            console.error('체크인 시간을 찾을 수 없습니다:', hotelTime);
+            return null;
+        }
     }
 });

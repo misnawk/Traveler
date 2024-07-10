@@ -1,36 +1,33 @@
 package com.exampl.traveler.vo;
 
 import lombok.Data;
+
 import java.util.Date;
 
 @Data
 public class UserOrderVO {
     private int orderId; // 자동 증가 ID
     private String userId;
-    private String comNo;
+    private String comNO;
     private String bincate;
-    private int totalCnt;
-    private Date orderDate;
+    private int totalcnt;
+    private Date orderdate;
     private String diaryTitle; // 패키지 제목
-    private String binID; //
-    private int totalcnt; //
-    private Date orderdate; //
+    private String binID; // 호텔 예약을 의미하는 고정 값
 
     // 기본 생성자
     public UserOrderVO() {
     }
 
     // 매개변수 생성자
-    public UserOrderVO(String userId, String comNo, String bincate, int totalCnt, Date orderDate, String diaryTitle, String binID, int totalcnt, Date orderdate) {
+    public UserOrderVO(String userId, String comNO, String bincate, int totalcnt, Date orderdate, String diaryTitle, String binID) {
         this.userId = userId;
-        this.comNo = comNo;
+        this.comNO = comNO;
         this.bincate = bincate;
-        this.totalCnt = totalCnt;
-        this.orderDate = orderDate;
-        this.diaryTitle = diaryTitle;
-        this.binID = binID;
         this.totalcnt = totalcnt;
         this.orderdate = orderdate;
+        this.diaryTitle = diaryTitle;
+        this.binID = binID;
     }
 
     @Override
@@ -38,14 +35,12 @@ public class UserOrderVO {
         return "UserOrderVO{" +
                 "orderId=" + orderId +
                 ", userId='" + userId + '\'' +
-                ", comNo='" + comNo + '\'' +
+                ", comNO='" + comNO + '\'' +
                 ", bincate='" + bincate + '\'' +
-                ", totalCnt=" + totalCnt +
-                ", orderDate=" + orderDate +
-                ", diaryTitle='" + diaryTitle + '\'' +
-                ", binID='" + binID + '\'' +
                 ", totalcnt=" + totalcnt +
                 ", orderdate=" + orderdate +
+                ", diaryTitle='" + diaryTitle + '\'' +
+                ", binID='" + binID + '\'' +
                 '}';
     }
 }

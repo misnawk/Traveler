@@ -45,9 +45,12 @@
   <div class="summary">
     <h2>예상 금액</h2>
     <p>호텔 이름: <span th:text="${hotel.hotelName}"></span></p>
+    <p>룸 이름: <span th:text="${roomName}"></span></p>
+    <p>룸 시설: <span th:text="${roomFacility}"></span></p>
     <p>체크인: <span th:text="${checkin}"></span></p>
     <p>체크아웃: <span th:text="${checkout}"></span></p>
     <p>인원수: <span th:text="${guestCount}"></span></p>
+
     <ul>
       <li>숙박 요금: <span th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelPrice, 0, 'COMMA', 0, 'POINT')}"></span></li>
       <li>할인: -<span th:text="'₩' + ${#numbers.formatDecimal(4000, 0, 'COMMA', 0, 'POINT')}"></span></li>
@@ -55,7 +58,14 @@
     <h3>총 금액: <span th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelPrice - 4000, 0, 'COMMA', 0, 'POINT')}"></span></h3>
   </div>
   <div class="payment-button-container">
-    <button id="payment-button" th:data-hotel-no="${hotel.hotelNO}" th:data-checkin="${checkin}" th:data-checkout="${checkout}" th:data-guest-count="${guestCount}">결제</button>
+    <button id="payment-button"
+            th:data-hotel-name="${hotel.hotelName}"
+            th:data-hotel-no="${hotel.hotelNO}"
+            th:data-checkin="${checkin}"
+            th:data-checkout="${checkout}"
+            th:data-guest-count="${guestCount}"
+            th:data-hotel-text="${hotel.hotelText}"
+            th:data-hotel-time="${hotel.hotelTime}">결제</button>
   </div>
 </div>
 </body>

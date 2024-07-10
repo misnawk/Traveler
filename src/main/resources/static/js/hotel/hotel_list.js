@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // 한국어 설정
     $.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -25,44 +24,63 @@ $(document).ready(function() {
         }
     });
 
-    // 체크인 달력
-    $("#checkin").datepicker({
-        minDate: 0, // 오늘 이후의 날짜만 선택 가능
-        onSelect: function(selectedDate) {
-            var nextDay = new Date(selectedDate);
-            nextDay.setDate(nextDay.getDate() + 1);
-            $("#checkout").datepicker("option", "minDate", nextDay);
+    // 체크인 달력 설정
+        $("#checkin").datepicker({
+            minDate: 0,
+            onSelect: function(selectedDate) {
+                var nextDay = new Date(selectedDate);
+                nextDay.setDate(nextDay.getDate() + 1);
+                $("#checkout").datepicker("option", "minDate", nextDay);
+
+                // 체크아웃 날짜가 체크인 날짜보다 이전이면 체크아웃 날짜를 다음날로 설정
+                var checkoutDate = $("#checkout").datepicker("getDate");
+                if (checkoutDate <= new Date(selectedDate)) {
+                    $("#checkout").datepicker("setDate", nextDay);
+                }
+            }
+        });
+
+        // 체크아웃 달력 설정
+        $("#checkout").datepicker({
+            minDate: 1,
+            onSelect: function(selectedDate) {
+                var prevDay = new Date(selectedDate);
+                prevDay.setDate(prevDay.getDate() - 1);
+                $("#checkin").datepicker("option", "maxDate", prevDay);
+            }
+        });
+
+        // 유효성 검사 함수
+        function validateForm() {
+            const destination = $('#destination').val();
+            const checkin = $('#checkin').val();
+            const checkout = $('#checkout').val();
+
+            if (!destination) {
+                alert('나라명을 입력해주세요');
+                return false;
+            }
+
+            if (!checkin) {
+                alert('가는날 날짜를 선택해주세요');
+                return false;
+            }
+
+            if (!checkout) {
+                alert('오는날 날짜를 선택해주세요');
+                return false;
+            }
+
+            // 체크아웃 날짜가 체크인 날짜 이후인지 확인
+            const checkinDate = new Date(checkin);
+            const checkoutDate = new Date(checkout);
+            if (checkoutDate <= checkinDate) {
+                alert('체크아웃 날짜는 체크인 날짜 다음날부터 선택 가능합니다.');
+                return false;
+            }
+
+            return true;
         }
-    });
-
-    // 체크아웃 달력
-    $("#checkout").datepicker({
-        minDate: 1 // 내일 이후의 날짜만 선택 가능
-    });
-
-    // 유효성 검사
-    function validateForm() {
-        const destination = $('#destination').val();
-        const checkin = $('#checkin').val();
-        const checkout = $('#checkout').val();
-
-        if (!destination) {
-            alert('나라/도시를 입력해주세요');
-            return false;
-        }
-
-        if (!checkin) {
-            alert('가는날 날짜를 선택해주세요');
-            return false;
-        }
-
-        if (!checkout) {
-            alert('오는날 날짜를 선택해주세요');
-            return false;
-        }
-
-        return true;
-    }
 
     $('#hotelForm').on('submit', function(event){
         event.preventDefault();

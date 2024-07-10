@@ -37,10 +37,10 @@ public class PackageService {
         // OrdersVO 객체 생성 및 값 설정
         UserOrderVO order = new UserOrderVO();
         order.setUserId(userId);
-        order.setComNo(packageNo);
+        order.setComNO(packageNo);
         order.setBincate("4"); // 패키지 카테고리
-        order.setTotalCnt(peopleCount);
-        order.setOrderDate(orderDate);
+        order.setTotalcnt(peopleCount);
+        order.setOrderdate(orderDate);
 
         // 주문 삽입 및 orderId 가져오기
         packageMapper.insertOrder(order);
