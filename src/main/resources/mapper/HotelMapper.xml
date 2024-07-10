@@ -20,7 +20,24 @@
     </insert>
 
     <insert id="insertDiary" parameterType="map">
-        INSERT INTO DIARY (userID, ORDERID, GODAY, DIARYTITLE)
-        VALUES (#{userId}, #{orderID}, #{goday}, #{diaryTitle})
+        INSERT INTO DIARY (userID, ORDERID, GODAY, BACKDAY, DIARYTITLE, DIARYTEXT, diaryTIME)
+        VALUES (#{userId}, #{orderID}, #{goday}, #{backday}, #{diaryTitle}, #{diaryText}, #{diaryTime})
     </insert>
+
+    <insert id="insertRoom" parameterType="com.exampl.traveler.vo.RoomtypeVO">
+        INSERT INTO rooms (hotelNO, roomName, roomImg, roomFacility, roomMax)
+        VALUES (#{hotelNO}, #{roomName}, #{roomImg}, #{roomFacility}, #{roomMax})
+    </insert>
+
+    <select id="selectFacilitiesByHotel" parameterType="String" resultType="map">
+        SELECT roomFacility, COUNT(*) as count
+        FROM rooms
+        WHERE hotelNO = #{hotelNO}
+        GROUP BY roomFacility
+    </select>
+
+    <select id="selectRoomsByFacilityAndHotel" parameterType="map" resultType="com.exampl.traveler.vo.RoomtypeVO">
+        SELECT * FROM rooms
+        WHERE hotelNO = #{hotelNO} AND roomFacility = #{facility}
+    </select>
 </mapper>

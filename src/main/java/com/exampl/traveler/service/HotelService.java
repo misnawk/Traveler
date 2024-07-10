@@ -3,6 +3,7 @@ package com.exampl.traveler.service;
 import com.exampl.traveler.mapper.HotelMapper;
 import com.exampl.traveler.vo.HotelVO;
 import com.exampl.traveler.vo.MemberVO;
+import com.exampl.traveler.vo.RoomtypeVO;
 import com.exampl.traveler.vo.UserOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class HotelService {
@@ -46,5 +49,32 @@ public class HotelService {
         }
 
         return order;
+    }
+
+    @Transactional
+    public void createDiary(String userId, int orderId, Date goday, Date backday, String hotelName, String hotelText, Date checkInTime) {
+        Map<String, Object> diaryParams = new HashMap<>();
+        diaryParams.put("userId", userId);
+        diaryParams.put("orderID", orderId);
+        diaryParams.put("goday", goday);
+        diaryParams.put("backday", backday);
+        diaryParams.put("diaryTitle", hotelName);
+        diaryParams.put("diaryText", hotelText);
+        diaryParams.put("diaryTime", checkInTime);
+
+        hotelMapper.insertDiary(diaryParams);
+    }
+
+
+    public void addRoom(RoomtypeVO roomtypeVO) {
+        hotelMapper.insertRoom(roomtypeVO);
+    }
+
+    public List<Map<String, Object>> getFacilitiesByHotel(String hotelNO) {
+        return hotelMapper.selectFacilitiesByHotel(hotelNO);
+    }
+
+    public List<RoomtypeVO> getRoomsByFacilityAndHotel(String hotelNO, String facility) {
+        return hotelMapper.selectRoomsByFacilityAndHotel(hotelNO, facility);
     }
 }

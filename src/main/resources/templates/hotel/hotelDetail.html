@@ -37,7 +37,7 @@
     <div class="description">
         <p th:text="${hotel.hotelDescription}"></p>
     </div>
-    <div class="facility">
+    <div class="hotelfacility">
         <h3>편의 시설 / 서비스</h3>
         <p th:text="${hotel.hotelFacility}"></p>
     </div>
@@ -48,11 +48,13 @@
     <div class="selection">
         <h3>객실을 선택하세요</h3>
         <p>맞춤 숙소 검색: </p>
-        <div>조식 포함 (2)</div>
-        <div>후지불 가능 (1)</div>
-        <div>예약 무료 취소 (3)</div>
-        <div>숙소에서 요금 결제 (1)</div>
-        <div>퀸베드 (3)</div>
+        <div id="facilities"></div>
+    </div>
+    <div id="roomsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="rooms"></div>
+        </div>
     </div>
     <div class="button-container">
         <button id="go-to-payment" th:data-hotel-no="${hotel.hotelNO}" th:data-checkin="${checkin}" th:data-checkout="${checkout}" th:data-guest-count="${guestCount}">결제 페이지로 이동하기</button>
