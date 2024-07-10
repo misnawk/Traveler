@@ -50,11 +50,14 @@ body, html {
 /*나라 추천*/
 .best-container{
     margin-top: 80px;
+
 }
 .best-trip {
     display: flex;
-    gap: 70px;
+    gap: 200px;
     padding-left: 80px;
+    padding-right : 80px
+    justify-content:center;
 }
 .best_btn {
     background-color: #fff;
@@ -70,7 +73,7 @@ body, html {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 .best_btn img {
-    width: 250px;
+    width: 280px;
     height: 150px;
     object-fit: cover;
     border-radius: 10px;
