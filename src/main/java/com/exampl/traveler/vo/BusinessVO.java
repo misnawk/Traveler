@@ -6,8 +6,8 @@ import lombok.Data;
 public class BusinessVO {
     private String binID;
     private String binPW;
-    private String binCate;
     private String binName;
+    private int binCate;
     private String binCode;
     private String binEmail;
     private String binTell;

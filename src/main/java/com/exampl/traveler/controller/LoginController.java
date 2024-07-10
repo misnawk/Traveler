@@ -42,7 +42,6 @@ public class LoginController {
                                               MemberVO vo,
                                               HttpServletRequest request){
 
-        // ResponseEntity :  HttpStatus, HttpHeaders, HttpBody 포함된 어노테이션
         boolean result = false;
         HttpSession session = request.getSession();
 
