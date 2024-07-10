@@ -45,7 +45,7 @@ public class TicketService {
             Map<String, Object> orderParams = new HashMap<>();
             orderParams.put("userId", userId);
             orderParams.put("comNO", tickNO);
-            orderParams.put("bincate", "4");
+            orderParams.put("bincate", "3");
             orderParams.put("totalcnt", quantity);
 
             int result = ticketMapper.createOrder(orderParams);

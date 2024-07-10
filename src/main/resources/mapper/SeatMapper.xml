@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exampl.traveler.mapper.SeatMapper">
+    <select id="getSeatsForAir" resultType="com.exampl.traveler.vo.SeatVO">
+        SELECT * FROM Seat WHERE airlineNo = #{airlineNo}
+    </select>
+
+    <update id="updateSeatAvailability">
+        UPDATE Seat
+        SET isAvailable = #{isAvailable}
+        WHERE airlineNo = #{airlineNo} AND seatNumber = #{seatNumber}
+    </update>
+
+    <update id="updateSeatAvailabilityWithLock">
+        UPDATE Seat
+        SET isAvailable = #{isAvailable}
+        WHERE airlineNo = #{airlineNo} AND seatNumber = #{seatNumber} AND isAvailable = true
+    </update>
+
+    <select id="getAllSeats" resultType="com.exampl.traveler.vo.SeatVO">
+        SELECT * FROM Seat WHERE airlineNo IS NULL
+    </select>
+
+    <update id="updateSeat" parameterType="com.exampl.traveler.vo.SeatVO">
+        UPDATE Seat
+        SET airlineNo = #{airlineNo}, isAvailable = #{isAvailable}
+        WHERE seatID = #{seatID}
+    </update>
+
+    <insert id="insertSeat" parameterType="com.exampl.traveler.vo.SeatVO">
+        INSERT INTO Seat (seatNumber, airlineNo, isAvailable)
+        VALUES (#{seatNumber}, #{airlineNo}, #{isAvailable})
+    </insert>
+</mapper>

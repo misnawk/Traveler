@@ -14,7 +14,7 @@
         SELECT * FROM hotel WHERE hotelNO = #{hotelNO}
     </select>
 
-    <insert id="insertOrder" parameterType="com.exampl.traveler.vo.UserOrderVO" useGeneratedKeys="true" keyProperty="orderId">
+    <insert id="insertOrder" parameterType="com.exampl.traveler.vo.UserOrderVO">
         INSERT INTO orders (userID, comNO, bincate, totalcnt, orderdate)
         VALUES (#{userId}, #{comNO}, #{binID}, #{totalcnt}, NOW())
     </insert>
@@ -24,3 +24,4 @@
         VALUES (#{userId}, #{orderID}, #{goday}, #{diaryTitle})
     </insert>
 </mapper>
+

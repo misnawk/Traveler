@@ -1,86 +1,51 @@
 package com.exampl.traveler.vo;
 
+import lombok.Data;
 import java.util.Date;
 
+@Data
 public class UserOrderVO {
-
+    private int orderId; // 자동 증가 ID
     private String userId;
-    private String comNO;
-    private String binID;
-    private int totalcnt;
-    private Date orderdate;
-    private int orderId; // 새로운 필드 추가
+    private String comNo;
+    private String bincate;
+    private int totalCnt;
+    private Date orderDate;
+    private String diaryTitle; // 패키지 제목
+    private String binID; //
+    private int totalcnt; //
+    private Date orderdate; //
 
     // 기본 생성자
     public UserOrderVO() {
     }
 
-    public UserOrderVO(String userId, String comNO, String binID, int totalcnt, Date orderdate) {
+    // 매개변수 생성자
+    public UserOrderVO(String userId, String comNo, String bincate, int totalCnt, Date orderDate, String diaryTitle, String binID, int totalcnt, Date orderdate) {
         this.userId = userId;
-        this.comNO = comNO;
+        this.comNo = comNo;
+        this.bincate = bincate;
+        this.totalCnt = totalCnt;
+        this.orderDate = orderDate;
+        this.diaryTitle = diaryTitle;
         this.binID = binID;
         this.totalcnt = totalcnt;
         this.orderdate = orderdate;
-    }
-
-    // Getters and setters
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getComNO() {
-        return comNO;
-    }
-
-    public void setComNO(String comNO) {
-        this.comNO = comNO;
-    }
-
-    public String getBinID() {
-        return binID;
-    }
-
-    public void setBinID(String binID) {
-        this.binID = binID;
-    }
-
-    public int getTotalcnt() {
-        return totalcnt;
-    }
-
-    public void setTotalcnt(int totalcnt) {
-        this.totalcnt = totalcnt;
-    }
-
-    public Date getOrderdate() {
-        return orderdate;
-    }
-
-    public void setOrderdate(Date orderdate) {
-        this.orderdate = orderdate;
-    }
-
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
     }
 
     @Override
     public String toString() {
         return "UserOrderVO{" +
-                "userId='" + userId + '\'' +
-                ", comNO='" + comNO + '\'' +
+                "orderId=" + orderId +
+                ", userId='" + userId + '\'' +
+                ", comNo='" + comNo + '\'' +
+                ", bincate='" + bincate + '\'' +
+                ", totalCnt=" + totalCnt +
+                ", orderDate=" + orderDate +
+                ", diaryTitle='" + diaryTitle + '\'' +
                 ", binID='" + binID + '\'' +
                 ", totalcnt=" + totalcnt +
                 ", orderdate=" + orderdate +
-                ", orderId=" + orderId +
                 '}';
     }
 }

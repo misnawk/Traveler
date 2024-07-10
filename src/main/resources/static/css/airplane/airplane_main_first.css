@@ -1,92 +1,91 @@
-.air_search {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  margin-top: 200px;
+body {
+    font-family: Arial, sans-serif;
+}
 
+.air_search {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-top: 200px;
 }
 
 .search_box {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .field {
-  flex: 1 1 200px;
-  position: relative;
+    flex: 1 1 200px;
+    position: relative;
+}
+
+.destination-field {
+    position: relative;
 }
 
 .field input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.dropdown_container {
-  position: absolute;
-  width: 100%;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-top: none;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
+.dropdown-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.dropdown {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+.dropdown-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-.dropdown li {
-  padding: 10px;
-  cursor: pointer;
+.dropdown-container li {
+    padding: 10px;
+    cursor: pointer;
 }
 
-.dropdown li:hover {
-  background-color: #f0f0f0;
+.dropdown-container li:hover {
+    background-color: #f0f0f0;
 }
 
-.hidden {
-  display: none;
+.country-list, .city-list {
+    display: none;
 }
 
 .search_button {
-  flex: 1 1 100%;
-  padding: 10px;
-  background-color: #0077be;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    flex: 1 1 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .search_button:hover {
-  background-color: #005fa3;
+    background-color: #45a049;
 }
 
 .trip_type {
-  flex: 1 1 100%;
-  margin-bottom: 10px;
+    flex: 1 1 100%;
+    margin-bottom: 10px;
 }
 
 .trip_type label {
-  margin-right: 20px;
-}
-
-input[type="number"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  opacity: 1;
+    margin-right: 20px;
 }

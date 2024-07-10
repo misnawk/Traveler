@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -11,108 +12,108 @@
     <script type="text/javascript" src="/js/business/business.js" defer></script>
 </head>
 <body>
-    <main>
-        <div th:replace="header_foter/header :: header"></div>
-        <div class="body_container">
-            <div class="profile_container">
-                <div class="profile_content">
-                    <input type="hidden" id="id" name="id" th:value="${session.binID}">
-                    <h4>[[${vo.getBinName()}]] 님</h4>
-                    <p>사업자번호 : [[${vo.getBinCode()}]]</p>
-                </div>
-                <input type="button" onclick="proEditor()" value="내 정보 수정하기">
+<main>
+    <div th:replace="header_foter/header :: header"></div>
+    <div class="body_container">
+        <div class="profile_container">
+            <div class="profile_content">
+                <input type="hidden" id="id" name="id" th:value="${session.binID}">
+                <h4>[[${vo.getBinName()}]] 님</h4>
+                <p>사업자번호 : [[${vo.getBinCode()}]]</p>
             </div>
+            <input type="button" onclick="proEditor()" value="내 정보 수정하기">
         </div>
-        <div style="background-color : #f2f2f2; padding:10px; "></div>
+    </div>
+    <div style="background-color : #f2f2f2; padding:10px; "></div>
 
-        <div class="register_content">
-            <input type="hidden" id="binCate" name="binCate" th:value="${session.binCate}">
-            <input type="button" class="register_btn" onclick="binWrite()" value="등록하기">
-        </div>
-        <div class="list_container">
-            <div class="search_content">
-                <th:block th:if="${session.binCate == '1'}">
-                    <select>
-                        <option value="">전체</option>
-                        <option value="natNO">국가</option>
-                        <option value="airNO">항공번호</option>
-                        <option value="airTitle">항공편명</option>
-                        <option value="airportName1">출발공항</option>
-                        <option value="airportName2">도착공항</option>
-                        <option value="airTime1">출발시간</option>
-                        <option value="airTime2">도착시간</option>
-                    </select>
-                </th:block>
-                <th:block th:if="${session.binCate == '2'}">
-                    <select>
-                        <option value="">전체</option>
-                        <option value="hotelCountry">국가</option>
-                        <option value="hotelName">호텔명</option>
-                        <option value="hotelPrice">가격(1박기준)</option>
-                    </select>
-                </th:block>
-                <th:block th:if="${session.binCate == '3'}">
-                    <select>
-                        <!-- 티켓 option 추가해주세요-->
-                        <option value="">전체</option>
-                    </select>
-                </th:block>
-                <th:block th:if="${session.binCate == '4'}">
-                    <select>
-                        <!-- 패키지 option 추가해주세요-->
-                        <option value="">전체</option>
-                    </select>
-                </th:block>
-                <input class="search_input" id="searchBar" name="searchBar" placeholder="검색어를 입력하세요">
-                <input type="button"class="search_btn" onclick="#" value="검색">
-            </div>
-
-            <div>
-                <table class="table_content">
-                    <tr>
-                        <th:block th:if="${session.binCate == '1'}">
-                            <th>국가</th>
-                            <th>항공번호</th>
-                            <th>항공편명</th>
-                            <th>공항정보</th>
-                            <th>일정정보</th>
-                            <th>관리</th>
-                        </th:block>
-                        <th:block th:if="${session.binCate == '2'}">
-                            <th>국가</th>
-                            <th>호텔명</th>
-                            <th>체크인/체크아웃</th>
-                            <th>가격(1박 기준)</th>
-                            <th>관리</th>
-                        </th:block>
-                        <th:block th:if="${session.binCate == '3'}">
-                            <!-- 티켓 th 추가해주세요-->
-                            <th>관리</th>
-                        </th:block>
-                        <th:block th:if="${session.binCate == '4'}">
-                            <!-- 패키지 th 추가해주세요-->
-                            <th>관리</th>
-                        </th:block>
-                    </tr>
-                    <tr th:each="list : ${list}">
-                        <th:block th:if="${session.binCate == '1'}">
-                            <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
-                        </th:block>
-                        <th:block th:if="${session.binCate == '2'}">
-                            <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
-                        </th:block>
-                        <th:block th:if="${session.binCate == '3'}">
-                            <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
-                        </th:block>
-                        <th:block th:if="${session.binCate == '4'}">
-                            <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
-                        </th:block>
-                    </tr>
-                </table>
-            </div>
+    <div class="register_content">
+        <input type="hidden" id="binCate" name="binCate" th:value="${session.binCate}">
+        <input type="button" class="register_btn" onclick="binWrite()" value="등록하기">
+    </div>
+    <div class="list_container">
+        <div class="search_content">
+            <th:block th:if="${session.binCate == '1'}">
+                <select>
+                    <option value="">전체</option>
+                    <option value="natNO">국가</option>
+                    <option value="airNO">항공번호</option>
+                    <option value="airTitle">항공편명</option>
+                    <option value="airportName1">출발공항</option>
+                    <option value="airportName2">도착공항</option>
+                    <option value="airTime1">출발시간</option>
+                    <option value="airTime2">도착시간</option>
+                </select>
+            </th:block>
+            <th:block th:if="${session.binCate == '2'}">
+                <select>
+                    <option value="">전체</option>
+                    <option value="hotelCountry">국가</option>
+                    <option value="hotelName">호텔명</option>
+                    <option value="hotelPrice">가격(1박기준)</option>
+                </select>
+            </th:block>
+            <th:block th:if="${session.binCate == '3'}">
+                <select>
+                    <!-- 티켓 option 추가해주세요-->
+                    <option value="">전체</option>
+                </select>
+            </th:block>
+            <th:block th:if="${session.binCate == '4'}">
+                <select>
+                    <!-- 패키지 option 추가해주세요-->
+                    <option value="">전체</option>
+                </select>
+            </th:block>
+            <input class="search_input" id="searchBar" name="searchBar" placeholder="검색어를 입력하세요">
+            <input type="button"class="search_btn" onclick="#" value="검색">
         </div>
 
-    </main>
+        <div>
+            <table class="table_content">
+                <tr>
+                    <th:block th:if="${session.binCate == '1'}">
+                        <th>국가</th>
+                        <th>항공번호</th>
+                        <th>항공편명</th>
+                        <th>공항정보</th>
+                        <th>일정정보</th>
+                        <th>관리</th>
+                    </th:block>
+                    <th:block th:if="${session.binCate == '2'}">
+                        <th>국가</th>
+                        <th>호텔명</th>
+                        <th>체크인/체크아웃</th>
+                        <th>가격(1박 기준)</th>
+                        <th>관리</th>
+                    </th:block>
+                    <th:block th:if="${session.binCate == '3'}">
+                        <!-- 티켓 th 추가해주세요-->
+                        <th>관리</th>
+                    </th:block>
+                    <th:block th:if="${session.binCate == '4'}">
+                        <!-- 패키지 th 추가해주세요-->
+                        <th>관리</th>
+                    </th:block>
+                </tr>
+                <tr th:each="list : ${list}">
+                    <th:block th:if="${session.binCate == '1'}">
+                        <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
+                    </th:block>
+                    <th:block th:if="${session.binCate == '2'}">
+                        <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
+                    </th:block>
+                    <th:block th:if="${session.binCate == '3'}">
+                        <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
+                    </th:block>
+                    <th:block th:if="${session.binCate == '4'}">
+                        <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
+                    </th:block>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</main>
 <!--    <div th:replace="header_foter/foter :: foter"></div>-->
 </body>
 </html>

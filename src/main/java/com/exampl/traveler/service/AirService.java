@@ -2,29 +2,39 @@ package com.exampl.traveler.service;
 
 import com.exampl.traveler.mapper.AirMapper;
 import com.exampl.traveler.vo.AirVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.exampl.traveler.vo.SeatVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AirService {
     private final AirMapper airMapper;
 
-    @Autowired
-    public AirService(AirMapper airMapper) {
-        this.airMapper = airMapper;
+    public List<AirVO> findOneWayAir(String departure, String destination, String departureDate) {
+        return airMapper.findOneWayAir(departure, destination, departureDate);
     }
 
-    public List<AirVO> findOutboundAirs(String departure, String destination, String departureDate) {
-        return airMapper.findOutboundAirs(departure, destination, departureDate);
+    public List<AirVO> findDepartureAir(String departure, String destination, String departureDate) {
+        return airMapper.findDepartureAir(departure, destination, departureDate);
     }
 
-    public List<AirVO> findReturnAirs(String departure, String destination, String returnDate) {
-        return airMapper.findReturnAirs(departure, destination, returnDate);
+    public List<AirVO> findReturnAir(String departure, String destination, String returnDate) {
+        return airMapper.findReturnAir(departure, destination, returnDate);
     }
 
-    public List<AirVO> findOneWayAirs(String departure, String destination, String departureDate) {
-        return airMapper.findOneWayAirs(departure, destination, departureDate);
+    public List<AirVO> findRoundTripAir(String departure, String destination, String departureDate, String returnDate) {
+        List<AirVO> departureAir = airMapper.findDepartureAir(departure, destination, departureDate);
+        List<AirVO> returnAir = airMapper.findReturnAir(destination, departure, returnDate);
+        departureAir.addAll(returnAir);
+        return departureAir;
     }
+
+    public AirVO getAirByAirNo(String airNo) {
+        return airMapper.getAirByAirNo(airNo);
+    }
+
+
 }

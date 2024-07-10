@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exampl.traveler.mapper.MyPageMapper">
-    <!-- 일반회원 -->
     <!-- 수정한 회원정보 업데이트 -->
     <update id="proUpdate">
         update user set userEmail = #{userEmail}, userName = #{userName}, userTell = #{userTell}
@@ -11,17 +10,5 @@
     <!-- 수정한 비밀번호 업데이트 -->
     <update id="pwInsert">
         update user set userPW = #{userPW} where userID = #{userID}
-    </update>
-
-    <!-- 기업회원 -->
-    <!-- 수정한 회원정보 업데이트 -->
-    <update id="binProUpdate">
-        update businessuser set binName = #{binName}, binTell = #{binTell}, binEmail = #{binEmail}
-        where binID = #{binID}
-    </update>
-
-    <!-- 수정한 비밀번호 업데이트-->
-    <update id="binPwUpdate">
-        update businessuser set binPW = #{binPW} where binID = #{binID}
     </update>
 </mapper>

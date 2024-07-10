@@ -125,6 +125,7 @@ public class LoginController {
             session.setAttribute("binID",id);
             session.setAttribute("binName",getVO.getBinName());
             session.setAttribute("binCate",getVO.getBinCate());
+            session.setAttribute("user", getVO);
             result = true;
         } else {
             result = false;

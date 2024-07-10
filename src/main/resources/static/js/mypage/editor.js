@@ -1,6 +1,6 @@
 // 비밀번호 변경 페이지
 function pwEditor(){
-    let id = document.getElementById("userID").value;
+    let id = sessionStorage.getItem('id');
     location.href="/mypage/pw/"+id;
 }
 
