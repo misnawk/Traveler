@@ -1,15 +1,20 @@
 package com.exampl.traveler.vo;
 
+import lombok.Data;
 import java.util.Date;
 
+@Data
 public class UserOrderVO {
-
+    private int orderId; // 자동 증가 ID
     private String userId;
-    private String comNO;
-    private String binID;
-    private int totalcnt;
-    private Date orderdate;
-    private int orderId; // 새로운 필드 추가
+    private String comNo;
+    private String bincate;
+    private int totalCnt;
+    private Date orderDate;
+    private String diaryTitle; // 패키지 제목
+    private String binID; //
+    private int totalcnt; //
+    private Date orderdate; //
 
     // 기본 생성자
     public UserOrderVO() {
@@ -24,30 +29,8 @@ public class UserOrderVO {
         this.orderDate = orderDate;
         this.diaryTitle = diaryTitle;
         this.binID = binID;
-    }
-
-    public int getTotalcnt() {
-        return totalcnt;
-    }
-
-    public void setTotalcnt(int totalcnt) {
         this.totalcnt = totalcnt;
-    }
-
-    public Date getOrderdate() {
-        return orderdate;
-    }
-
-    public void setOrderdate(Date orderdate) {
         this.orderdate = orderdate;
-    }
-
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
     }
 
     @Override
@@ -63,7 +46,6 @@ public class UserOrderVO {
                 ", binID='" + binID + '\'' +
                 ", totalcnt=" + totalcnt +
                 ", orderdate=" + orderdate +
-                ", orderId=" + orderId +
                 '}';
     }
 }
