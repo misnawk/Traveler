@@ -69,14 +69,20 @@
 
     var images = [
         { title: '일본', filenames: ['일본2.jpeg', '일본3.jpeg', '일본4.jpeg'] },
-        { title: '호주', filenames: ['호주1.jpg', '호주2.jpg'] }
+        { title: '베트남', filenames: ['베트남1.jpeg', '베트남2.jpeg','베트남3.jpeg'] },
+        { title: '대만', filenames: ['대만1.jpeg', '대만2.jpeg','대만3.jpeg'] },
+        { title: '필리핀', filenames: ['필리핀1.jpeg', '필리핀2.jpeg','필리핀3.jpeg'] },
+        { title: '인도네시아', filenames: ['인도네시아1.jpeg', '인도네시아2.jpeg','인도네시아3.jpeg'] },
+        { title: '인도', filenames: ['인도1.jpeg', '인도2.jpeg','인도3.jpeg'] },
+        { title: '태국', filenames: ['태국1.jpeg', '태국2.jpeg','태국3.jpeg'] },
+        { title: '호주', filenames: ['호주1.jpeg', '호주2.jpeg','호주3.jpeg'] },
     ];
 
     images.forEach(function(item) {
         if (item.title === natName) {
             item.filenames.forEach(function(filename) {
                 var imgElement = document.createElement('img');
-                imgElement.src = '/imgs/' + filename;
+                imgElement.src = '/imgs/nat/' + filename;
                 imgElement.alt = natName + ' 사진';
                 document.getElementById('image_con').appendChild(imgElement);
             });
