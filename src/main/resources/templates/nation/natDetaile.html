@@ -53,7 +53,7 @@
             <div class="coummunity_box" th:if="${not #lists.isEmpty(board)}">
                 <div class="coummunity_title" th:each="board : ${board}">
                     <button>
-                        <p th:text="${board.tripTitle}"></p>
+                        <a th:href="@{/board/details(boardNo=${board.boardNo})}"  th:text="${board.tripTitle}"></a>
                     </button>
                 </div>
             </div>

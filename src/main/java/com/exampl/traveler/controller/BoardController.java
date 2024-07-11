@@ -52,6 +52,14 @@ public class BoardController {
         model.addAttribute("currentPage", page);
         return "/board/boardDetail";
     }
+    @GetMapping("/details")
+    public String details(@RequestParam("boardNo") int boardNo, Model model) {
+        BoardVO board = boardService.selectOne(boardNo);
+
+        model.addAttribute("board",board);
+
+        return "/board/boardDetail";
+    }
 
 
 
