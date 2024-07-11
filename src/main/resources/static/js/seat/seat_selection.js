@@ -68,7 +68,7 @@ function reserveSeat() {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `airlineNo=${airlineNo}&seatNumber=${seatNumber}`
+        body: `airlineNo=${airlineNo}&seatNumber=${seatNumber}&`
     })
     .then(response => {
         if (!response.ok) {
