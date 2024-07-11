@@ -46,7 +46,9 @@ public class MainController {
 
     // admin 페이지
     @GetMapping("admin")
-    public String admin(){
+    public String admin(Model model){
+        List<MemberVO> vo = loginService.selectAll();
+        model.addAttribute("vo",vo);
         return "/admin/admin";
     }
 

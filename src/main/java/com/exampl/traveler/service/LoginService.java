@@ -38,6 +38,11 @@ public class LoginService {
         return loginMapper.selectOne(id);
     }
 
+    // 회원 전체 select
+    public List<MemberVO> selectAll(){
+        return loginMapper.selectAll();
+    }
+
     //// 기업회원 로그인 & 회원가입 Service
     // 기업 로그인 체크
     public boolean binLoginCheck(BusinessVO vo){
@@ -57,5 +62,10 @@ public class LoginService {
     // 기업 한개 찾기
     public BusinessVO binSelectOne(String id){
         return loginMapper.binSelectOne(id);
+    }
+
+    // 기업 전체 select
+    public List<BusinessVO> binSelectAll(){
+        return loginMapper.binSelectAll();
     }
 }

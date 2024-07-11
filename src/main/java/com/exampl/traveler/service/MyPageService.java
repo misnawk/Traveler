@@ -19,4 +19,5 @@ public class MyPageService {
     public boolean pwInsert(MemberVO vo){
         return myPageMapper.pwInsert(vo);
     }
+
 }
