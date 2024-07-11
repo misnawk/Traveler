@@ -30,6 +30,13 @@
         SELECT * FROM BOARD WHERE boardNO = #{boardNo}
 
     </select>
+    <select id="getBoardByKeyword" resultType="com.exampl.traveler.vo.BoardVO">
+        SELECT * FROM board
+        WHERE tripTitle LIKE CONCAT('%', #{keyword}, '%')
+        OR tripText LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+
 
 
 </mapper>

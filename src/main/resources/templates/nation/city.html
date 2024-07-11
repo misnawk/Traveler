@@ -32,7 +32,25 @@
             </div>
 
         </div>
+        <div class="community_container">
+            <div class="coummunity_top">
+                <h3 class="community_text">게시판</h3>
+                <button class="community_detail_btn"><a href="/board">더보기</a></button>
+            </div>
+            <div class="coummunity_box" th:if="${not #lists.isEmpty(board)}">
+                <div class="coummunity_title" th:each="board : ${board}">
+                    <button>
+                        <a th:href="@{/board/details(boardNo=${board.boardNo})}"  th:text="${board.tripTitle}"></a>
+                    </button>
+                </div>
+            </div>
+            <div class="coummunity_box" th:if="${#lists.isEmpty(board)}">
+                <p>관련된 게시글이 없습니다.</p>
+            </div>
+        </div>
     </div>
+
+
 </main>
 <div th:replace="header_foter/foter :: foter"></div>
 

@@ -23,4 +23,6 @@ public interface BoardMapper {
 
     BoardVO selectOne(@Param("boardNo") int boardNo);
 
+
+    List<BoardVO> getBoardByKeyword(String keyword);
 }

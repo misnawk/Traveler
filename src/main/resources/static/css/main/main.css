@@ -144,8 +144,10 @@ body, html {
     cursor: pointer;
     transition: all 0.3s;
 }
-.coummunity_title button p{
+.coummunity_title button a{
   margin-left: 40px;
+  text-decoration : none;
+  color : black;
 }
 .coummunity_title button:hover{
     background-color: #5050FF;

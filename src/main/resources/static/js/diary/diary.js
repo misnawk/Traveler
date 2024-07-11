@@ -62,11 +62,12 @@ function loadDiaryEntries(userId, successCallback, failureCallback) {
                 return {
                     id: entry.orderID,
                     title: entry.diaryTitle,
-                    start: entry.goDay || allday(entry.allDay)  , // 시간 정보 제거
+                    start: entry.allDay || allday(entry.goDay)  , // 시간 정보 제거
                     end: backday(entry.backDay), // 시간 정보 제거
                     color: entry.diaryColor || getRandomColor() // diaryColor null일 경우 랜덤 색상 사용
                 };
             });
+
             successCallback(events);
         },
         error: function(xhr, status, error) {
@@ -76,79 +77,42 @@ function loadDiaryEntries(userId, successCallback, failureCallback) {
     });
 }
 
-function saveDiaryEntry(calendar) {
-    var userId = $('#id').val();
-    if (!userId) {
-        console.error('User ID not found');
-        return;
+ function saveDiaryEntry(calendar) {
+        var userId = $('#id').val();
+        if (!userId) {
+            console.error('User ID not found');
+            return;
+        }
+
+        var diaryEntry = {
+            userId: userId,
+            allDay: $('#start').val(),
+            backDay: $('#end').val(),
+            diaryTitle: $('#title').val(),
+            diaryColor: $('#color').val() // 색상 값을 diaryText로 사용
+        };
+
+        $.ajax({
+            url: '/diary',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(diaryEntry),
+            success: function(response) {
+                alert('일정이 저장되었습니다.');
+                calendar.addEvent({
+                    title: diaryEntry.diaryTitle,
+                    start: diaryEntry.allDay,
+                    end: diaryEntry.backDay,
+                    color: diaryEntry.diaryColor,
+                    editable: true
+                });
+                $('#event-form')[0].reset();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error saving diary entry:', error);
+            }
+        });
     }
-
-    var diaryEntry = {
-        userId: userId,
-        allDay: $('#start').val(),
-        backDay: $('#end').val(),
-        diaryTitle: $('#title').val(),
-        diaryColor: $('#color').val() // 색상 값을 diaryColor 사용
-    };
-
-    $.ajax({
-        url: '/diary',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(diaryEntry),
-        success: function(response) {
-            alert('일정이 저장되었습니다.');
-            calendar.addEvent({
-                id: response.orderID,
-                title: diaryEntry.diaryTitle,
-                start: diaryEntry.allDay,
-                end: diaryEntry.backDay,
-                color: diaryEntry.diaryColor,
-                editable: true
-            });
-            $('#event-form')[0].reset();
-        },
-        error: function(xhr, status, error) {
-            console.error('Error saving diary entry:', error);
-        }
-    });
-}
-
-function updateDiaryEntry(event) {
-    var diaryEntry = {
-        orderID: event.id,
-        allDay: event.start.toISOString().split('T')[0],
-        backDay: event.end ? event.end.toISOString().split('T')[0] : null,
-        diaryTitle: event.title,
-        diaryColor: event.backgroundColor
-    };
-
-    $.ajax({
-        url: '/diary/' + event.id,
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify(diaryEntry),
-        success: function(response) {
-            alert('일정이 업데이트되었습니다.');
-        },
-        error: function(xhr, status, error) {
-            console.error('Error updating diary entry:', error);
-        }
-    });
-}
-
-function deleteDiaryEntry(event) {
-    $.ajax({
-        url: '/diary/' + event.id,
-        type: 'DELETE',
-        success: function(response) {
-            alert('일정이 삭제되었습니다.');
-        },
-        error: function(xhr, status, error) {
-            console.error('Error deleting diary entry:', error);
-        }
-    });
-}
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF';

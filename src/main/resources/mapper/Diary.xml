@@ -7,8 +7,8 @@
     </select>
 
     <insert id="insertDiary" parameterType="com.exampl.traveler.vo.DiaryVO">
-        INSERT INTO DIARY (userID, goDay,AllDay, BACKDAY, DIARYTITLE, DiaryColor)
-        VALUES (#{userId},#{goDay}, #{allDay}, #{backDay}, #{diaryTitle}, #{diaryColor});
+        INSERT INTO DIARY (userID,GoDay, BACKDAY, DIARYTITLE, DiaryColor)
+        VALUES (#{userId}, #{goDay}, #{backDay}, #{diaryTitle}, #{diaryColor});
     </insert>
 
 </mapper>

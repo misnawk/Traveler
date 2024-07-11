@@ -50,13 +50,14 @@
 
     <div class="community_container">
         <div class="coummunity_top">
-            <h3 class="community_text">trabeler들의 진짜 여행후기</h3>
+            <h3 class="community_text"> 게시판</h3>
             <button class="community_detail_btn" > <a href="/board">더보기</a></button>
         </div>
         <div class="coummunity_box" th:if="${not #lists.isEmpty(board)}">
             <div class="coummunity_title" th:each="board : ${board}">
                 <button>
-                    <p th:text="${board.tripTitle}"></p>
+                    <a th:href="@{/board/details(boardNo=${board.boardNo})}"  th:text="${board.tripTitle}"></a>
+
                 </button>
             </div>
         </div>
