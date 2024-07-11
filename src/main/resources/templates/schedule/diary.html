@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>일정 관리</title>
+    <link rel="stylesheet" href="/css/schedule/schedule.css">
+    <link rel="stylesheet" href="/css/header_foter/header.css">
+    <link rel="stylesheet" href="/css/header_foter/foter.css">
+    <script src="/js/diary/diary.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.14/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.14/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.14/index.global.min.js'></script>
+    <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.14/main.min.css' rel='stylesheet' />
+</head>
+<body>
+<div th:replace="header_foter/header :: header"></div>
+<main>
+    <input type="hidden" id="id" name="id" th:value="${userId}">
+    <h3>일정 추가</h3>
+    <form id="event-form">
+        <label for="title">제목:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="start">시작 날짜:</label>
+        <input type="date" id="start" name="start" required><br><br>
+        <label for="end">종료 날짜:</label>
+        <input type="date" id="end" name="end"><br><br>
+        <label for="color">색상:</label>
+        <select id="color" name="color" required>
+            <option value="#FF5733" style="background-color: #FF5733;">빨간색</option>
+            <option value="#33FF57" style="background-color: #33FF57;">녹색</option>
+            <option value="#3357FF" style="background-color: #3357FF;">파란색</option>
+            <option value="#FF5733" style="background-color: #FF5733;">빨간색</option>
+            <option value="#33FF57" style="background-color: #33FF57;">녹색</option>
+            <option value="#3357FF" style="background-color: #3357FF;">파란색</option>
+            <option value="#F3FF33" style="background-color: #F3FF33;">노란색</option>
+            <option value="#FF33F6" style="background-color: #FF33F6;">분홍색</option>
+            <option value="#33FFF3" style="background-color: #33FFF3;">청록색</option>
+            <option value="#FF8633" style="background-color: #FF8633;">주황색</option>
+            <option value="#8633FF" style="background-color: #8633FF;">보라색</option>
+            <option value="#3386FF" style="background-color: #3386FF;">하늘색</option>
+            <option value="#86FF33" style="background-color: #86FF33;">연두색</option>
+            <option value="#FF3386" style="background-color: #FF3386;">자홍색</option>
+            <option value="#33FF86" style="background-color: #33FF86;">연한녹색</option>
+            <option value="#FF3386" style="background-color: #FF3386;">자홍색</option>
+            <option value="#FFB533" style="background-color: #FFB533;">밝은주황색</option>
+            <option value="#B533FF" style="background-color: #B533FF;">연보라색</option>
+            <option value="#33FFB5" style="background-color: #33FFB5;">연한청록색</option>
+            <option value="#FF33B5" style="background-color: #FF33B5;">밝은분홍색</option>
+            <option value="#B5FF33" style="background-color: #B5FF33;">밝은연두색</option>
+            <option value="#3335FF" style="background-color: #3335FF;">진한파란색</option>
+            <option value="#FF3335" style="background-color: #FF3335;">진한빨간색</option>
+        </select><br><br>
+        <button type="submit">일정 추가</button>
+    </form>
+
+    <div class="calendar_con" id='calendar'></div>
+</main>
+<div th:replace="header_foter/foter :: foter"></div>
+
+
+</body>
+</html>

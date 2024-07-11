@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>게시판</title>
     <link rel="stylesheet" href="/css/board/boardList.css">
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css"/>
@@ -11,6 +11,13 @@
 <div th:replace="header_foter/header :: header"></div>
 <main>
 
+    <!-- 필터링 버튼 -->
+    <div class="filter-container">
+        <button onclick="filterBoard(1, this)">패키지</button>
+        <button onclick="filterBoard(0, this)">자유</button>
+    </div>
+
+
     <table class="board_con">
         <thead>
         <tr>
@@ -18,14 +25,16 @@
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
+            <th>조회수</th>
         </tr>
         </thead>
-        <tbody class="board_list">
-        <tr th:each="board : ${board}" >
+        <tbody id="board_list" class="board_list">
+        <tr th:each="board : ${board}">
             <td th:text="${board.tripType == 1 ? '패키지' : '자유여행'}"></td>
-            <td > <a th:href="@{/board/detail(boardNo=${board.boardNo}, page=${currentPage})}" th:text="${board.tripTitle}"></a></td>
+            <td><a th:href="@{/board/detail(boardNo=${board.boardNo}, page=${currentPage})}" th:text="${board.tripTitle}"></a></td>
             <td th:text="${board.userId}"></td>
             <td th:text="${#dates.format(board.tripDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${board.count}"></td>
         </tr>
         </tbody>
     </table>
@@ -57,10 +66,30 @@
 <!-- JavaScript 코드 추가 -->
 <script>
     function showLoginAlert() {
-        alert("로그인을 해주세요.");
-        // 선택적: 로그인 페이지로 리다이렉트
-        // window.location.href = '/login';
-    }
+    alert("로그인을 해주세요.");
+    // 선택적: 로그인 페이지로 리다이렉트
+    // window.location.href = '/login';
+}
+
+function filterBoard(tripType, button) {
+    const rows = document.querySelectorAll('#board_list tr');
+    rows.forEach(row => {
+        const typeCell = row.querySelector('td:nth-child(1)');
+        const typeText = typeCell.innerText;
+        if ((tripType === 1 && typeText === '패키지') || (tripType === 0 && typeText === '자유여행')) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+
+    // 버튼 스타일 변경
+    const buttons = document.querySelectorAll('.filter-container button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+}
+
+
 </script>
 </body>
 </html>

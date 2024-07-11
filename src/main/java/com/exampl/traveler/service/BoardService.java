@@ -38,6 +38,7 @@ public class BoardService {
     }
 
     public BoardVO selectOne(int boardNo){
+        boardMapper.increaseViewCount(boardNo);
         return boardMapper.selectOne(boardNo);
 
     }
