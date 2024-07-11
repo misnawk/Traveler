@@ -11,4 +11,5 @@ public interface MyPageMapper {
 
     // 수정한 비밀번호 업데이트
     boolean pwInsert(MemberVO vo);
+
 }
