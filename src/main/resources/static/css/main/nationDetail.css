@@ -46,9 +46,9 @@ body, html {
     border : 1px solid #0000001a;
     border-radius: 10px;
     width : 950px;
-    height: 600px;
+    height: auto;
     position: absolute;
-    top: 450px;
+    top:700px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -163,4 +163,73 @@ body, html {
     width: 50px;
     font-weight : bold;
 
+}
+
+/* 게시판 */
+.community_text{
+
+    font-weight:bolder;
+
+
+
+}
+.coummunity_top{
+    display: flex;
+    margin-top: 100px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+.community_detail_btn{
+    background-color: #007bff;
+    width: 150px;
+    height: 50px;
+    margin-right: 20px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight:bolder;
+    border-radius: 10px;
+    transition: all 0.3s;
+
+
+}
+.community_detail_btn a{
+    text-decoration: none;
+    color: white;
+
+
+
+}
+.community_detail_btn:hover{
+    background-color: lightskyblue;
+
+
+}
+
+.coummunity_title{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+.coummunity_title button{
+    width: 100%;
+    text-align: left;
+    font-weight:bolder;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid  lightslategray;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.coummunity_title button a{
+  margin-left: 40px;
+  text-decoration : none;
+  color : black;
+}}
+.coummunity_title button:hover{
+    background-color: #5050FF;
+    color: #fff;
+    font-weight:bolder;
 }
