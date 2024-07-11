@@ -43,6 +43,10 @@ public class BoardService {
 
     }
 
+    public List<BoardVO> getBoardByKeyword(String keyword) {
+        return boardMapper.getBoardByKeyword(keyword);  // 새로운 메서드 구현
+    }
+
 
 
 }

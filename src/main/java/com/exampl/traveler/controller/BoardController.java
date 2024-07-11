@@ -54,6 +54,7 @@ public class BoardController {
     }
 
 
+
     //글 등록 페이지
     @RequestMapping("/write")
     public String write(Model model) {
