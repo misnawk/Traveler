@@ -114,16 +114,16 @@ public class AdminController {
 
         BusinessVO vo = loginService.binSelectOne(binID);
 
-        if(vo.getBinCate() == 1) {
+        if(vo.getBinCate() == "1") {
             List<AirVO> items = adminService.airSelectID(binID);
             model.addAttribute("items", items);
-        } else if(vo.getBinCate() == 2){
+        } else if(vo.getBinCate() == "2"){
             List<HotelVO> items = adminService.hotelSelectID(binID);
             model.addAttribute("items", items);
-        } else if(vo.getBinCate() == 3){
+        } else if(vo.getBinCate() == "3"){
             List<TicketVO> items = adminService.tickSelectID(binID);
             model.addAttribute("items", items);
-        } else if(vo.getBinCate() == 4){
+        } else if(vo.getBinCate() == "4"){
             List<PackageVO> items = adminService.packSelectID(binID);
             model.addAttribute("items", items);
         }
