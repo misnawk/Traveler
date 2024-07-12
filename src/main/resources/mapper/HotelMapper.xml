@@ -15,8 +15,8 @@
     </select>
 
     <insert id="insertOrder" parameterType="com.exampl.traveler.vo.UserOrderVO" useGeneratedKeys="true" keyProperty="orderId">
-        INSERT INTO orders (userID, comNO, binCate, totalCnt, orderDate)
-        VALUES (#{userId}, #{comNO}, #{binCate}, #{totalCnt}, NOW())
+        INSERT INTO orders (userID, comNO, binCate, totalCnt, orderDate, useDate)
+        VALUES (#{userId}, #{comNO}, #{binCate}, #{totalCnt}, NOW(), #{useDate})
     </insert>
 
     <insert id="insertDiary" parameterType="map">

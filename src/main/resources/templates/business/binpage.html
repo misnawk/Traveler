@@ -49,7 +49,14 @@
                         <th>가격(1박 기준)</th>
                         <th>관리</th>
                     </th:block>
-                    <th:block th:if="${session.binCate == '3'}">
+                    <tr th:each="hotel : ${hotelList}" th:if="${session.binCate == '2'}">
+                        <td th:text="${hotel.hotelCountry}"></td>
+                        <td th:text="${hotel.hotelName}"></td>
+                        <td th:text="${hotel.hotelTime}"></td>
+                        <td th:text="${hotel.hotelPrice}"></td>
+                        <td><input type="button" class="item_btn" onclick="manageHotel(/* add parameters as needed */)" value="관리"></td>
+                    </tr>
+                <th:block th:if="${session.binCate == '3'}">
                         <th>국가</th>
                         <th>카테고리</th>
                         <th>티켓명</th>

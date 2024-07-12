@@ -18,5 +18,5 @@ public class UserOrderVO {
     private Date orderDate;
     private String title; // 일반회원 관리자에서 사용
     private String time; // 일반회원 관리자에서 사용
-
+    private Date useDate;
 }
