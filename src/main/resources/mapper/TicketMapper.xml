@@ -10,10 +10,9 @@
         <result property="tickText" column="tickText"/>
         <result property="tickOp" column="tickOp"/>
         <result property="tickPrice" column="tickPrice"/>
-        <result property="tickDate" column="tickDate" jdbcType="TIMESTAMP"/>
+        <result property="tickDate" column="tickDate"/>
         <result property="tickPlace" column="tickPlace"/>
         <result property="category" column="category"/>
-        <result property="tickTime" column="tickTime" jdbcType="TIME" javaType="java.time.LocalTime"/>
     </resultMap>
 
     <select id="getAllTickets" resultMap="ticketResultMap">
@@ -24,18 +23,14 @@
         SELECT * FROM tick WHERE tickNO = #{tickNO}
     </select>
 
-    <insert id="createOrder" parameterType="map" useGeneratedKeys="true" keyProperty="orderID">
-        INSERT INTO orders (userID, comNO, bincate, totalcnt, orderdate)
-        VALUES (#{userId}, #{comNO}, #{bincate}, #{totalcnt}, NOW())
+
+    <insert id="insertOrder" parameterType="com.exampl.traveler.vo.UserOrderVO" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO orders (userID, comNO, binCate, totalCnt, orderDate)
+        VALUES (#{userId}, #{comNO}, #{binCate}, #{totalCnt}, NOW())
     </insert>
 
-    <insert id="createDiary" parameterType="map">
-        INSERT INTO DIARY (userID, ORDERID, GODAY, DIARYTITLE)
-        VALUES (#{userId}, #{orderID}, #{goday}, #{diaryTitle})
+    <insert id="insertDiary" parameterType="map">
+        INSERT INTO DIARY (userID, orderID, AllDay, DiaryTitle)
+        VALUES (#{userId}, #{orderID}, #{allDay}, #{diaryTitle})
     </insert>
-
-    <select id="getTicketByBinID" resultMap="ticketResultMap">
-        SELECT * FROM tick WHERE binID = #{binID} LIMIT 1
-    </select>
-
 </mapper>

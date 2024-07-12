@@ -2,17 +2,15 @@ package com.exampl.traveler.service;
 
 import com.exampl.traveler.mapper.TicketMapper;
 import com.exampl.traveler.vo.TicketVO;
+import com.exampl.traveler.vo.UserOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigInteger;
-import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class TicketService {
@@ -34,39 +32,21 @@ public class TicketService {
     }
 
     @Transactional
-    public boolean reserveTicket(String userId, String tickNO, int quantity) {
-        try {
-            TicketVO ticket = ticketMapper.getTicketByTickNO(tickNO);
-            if (ticket == null) {
-                log.error("Ticket not found for tickNO: {}", tickNO);
-                return false;
-            }
-
-            Map<String, Object> orderParams = new HashMap<>();
-            orderParams.put("userId", userId);
-            orderParams.put("comNO", tickNO);
-            orderParams.put("bincate", "3");
-            orderParams.put("totalcnt", quantity);
-
-            int result = ticketMapper.createOrder(orderParams);
-
-            if (result > 0) {
-                Object orderIDObj = orderParams.get("orderID");
-                long orderID = ((Number) orderIDObj).longValue();
-
-                Map<String, Object> diaryParams = new HashMap<>();
-                diaryParams.put("userId", userId);
-                diaryParams.put("orderID", orderID);
-                diaryParams.put("goday", ticket.getTickDate());  // Date 타입 그대로 사용
-                diaryParams.put("diaryTitle", ticket.getTickTitle());
-
-                ticketMapper.createDiary(diaryParams);
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            log.error("Error while reserving ticket", e);
-            return false;
+    public void insertOrder(UserOrderVO userOrderVO) {
+        log.info("insertOrder 메서드 시작");
+        log.info("Received userOrderVO: {}", userOrderVO);
+        userOrderVO.setBinCate("3");
+        userOrderVO.setOrderDate(new Date());
+        ticketMapper.insertOrder(userOrderVO);
+        log.info("Order inserted, getting ticket info");
+        TicketVO ticket = ticketMapper.getTicketByTickNO(userOrderVO.getComNO());
+        if (ticket == null) {
+            log.error("Ticket not found for comNO: {}", userOrderVO.getComNO());
+            throw new RuntimeException("Ticket not found");
         }
+        log.info("Inserting diary entry");
+        ticketMapper.insertDiary(userOrderVO.getUserId(), userOrderVO.getOrderId(),
+                ticket.getTickDate(), ticket.getTickTitle());
+        log.info("Diary entry inserted");
     }
 }

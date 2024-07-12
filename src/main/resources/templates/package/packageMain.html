@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="/css/header_foter/header.css"/>
   <title>Package List</title>
   <script>
-    function viewPackageDetail(packageNo) {
-        location.href = '/packages/' + packageNo;
+    function viewPackageDetail(packageNO) {
+        location.href = '/packages/' + packageNO;
     }
   </script>
 </head>
@@ -48,7 +48,7 @@
       <p th:text="${package.packageText}"></p>
       <p class="travel_period">여행기간: <span th:text="${#dates.format(package.startDateTime, 'yyyy-MM-dd')} + ' ~ ' + ${#dates.format(package.endDateTime, 'yyyy-MM-dd')}"></span></p>
       <p class="price">상품가격: <span th:text="${#numbers.formatDecimal(package.packagePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span></p>
-      <button class="detail_btn" th:data-package-no="${package.packageNo}" onclick="viewPackageDetail(this.getAttribute('data-package-no'))">자세히 보기</button>
+      <button class="detail_btn" th:data-package-no="${package.packageNO}" onclick="viewPackageDetail(this.getAttribute('data-package-no'))">자세히 보기</button>
     </div>
   </div>
 </div>

@@ -1,84 +1,83 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.container {
-    width: 80%;
+.package-detail-container {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 200px;
 }
 
-.header {
-    text-align: center;
-    padding: 20px 0;
-}
-
-.header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    color: #333;
-}
-
-.package_detail {
-    margin-top: 300px;
+.package-detail {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
-.package_image {
-    flex: 1;
-    min-width: 300px;
-    margin-right: 20px;
-}
-
-.package_image img {
-    width: 100%;
-    height: auto;
+.package-image img {
+    max-width: 100%;
     border-radius: 8px;
 }
 
-.package_info {
-    flex: 2;
-    min-width: 300px;
+.package-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.package_info h2 {
-    font-size: 2em;
+.package-info h3 {
+    font-size: 24px;
     color: #333;
-    margin-bottom: 10px;
 }
 
-.package_info p {
-    font-size: 1.2em;
+.package-info p {
+    margin: 0;
+    color: #555;
     line-height: 1.6;
-    color: #666;
 }
 
-.package_info .travel_period,
-.package_info .price {
+.travel-period, .price, .people-count {
     font-weight: bold;
-    margin-top: 20px;
 }
 
-.button_container {
-    margin-top: 20px;
+#orderForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.button_container button {
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #007bff;
+#orderForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#orderForm input[type="number"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 60px;
+}
+
+#orderButton {
+    padding: 10px 15px;
     border: none;
     border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
 }
 
-.button_container button:hover {
+#orderButton:hover {
     background-color: #0056b3;
 }

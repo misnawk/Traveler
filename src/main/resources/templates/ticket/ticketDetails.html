@@ -48,7 +48,7 @@
                 <!-- 총 가격 표시 -->
                 <p class="total-price">총 가격: <span id="totalPrice"></span></p>
 
-                <button class="reserve-btn" onclick="payTicket()">결제하기</button>
+                <button class="reserve-btn" onclick="reserveTicket()">결제하기</button>
             </div>
         </div>
     </div>
@@ -61,11 +61,10 @@
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-    var isLoggedIn = [[${session.id != null}]];
-    var ticketTickNO = [[${ticket.tickNO}]];
-    var ticketPrice = [[${ticket.tickPrice}]];
-    var ticketTime = [[${#dates.format(ticket.tickTime, 'HH:mm')}]];
-    /*]]>*/
+    let isLoggedIn = [[${session.id != null}]];
+    let ticketTickNO = [[${ticket.tickNO}]];
+    let ticketPrice = [[${ticket.tickPrice}]];
+    let ticketDate = [[${#dates.format(ticket.tickDate, 'yyyy-MM-dd HH:mm')}]];    /*]]>*/
 </script>
 
 </body>

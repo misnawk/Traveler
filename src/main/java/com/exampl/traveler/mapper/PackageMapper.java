@@ -17,6 +17,9 @@ public interface PackageMapper {
 
     void insertOrder(UserOrderVO order);
 
-    void insertDiary(@Param("userId") String userId, @Param("orderId") int orderId, @Param("goDay") Date goDay, @Param("diaryTitle") String diaryTitle);
-
+    void insertDiary(@Param("userId") String userId,
+                     @Param("orderId") int orderId,
+                     @Param("goDay") Date goDay,
+                     @Param("backDay") Date backDay,
+                     @Param("diaryTitle") String diaryTitle);
 }

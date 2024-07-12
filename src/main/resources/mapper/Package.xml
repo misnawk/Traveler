@@ -7,17 +7,17 @@
     </select>
 
     <select id="getPackageById" parameterType="String" resultType="com.exampl.traveler.vo.PackageVO">
-        SELECT * FROM Package WHERE packageNo = #{id}
+        SELECT * FROM Package WHERE packageNO = #{id}
     </select>
 
     <insert id="insertOrder" parameterType="com.exampl.traveler.vo.UserOrderVO" useGeneratedKeys="true" keyProperty="orderId">
-        INSERT INTO orders (userID, comNO, bincate, totalcnt, orderdate)
-        VALUES (#{userId}, #{comNo}, #{bincate}, #{totalCnt}, #{orderDate})
+        INSERT INTO orders (userID, comNO, binCate, totalCnt, orderDate)
+        VALUES (#{userId}, #{comNO}, #{binCate}, #{totalCnt}, #{orderDate})
     </insert>
 
     <insert id="insertDiary">
-        INSERT INTO DIARY (userID, ORDERID, GODAY, DIARYTITLE)
-        VALUES (#{userId}, #{orderId}, #{goDay}, #{diaryTitle})
+        INSERT INTO DIARY (userID, orderID, GoDay, BackDay, DiaryTitle)
+        VALUES (#{userId}, #{orderID}, #{goDay}, #{backDay}, #{diaryTitle})
     </insert>
 
 </mapper>

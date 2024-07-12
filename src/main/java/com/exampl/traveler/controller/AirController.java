@@ -58,9 +58,9 @@ public class AirController {
     }
 
     @GetMapping("/search")
-    public String searchAir(@RequestParam("departure") String departure,
-                            @RequestParam("destination") String destination,
-                            @RequestParam("departureDate") String departureDate,
+    public String searchAir(@RequestParam("departure") String departure, //출발지
+                            @RequestParam("destination") String destination, //도착지
+                            @RequestParam("departureDate") String departureDate, //출발날
                             @RequestParam(value = "returnDate", required = false) String returnDate,
                             @RequestParam("tripType") String tripType,
                             Model model) {
