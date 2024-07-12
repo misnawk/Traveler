@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/header_foter/foter.css" />
+    <link rel="stylesheet" href="/css/header_foter/header.css" />
+    <link href="/css/admin/admin.css" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/js/admin/admin.js" defer></script>
+</head>
+<header>
+    <div class="header_content">
+        <h1 class="logo"><a href="/">traveler</a></h1>
+        <div class="button_content">
+            <th:block th:if="${session.id == 'admin'}">
+                <input type="hidden" id="adminID" name="adminID" th:value="${session.id}">
+                <span class="userName"><b>[[${session.name}]]</b> 님</span>
+                <button class="mypage" onclick="adminPage()">관리자</button>
+                <button class="logout" onclick="logout()">로그아웃</button>
+            </th:block>
+        </div>
+    </div>
+
+    <nav>
+        <ul id="menu">
+            <li><a href="/admin">회원관리</a></li>
+            <li><a href="/admin/business">기업관리</a></li>
+            <li><a href="/admin/items">상품관리</a></li>
+            <li><a href="/amin/orders">결제관리</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+<main>
+
+    <div class="binCate_content">
+        <input type="radio" id="airline" name="binCate" onclick="binCate(this.value)" value="airline">
+        <label for="airline">항공</label>
+        <input type="radio" id="hotel" name="binCate" onclick="binCate(this.value)" value="hotel">
+        <label for="hotel">숙박</label>
+        <input type="radio" id="tick" name="binCate" onclick="binCate(this.value)" value="tick">
+        <label for="tick">티켓</label>
+        <input type="radio" id="package" name="binCate" onclick="binCate(this.value)" value="package">
+        <label for="package">패키지</label>
+    </div>
+
+    <form action="/admin/items" method="get" >
+        <div class="search_content">
+            <select name="option">
+                <th:block th:if="${type == 'airline'}">
+                    <option value="">전체</option>
+                    <option value="">항공명</option>
+                </th:block>
+                <th:block th:if="${type == 'hotel'}">
+                    <option value="">전체</option>
+                    <option value="">숙박</option>
+                </th:block>
+                <th:block th:if="${type == 'tick'}">
+                    <option value="">전체</option>
+                    <option value="">티켓</option>
+                </th:block>
+                <th:block th:if="${type == 'package'}">
+                    <option value="">전체</option>
+                    <option value="">패키지</option>
+                </th:block>
+            </select>
+            <input class="search_input" id="data" name="data" placeholder="검색어를 입력하세요">
+            <input type="submit" class="search_btn" value="검색">
+            <input type="button" class="reset_btn" onclick="reset()" value="검색초기화">
+        </div>
+    </form>
+
+    <div>
+        <table class="table_content">
+            <tr>
+                <th:block th:if="${type == 'airline'}">
+                    <th>항공사</th>
+                    <th>분류</th>
+                    <th>상호명</th>
+                    <th>사업자등록번호</th>
+                    <th>대표전화번호</th>
+                    <th>대표이메일</th>
+                    <th>관리</th>
+                </th:block>
+            </tr>
+            <tr th:each="vo : ${vo}">
+
+                <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
+            </tr>
+        </table>
+    </div>
+
+    <!--        <div th:replace="header_foter/foter :: foter"></div>-->
+</main>
+</body>
+</html>

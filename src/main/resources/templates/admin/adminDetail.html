@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/mypage/editor.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/header_foter/header.css">
+    <link rel="stylesheet" href="/css/header_foter/foter.css" />
+    <link href="/css/admin/admin.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+</head>
+<header>
+    <div class="header_content">
+        <h1 class="logo"><a href="/">traveler</a></h1>
+        <div class="button_content">
+            <th:block th:if="${session.id == 'admin'}">
+                <input type="hidden" id="adminID" name="adminID" th:value="${session.id}">
+                <span class="userName"><b>[[${session.name}]]</b> 님</span>
+                <button class="mypage" onclick="adminPage()">관리자</button>
+                <button class="logout" onclick="logout()">로그아웃</button>
+            </th:block>
+        </div>
+    </div>
+
+    <nav>
+        <ul id="menu">
+            <li><a href="/admin">회원관리</a></li>
+            <li><a href="/admin/business">기업관리</a></li>
+            <li><a href="/admin/items">상품관리</a></li>
+            <li><a href="/amin/orders">결제관리</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+    <main>
+        <div class="body_container">
+            <div class="table_container">
+                <table class="table_content">
+                    <tr class="table_tr">
+                        <th>아이디</th>
+                        <td>[[${vo.getBinID}]]
+                        <th>분류</th>
+                        <th:block th:if="${vo.getBinCate == 1}">
+                            <td>항공</td>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 2}">
+                            <td>숙박</td>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 3}">
+                            <td>티켓</td>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 4}">
+                            <td>패키지</td>
+                        </th:block>
+                    </tr>
+                    <tr class="table_tr">
+                        <th>이름</th>
+                        <td>[[${vo.getBinName}]]</td>
+                        <th>사업자등록증</th>
+                        <td>[[${vo.getBinCode}]]</td>
+                    </tr>
+                    <tr class="table_tr">
+                        <th>전화번호</th>
+                        <td>[[${vo.getBinTell}]]</td>
+                        <th>이메일</th>
+                        <td>[[${vo.getBinEmail}]]</td>
+                    </tr>
+                </table>
+            </div>
+
+            <form action="/admin/detail" method="get" >
+                <div class="search_content">
+                    <select name="option">
+                        <th:block th:if="${vo.getBinCate == 1}">
+                            <option value="">전체</option>
+                            <option value="userID">항공</option>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 2}">
+                            <option value="">전체</option>
+                            <option value="userID">숙박</option>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 3}">
+                            <option value="">전체</option>
+                            <option value="userID">티켓명</option>
+                            <option value="userID">옵션</option>
+                            <option value="userID">사용처</option>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 4}">
+                            <option value="">전체</option>
+                            <option value="userID">패키지명</option>
+                        </th:block>
+                    </select>
+                    <input class="search_input" id="data" name="data" placeholder="검색어를 입력하세요">
+                    <input type="submit" class="search_btn" value="검색">
+                    <input type="button" class="reset_btn" onclick="reset()" value="검색초기화">
+                </div>
+            </form>
+
+            <div>
+                <table class="table_content">
+                    <tr>
+                        <th:block th:if="${vo.getBinCate == 1}">
+                            <th>항공</th>
+                            <th>옵션</th>
+                            <th>유효기간</th>
+                            <th>사용처</th>
+                            <th>가격</th>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 2}">
+                            <th>호텔명</th>
+                            <th>나라</th>
+                            <th>체크인/체크아웃</th>
+                            <th>가격(1박기준)</th>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 3}">
+                            <th>티켓명</th>
+                            <th>옵션</th>
+                            <th>유효기간</th>
+                            <th>사용처</th>
+                            <th>가격</th>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 4}">
+                            <th>패키지명</th>
+                            <th>최대인원</th>
+                            <th>시작날짜</th>
+                            <th>종료날짜</th>
+                            <th>가격</th>
+                        </th:block>
+                    </tr>
+                    <tr th:each="item : ${items}">
+                        <th:block th:if="${vo.getBinCate == 1}">
+                            <td></td>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 2}">
+<!--                            <td>[[${item.getHotelName}]]</td>-->
+<!--                            <td>[[${item.getHotelCountry}]]</td>-->
+<!--                            <td>[[${item.getHotelTime}]]</td>-->
+<!--                            <td>[[${item.getTickPlace}]]</td>-->
+<!--                            <td>[[${#numbers.formatInteger(item.getHotelPrice, 3, 'COMMA')}]]</td>-->
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 3}">
+                            <td>[[${item.getTickTitle}]]</td>
+                            <td>[[${item.getTickOp}]]</td>
+                            <td>[[${#dates.format(item.getTickDate, 'yyyy-MM-dd')}]]</td>
+                            <td>[[${item.getTickPlace}]]</td>
+                            <td>[[${#numbers.formatInteger(item.getTickPrice, 3, 'COMMA')}]]</td>
+                        </th:block>
+                        <th:block th:if="${vo.getBinCate == 4}">
+                            <td>[[${item.getPackageTitle}]]</td>
+                            <td>[[${item.getPackageMax}]]</td>
+                            <td>[[${#dates.format(item.getStartDateTime, 'yyyy-MM-dd')}]]</td>
+                            <td>[[${#dates.format(item.getEndDateTime, 'yyyy-MM-dd')}]]</td>
+                            <td>[[${#numbers.formatInteger(item.getPackagePrice, 3, 'COMMA')}]]</td>
+                        </th:block>
+                    </tr>
+                </table>
+            </div>
+
+<!--            <div class="btn_content">-->
+<!--                <input type="button" class="save_btn" id="saveBtn" name="saveBtn" onclick="save()" value="저장하기">-->
+<!--            </div>-->
+<!--            <div class="btn_content2">-->
+<!--                <input type="button" class="back_btn" onclick="HomeBack()" value="뒤로가기">-->
+<!--            </div>-->
+        </div>
+    </main>
+</body>
+</html>
