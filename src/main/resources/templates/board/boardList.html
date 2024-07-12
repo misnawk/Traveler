@@ -11,10 +11,13 @@
 <body>
 <div th:replace="header_foter/header :: header"></div>
 <main>
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="여행지를 검색해보세요">
-        <button onclick="getSearch()">검색</button>
-    </div>
+    <form action="/board/search" method="get">
+        <div class="search-box">
+            <input class="search-box-input" type="text" id="data" name="data" placeholder="여행지를 검색해보세요">
+            <input type="submit" class="search-btn" value="검색">
+        </div>
+    </form>
+
 
 
     <!-- 필터링 버튼 -->

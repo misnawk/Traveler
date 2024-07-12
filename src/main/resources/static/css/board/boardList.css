@@ -224,7 +224,7 @@ body, html {
     margin-top : 50px;
 }
 
-.search-box input {
+.search-box-input {
     border: 0.5px solid #ddd ;
     width:500px;
     padding: 10px;
@@ -232,9 +232,10 @@ body, html {
     border-radius: 5px 0 0 5px;
     outline: none;
 }
-.search-box button {
+.search-btn {
     background-color: #007bff;
     color: white;
+     width:200px;
     border: none;
     padding: 10px 20px;
     font-size: 16px;

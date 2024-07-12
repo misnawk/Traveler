@@ -29,18 +29,3 @@ function filterBoard(tripType, button) {
             window.location.href = url.toString();
     }
 
-
-    function getSearch() {
-        const searchQuery = $('#searchInput').val();
-        $.ajax({
-            url: '/board/search',
-            type: 'GET',
-            data: { query: searchQuery },
-            success: function(response) {
-                $('#board_list').html(response);
-            },
-            error: function() {
-                alert('검색에 실패했습니다.');
-            }
-        });
-    }

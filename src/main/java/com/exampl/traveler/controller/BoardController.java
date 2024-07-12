@@ -55,6 +55,20 @@ public class BoardController {
         return "/board/boardDetail";
     }
 
+
+    // 검색
+    @GetMapping("/search")
+    public String search(@RequestParam(value = "tripType", required = false) Integer tripType,@RequestParam("data") String data, Model model) {
+        System.out.println("검색어: " + data);  // 로그로 검색어 확인
+        List<BoardVO> board = boardService.search(data,tripType);
+
+        model.addAttribute("board", board);
+        model.addAttribute("currentPage", 1);
+        model.addAttribute("totalPages", 1);
+        return "/board/boardList";
+    }
+
+
     //메인 국가 도시페이지에서 누르면 상세페이지로 가는거
     @GetMapping("/details")
     public String details(@RequestParam("boardNo") int boardNo, Model model) {

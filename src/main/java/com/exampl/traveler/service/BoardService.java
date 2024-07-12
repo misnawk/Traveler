@@ -35,6 +35,15 @@ public class BoardService {
     public int getTotalBoardCount() {
         return boardMapper.getTotalBoardCount();
     }
+    //검색기능
+    public List<BoardVO> search(String data,Integer tripType){
+        if(tripType == null){
+            return boardMapper.search(data);
+        }else{
+            return boardMapper.findsearchTripType(data,tripType);
+        }
+
+    }
 
 
     public void saveBoard(BoardVO boardVO) {
