@@ -20,8 +20,8 @@
     </insert>
 
     <insert id="insertDiary" parameterType="map">
-        INSERT INTO DIARY (userID, ORDERID, GODAY, BACKDAY, DIARYTITLE, DIARYTEXT, diaryTIME)
-        VALUES (#{userId}, #{orderID}, #{goday}, #{backday}, #{diaryTitle}, #{diaryText}, #{diaryTime})
+        INSERT INTO DIARY (userID, ORDERID, GODAY, BACKDAY, DIARYTITLE)
+        VALUES (#{userId}, #{orderID}, #{goday}, #{backday}, #{diaryTitle})
     </insert>
 
     <insert id="insertRoom" parameterType="com.exampl.traveler.vo.RoomtypeVO">
@@ -40,4 +40,23 @@
         SELECT * FROM rooms
         WHERE hotelNO = #{hotelNO} AND roomFacility = #{facility}
     </select>
+
+    <select id="getAllRooms" resultType="com.exampl.traveler.vo.RoomtypeVO">
+        SELECT * FROM rooms
+    </select>
+
+    <insert id="binInsertHotel" parameterType="com.exampl.traveler.vo.HotelVO" useGeneratedKeys="true" keyProperty="hotelNO">
+        INSERT INTO hotel (
+        hotelNO, hotelName, hotelPrice, hotelImg, hotelImg1, hotelImg2, hotelImg3, hotelImg4, hotelImg5, hotelImg6,
+        hotelText, hotelFacility, hotelCountry, hotelTime, hotelCheck, hotelAddr, hotelDescription, hotelSights, hotelTotal, binID, binCate
+        ) VALUES (
+        #{hotelNO}, #{hotelName}, #{hotelPrice}, #{hotelImg}, #{hotelImg1}, #{hotelImg2}, #{hotelImg3}, #{hotelImg4}, #{hotelImg5}, #{hotelImg6},
+        #{hotelText}, #{hotelFacility}, #{hotelCountry}, #{hotelTime}, #{hotelCheck}, #{hotelAddr}, #{hotelDescription}, #{hotelSights}, #{hotelTotal}, #{binID}, #{binCate}
+        )
+    </insert>
+
+    <insert id="binInsertRoom" parameterType="com.exampl.traveler.vo.RoomtypeVO">
+        INSERT INTO rooms (hotelNO, roomName, roomImg, roomFacility, roomMax)
+        VALUES (#{hotelNO}, #{roomName}, #{roomImg}, #{roomFacility}, #{roomMax})
+    </insert>
 </mapper>

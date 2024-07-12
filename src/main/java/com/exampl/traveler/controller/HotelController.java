@@ -78,7 +78,7 @@ public class HotelController {
                                   @RequestParam("roomName") String roomName,
                                   @RequestParam("roomFacility") String roomFacility,
                                   @RequestParam("roomMax") int roomMax,
-                                  Model model, HttpSession session){
+                                  Model model, HttpSession session) {
         String userId = (String) session.getAttribute("id");
         if (userId == null) {
             return "redirect:/login";
@@ -144,7 +144,7 @@ public class HotelController {
             calendar.set(Calendar.MINUTE, checkInCalendar.get(Calendar.MINUTE));
             Date fullCheckInTime = calendar.getTime();
 
-            hotelService.createDiary(userId, orderId, goday, backday, hotelName, hotelText, fullCheckInTime);
+            hotelService.createDiary(userId, orderId, goday, backday, hotelName);
             return ResponseEntity.ok(Collections.singletonMap("success", true));
         } catch (Exception e) {
             e.printStackTrace();

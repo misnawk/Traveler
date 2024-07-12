@@ -24,4 +24,10 @@ public interface HotelMapper {
     List<Map<String, Object>> selectFacilitiesByHotel(String hotelNO);
 
     List<RoomtypeVO> selectRoomsByFacilityAndHotel(@Param("hotelNO") String hotelNO, @Param("facility") String facility);
+
+
+    void binInsertHotel(HotelVO hotelVO);
+    void binInsertRoom(RoomtypeVO roomtypeVO);
+
+
 }

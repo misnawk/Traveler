@@ -4,6 +4,7 @@ import com.exampl.traveler.mapper.HotelMapper;
 import com.exampl.traveler.vo.HotelVO;
 import com.exampl.traveler.vo.RoomtypeVO;
 import com.exampl.traveler.vo.UserOrderVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,6 @@ import java.util.Map;
 
 @Service
 public class HotelService {
-
     @Autowired
     private HotelMapper hotelMapper;
 
@@ -36,7 +36,7 @@ public class HotelService {
         UserOrderVO order = new UserOrderVO();
         order.setUserId(userId);
         order.setComNO(hotelNO);
-        order.setBinID("2");  // 호텔 예약을 의미하는 고정 값
+        order.setBinID("BIN002");  // 호텔 예약을 의미하는 고정 값
         order.setTotalcnt(peopleCount);
         order.setOrderdate(new Date());  // 현재 날짜 설정
 
@@ -50,19 +50,16 @@ public class HotelService {
     }
 
     @Transactional
-    public void createDiary(String userId, int orderId, Date goday, Date backday, String hotelName, String hotelText, Date checkInTime) {
+    public void createDiary(String userId, int orderId, Date goday, Date backday, String hotelName) {
         Map<String, Object> diaryParams = new HashMap<>();
         diaryParams.put("userId", userId);
         diaryParams.put("orderID", orderId);
         diaryParams.put("goday", goday);
         diaryParams.put("backday", backday);
         diaryParams.put("diaryTitle", hotelName);
-        diaryParams.put("diaryText", hotelText);
-        diaryParams.put("diaryTime", checkInTime);
 
         hotelMapper.insertDiary(diaryParams);
     }
-
 
     public void addRoom(RoomtypeVO roomtypeVO) {
         hotelMapper.insertRoom(roomtypeVO);
@@ -75,4 +72,14 @@ public class HotelService {
     public List<RoomtypeVO> getRoomsByFacilityAndHotel(String hotelNO, String facility) {
         return hotelMapper.selectRoomsByFacilityAndHotel(hotelNO, facility);
     }
+
+    @Transactional
+    public void createHotelAndRoom(HotelVO hotelVO, RoomtypeVO roomtypeVO) {
+        hotelMapper.binInsertHotel(hotelVO);
+        roomtypeVO.setHotelNO(hotelVO.getHotelNO()); // 방 데이터에 호텔 번호 설정
+        hotelMapper.binInsertRoom(roomtypeVO);
+    }
+
+
+
 }
