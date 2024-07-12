@@ -40,4 +40,7 @@ public interface LoginMapper {
 
     // 기업 전체 select
     List<BusinessVO> binSelectAll();
+
+    // 기업 사업자번호 중복 체크
+    boolean binCodeCheck(String code);
 }
