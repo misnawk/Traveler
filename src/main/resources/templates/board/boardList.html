@@ -6,15 +6,21 @@
     <link rel="stylesheet" href="/css/board/boardList.css">
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css"/>
+    <script src="/js/board/board.js"></script>
 </head>
 <body>
 <div th:replace="header_foter/header :: header"></div>
 <main>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="여행지를 검색해보세요">
+        <button onclick="getSearch()">검색</button>
+    </div>
+
 
     <!-- 필터링 버튼 -->
     <div class="filter-container">
-        <button onclick="filterBoard(1, this)">패키지</button>
-        <button onclick="filterBoard(0, this)">자유</button>
+        <button onclick="filterBoard(1)">패키지</button>
+        <button onclick="filterBoard(0)">자유</button>
     </div>
 
 
@@ -88,8 +94,6 @@ function filterBoard(tripType, button) {
     buttons.forEach(btn => btn.classList.remove('active'));
     button.classList.add('active');
 }
-
-
 </script>
 </body>
 </html>

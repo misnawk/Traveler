@@ -16,6 +16,7 @@ public interface BoardMapper {
     // 게시판 페이지에서 페이지 작업한것
     List<BoardVO> getBoardPage(@Param("offset") int offset, @Param("pageSize") int pageSize);
 
+    List<BoardVO> findBoardAllTripType(@Param("tripType") Integer tripType,@Param("offset") int offset, @Param("pageSize")int pageSize);
 
     int getTotalBoardCount();
 

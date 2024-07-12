@@ -18,14 +18,18 @@ public class BoardService {
     public List<BoardVO> getBoard() {
         return boardMapper.getBoard();
     }
-    //게시판 저부불러오기
-    public List<BoardVO> getBoardAll() {
-        return boardMapper.getBoard();
-    }
+//    //게시판 저부불러오기
+//    public List<BoardVO> getBoardAll() {
+//        return boardMapper.getBoard();
+//    }
     //게시판 페이지 설정
-    public List<BoardVO> getBoardPage(int page, int pageSize) {
+    public List<BoardVO> getBoardPage(Integer tripType, int page, int pageSize) {
         int offset = (page - 1) * pageSize;
+        if(tripType == null){
         return boardMapper.getBoardPage(offset, pageSize);
+        }else{
+            return boardMapper.findBoardAllTripType(tripType,offset,pageSize);
+        }
     }
 
     public int getTotalBoardCount() {
