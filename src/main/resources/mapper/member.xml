@@ -31,6 +31,11 @@
         select * from user where userID = #{id}
     </select>
 
+    <!-- 회원 전체 select -->
+    <select id="selectAll" resultType="com.exampl.traveler.vo.MemberVO">
+        select * from user where userID != 'admin'
+    </select>
+
     <!-- 기업회원 로그인 & 회원가입 xml -->
     <!-- 로그인 체크 -->
     <select id="binLoginCheck" resultType="boolean">
@@ -47,8 +52,8 @@
         insert into businessUser values(
             #{binID},
             #{binPW},
-            #{binName},
             #{binCate},
+            #{binName},
             #{binCode},
             #{binEmail},
             #{binTell}
@@ -58,5 +63,10 @@
     <!-- 회원 한명 찾기 -->
     <select id="binSelectOne">
         select * from businessUser where binID = #{id}
+    </select>
+
+    <!-- 회원 전체 select -->
+    <select id="binSelectAll" resultType="com.exampl.traveler.vo.BusinessVO">
+        select * from businessUser
     </select>
 </mapper>

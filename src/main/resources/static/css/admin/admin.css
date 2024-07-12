@@ -1,57 +1,8 @@
 
 main{
-    padding-top:120px; /* header와 nav의 높이에 따라 조정 */
+    padding-top:180px; /* header와 nav의 높이에 따라 조정 */
     padding-bottom: 50px;
     height: 100%;
-}
-
-.body_container{
-    padding : 30px 0px;
-}
-
-.profile_container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 30px;
-}
-
-.profile_container > input {
-    height: 40px;
-    width: 150px;
-    border: 1px solid #1273E4;
-    border-radius: 5px;
-    background-color: #fff;
-    font: bold;
-    font-size: 14px;
-    color: #1273E4;
-    cursor: pointer;
-}
-
-.profile_content > h4{
-    margin-bottom: 5px;
-}
-
-.profile_content > p{
-    margin: 0;
-    font-size: 14px;
-}
-
-.register_content{
-    float : right;
-    margin : 15px 30px 0;
-}
-
-.register_btn{
-    height: 40px;
-    width: 150px;
-    border: none;
-    border-radius: 5px;
-    background-color: #1273E4;
-    font: bold;
-    font-size: 14px;
-    color: #fff;
-    cursor: pointer;
 }
 
 .table_content{
@@ -125,6 +76,48 @@ select{
     cursor: pointer;
 }
 
+.reset_btn{
+    height: 40px;
+    width: 100px;
+    border: 1px solid #1273E4;
+    margin-left : 5px;
+    border-radius: 5px;
+    font-size: 13px;
+    color: #1273E4;
+    background-color: #fff;
+    cursor: pointer;
+}
+
 .list_container{
     margin-top : 80px
+}
+
+.binCate_content{
+    display: flex;
+    justify-content: center;
+    margin-bottom : 20px;
+}
+
+.binCate_content input[type=radio]{
+    display: none;
+    margin: 0;
+}
+
+.binCate_content input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    border:1px solid #ddd;
+    border-radius : 10px;
+    margin : 3px;
+    width: 100px;
+    height: 40px;
+    align-content: center;
+    font-size:15px;
+}
+
+.binCate_content input[type=radio]:checked+label{
+    background-color: #1273E4;
+    border-radius: 10px;
+    color: #fff;
 }

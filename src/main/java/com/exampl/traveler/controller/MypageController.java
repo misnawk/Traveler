@@ -76,3 +76,4 @@ public class MypageController {
         return "redirect:/mypage/"+id;
     }
 }
+

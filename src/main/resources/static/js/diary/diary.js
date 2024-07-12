@@ -67,6 +67,7 @@ function loadDiaryEntries(userId, successCallback, failureCallback) {
                     color: entry.diaryColor || getRandomColor() // diaryColor null일 경우 랜덤 색상 사용
                 };
             });
+
             successCallback(events);
         },
         error: function(xhr, status, error) {

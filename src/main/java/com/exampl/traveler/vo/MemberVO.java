@@ -11,4 +11,5 @@ public class MemberVO {
     private String userName;
     private String userTell;
     private String userWish;
+
 }

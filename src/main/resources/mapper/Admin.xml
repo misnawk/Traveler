@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exampl.traveler.mapper.AdminMapper">
+    <!-- 일반회원 select 검색-->
+    <select id="searchID" resultType="com.exampl.traveler.vo.MemberVO">
+        select * from user where userID like '%${data}%' and userID != 'admin'
+    </select>
+
+    <select id="searchName" resultType="com.exampl.traveler.vo.MemberVO">
+        select * from user where userName like '%${data}%' and userID != 'admin'
+    </select>
+
+    <select id="searchTell" resultType="com.exampl.traveler.vo.MemberVO">
+        select * from user where userTell like '%${data}%' and userID != 'admin'
+    </select>
+
+    <select id="searchEmail" resultType="com.exampl.traveler.vo.MemberVO">
+        select * from user where userEmail like '%${data}%' and userID != 'admin'
+    </select>
+
+    <!-- 기업회원 select 검색-->
+    <select id="binSearchID">
+        select * from businessUser where binID like '%${data}%'
+    </select>
+
+    <select id="binSearchName">
+        select * from businessUser where binName like '%${data}%'
+    </select>
+
+    <select id="binSearchCode">
+        select * from businessUser where binCode like '%${data}%'
+    </select>
+
+    <select id="binSearchTell">
+        select * from businessUser where binTell like '%${data}%'
+    </select>
+
+    <select id="binSearchEmail">
+        select * from businessUser where binEmial like '%${data}%'
+    </select>
+
+    <!-- 상품관리 -->
+    <select id="airSelectAll">
+        select * from airline
+    </select>
+
+    <select id="hotelSelectAll">
+        select * from hotel
+    </select>
+
+    <select id="tickSelectAll">
+        select * from tick
+    </select>
+
+    <select id="packSelectAll">
+        select * from package
+    </select>
+
+    <!-- 상세페이지 -->
+    <select id="airSelectID">
+        select * from airline where binID = #{binID}
+    </select>
+
+    <select id="hotelSelectID">
+        select * from hotel where binID = #{binID}
+    </select>
+
+    <select id="tickSelectID">
+        select * from tick where binID = #{binID}
+    </select>
+
+    <select id="packSelectID">
+        select * from package where binID = #{binID}
+    </select>
+
+</mapper>

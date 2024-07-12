@@ -4,6 +4,8 @@ import com.exampl.traveler.vo.BusinessVO;
 import com.exampl.traveler.vo.MemberVO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface LoginMapper {
 
@@ -20,6 +22,9 @@ public interface LoginMapper {
     // 회원 한명 찾기
     MemberVO selectOne(String id);
 
+    // 회원 전체 select
+    List<MemberVO> selectAll();
+
     //// 기업회원 로그인 & 회원가입 mapper
     // 기업 로그인 체크
     boolean binLoginCheck(BusinessVO vo);
@@ -32,4 +37,7 @@ public interface LoginMapper {
 
     // 기업 한개 찾기
     BusinessVO binSelectOne(String id);
+
+    // 기업 전체 select
+    List<BusinessVO> binSelectAll();
 }

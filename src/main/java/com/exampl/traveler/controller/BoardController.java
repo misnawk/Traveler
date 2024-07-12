@@ -31,9 +31,11 @@ public class BoardController {
 
     // 게시판 메인 페이지 한 페이지에 5개씩 페이지 작업까지 완료
     @RequestMapping
-    public String board(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    public String board(Model model,
+                        @RequestParam(value = "tripType", required = false) Integer tripType ,
+                        @RequestParam(value = "page", defaultValue = "1") int page) {
         int pageSize = 5;
-        List<BoardVO> boardPage = boardService.getBoardPage(page, pageSize);
+        List<BoardVO> boardPage = boardService.getBoardPage(tripType,page, pageSize);
         int totalBoards = boardService.getTotalBoardCount();
         int totalPages = (int) Math.ceil((double) totalBoards / pageSize);
 
@@ -43,7 +45,7 @@ public class BoardController {
 
         return "/board/boardList";
     }
-
+    //게시판에서 누르면 이동되는곳
     @GetMapping("/detail")
     public String detail(@RequestParam("boardNo") int boardNo, @RequestParam("page") int page, Model model) {
         BoardVO board = boardService.selectOne(boardNo);
@@ -52,6 +54,8 @@ public class BoardController {
         model.addAttribute("currentPage", page);
         return "/board/boardDetail";
     }
+
+    //메인 국가 도시페이지에서 누르면 상세페이지로 가는거
     @GetMapping("/details")
     public String details(@RequestParam("boardNo") int boardNo, Model model) {
         BoardVO board = boardService.selectOne(boardNo);
