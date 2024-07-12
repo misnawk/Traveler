@@ -128,24 +128,24 @@
                         </th:block>
                     </tr>
                     <tr th:each="item : ${items}">
-                        <th:block th:if="${vo.getBinCate == 1}">
+                        <th:block th:if="${vo.getBinCate == '1'}">
                             <td></td>
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 2}">
+                        <th:block th:if="${vo.getBinCate == '2'}">
 <!--                            <td>[[${item.getHotelName}]]</td>-->
 <!--                            <td>[[${item.getHotelCountry}]]</td>-->
 <!--                            <td>[[${item.getHotelTime}]]</td>-->
 <!--                            <td>[[${item.getTickPlace}]]</td>-->
 <!--                            <td>[[${#numbers.formatInteger(item.getHotelPrice, 3, 'COMMA')}]]</td>-->
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 3}">
+                        <th:block th:if="${vo.getBinCate == '3'}">
                             <td>[[${item.getTickTitle}]]</td>
                             <td>[[${item.getTickOp}]]</td>
                             <td>[[${#dates.format(item.getTickDate, 'yyyy-MM-dd')}]]</td>
                             <td>[[${item.getTickPlace}]]</td>
                             <td>[[${#numbers.formatInteger(item.getTickPrice, 3, 'COMMA')}]]</td>
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 4}">
+                        <th:block th:if="${vo.getBinCate == '4'}">
                             <td>[[${item.getPackageTitle}]]</td>
                             <td>[[${item.getPackageMax}]]</td>
                             <td>[[${#dates.format(item.getStartDateTime, 'yyyy-MM-dd')}]]</td>

@@ -63,16 +63,16 @@
             </tr>
             <tr th:each="vo : ${vo}">
                 <td>[[${vo.getBinID}]]</td>
-                <th:block th:if="${vo.getBinCate == 1}">
+                <th:block th:if="${vo.getBinCate == '1'}">
                     <td>항공</td>
                 </th:block>
-                <th:block th:if="${vo.getBinCate == 2}">
+                <th:block th:if="${vo.getBinCate == '2'}">
                     <td>숙박</td>
                 </th:block>
-                <th:block th:if="${vo.getBinCate == 3}">
+                <th:block th:if="${vo.getBinCate == '3'}">
                     <td>티켓</td>
                 </th:block>
-                <th:block th:if="${vo.getBinCate == 4}">
+                <th:block th:if="${vo.getBinCate == '4'}">
                     <td>패키지</td>
                 </th:block>
                 <td>[[${vo.getBinName}]]</td>
