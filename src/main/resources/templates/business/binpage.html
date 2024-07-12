@@ -71,7 +71,7 @@
         <div>
             <table class="table_content">
                 <tr>
-                    <th:block th:if="${session.binCate == 1}">
+                    <th:block th:if="${session.binCate == '1'}">
                         <th>국가</th>
                         <th>항공번호</th>
                         <th>항공편명</th>
@@ -79,33 +79,33 @@
                         <th>일정정보</th>
                         <th>관리</th>
                     </th:block>
-                    <th:block th:if="${session.binCate == 2}">
+                    <th:block th:if="${session.binCate == '2'}">
                         <th>국가</th>
                         <th>호텔명</th>
                         <th>체크인/체크아웃</th>
                         <th>가격(1박 기준)</th>
                         <th>관리</th>
                     </th:block>
-                    <th:block th:if="${session.binCate == 3}">
+                    <th:block th:if="${session.binCate == '3'}'">
                         <!-- 티켓 th 추가해주세요-->
                         <th>관리</th>
                     </th:block>
-                    <th:block th:if="${session.binCate == 4}">
+                    <th:block th:if="${session.binCate == '4'}">
                         <!-- 패키지 th 추가해주세요-->
                         <th>관리</th>
                     </th:block>
                 </tr>
                 <tr th:each="list : ${list}">
-                    <th:block th:if="${session.binCate == 1}">
+                    <th:block th:if="${session.binCate == '1'}">
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
-                    <th:block th:if="${session.binCate == 2}">
+                    <th:block th:if="${session.binCate == '2'}">
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
-                    <th:block th:if="${session.binCate == 3}">
+                    <th:block th:if="${session.binCate == '3'}">
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
-                    <th:block th:if="${session.binCate == 4}">
+                    <th:block th:if="${session.binCate == '4'}">
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
                 </tr>

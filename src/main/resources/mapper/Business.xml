@@ -8,5 +8,4 @@
         VALUES (#{binID}, #{binPW}, #{binName}, #{binCate}, #{binCode}, #{binEmail}, #{binTell})
     </insert>
 
-
 </mapper>

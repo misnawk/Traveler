@@ -7,7 +7,7 @@ public class BusinessVO {
     private String binID;
     private String binPW;
     private String binName;
-    private int binCate;
+    private String binCate;
     private String binCode;
     private String binEmail;
     private String binTell;
