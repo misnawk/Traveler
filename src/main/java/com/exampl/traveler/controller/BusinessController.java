@@ -57,7 +57,7 @@ public class BusinessController {
             hotelVO.setHotelSights((String) hotelData.get("hotelSights"));
             hotelVO.setHotelTotal(parseInteger(hotelData.get("hotelTotal")));
             hotelVO.setBinID((String) hotelData.get("binID"));
-            hotelVO.setBinCate(parseInteger(hotelData.get("binCate")));
+            hotelVO.setBinCate((String) hotelData.get("binCate"));
 
             RoomtypeVO roomVO = new RoomtypeVO();
             roomVO.setRoomName((String) roomData.get("roomName"));

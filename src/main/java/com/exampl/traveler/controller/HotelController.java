@@ -97,6 +97,7 @@ public class HotelController {
 
     @PostMapping("/hotel/{hotelNO}/order")
     public ResponseEntity<?> orderHotel(@PathVariable("hotelNO") String hotelNO,
+                                        @RequestParam(value = "binCate", defaultValue = "2") String binCate,
                                         @RequestParam("peopleCount") int peopleCount,
                                         HttpSession session) {
         String userId = (String) session.getAttribute("id");
@@ -106,7 +107,7 @@ public class HotelController {
         }
 
         try {
-            UserOrderVO order = hotelService.createOrder(userId, hotelNO, peopleCount);
+            UserOrderVO order = hotelService.createOrder(userId, hotelNO, binCate, peopleCount);
             return ResponseEntity.ok(Collections.singletonMap("orderId", order.getOrderId()));
         } catch (Exception e) {
             e.printStackTrace();

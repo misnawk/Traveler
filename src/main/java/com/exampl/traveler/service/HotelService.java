@@ -32,13 +32,13 @@ public class HotelService {
     }
 
     @Transactional
-    public UserOrderVO createOrder(String userId, String hotelNO, int peopleCount) {
+    public UserOrderVO createOrder(String userId, String hotelNO, String binCate, int peopleCount) {
         UserOrderVO order = new UserOrderVO();
         order.setUserId(userId);
         order.setComNO(hotelNO);
-        order.setBinID("BIN002");  // 호텔 예약을 의미하는 고정 값
-        order.setTotalcnt(peopleCount);
-        order.setOrderdate(new Date());  // 현재 날짜 설정
+        order.setBinCate(binCate);
+        order.setTotalCnt(peopleCount);
+        order.setOrderDate(new Date());  // 현재 날짜 설정
 
         hotelMapper.insertOrder(order);
 

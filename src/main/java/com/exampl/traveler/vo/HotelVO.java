@@ -26,5 +26,5 @@ public class HotelVO {
     private String hotelSights;
     private int hotelTotal;
     private String binID;
-    private int binCate;
+    private String binCate;
 }
