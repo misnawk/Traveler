@@ -1,10 +1,7 @@
 package com.exampl.traveler.controller;
 
-import com.exampl.traveler.service.BoardService;
-import com.exampl.traveler.service.LoginService;
-import com.exampl.traveler.vo.BoardVO;
-import com.exampl.traveler.vo.BusinessVO;
-import com.exampl.traveler.vo.MemberVO;
+import com.exampl.traveler.service.*;
+import com.exampl.traveler.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MainController {
     private final LoginService loginService;
+    private final MyPageService myPageService;
+    private final HotelService hotelService;
+    private final TicketService ticketService;
 
     @Autowired
     BoardService boardService;
@@ -57,6 +57,26 @@ public class MainController {
     public String myPage(@PathVariable("id") String id, Model model){
         MemberVO vo = loginService.selectOne(id);
         model.addAttribute("vo",vo);
+
+        List<UserOrderVO> orders = myPageService.orderSelectID(id);
+
+        for(int i =0; i < orders.size(); i++) {
+            if(orders.get(i).getComNO().startsWith("A")){
+
+            }else if(orders.get(i).getComNO().startsWith("h")){
+                HotelVO item =  hotelService.getHotelById(orders.get(i).getComNO());
+                orders.get(i).setTitle(item.getHotelName());
+                orders.get(i).setTime(item.getHotelTime());
+            }else if(orders.get(i).getComNO().startsWith("T")){
+                TicketVO item = ticketService.getTicketByTickNO(orders.get(i).getComNO());
+                orders.get(i).setTitle(item.getTickTitle());
+                orders.get(i).setTime(String.valueOf(item.getTickDate()));
+            }else if(orders.get(i).getComNO().startsWith("P")){
+
+            }
+        }
+
+        model.addAttribute("orders", orders);
 
         return "/mypage/mypage";
     }

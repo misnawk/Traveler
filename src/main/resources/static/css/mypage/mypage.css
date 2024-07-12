@@ -13,17 +13,18 @@ main{
     justify-content: space-between;
     align-items: center;
     margin: 0 30px;
+    margin-bottom : 50px;
 }
 
 .profile_container > input {
-    height: 30px;
+    height: 40px;
     width: 150px;
-    border: none;
+    border: 1px solid #1273E4;
     border-radius: 5px;
-    background-color: #1273E4;
+    background-color: #fff;
     font: bold;
     font-size: 14px;
-    color: #fff;
+    color: #1273E4;
     cursor: pointer;
 }
 
@@ -90,4 +91,29 @@ main{
     border: solid 1px #AEAEAE;
     height: 30px;
     border-radius: 5px;
+}
+
+.table_content{
+    width: 80%;
+    border: 1px solid #AEAEAE;
+    border-collapse: collapse;
+    margin: 20px auto 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table_content tr{
+    border: 1px solid #ddd;
+    height: 50px;
+    position: relative;
+}
+
+.table_content tr th {
+    border: 1px solid #ddd;
+    font-size: 15px;
+}
+
+.table_content tr td {
+    border: 1px solid #ddd;
+    font-size: 14px;
+    text-align: center;
 }

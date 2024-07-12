@@ -21,50 +21,34 @@
                 </div>
                 <input type="button" onclick="proEditor()" value="내 정보 수정하기">
             </div>
-
-            <div class="buy_container">
-                <div class="buy_title">
-                    <h5>구매 내역</h5>
-                    <p onclick="#">더보기 ></p>
-                </div>
-                <div class="buy_button">
-                    <input type="radio" id="buy0" name="buy" value="0" onclick="buyCheck(0)" checked>
-                    <label for="buy0">항공</label>
-                    <input type="radio" id="buy1" name="buy" value="1" onclick="buyCheck(1)">
-                    <label for="buy1">숙박</label>
-                    <input type="radio" id="buy2" name="buy" value="2" onclick="buyCheck(2)">
-                    <label for="buy2">티켓</label>
-                    <input type="radio" id="buy3" name="buy" value="3" onclick="buyCheck(3)">
-                    <label for="buy3">패키지</label>
-                </div>
-                <div class="buy_content">
-                    <div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="wish_container">
-                <div class="wish_title">
-                    <h5>찜한 목록</h5>
-                    <p onclick="#">더보기 ></p>
-                </div>
-                <div class="wish_button">
-                    <input type="radio" id="wish0" name="wish" value="0" onclick="wishCheck(0)" checked>
-                    <label for="wish0">항공</label>
-                    <input type="radio" id="wish1" name="wish" value="1" onclick="wishCheck(1)">
-                    <label for="wish1">숙박</label>
-                    <input type="radio" id="wish2" name="wish" value="2" onclick="wishCheck(2)">
-                    <label for="wish2">티켓</label>
-                    <input type="radio" id="wish3" name="wish" value="3" onclick="wishCheck(3)">
-                    <label for="wish3">패키지</label>
-                </div>
-                <div class="wish_content">
-                    <div>
-
-
-                    </div>
-                </div>
+            <div>
+                <table class="table_content">
+                    <tr>
+                        <th>구분</th>
+                        <th>구매항목</th>
+                        <th>사용시간</th>
+                        <th>인원수</th>
+                        <th>결제일</th>
+                    </tr>
+                    <tr th:each="order : ${orders}">
+                        <th:block th:if="${order.getBinCate() == '1'}">
+                            <td>항공</td>
+                        </th:block>
+                        <th:block th:if="${order.getBinCate() == '2'}">
+                            <td>숙박</td>
+                        </th:block>
+                        <th:block th:if="${order.getBinCate() == '3'}">
+                            <td>티켓</td>
+                        </th:block>
+                        <th:block th:if="${order.getBinCate() == '4'}">
+                            <td>패키지</td>
+                        </th:block>
+                        <td>[[${order.getTitle}]]</td>
+                        <td></td>
+                        <td>[[${order.getTotalCnt}]]</td>
+                        <td>[[${#dates.format(order.getOrderDate, 'yyyy-MM-dd')}]]</td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div th:replace="header_foter/foter :: foter"></div>

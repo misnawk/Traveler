@@ -2,13 +2,20 @@ package com.exampl.traveler.service;
 
 import com.exampl.traveler.mapper.MyPageMapper;
 import com.exampl.traveler.vo.MemberVO;
+import com.exampl.traveler.vo.UserOrderVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class MyPageService {
     private final MyPageMapper myPageMapper;
+
+    public List<UserOrderVO> orderSelectID(String id){
+        return myPageMapper.orderSelectID(id);
+    }
 
     // 수정한 회원정보 업데이트
     public boolean proUpdate(MemberVO vo){
