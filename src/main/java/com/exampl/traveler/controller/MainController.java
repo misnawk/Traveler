@@ -19,6 +19,7 @@ public class MainController {
     private final MyPageService myPageService;
     private final HotelService hotelService;
     private final TicketService ticketService;
+    private final AdminService adminService;
 
     @Autowired
     BoardService boardService;
@@ -85,6 +86,22 @@ public class MainController {
     @GetMapping("binpage/{id}")
     public String binPage(@PathVariable("id") String id, Model model){
         BusinessVO vo = loginService.binSelectOne(id);
+        System.out.println("binCate : " +vo.getBinCate());
+
+        if(vo.getBinCate().equals("1")){
+            List<AirVO> item = adminService.airSelectID(id);
+            model.addAttribute("item",item);
+        } else if(vo.getBinCate().equals("2")){
+            List<HotelVO> item = adminService.hotelSelectID(id);
+            model.addAttribute("item",item);
+        } else if(vo.getBinCate() .equals("3")){
+            List<TicketVO> item = adminService.tickSelectID(id);
+            System.out.println("출력 : "+item);
+            model.addAttribute("item",item);
+        } else if(vo.getBinCate().equals("4")) {
+            List<PackageVO> item = adminService.packSelectID(id);
+            model.addAttribute("item", item);
+        }
         model.addAttribute("vo",vo);
 
         return "/business/binpage";

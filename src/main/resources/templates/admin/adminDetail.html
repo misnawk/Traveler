@@ -77,17 +77,18 @@
                         </th:block>
                         <th:block th:if="${vo.getBinCate == 2}">
                             <option value="">전체</option>
-                            <option value="userID">숙박</option>
+                            <option value="hotelCountry">국가</option>
+                            <option value="hotelName">호텔명</option>
                         </th:block>
                         <th:block th:if="${vo.getBinCate == 3}">
                             <option value="">전체</option>
-                            <option value="userID">티켓명</option>
-                            <option value="userID">옵션</option>
-                            <option value="userID">사용처</option>
+                            <option value="tickPlace">국가</option>
+                            <option value="category">카테고리</option>
+                            <option value="tickTitle">티켓명</option>
                         </th:block>
                         <th:block th:if="${vo.getBinCate == 4}">
                             <option value="">전체</option>
-                            <option value="userID">패키지명</option>
+                            <option value="packTitle">패키지명</option>
                         </th:block>
                     </select>
                     <input class="search_input" id="data" name="data" placeholder="검색어를 입력하세요">

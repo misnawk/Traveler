@@ -59,4 +59,5 @@
         INSERT INTO rooms (hotelNO, roomName, roomImg, roomFacility, roomMax)
         VALUES (#{hotelNO}, #{roomName}, #{roomImg}, #{roomFacility}, #{roomMax})
     </insert>
+
 </mapper>
