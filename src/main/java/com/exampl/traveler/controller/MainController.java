@@ -67,11 +67,9 @@ public class MainController {
             }else if(orders.get(i).getComNO().startsWith("h")){
                 HotelVO item =  hotelService.getHotelById(orders.get(i).getComNO());
                 orders.get(i).setTitle(item.getHotelName());
-                orders.get(i).setTime(item.getHotelTime());
             }else if(orders.get(i).getComNO().startsWith("T")){
                 TicketVO item = ticketService.getTicketByTickNO(orders.get(i).getComNO());
                 orders.get(i).setTitle(item.getTickTitle());
-                orders.get(i).setTime(String.valueOf(item.getTickDate()));
             }else if(orders.get(i).getComNO().startsWith("P")){
 
             }
