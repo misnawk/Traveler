@@ -17,4 +17,5 @@
     <update id="pwInsert">
         update user set userPW = #{userPW} where userID = #{userID}
     </update>
+
 </mapper>

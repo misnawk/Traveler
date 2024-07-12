@@ -13,6 +13,7 @@ import java.util.List;
 public class MyPageService {
     private final MyPageMapper myPageMapper;
 
+    // 회원별 주문건 select
     public List<UserOrderVO> orderSelectID(String id){
         return myPageMapper.orderSelectID(id);
     }
