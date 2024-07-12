@@ -16,3 +16,18 @@ function adminPage(){
 
     location.href="/admin";
 }
+
+function reset(){
+    location.href="/admin";
+}
+
+// 기업회원 자세히 보기
+function binDetail(binID){
+    location.href="/admin/detail?binID="+binID;
+}
+
+// 상품관리
+function binCate(binCate){
+    location.href="/admin/items?binCate="+binCate;
+}
+

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/css/header_foter/foter.css" />
-    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="/css/header_foter/header.css" />
+    <link href="/css/admin/admin.css" rel="stylesheet" type="text/css">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script type="text/javascript" src="/js/admin/admin.js" defer></script>
 </head>
-<body>
-    <main>
+<header>
         <div class="header_content">
             <h1 class="logo"><a href="/">traveler</a></h1>
             <div class="button_content">
@@ -23,9 +23,52 @@
             </div>
         </div>
 
+        <nav>
+            <ul id="menu">
+                <li><a href="/admin">회원관리</a></li>
+                <li><a href="/admin/business">기업관리</a></li>
+                <li><a href="/admin/items">상품관리</a></li>
+                <li><a href="/amin/orders">결제관리</a></li>
+            </ul>
+        </nav>
+</header>
+<body>
+    <main>
+        <form action="/admin/user" method="get" >
+            <div class="search_content">
+                <select name="option">
+                    <option value="">전체</option>
+                    <option value="userID">아이디</option>
+                    <option value="userName">이름</option>
+                    <option value="userTell">전화번호</option>
+                    <option value="userEmail">이메일</option>
+                </select>
+                <input class="search_input" id="data" name="data" placeholder="검색어를 입력하세요">
+                <input type="submit" class="search_btn" value="검색">
+                <input type="button" class="reset_btn" onclick="reset()" value="검색초기화">
+            </div>
+        </form>
 
+        <div>
+            <table class="table_content">
+                <tr>
+                    <th>아이디</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>이메일</th>
+                    <th>생년월일</th>
+                </tr>
+                <tr th:each="vo : ${vo}">
+                    <td>[[${vo.getUserID}]]</td>
+                    <td>[[${vo.getUserName}]]</td>
+                    <td>[[${vo.getUserTell}]]</td>
+                    <td>[[${vo.getUserEmail}]]</td>
+                    <td>[[${vo.getUserBirth}]]</td>
+               </tr>
+            </table>
+        </div>
 
-        <div th:replace="header_foter/foter :: foter"></div>
+    <!--        <div th:replace="header_foter/foter :: foter"></div>-->
     </main>
 </body>
 </html>

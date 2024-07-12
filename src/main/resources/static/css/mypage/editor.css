@@ -24,6 +24,12 @@ main{
     position: relative;
 }
 
+.table_tr_memo{
+    border: 1px solid #ddd;
+    height: 100px;
+    position: relative;
+}
+
 .table_tr th {
     border: 1px solid #ddd;
     height: 50px;
