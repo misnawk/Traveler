@@ -5,6 +5,8 @@ import com.exampl.traveler.service.CityService;
 import com.exampl.traveler.service.LoginService;
 import com.exampl.traveler.service.NationService;
 import com.exampl.traveler.vo.*;
+import com.exampl.traveler.service.*;
+import com.exampl.traveler.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,11 @@ public class MainController {
     private final LoginService loginService;
     @Autowired
     private CityService cityService;
+    private final MyPageService myPageService;
+    private final HotelService hotelService;
+    private final TicketService ticketService;
+    private final AdminService adminService;
+
     @Autowired
     BoardService boardService;
 
@@ -63,6 +70,24 @@ public class MainController {
         MemberVO vo = loginService.selectOne(id);
         model.addAttribute("vo",vo);
 
+        List<UserOrderVO> orders = myPageService.orderSelectID(id);
+
+        for(int i =0; i < orders.size(); i++) {
+            if(orders.get(i).getComNO().startsWith("A")){
+
+            }else if(orders.get(i).getComNO().startsWith("h")){
+                HotelVO item =  hotelService.getHotelById(orders.get(i).getComNO());
+                orders.get(i).setTitle(item.getHotelName());
+            }else if(orders.get(i).getComNO().startsWith("T")){
+                TicketVO item = ticketService.getTicketByTickNO(orders.get(i).getComNO());
+                orders.get(i).setTitle(item.getTickTitle());
+            }else if(orders.get(i).getComNO().startsWith("P")){
+
+            }
+        }
+
+        model.addAttribute("orders", orders);
+
         return "/mypage/mypage";
     }
 
@@ -70,6 +95,22 @@ public class MainController {
     @GetMapping("binpage/{id}")
     public String binPage(@PathVariable("id") String id, Model model){
         BusinessVO vo = loginService.binSelectOne(id);
+        System.out.println("binCate : " +vo.getBinCate());
+
+        if(vo.getBinCate().equals("1")){
+            List<AirVO> item = adminService.airSelectID(id);
+            model.addAttribute("item",item);
+        } else if(vo.getBinCate().equals("2")){
+            List<HotelVO> item = adminService.hotelSelectID(id);
+            model.addAttribute("item",item);
+        } else if(vo.getBinCate() .equals("3")){
+            List<TicketVO> item = adminService.tickSelectID(id);
+            System.out.println("출력 : "+item);
+            model.addAttribute("item",item);
+        } else if(vo.getBinCate().equals("4")) {
+            List<PackageVO> item = adminService.packSelectID(id);
+            model.addAttribute("item", item);
+        }
         model.addAttribute("vo",vo);
 
         return "/business/binpage";
