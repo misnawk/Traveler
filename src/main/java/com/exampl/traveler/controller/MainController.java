@@ -50,6 +50,7 @@ public class MainController {
     @GetMapping("/header")
     public String Header(Model model) {
         return "header";
+
     }
     @GetMapping("/footer")
     public String Footer(Model model){
