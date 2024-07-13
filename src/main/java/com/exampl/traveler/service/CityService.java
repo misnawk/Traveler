@@ -14,4 +14,8 @@ public class CityService {
     public CityVO getCityByNumber(int cityNO) {
         return cityMapper.getCityByNumber(cityNO);
     }
+
+    public CityVO getCityByName(String cityName) {
+        return cityMapper.getCityByName(cityName);
+    }
 }
