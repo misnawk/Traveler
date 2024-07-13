@@ -1,20 +1,23 @@
 package com.exampl.traveler.mapper;
 
 import com.exampl.traveler.vo.TicketVO;
-import com.exampl.traveler.vo.UserOrderVO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Mapper
 public interface TicketMapper {
     List<TicketVO> getAllTickets();
-    TicketVO getTicketByTickNO(@Param("tickNO") String tickNO);
+    TicketVO getTicketByTickNO(String tickNO);
+    int createOrder(Map<String, Object> params);
+    int createDiary(Map<String, Object> params);
 
-    void insertOrder(UserOrderVO userOrderVO);
-    void insertDiary(@Param("userId") String userId, @Param("orderID") int orderID,
-                     @Param("allday") Date allday, @Param("diaryTitle") String diaryTitle);
+    @Select("SELECT orderID FROM orders WHERE comNO = #{tickNO}")
+    Integer getOrderIdByTickNO(String tickNO);
+
+    @Options(useGeneratedKeys = true, keyProperty = "orderID")
+    Integer getLastInsertId();
 }

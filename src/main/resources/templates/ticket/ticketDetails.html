@@ -28,13 +28,13 @@
         </div>
 
         <div class="ticket-info">
-            <h2>패키지 옵션</h2>
+            <h2>티켓 옵션</h2>
             <div class="package-option">
-                <h3 th:text="${ticket.tickTitle}">티켓 제목</h3>
-                <p th:text="${ticket.tickText}">티켓 설명</p>
-                <p th:text="${ticket.tickOp}">운영 시간</p>
+                <h3 id="ticketTitle" th:text="${ticket.tickTitle}">티켓 제목</h3>
+                <p id="ticketText" th:text="${ticket.tickText}">티켓 설명</p>
+                <p id="ticketOp" th:text="${ticket.tickOp}">운영 시간</p>
                 <p>날짜 및 시간:
-                    <span th:text="${#dates.format(ticket.tickDate, 'yyyy-MM-dd HH:mm')}">
+                    <span id="date" th:text="${#dates.format(ticket.tickDate, 'yyyy-MM-dd HH:mm')}">
                     날짜 및 시간
                     </span>
                 </p>
@@ -42,30 +42,29 @@
 
                 <div class="quantity-selector">
                     <label for="ticketQuantity">인원수:</label>
-                    <input type="number" id="ticketQuantity" name="ticketQuantity" min="1" value="1">
+                    <input type="number" id="ticketQuantity" min="1" value="1">
                 </div>
 
-                <!-- 총 가격 표시 -->
                 <p class="total-price">총 가격: <span id="totalPrice"></span></p>
 
-                <button class="reserve-btn" onclick="reserveTicket()">결제하기</button>
+                <button class="reserve-btn">결제하기</button>
             </div>
         </div>
     </div>
 </main>
 
-
 <footer>
-    <!-- 푸터 내용 -->
 </footer>
 
 <script th:inline="javascript">
-    /*<![CDATA[*/
-    let isLoggedIn = [[${session.id != null}]];
-    let ticketTickNO = [[${ticket.tickNO}]];
-    let ticketPrice = [[${ticket.tickPrice}]];
-    let ticketDate = [[${#dates.format(ticket.tickDate, 'yyyy-MM-dd HH:mm')}]];    /*]]>*/
+    let session = {
+        id: [[${session.id}]]
+    };
+    let ticket = {
+        tickNO: [[${ticket.tickNO}]],
+        tickPrice: [[${ticket.tickPrice}]]
+    };
+    let date = '[[${#dates.format(ticket.tickDate, "yyyy-MM-dd HH:mm")}]]';
 </script>
-
 </body>
 </html>

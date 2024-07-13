@@ -23,14 +23,28 @@
             <p class="travel-period">여행기간: <span th:text="${#dates.format(package.startDateTime, 'yyyy-MM-dd')} + ' ~ ' + ${#dates.format(package.endDateTime, 'yyyy-MM-dd')}"></span></p>
             <p class="price">상품가격: <span th:text="${#numbers.formatDecimal(package.packagePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span></p>
 
-
-            <form id="orderForm" th:data-package-no="${package.packageNO}" method="post">
+            <div class="order-info">
                 <label for="peopleCount">인원수:</label>
-                <input type="number" id="peopleCount" name="peopleCount" min="1" required>
-                <button type="button" id="orderButton">결제하기</button>
-            </form>
+                <input type="number" id="peopleCount" name="peopleCount" min="1" th:max="${package.packageMax}">
+                <p class="total-price">총 가격: <span id="totalPrice"></span></p>
+                <div class="package-button-container">
+                    <button id="reserveButton" class="reserve-btn">예약하기</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    let packageData = {
+        packageNO: [[${package.packageNO}]],
+        packagePrice: [[${package.packagePrice}]],
+        startDateTime: '[[${#dates.format(package.startDateTime, 'yyyy-MM-dd HH:mm:ss')}]]',
+        endDateTime: '[[${#dates.format(package.endDateTime, 'yyyy-MM-dd HH:mm:ss')}]]'
+    };
+    let session = {
+        id: [[${session.id}]]
+    };
+</script>
 </body>
 </html>

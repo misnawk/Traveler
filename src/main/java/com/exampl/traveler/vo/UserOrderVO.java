@@ -10,12 +10,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserOrderVO {
-    private int orderId; // 자동 증가 ID
+    private int orderId;
     private String userId;
     private String comNO;
     private String binCate;
     private int totalCnt;
     private Date orderDate;
-    private String Title; // 패키지 제목
-
+    private Date useDate;
 }

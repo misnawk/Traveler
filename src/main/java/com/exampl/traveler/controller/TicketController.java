@@ -2,12 +2,10 @@ package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.TicketService;
 import com.exampl.traveler.vo.TicketVO;
-import com.exampl.traveler.vo.UserOrderVO;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +19,7 @@ import java.util.Map;
 public class TicketController {
 
     private static final Logger log = LoggerFactory.getLogger(TicketController.class);
+
     @Autowired
     private TicketService ticketService;
 
@@ -33,7 +32,7 @@ public class TicketController {
 
     @GetMapping("/api/tickets")
     @ResponseBody
-    public List<TicketVO> getTicketsJson() {
+    public List<TicketVO> getAllTickets() {
         return ticketService.getAllTickets();
     }
 
@@ -47,30 +46,46 @@ public class TicketController {
         return "ticket/ticketDetails";
     }
 
-    @PostMapping("/ticket/order")
+    @PostMapping("/reserveTicket")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> createOrder(@RequestBody UserOrderVO orderVO, HttpSession session) {
-        log.info("createOrder 메서드 시작");
-        log.info("Received orderVO: {}", orderVO);
+    public ResponseEntity<?> reserveTicket(@RequestBody Map<String, Object> requestData, HttpSession session) {
         String userId = (String) session.getAttribute("id");
-        log.info("User ID from session: {}", userId);
         if (userId == null) {
-            log.info("User not logged in");
-            return ResponseEntity.ok(Map.of("loggedIn", false, "success", false));
+            return ResponseEntity.ok().body(Map.of("loggedIn", false));
         }
 
+        String ticketNO = (String) requestData.get("ticketNO");
+        int quantity = Integer.parseInt(requestData.get("quantity").toString());
+
+        TicketVO ticket = ticketService.getTicketByTickNO(ticketNO);
+        Date useDate = ticket.getTickDate();
+
         try {
-            orderVO.setUserId(userId);
-            orderVO.setOrderDate(new Date()); // Set the order date
-            orderVO.setBinCate("3"); // Set the default bincate
-            log.info("Calling ticketService.insertOrder");
-            ticketService.insertOrder(orderVO);
-            log.info("Order inserted successfully");
-            return ResponseEntity.ok(Map.of("success", true, "loggedIn", true));
+            Integer orderId=ticketService.createOrder(userId, ticketNO, quantity, useDate);
+
+            if (orderId != null) {
+                ticketService.createDiary(userId, orderId, useDate, ticket.getTickTitle());
+
+                return ResponseEntity.ok().body(Map.of(
+                        "loggedIn", true,
+                        "ordered", true,
+                        "diaryCreated", true
+                ));
+            } else {
+                return ResponseEntity.badRequest().body(Map.of(
+                        "loggedIn", true,
+                        "ordered", false,
+                        "diaryCreated", false,
+                        "error", "Order ID not found"
+                ));
+            }
         } catch (Exception e) {
-            log.error("Error while creating order", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("success", false, "loggedIn", true, "error", e.getMessage() != null ? e.getMessage() : "Unknown error"));
+            log.error("Error reserving ticket", e);
+            return ResponseEntity.badRequest().body(Map.of(
+                    "loggedIn", true,
+                    "ordered", false,
+                    "diaryCreated", false
+            ));
         }
     }
 }

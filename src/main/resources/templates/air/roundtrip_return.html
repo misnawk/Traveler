@@ -29,12 +29,12 @@
                     <span th:text="${air.departureAirport}">출발 공항</span>
                     <span th:text="${air.arrivalAirport}">도착 공항</span>
                 </div>
-                <div class="flight-number" th:text="${air.airNo}">항공편 번호</div>
+                <div class="flight-number" th:text="${air.airlineNO}">항공편 번호</div>
             </div>
             <div class="flight-price">
                 <span th:text="${#numbers.formatDecimal(air.airPrice, 0, 'COMMA', 0, 'POINT')}">가격</span>원
             </div>
-            <button class="select-air" th:attr="data-airno=${air.airNo}" onclick="selectReturnAir(this.getAttribute('data-airno'))">선택</button>
+            <button class="select-air" th:attr="data-airno=${air.airlineNO}" onclick="selectReturnAir(this.getAttribute('data-airno'))">선택</button>
         </div>
     </div>
 </main>

@@ -23,14 +23,19 @@
         SELECT * FROM tick WHERE tickNO = #{tickNO}
     </select>
 
-
-    <insert id="insertOrder" parameterType="com.exampl.traveler.vo.UserOrderVO" useGeneratedKeys="true" keyProperty="orderId">
-        INSERT INTO orders (userID, comNO, binCate, totalCnt, orderDate)
-        VALUES (#{userId}, #{comNO}, #{binCate}, #{totalCnt}, NOW())
+    <insert id="createOrder" parameterType="map" useGeneratedKeys="true" keyProperty="orderID">
+        INSERT INTO orders (userID, comNO, binCate, totalCnt, orderDate, useDate)
+        VALUES (#{userId}, #{comNO}, #{binCate}, #{totalCnt}, #{orderDate}, #{useDate})
     </insert>
 
-    <insert id="insertDiary" parameterType="map">
-        INSERT INTO DIARY (userID, orderID, AllDay, DiaryTitle)
-        VALUES (#{userId}, #{orderID}, #{allDay}, #{diaryTitle})
+    <insert id="createDiary" parameterType="map">
+        INSERT INTO DIARY (userID, ORDERID, allday, DIARYTITLE)
+        VALUES (#{userId}, #{orderId}, #{allDay}, #{diaryTitle})
     </insert>
-</mapper>
+
+    <select id="getLastInsertId" resultType="java.lang.Integer">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+
+    </mapper>
