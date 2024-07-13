@@ -60,13 +60,18 @@
         )
     </insert>
 
-    <!-- 회원 한명 찾기 -->
+    <!-- 기업 한명 찾기 -->
     <select id="binSelectOne">
         select * from businessUser where binID = #{id}
     </select>
 
-    <!-- 회원 전체 select -->
+    <!-- 기업 전체 select -->
     <select id="binSelectAll" resultType="com.exampl.traveler.vo.BusinessVO">
         select * from businessUser
+    </select>
+
+    <!-- 기업 사업자번호 중복 체크-->
+    <select id="binCodeCheck" resultType="boolean">
+        select count(*) from businessUser where binCode = #{code}
     </select>
 </mapper>

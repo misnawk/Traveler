@@ -5,13 +5,25 @@
     <select id="getBoard" resultType="boardVO">
         SELECT * FROM board LIMIT 5
     </select>
-    <select id="getBoardAll" resultType="BoardVO">
-        SELECT * FROM board
-    </select>
+
     <select id="getBoardPage" resultType="com.exampl.traveler.vo.BoardVO">
         SELECT * FROM board
         ORDER BY tripDate DESC
         LIMIT #{offset}, #{pageSize}
+    </select>
+    <select id="search" resultType="com.exampl.traveler.vo.BoardVO">
+        select * from board where tripTitle like '%${data}%'
+    </select>
+
+    <select id="findsearchTripType" resultType="com.exampl.traveler.vo.BoardVO">
+        SELECT *
+        FROM board
+        WHERE tripTitle LIKE '%${data}%'
+        OR tripType = '${tripType}';
+    </select>
+
+    <select id="findBoardAllTripType" resultType="com.exampl.traveler.vo.BoardVO">
+        select * FROM board where tripType = ${tripType} ORDER BY tripDate desc limit #{offset}, #{pageSize}
     </select>
 
     <select id="getTotalBoardCount" resultType="int">

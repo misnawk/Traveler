@@ -6,15 +6,24 @@
     <link rel="stylesheet" href="/css/board/boardList.css">
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css"/>
+    <script src="/js/board/board.js"></script>
 </head>
 <body>
 <div th:replace="header_foter/header :: header"></div>
 <main>
+    <form action="/board/search" method="get">
+        <div class="search-box">
+            <input class="search-box-input" type="text" id="data" name="data" placeholder="여행지를 검색해보세요">
+            <input type="submit" class="search-btn" value="검색">
+        </div>
+    </form>
+
+
 
     <!-- 필터링 버튼 -->
     <div class="filter-container">
-        <button onclick="filterBoard(1, this)">패키지</button>
-        <button onclick="filterBoard(0, this)">자유</button>
+        <button onclick="filterBoard(1)">패키지</button>
+        <button onclick="filterBoard(0)">자유</button>
     </div>
 
 
@@ -63,33 +72,6 @@
 
 <div th:replace="header_foter/foter :: foter"></div>
 
-<!-- JavaScript 코드 추가 -->
-<script>
-    function showLoginAlert() {
-    alert("로그인을 해주세요.");
-    // 선택적: 로그인 페이지로 리다이렉트
-    // window.location.href = '/login';
-}
 
-function filterBoard(tripType, button) {
-    const rows = document.querySelectorAll('#board_list tr');
-    rows.forEach(row => {
-        const typeCell = row.querySelector('td:nth-child(1)');
-        const typeText = typeCell.innerText;
-        if ((tripType === 1 && typeText === '패키지') || (tripType === 0 && typeText === '자유여행')) {
-            row.style.display = '';
-        } else {
-            row.style.display = 'none';
-        }
-    });
-
-    // 버튼 스타일 변경
-    const buttons = document.querySelectorAll('.filter-container button');
-    buttons.forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
-}
-
-
-</script>
 </body>
 </html>

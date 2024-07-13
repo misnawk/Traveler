@@ -1,6 +1,7 @@
 let idSccess = false
 let pwRangeSccess = false
 let pwSccess = false
+codeSccess = false
 let red = "#ff0000"
 let blue = "#1273E4"
 
@@ -28,6 +29,35 @@ function idCheck(){
                 alert("사용이 불가능한 ID입니다")
                 document.getElementById("binID").value = ''
                 idSccess = false
+                return
+            }
+        }
+    });
+}
+
+function codeCheck(){
+    let code = document.getElementById("binCode").value
+
+    if(code == ''){
+        alert("아이디를 입력하세요")
+        return
+    }
+
+    $.ajax({
+        url : '/bin/codeCheck',
+        data : {
+            code : code
+        },
+        type : 'POST',
+        dataType : 'json',
+        success : function(result) {
+            if (result == true) {
+                alert("사용 가능한 사업자등록번호 입니다")
+                codeSccess = true
+            } else {
+                alert("이미 등록된 사업자등록번호 입니다")
+                document.getElementById("binCode").value = ''
+                codeSccess = false
                 return
             }
         }
@@ -89,8 +119,8 @@ function save(){
     let $sendBtn = $("input#singUp");
 
     if(idSccess == false){
-        idMsg.style.color = red;
-        idMsg.innerHTML = "아이디 중복 확인을 해주세요"
+//        idMsg.style.color = red;
+//        idMsg.innerHTML = "아이디 중복 확인을 해주세요"
         document.getElementById("binID").value = "";
         return;
     }

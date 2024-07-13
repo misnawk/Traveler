@@ -58,9 +58,34 @@
     // Thymeleaf에서 변수를 JavaScript로 가져오기 위해 사용합니다
     var cityName = /*[[${city.cityName}]]*/ '일본';
 
-    // 이미지 폴더에서 가져올 이미지들의 정보를 객체 배열로 정의합니다
+    // 이미지 폴더에서 가져올  정보를 객체 배열로 정의합니다
     var images = [
         { title: '도쿄', filenames: ['도쿄1.jpeg', '도쿄2.jpeg', '도쿄3.png'] },
+        { title: '오사카', filenames: ['오사카1.jpeg', '오사카2.jpeg', '오사카3.jpeg'] },
+        { title: '삿포로', filenames: ['삿포로1.jpeg', '삿포로2.jpeg', '삿포로3.jpeg'] },
+        { title: '호찌민', filenames: ['호찌민1.jpeg', '호찌민2.jpeg', '호찌민3.jpeg'] },
+        { title: '하노이', filenames: ['하노이1.jpeg', '하노이2.jpeg', '하노이3.jpeg'] },
+        { title: '다낭', filenames: ['다낭1.jpeg', '다낭2.jpeg', '다낭3.jpeg'] },
+        { title: '타이베이', filenames: ['타이베이1.jpeg', '타이베이2.jpeg', '타이베이3.jpeg'] },
+        { title: '가오슝', filenames: ['가오슝1.jpeg', '가오슝2.jpeg', '가오슝3.jpeg'] },
+        { title: '타이중', filenames: ['타이중1.jpeg', '타이중2.jpeg', '타이중3.jpeg'] },
+        { title: '세부', filenames: ['세부1.jpeg', '세부2.jpeg', '세부3.jpeg'] },
+        { title: '보홀', filenames: ['보홀1.jpeg', '보홀2.jpeg', '보홀3.jpeg'] },
+        { title: '보라카이', filenames: ['보라카이1.jpeg', '보라카이2.jpeg', '보라카이3.jpeg'] },
+        { title: '발리', filenames: ['발리1.jpeg', '발리2.jpeg', '발리3.jpeg'] },
+        { title: '자카르타', filenames: ['자카르타1.jpeg', '자카르타2.jpeg', '자카르타3.jpeg'] },
+        { title: '빈탄섬', filenames: ['빈탄섬1.jpeg', '빈탄섬2.jpeg', '빈탄섬3.jpeg'] },
+        { title: '뉴델리', filenames: ['뉴델리1.jpeg', '뉴델리2.jpeg', '뉴델리3.jpeg'] },
+        { title: '뭄바이', filenames: ['뭄바이1.jpeg', '뭄바이2.jpeg', '뭄바이3.jpeg'] },
+        { title: '벵갈루루', filenames: ['벵갈루루1.jpeg', '벵갈루루2.jpeg', '벵갈루루3.jpeg'] },
+        { title: '방콕', filenames: ['방콕1.jpeg', '방콕2.jpeg', '방콕3.jpeg'] },
+        { title: '치앙마이', filenames: ['치앙마이1.jpeg', '치앙마이2.jpeg', '치앙마이3.jpeg'] },
+        { title: '푸켓', filenames: ['푸켓1.jpeg', '푸켓2.jpeg', '푸켓3.jpeg'] },
+        { title: '시드니', filenames: ['시드니1.jpeg', '시드니2.jpeg', '시드니3.jpeg'] },
+        { title: '멜버른', filenames: ['멜버른1.jpeg', '멜버른2.jpeg', '멜버른3.jpeg'] },
+        { title: '브리즈번', filenames: ['브리즈번1.jpeg', '브리즈번2.jpeg', '브리즈번3.jpeg'] },
+
+
     ];
 
     // natName과 일치하는 국가의 이미지 파일들을 가져와서 표시합니다
@@ -68,7 +93,7 @@
         if (item.title === cityName) {
             item.filenames.forEach(function(filename) {
                 var imgElement = document.createElement('img');
-                imgElement.src = '/imgs/' + filename;
+                imgElement.src = '/imgs/city/' + filename;
                 imgElement.alt = cityName + ' 사진';
                 document.getElementById('image_con').appendChild(imgElement);
             });

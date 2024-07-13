@@ -108,8 +108,8 @@ function save(){
     let $sendBtn = $("input#singUp");
 
     if(idSccess == false){
-        idMsg.style.color = red;
-        idMsg.innerHTML = "아이디 중복 확인을 해주세요"
+//        idMsg.style.color = red;
+//        idMsg.innerHTML = "아이디 중복 확인을 해주세요"
         return;
     }
 
@@ -134,8 +134,8 @@ function save(){
     }
 
     if(year == "출생 연도" || month == "월" || day == "일"){
-        birthMsg.style.color = red;
-        birthMsg.innerHTML = "생년월일을 선택해주세요"
+//        birthMsg.style.color = red;
+//        birthMsg.innerHTML = "생년월일을 선택해주세요"
         return;
     }
 

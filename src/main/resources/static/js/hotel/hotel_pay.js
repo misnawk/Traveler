@@ -29,7 +29,9 @@ $(document).ready(function() {
                 url: `/hotel/${hotelNO}/order`,
                 type: 'POST',
                 data: {
-                    peopleCount: guestCount
+                    binCate: "2", // 또는 다른 값으로 설정
+                    peopleCount: guestCount,
+                    useDate: checkin // checkin 날짜를 useDate로 전달
                 },
                 success: function(response) {
                     console.log('Order Response:', response);

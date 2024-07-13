@@ -160,4 +160,18 @@ public class LoginController {
         loginService.binIdInsert(vo);
         return "redirect:/binLogin";
     }
+
+    @PostMapping("bin/codeCheck")
+    public ResponseEntity<Boolean> codeCheck(@RequestParam("code") String code){
+        boolean result = true;
+
+        // 전달 받은 id값이 이미 존재한지 체크
+        if(loginService.codeCheck(code)){
+            result = false;
+        } else {
+            result = true;
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }
