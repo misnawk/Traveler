@@ -28,9 +28,9 @@ public class SeatService {
     public boolean reserveSeat(String airlineNo, String seatNumber, String userId) {
         // 항공편 존재 여부 및 가용 좌석 확인
         AirVO air = airMapper.getAirById(airlineNo);
-        if (air == null || air.getAvailableSeats() <= 0) {
-            return false; // 항공편이 없거나 가용 좌석 없음
-        }
+//        if (air == null || air.getAvailableSeats() <= 0) {
+//            return false; // 항공편이 없거나 가용 좌석 없음
+//        }
 
         // 좌석 예약 가능 여부 확인 및 업데이트
         int updatedRows = seatMapper.updateSeatAvailability(airlineNo, seatNumber, false);

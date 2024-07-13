@@ -1,6 +1,7 @@
 package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.AdminService;
+import com.exampl.traveler.service.CityService;
 import com.exampl.traveler.service.LoginService;
 import com.exampl.traveler.vo.*;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 public class AdminController {
     public final AdminService adminService;
     public final LoginService loginService;
+    public final CityService cityService;
 
     // 회원관리 select 검색
     @GetMapping("/user")
@@ -78,28 +80,34 @@ public class AdminController {
         String type = null;
 
         if(binCate == null || binCate.equals("airline")) {
-            List<AirVO> vo = adminService.airSelectAll();
+            List<AirVO> item = adminService.airSelectAll();
             type = "airline";
 
-            model.addAttribute("vo",vo);
+            for(int i =0; i < item.size(); i++) {
+                System.out.println(item.get(i).getCityNO());
+                CityVO city = cityService.getCityByNumber(item.get(i).getCityNO());
+                item.get(i).setCityName(city.getCityName());
+            }
+
+            model.addAttribute("item",item);
             model.addAttribute("type", type);
         } else if(binCate.equals("hotel")){
-            List<HotelVO> vo = adminService.hotelSelectAll();
+            List<HotelVO> item = adminService.hotelSelectAll();
             type = "hotel";
 
-            model.addAttribute("vo",vo);
+            model.addAttribute("item",item);
             model.addAttribute("type", type);
         } else if(binCate.equals("tick")){
-            List<TicketVO> vo = adminService.tickSelectAll();
+            List<TicketVO> item = adminService.tickSelectAll();
             type = "tick";
 
-            model.addAttribute("vo",vo);
+            model.addAttribute("item",item);
             model.addAttribute("type", type);
         } else if(binCate.equals("package")){
-            List<PackageVO> vo = adminService.packSelectAll();
+            List<PackageVO> item = adminService.packSelectAll();
             type = "package";
 
-            model.addAttribute("vo",vo);
+            model.addAttribute("item",item);
             model.addAttribute("type", type);
         }
 

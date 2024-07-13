@@ -36,10 +36,12 @@
                 <tr>
                     <th:block th:if="${session.binCate == '1'}">
                         <th>국가</th>
-                        <th>항공번호</th>
                         <th>항공편명</th>
-                        <th>공항정보</th>
-                        <th>일정정보</th>
+                        <th>출발공항</th>
+                        <th>도착공항</th>
+                        <th>출발정보</th>
+                        <th>도착정보</th>
+                        <th>가격(1인 기준)</th>
                         <th>관리</th>
                     </th:block>
                     <th:block th:if="${session.binCate == '2'}">
@@ -86,7 +88,7 @@
                         <td>[[${item.getHotelCountry}]]</td>
                         <td>[[${item.getHotelName}]]</td>
                         <td>[[${item.getHotelTime}]]</td>
-                        <th>[[${#numbers.formatInteger(item.getHotelPrice, 3, 'COMMA')}]]</th>
+                        <td>[[${#numbers.formatInteger(item.getHotelPrice, 3, 'COMMA')}]]</td>
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
                     <th:block th:if="${session.binCate == '3'}">

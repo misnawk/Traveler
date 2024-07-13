@@ -36,10 +36,10 @@ public class SeatController {
             return "redirect:/error";
         }
 
-        List<SeatVO> seats = seatService.getSeatsForAir(air.getAirlineNo());
+//        List<SeatVO> seats = seatService.getSeatsForAir(air.getAirlineNo());
 
         model.addAttribute("air", air);
-        model.addAttribute("seats", seats);
+//        model.addAttribute("seats", seats);
         model.addAttribute("tripType", tripType);
         model.addAttribute("userId", session.getAttribute("userId")); // 세션에서 userId 가져오기
         return "seat/selection";
