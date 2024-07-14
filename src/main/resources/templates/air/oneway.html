@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>편도 항공편 선택</title>
     <link rel="stylesheet" href="/css/airplane/air_list.css" />
-    <script src="/js/airplane/oneway.js" defer></script>
 </head>
 <body>
 <header>
@@ -17,13 +16,13 @@
 </header>
 <main>
     <div class="flight-list">
-        <div th:each="air : ${airResults}" class="flight-item">
+        <div th:each="air : ${airs}" class="flight-item">
             <div class="airline-logo" th:text="${air.airCompany}">항공사 로고</div>
             <div class="flight-details">
                 <div class="flight-time">
-                    <span th:text="${#temporals.format(air.departureDateTime, 'HH:mm')}">출발 시간</span>
+                    <span th:text="${#dates.format(air.departureDateTime, 'HH:mm')}">출발 시간</span>
                     <span class="arrow">→</span>
-                    <span th:text="${#temporals.format(air.arrivalDateTime, 'HH:mm')}">도착 시간</span>
+                    <span th:text="${#dates.format(air.arrivalDateTime, 'HH:mm')}">도착 시간</span>
                 </div>
                 <div class="flight-route">
                     <span th:text="${air.departureAirport}">출발 공항</span>
@@ -37,6 +36,12 @@
         </div>
     </div>
 </main>
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var isLoggedIn = /*[[${session.id != null}]]*/ false;
+    var loginPageUrl = /*[[@{/login}]]*/ '/login';
+    /*]]>*/
+</script>
+<script src="/js/airplane/oneway.js"></script>
 </body>
 </html>
