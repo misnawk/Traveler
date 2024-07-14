@@ -1,10 +1,10 @@
 package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.BoardService;
+import com.exampl.traveler.service.CityService;
 import com.exampl.traveler.service.LoginService;
-import com.exampl.traveler.vo.BoardVO;
-import com.exampl.traveler.vo.BusinessVO;
-import com.exampl.traveler.vo.MemberVO;
+import com.exampl.traveler.service.NationService;
+import com.exampl.traveler.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -19,7 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MainController {
     private final LoginService loginService;
-
+    private final CityService cityService;
+    private final NationService nationService;
     @Autowired
     BoardService boardService;
     //메인페이지 게시판에 5개만 보이게 설정
@@ -51,6 +54,25 @@ public class MainController {
         model.addAttribute("vo",vo);
         return "/admin/admin";
     }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("data") String query) {
+        // 도시 검색
+        CityVO city = cityService.getCityByName(query);
+        if (city != null) {
+            return "redirect:/city?cityNO=" + city.getCityNO();
+        }
+
+        // 국가 검색
+        NationVO nation = nationService.getNationByName(query);
+        if (nation != null) {
+            return "redirect:/nation/detail/" + nation.getNatNO();
+        }
+
+        // 검색 결과가 없을 경우
+        return "redirect:/noResults";
+    }
+
 
     // 일반회원 마이페이지
     @GetMapping("mypage/{id}")

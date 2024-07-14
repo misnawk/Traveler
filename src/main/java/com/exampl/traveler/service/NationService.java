@@ -22,4 +22,9 @@ public class NationService {
     public NationVO getNationDetails(String natNO) {
         return nationMapper.selectNationById(natNO);
     }
+
+
+    public NationVO getNationByName(String nationName) {
+        return nationMapper.getNationByName(nationName);
+    }
 }

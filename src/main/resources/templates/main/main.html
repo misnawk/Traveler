@@ -14,13 +14,15 @@
 <body>
 <div th:replace="header_foter/header :: header"></div>
 <main>
-
-    <div class="bgimg" style="background-image: url('./imgs/serchimg.jpg');">
-        <div class="search-box">
-            <input type="text" placeholder="여행지를 검색해보세요">
-            <button>검색</button>
+    <form action="/search" method="get">
+        <div class="bgimg" style="background-image: url('./imgs/serchimg.jpg');">
+            <div class="search-box">
+                <input class="search-box-input" type="text" id="data" name="data" placeholder="여행지를 검색해보세요">
+                <input class="search-box-submit" type="submit" value="검색">
+            </div>
         </div>
-    </div>
+    </form>
+
 
     <div class="best-container">
         <div class="best_top"><h3 class="best_text">BEST 여행지 추천</h3></div>

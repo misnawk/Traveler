@@ -14,4 +14,8 @@
     <select id="getCityByNumber" parameterType="int" resultMap="cityResultMap">
         SELECT * FROM city WHERE cityNO = #{cityNO}
     </select>
+
+    <select id="getCityByName" parameterType="string" resultType="com.exampl.traveler.vo.CityVO">
+        SELECT * FROM city WHERE cityName = #{cityName}
+    </select>
 </mapper>

@@ -31,4 +31,8 @@
         LEFT JOIN city c ON n.natNO = c.natNO
         WHERE n.natNO = #{natNO}
     </select>
+
+    <select id="getNationByName" parameterType="string" resultType="com.exampl.traveler.vo.NationVO">
+        SELECT * FROM NATION WHERE natName = #{nationName}
+    </select>
 </mapper>
