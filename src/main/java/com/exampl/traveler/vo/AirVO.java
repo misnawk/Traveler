@@ -16,4 +16,5 @@ public class AirVO {
     private Date arrivalDateTime;
     private int airPrice;
     private int cityNO;
+    private String cityName; // 관리자에서 사용
 }
