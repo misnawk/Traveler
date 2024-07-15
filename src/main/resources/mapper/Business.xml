@@ -8,4 +8,20 @@
         VALUES (#{binID}, #{binPW}, #{binName}, #{binCate}, #{binCode}, #{binEmail}, #{binTell})
     </insert>
 
+    <insert id="insertAir" parameterType="com.exampl.traveler.vo.AirVO">
+        INSERT INTO Airline (binID, airTitle, departureAirport, arrivalAirport, airCompany, departureDateTime, arrivalDateTime, airPrice, cityNO)
+        VALUES (#{binId}, #{airTitle}, #{departureAirport}, #{arrivalAirport}, #{airCompany}, #{departureDateTime}, #{arrivalDateTime}, #{airPrice}, #{cityNO})
+    </insert>
+
+
+    <insert id="insertTicket" parameterType="com.exampl.traveler.vo.TicketVO">
+        INSERT INTO tick ( binID, tickImg, tickTitle, tickText, tickOp, tickPrice, tickDate, tickPlace, category)
+        VALUES ( #{binID}, #{tickImg}, #{tickTitle}, #{tickText}, #{tickOp}, #{tickPrice}, #{tickDate}, #{tickPlace}, #{category})
+    </insert>
+
+    <insert id="insertPackage" parameterType="com.exampl.traveler.vo.PackageVO">
+        INSERT INTO Package ( binId, packageTitle, packageText, packageMax, packagePrice, peopleCnt, startDateTime, endDateTime, imageUrl, packageCountry)
+        VALUES ( #{binId}, #{packageTitle}, #{packageText}, #{packageMax}, #{packagePrice}, #{peopleCnt}, #{startDateTime}, #{endDateTime}, #{imageUrl}, #{packageCountry})
+    </insert>
+
 </mapper>

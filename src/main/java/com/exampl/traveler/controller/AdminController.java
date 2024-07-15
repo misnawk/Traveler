@@ -86,7 +86,7 @@ public class AdminController {
             for(int i =0; i < item.size(); i++) {
                 System.out.println(item.get(i).getCityNO());
                 CityVO city = cityService.getCityByNumber(item.get(i).getCityNO());
-                item.get(i).setCityName(city.getCityName());
+//                item.get(i).setCityName(city.getCityName());
             }
 
             model.addAttribute("item",item);

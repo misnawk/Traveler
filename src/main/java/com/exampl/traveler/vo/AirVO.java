@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 public class AirVO {
     private String airlineNO;
+    private String binId;
     private String airTitle;
     private String departureAirport;
     private String arrivalAirport;

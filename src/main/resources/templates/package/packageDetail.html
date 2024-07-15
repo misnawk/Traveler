@@ -12,23 +12,33 @@
 <body>
 <div th:replace="~{header_foter/header :: header}"></div>
 
-<div class="package-detail-container">
-    <div class="package-detail">
-        <div class="package-image">
-            <img th:src="${package.imageUrl}" th:alt="${package.packageTitle}" />
-        </div>
-        <div class="package-info">
-            <h3 th:text="${package.packageTitle}"></h3>
-            <p th:text="${package.packageText}"></p>
-            <p class="travel-period">여행기간: <span th:text="${#dates.format(package.startDateTime, 'yyyy-MM-dd')} + ' ~ ' + ${#dates.format(package.endDateTime, 'yyyy-MM-dd')}"></span></p>
-            <p class="price">상품가격: <span th:text="${#numbers.formatDecimal(package.packagePrice, 0, 'COMMA', 0, 'POINT')} + '원'"></span></p>
+<div class="content-wrapper">
+    <div class="breadcrumb">
+        Travel > 전망대 > <span th:text="${package.packageTitle}"></span>
+    </div>
 
-            <div class="order-info">
-                <label for="peopleCount">인원수:</label>
-                <input type="number" id="peopleCount" name="peopleCount" min="1" th:max="${package.packageMax}">
-                <p class="total-price">총 가격: <span id="totalPrice"></span></p>
-                <div class="package-button-container">
-                    <button id="reserveButton" class="reserve-btn">예약하기</button>
+    <div class="package-detail-container">
+        <h1 th:text="${package.packageTitle}"></h1>
+        <p th:text="${package.packageText}"></p>
+
+        <div class="package-content">
+            <div class="image-container">
+                <img th:src="${package.imageUrl}" th:alt="${package.packageTitle}" />
+            </div>
+            <div class="ticket-option">
+                <h2>패키지 옵션</h2>
+                <div class="ticket-info">
+                    <h3 th:text="${package.packageTitle}"></h3>
+                    <p th:text="${package.packageText}"></p>
+                    <p class="travel-period">오후</p>
+                    <p>날짜 및 시간: <span th:text="${#dates.format(package.startDateTime, 'yyyy-MM-dd HH:mm')}"></span></p>
+                    <p class="price"><span th:text="${#numbers.formatDecimal(package.packagePrice, 0, 'COMMA', 0, 'POINT')}">원</span></p>
+                    <div class="order-info">
+                        <label for="peopleCount">인원수:</label>
+                        <input type="number" id="peopleCount" name="peopleCount" min="1" th:max="${package.packageMax}" value="1">
+                        <p class="total-price">총 가격: <span id="totalPrice"></span></p>
+                        <button id="reserveButton" class="reserve-btn">결제하기</button>
+                    </div>
                 </div>
             </div>
         </div>

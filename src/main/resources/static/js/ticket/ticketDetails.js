@@ -1,4 +1,14 @@
 $(document).ready(function() {
+    function updateTotalPrice() {
+        let ticketQuantity = $('#ticketQuantity').val();
+        let totalPrice = ticket.tickPrice * ticketQuantity;
+        $('#totalPrice').text(totalPrice.toLocaleString() + '원');
+    }
+
+    $('#ticketQuantity').on('input', updateTotalPrice);
+
+    updateTotalPrice(); // 초기 총 가격 설정
+
     function reserveTicket() {
         console.log("reserveTicket 함수 시작");
 
@@ -51,7 +61,5 @@ $(document).ready(function() {
     }
 
     // 예약하기 버튼에 클릭 이벤트 핸들러 추가
-    $(".reserve-btn").click(function() {
-        reserveTicket();
-    });
+    $(".reserve-btn").click(reserveTicket);
 });

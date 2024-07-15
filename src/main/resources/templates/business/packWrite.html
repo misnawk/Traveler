@@ -2,49 +2,73 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="/css/business/binWrite.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/css/header_foter/header.css">
-    <link rel="stylesheet" href="/css/header_foter/foter.css" />
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script type="text/javascript" src="/js/business/binWrite.js" defer></script>
+    <title>패키지 등록</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/business/packageWrite.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/business/packageWriteInput.js" defer></script>
 </head>
 <body>
-<main>
-    <div th:replace="header_foter/header :: header"></div>
+<div class="container">
+    <h1>패키지 등록</h1>
+    <form id="packageForm" enctype="multipart/form-data">
+        <input type="hidden" id="binId" name="binId" th:value="${session.binID}">
 
-    <input type="hidden" id="binID" name="binID" th:value="${session.binID}">
+        <div class="form-group">
+            <label for="packageTitle">패키지 이름</label>
+            <input type="text" id="packageTitle" name="packageTitle" required>
+        </div>
 
-    <div class="table_container">
-        <table class="table_content">
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <label for="packageText">패키지 내용</label>
+            <textarea id="packageText" name="packageText" required></textarea>
+        </div>
 
-        <input type="button" class="save_btn" id="saveBtn" name="saveBtn" onclick="save()" value="저장하기">
-        <input type="button" class="back_btn" id="backBtn" name="backBtn" onclick="back()" value="뒤로가기">
-    </div>
+        <div class="form-group">
+            <label for="packageMax">총 인원</label>
+            <input type="number" id="packageMax" name="packageMax" required>
+        </div>
 
-    <div th:replace="header_foter/foter :: foter"></div>
-</main>
+        <div class="form-group">
+            <label for="packagePrice">가격</label>
+            <input type="number" id="packagePrice" name="packagePrice" required>
+        </div>
+
+        <div class="form-group">
+            <label for="startDateTime">출발 날짜와 시간</label>
+            <input type="datetime-local" id="startDateTime" name="startDateTime" required>
+        </div>
+
+        <div class="form-group">
+            <label for="endDateTime">도착 날짜와 시간</label>
+            <input type="datetime-local" id="endDateTime" name="endDateTime" required>
+        </div>
+
+        <div class="form-group">
+            <label for="imageUrl">패키지 이미지</label>
+            <input type="file" id="imageUrl" name="imageUrl" accept="image/*">
+        </div>
+
+        <div class="form-group">
+            <label for="packageCountry">패키지 나라</label>
+            <select id="packageCountry" name="packageCountry" required>
+                <option value="">국가 선택</option>
+                <option value="일본">일본</option>
+                <option value="베트남">베트남</option>
+                <option value="대만">대만</option>
+                <option value="필리핀">필리핀</option>
+                <option value="인도네시아">인도네시아</option>
+                <option value="인도">인도</option>
+                <option value="태국">태국</option>
+                <option value="호주">호주</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" id="saveBtn" class="btn btn-primary">등록하기</button>
+            <button type="button" id="backBtn" class="btn btn-secondary" onclick="back()">뒤로가기</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
