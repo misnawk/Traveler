@@ -44,6 +44,11 @@ function codeCheck(){
         return
     }
 
+    if(code.length > 10){
+        alert("사업자등록번호는 10자를 초과하지 않습니다. 다시 확인 부탁드립니다")
+        return
+    }
+
     $.ajax({
         url : '/bin/codeCheck',
         data : {
