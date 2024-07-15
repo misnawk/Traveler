@@ -75,4 +75,9 @@ public class AdminService {
     public List<PackageVO> packSelectID(String binID){
         return adminMapper.packSelectID(binID);
     }
+
+    // 주문관리
+    public List<UserOrderVO> orderSelectAll(){
+        return adminMapper.orderSelectAll();
+    }
 }

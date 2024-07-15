@@ -1,8 +1,6 @@
 package com.exampl.traveler.controller;
 
-import com.exampl.traveler.service.AdminService;
-import com.exampl.traveler.service.CityService;
-import com.exampl.traveler.service.LoginService;
+import com.exampl.traveler.service.*;
 import com.exampl.traveler.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +18,10 @@ public class AdminController {
     public final AdminService adminService;
     public final LoginService loginService;
     public final CityService cityService;
+    private final AirService airService;
+    private final HotelService hotelService;
+    private final TicketService ticketService;
+    private final PackageService packageService;
 
     // 회원관리 select 검색
     @GetMapping("/user")
@@ -86,7 +88,7 @@ public class AdminController {
             for(int i =0; i < item.size(); i++) {
                 System.out.println(item.get(i).getCityNO());
                 CityVO city = cityService.getCityByNumber(item.get(i).getCityNO());
-//                item.get(i).setCityName(city.getCityName());
+                item.get(i).setCityName(city.getCityName());
             }
 
             model.addAttribute("item",item);
@@ -117,27 +119,57 @@ public class AdminController {
     // 상세페이지
     @GetMapping("/detail")
     public String detail(@RequestParam(value = "binID", required = false) String binID,
-                         @RequestParam(value = "option", required = false) String option,
-                         @RequestParam(value = "data", required = false) String data, Model model){
+                         Model model){
 
         BusinessVO vo = loginService.binSelectOne(binID);
 
-        if(vo.getBinCate() == "1") {
+        if(vo.getBinCate().equals("1")) {
             List<AirVO> items = adminService.airSelectID(binID);
             model.addAttribute("items", items);
-        } else if(vo.getBinCate() == "2"){
+        } else if(vo.getBinCate().equals("2")){
             List<HotelVO> items = adminService.hotelSelectID(binID);
             model.addAttribute("items", items);
-        } else if(vo.getBinCate() == "3"){
+        } else if(vo.getBinCate().equals("3")){
             List<TicketVO> items = adminService.tickSelectID(binID);
             model.addAttribute("items", items);
-        } else if(vo.getBinCate() == "4"){
+        } else if(vo.getBinCate().equals("4")){
             List<PackageVO> items = adminService.packSelectID(binID);
             model.addAttribute("items", items);
         }
 
         model.addAttribute("vo",vo);
         return "/admin/adminDetail";
+    }
+
+    // 결제 페이지 이동
+    @GetMapping("/orders")
+    public String orders(Model model){
+        List<UserOrderVO> orders = adminService.orderSelectAll();
+
+        for(int i = 0; i < orders.size(); i++){
+            if(orders.get(i).getComNO().startsWith("A")){
+                AirVO item =  airService.getAirByAirlineNo(orders.get(i).getComNO());
+                orders.get(i).setPrice(item.getAirPrice() * orders.get(i).getTotalCnt());
+                orders.get(i).setTitle(item.getAirTitle());
+            }else if(orders.get(i).getComNO().startsWith("h")){
+                HotelVO item =  hotelService.getHotelById(orders.get(i).getComNO());
+                orders.get(i).setPrice(item.getHotelPrice() * orders.get(i).getTotalCnt());
+                orders.get(i).setTitle(item.getHotelName());
+            }else if(orders.get(i).getComNO().startsWith("T")){
+                TicketVO item = ticketService.getTicketByTickNO(orders.get(i).getComNO());
+                orders.get(i).setPrice(item.getTickPrice() * orders.get(i).getTotalCnt());
+                orders.get(i).setTitle(item.getTickTitle());
+            }else if(orders.get(i).getComNO().startsWith("P")){
+                PackageVO item =  packageService.getPackageById(orders.get(i).getComNO());
+                orders.get(i).setPrice(item.getPackagePrice() * orders.get(i).getTotalCnt());
+                orders.get(i).setTitle(item.getPackageTitle());
+            }
+
+        }
+
+        model.addAttribute("orders", orders);
+
+        return "/admin/adminOrders";
     }
 
 }

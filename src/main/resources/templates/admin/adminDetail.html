@@ -27,7 +27,7 @@
             <li><a href="/admin">회원관리</a></li>
             <li><a href="/admin/business">기업관리</a></li>
             <li><a href="/admin/items">상품관리</a></li>
-            <li><a href="/amin/orders">결제관리</a></li>
+            <li><a href="/admin/orders">결제관리</a></li>
         </ul>
     </nav>
 </header>
@@ -40,16 +40,16 @@
                         <th>아이디</th>
                         <td>[[${vo.getBinID}]]
                         <th>분류</th>
-                        <th:block th:if="${vo.getBinCate == 1}">
+                        <th:block th:if="${vo.getBinCate == '1'}">
                             <td>항공</td>
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 2}">
+                        <th:block th:if="${vo.getBinCate == '2'}">
                             <td>숙박</td>
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 3}">
+                        <th:block th:if="${vo.getBinCate == '3'}">
                             <td>티켓</td>
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 4}">
+                        <th:block th:if="${vo.getBinCate == '4'}">
                             <td>패키지</td>
                         </th:block>
                     </tr>
@@ -68,86 +68,65 @@
                 </table>
             </div>
 
-            <form action="/admin/detail" method="get" >
-                <div class="search_content">
-                    <select name="option">
-                        <th:block th:if="${vo.getBinCate == 1}">
-                            <option value="">전체</option>
-                            <option value="userID">항공</option>
-                        </th:block>
-                        <th:block th:if="${vo.getBinCate == 2}">
-                            <option value="">전체</option>
-                            <option value="hotelCountry">국가</option>
-                            <option value="hotelName">호텔명</option>
-                        </th:block>
-                        <th:block th:if="${vo.getBinCate == 3}">
-                            <option value="">전체</option>
-                            <option value="tickPlace">국가</option>
-                            <option value="category">카테고리</option>
-                            <option value="tickTitle">티켓명</option>
-                        </th:block>
-                        <th:block th:if="${vo.getBinCate == 4}">
-                            <option value="">전체</option>
-                            <option value="packTitle">패키지명</option>
-                        </th:block>
-                    </select>
-                    <input class="search_input" id="data" name="data" placeholder="검색어를 입력하세요">
-                    <input type="submit" class="search_btn" value="검색">
-                    <input type="button" class="reset_btn" onclick="reset()" value="검색초기화">
-                </div>
-            </form>
-
             <div>
                 <table class="table_content">
                     <tr>
-                        <th:block th:if="${vo.getBinCate == 1}">
-                            <th>항공</th>
-                            <th>옵션</th>
-                            <th>유효기간</th>
-                            <th>사용처</th>
-                            <th>가격</th>
+                        <th:block th:if="${vo.getBinCate == '1'}">
+                            <th>항공편명</th>
+                            <th>출발/도착공항</th>
+                            <th>출발정보</th>
+                            <th>도착정보</th>
+                            <th>가격(1인 기준)</th>
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 2}">
+                        <th:block th:if="${vo.getBinCate == '2'}">
+                            <th>국가</th>
                             <th>호텔명</th>
-                            <th>나라</th>
                             <th>체크인/체크아웃</th>
-                            <th>가격(1박기준)</th>
+                            <th>가격(1박 기준)</th>
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 3}">
+                        <th:block th:if="${vo.getBinCate == '3'}">
+                            <th>국가</th>
+                            <th>카테고리</th>
                             <th>티켓명</th>
-                            <th>옵션</th>
-                            <th>유효기간</th>
-                            <th>사용처</th>
+                            <th>사용일</th>
                             <th>가격</th>
                         </th:block>
-                        <th:block th:if="${vo.getBinCate == 4}">
+                        <th:block th:if="${vo.getBinCate == '4'}">
                             <th>패키지명</th>
                             <th>최대인원</th>
-                            <th>시작날짜</th>
-                            <th>종료날짜</th>
+                            <th>시작일</th>
+                            <th>종료일</th>
                             <th>가격</th>
                         </th:block>
                     </tr>
                     <tr th:each="item : ${items}">
                         <th:block th:if="${vo.getBinCate == '1'}">
-                            <td></td>
+                            <td>[[${item.getAirTitle}]]</td>
+                            <td>[[${item.getDepartureAirport}]]/[[${item.getArrivalAirport}]]</td>
+                            <td>[[${#dates.format(item.getDepartureDateTime, 'yyyy-MM-dd HH:mm')}]]
+                            <td>[[${#dates.format(item.getArrivalDateTime, 'yyyy-MM-dd HH:mm')}]]</td>
+                            <td>[[${#numbers.formatInteger(item.getAirPrice, 3, 'COMMA')}]]</td>
                         </th:block>
                         <th:block th:if="${vo.getBinCate == '2'}">
-<!--                            <td>[[${item.getHotelName}]]</td>-->
-<!--                            <td>[[${item.getHotelCountry}]]</td>-->
-<!--                            <td>[[${item.getHotelTime}]]</td>-->
-<!--                            <td>[[${item.getTickPlace}]]</td>-->
-<!--                            <td>[[${#numbers.formatInteger(item.getHotelPrice, 3, 'COMMA')}]]</td>-->
+                            <td>[[${item.getHotelCountry}]]</td>
+                            <td>[[${item.getHotelName}]]</td>
+                            <td>[[${item.getHotelTime}]]</td>
+                            <td>[[${#numbers.formatInteger(item.getHotelPrice, 3, 'COMMA')}]]</td>
                         </th:block>
                         <th:block th:if="${vo.getBinCate == '3'}">
-                            <td>[[${item.getTickTitle}]]</td>
-                            <td>[[${item.getTickOp}]]</td>
-                            <td>[[${#dates.format(item.getTickDate, 'yyyy-MM-dd')}]]</td>
                             <td>[[${item.getTickPlace}]]</td>
+                            <td>[[${item.getCategory}]]</td>
+                            <td>[[${item.getTickTitle}]]</td>
+                            <td>[[${#dates.format(item.getTickDate, 'yyyy-MM-dd')}]]</td>
                             <td>[[${#numbers.formatInteger(item.getTickPrice, 3, 'COMMA')}]]</td>
                         </th:block>
                         <th:block th:if="${vo.getBinCate == '4'}">
-                            <td>[[${item.getPackageTitle}]]</td>
+                            <th:block th:if="${#strings.length(item.getPackageTitle) > 10}">
+                                <td>[[${#strings.substring(item.getPackageTitle,0,10)}]]...</td>
+                            </th:block>
+                            <th:block th:unless="${#strings.length(item.getPackageTitle) > 10}">
+                                <td>[[${item.getPackageTitle}]]</td>
+                            </th:block>
                             <td>[[${item.getPackageMax}]]</td>
                             <td>[[${#dates.format(item.getStartDateTime, 'yyyy-MM-dd')}]]</td>
                             <td>[[${#dates.format(item.getEndDateTime, 'yyyy-MM-dd')}]]</td>

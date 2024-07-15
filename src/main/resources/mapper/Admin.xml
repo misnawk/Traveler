@@ -74,4 +74,9 @@
         select * from package where binID = #{binID}
     </select>
 
+    <!-- 주문관리 -->
+    <select id="orderSelectAll">
+        select * from orders
+    </select>
+
 </mapper>

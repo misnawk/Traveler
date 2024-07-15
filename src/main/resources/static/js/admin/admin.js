@@ -30,4 +30,3 @@ function binDetail(binID){
 function binCate(binCate){
     location.href="/admin/items?binCate="+binCate;
 }
-
