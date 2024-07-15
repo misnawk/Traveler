@@ -76,7 +76,7 @@ public class MainController {
 
         for(int i =0; i < orders.size(); i++) {
             if(orders.get(i).getComNO().startsWith("A")){
-                AirVO item =  airService.getAirByAirNo(orders.get(i).getComNO());
+                AirVO item =  airService.getAirByAirlineNo(orders.get(i).getComNO());
                 orders.get(i).setTitle(item.getAirTitle());
             }else if(orders.get(i).getComNO().startsWith("h")){
                 HotelVO item =  hotelService.getHotelById(orders.get(i).getComNO());
