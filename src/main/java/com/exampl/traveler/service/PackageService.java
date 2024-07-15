@@ -19,9 +19,13 @@ public class PackageService {
         return packageMapper.getAllPackages();
     }
 
+    public List<PackageVO> getPackagesNat(String keyword){return packageMapper.getPackagesNat(keyword);}
+    //국가디테일 페이지에서 조회
     public PackageVO getPackageById(String id) {
         return packageMapper.getPackageById(id);
     }
+    //메인에서 조회
+    public List<PackageVO> getPackages() {return packageMapper.getPackages();}
 
     public UserOrderVO createOrder(String packageNo, int peopleCount, String userId) {
         PackageVO packageVO = getPackageById(packageNo);
@@ -50,4 +54,6 @@ public class PackageService {
 
         return order;
     }
+
+
 }

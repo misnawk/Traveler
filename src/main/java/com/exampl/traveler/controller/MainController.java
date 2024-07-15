@@ -29,6 +29,8 @@ public class MainController {
     private final TicketService ticketService;
     private final AdminService adminService;
 
+    private final PackageService packageService;
+
     @Autowired
     BoardService boardService;
 
@@ -39,6 +41,8 @@ public class MainController {
     public String main(Model model){
         List<BoardVO> board = boardService.getBoard();
         model.addAttribute("board",board);
+        List<PackageVO> packages = packageService.getPackages();
+        model.addAttribute("packages", packages);
 
         return "/main/main";
     }
