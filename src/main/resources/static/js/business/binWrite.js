@@ -41,34 +41,6 @@ function saveHotel() {
     });
 }
 
-function saveRoom() {
-    var roomData = {
-        roomName: $('#roomName').val(),
-        roomImg: $('#roomImg').val(),
-        roomFacility: $('#roomFacility').val(),
-        roomMax: $('#roomMax').val(),
-        hotelNO: $('#hotelNO').val()
-    };
-
-    if (!roomData.hotelNO) {
-        alert('호텔 ID를 입력하세요.');
-        return;
-    }
-
-    $.ajax({
-        type: 'POST',
-        url: '/business/saveRoom',
-        data: JSON.stringify(roomData),
-        contentType: 'application/json',
-        success: function(response) {
-            alert('숙소 등록을 완료하였습니다');
-        },
-        error: function(xhr, status, error) {
-            alert('데이터 저장 오류: ' + error);
-        }
-    });
-}
-
 function back() {
     window.history.back();  // 또는 window.location.href = '/원하는URL';
 }
