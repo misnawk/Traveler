@@ -31,7 +31,7 @@ public class MainController {
     private final PackageService packageService;
     private final AdminService adminService;
 
-    private final PackageService packageService;
+
 
     @Autowired
     BoardService boardService;
