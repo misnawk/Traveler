@@ -147,7 +147,7 @@ public class AirController {
                     air.getAirTitle());
 
             if (success) {
-                return ResponseEntity.ok(Map.of("success", true, "message", "예약이 완료되었습니다."));
+                return ResponseEntity.ok(Map.of("success", true, "message", "예약이 완료되었습니다.","redirect", "/"));
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body(Map.of("success", false, "message", "예약 처리 중 오류가 발생했습니다."));
