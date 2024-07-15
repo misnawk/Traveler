@@ -15,7 +15,8 @@
         SELECT * FROM city WHERE cityNO = #{cityNO}
     </select>
 
+    <!-- 도시 이름으로 도시 정보 조회 -->
     <select id="getCityByName" parameterType="string" resultType="com.exampl.traveler.vo.CityVO">
-        SELECT * FROM city WHERE cityName = #{cityName}
+        SELECT * FROM CITY WHERE cityName = #{cityName}
     </select>
 </mapper>

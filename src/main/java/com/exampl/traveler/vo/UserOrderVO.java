@@ -16,5 +16,6 @@ public class UserOrderVO {
     private String binCate;
     private int totalCnt;
     private Date orderDate;
-    private String diaryTitle; // 패키지 제목
+    private Date useDate;
+    private String title; // 일반회원 관리자에서 사용
 }

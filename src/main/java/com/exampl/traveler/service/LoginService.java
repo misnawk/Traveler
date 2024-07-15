@@ -68,4 +68,9 @@ public class LoginService {
     public List<BusinessVO> binSelectAll(){
         return loginMapper.binSelectAll();
     }
+
+    // 기업 아이디 중복 체크
+    public boolean codeCheck(String code){
+        return loginMapper.binCodeCheck(code);
+    }
 }

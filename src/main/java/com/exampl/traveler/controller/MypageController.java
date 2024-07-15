@@ -75,5 +75,6 @@ public class MypageController {
         myPageService.pwInsert(vo);
         return "redirect:/mypage/"+id;
     }
+
 }
 

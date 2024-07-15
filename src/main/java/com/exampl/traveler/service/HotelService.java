@@ -32,13 +32,15 @@ public class HotelService {
     }
 
     @Transactional
-    public UserOrderVO createOrder(String userId, String hotelNO, String binCate, int peopleCount) {
+    public UserOrderVO createOrder(String userId, String hotelNO, String binCate, int peopleCount, Date useDate) {
         UserOrderVO order = new UserOrderVO();
         order.setUserId(userId);
         order.setComNO(hotelNO);
         order.setBinCate(binCate);
         order.setTotalCnt(peopleCount);
         order.setOrderDate(new Date());  // 현재 날짜 설정
+        order.setUseDate(useDate);
+
 
         hotelMapper.insertOrder(order);
 

@@ -17,7 +17,16 @@ public class DiaryService {
         return diaryMapper.show(userId);
     }
 
-    public void save(DiaryVO diary) {
-        diaryMapper.insertDiary(diary);
+    public void save(DiaryVO diaryVO) {
+        diaryMapper.insertDiaryEntry(diaryVO);
     }
+
+    public void update(DiaryVO diaryVO) {
+        diaryMapper.updateDiaryEntry(diaryVO);
+    }
+
+    public void delete(String diaryNO) {
+        diaryMapper.deleteDiaryEntry(diaryNO);
+    }
+
 }

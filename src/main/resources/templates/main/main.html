@@ -14,11 +14,12 @@
 <body>
 <div th:replace="header_foter/header :: header"></div>
 <main>
+
     <form action="/search" method="get">
         <div class="bgimg" style="background-image: url('./imgs/serchimg.jpg');">
             <div class="search-box">
-                <input class="search-box-input" type="text" id="data" name="data" placeholder="여행지를 검색해보세요">
-                <input class="search-box-submit" type="submit" value="검색">
+                <input class="search-btn-input" type="text" id="data" name="data" placeholder="여행지를 검색해보세요">
+                <input class="search-btn" type="submit" value="검색">
             </div>
         </div>
     </form>

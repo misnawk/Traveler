@@ -3,6 +3,7 @@ package com.exampl.traveler.controller;
 import com.exampl.traveler.service.DiaryService;
 import com.exampl.traveler.vo.DiaryVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,34 @@ public class DiaryController {
 
     @PostMapping
     @ResponseBody
-    public String saveDiaryEntry(@RequestBody DiaryVO diaryVO) {
-        diaryService.save(diaryVO);
-        return "일정이 저장되었습니다.";
+    public ResponseEntity<String> saveDiaryEntry(@RequestBody DiaryVO diaryVO) {
+        try {
+            diaryService.save(diaryVO);
+            return ResponseEntity.ok("일정이 저장되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("일정 저장 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
+    @PutMapping("/{diaryNO}")
+    @ResponseBody
+    public ResponseEntity<String> updateDiaryEntry(@PathVariable("diaryNO") Integer diaryNO, @RequestBody DiaryVO diaryVO) {
+        try {
+            diaryVO.setDiaryNO(diaryNO);
+            diaryService.update(diaryVO);
+            return ResponseEntity.ok("일정이 수정되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("일정 수정 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{diaryNO}")
+    @ResponseBody
+    public ResponseEntity<String> deleteDiaryEntry(@PathVariable("diaryNO") String diaryNO) {
+        try {
+            diaryService.delete(diaryNO);
+            return ResponseEntity.ok("일정이 삭제되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("일정 삭제 중 오류가 발생했습니다: " + e.getMessage());
+        }
     }
 }

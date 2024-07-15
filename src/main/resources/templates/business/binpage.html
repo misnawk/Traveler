@@ -31,43 +31,6 @@
         <input type="button" class="register_btn" onclick="binWrite()" value="등록하기">
     </div>
     <div class="list_container">
-        <div class="search_content">
-            <th:block th:if="${session.binCate == '1'}">
-                <select>
-                    <option value="">전체</option>
-                    <option value="natNO">국가</option>
-                    <option value="airNO">항공번호</option>
-                    <option value="airTitle">항공편명</option>
-                    <option value="airportName1">출발공항</option>
-                    <option value="airportName2">도착공항</option>
-                    <option value="airTime1">출발시간</option>
-                    <option value="airTime2">도착시간</option>
-                </select>
-            </th:block>
-            <th:block th:if="${session.binCate == '2'}">
-                <select>
-                    <option value="">전체</option>
-                    <option value="hotelCountry">국가</option>
-                    <option value="hotelName">호텔명</option>
-                    <option value="hotelPrice">가격(1박기준)</option>
-                </select>
-            </th:block>
-            <th:block th:if="${session.binCate == '3'}">
-                <select>
-                    <!-- 티켓 option 추가해주세요-->
-                    <option value="">전체</option>
-                </select>
-            </th:block>
-            <th:block th:if="${session.binCate == '4'}">
-                <select>
-                    <!-- 패키지 option 추가해주세요-->
-                    <option value="">전체</option>
-                </select>
-            </th:block>
-            <input class="search_input" id="searchBar" name="searchBar" placeholder="검색어를 입력하세요">
-            <input type="button"class="search_btn" onclick="#" value="검색">
-        </div>
-
         <div>
             <table class="table_content">
                 <tr>
@@ -86,26 +49,60 @@
                         <th>가격(1박 기준)</th>
                         <th>관리</th>
                     </th:block>
-                    <th:block th:if="${session.binCate == '3'}">
-                        <!-- 티켓 th 추가해주세요-->
+                    <tr th:each="hotel : ${hotelList}" th:if="${session.binCate == '2'}">
+                        <td th:text="${hotel.hotelCountry}"></td>
+                        <td th:text="${hotel.hotelName}"></td>
+                        <td th:text="${hotel.hotelTime}"></td>
+                        <td th:text="${hotel.hotelPrice}"></td>
+                        <td><input type="button" class="item_btn" onclick="manageHotel(/* add parameters as needed */)" value="관리"></td>
+                    </tr>
+                <th:block th:if="${session.binCate == '3'}">
+                        <th>국가</th>
+                        <th>카테고리</th>
+                        <th>티켓명</th>
+                        <th>사용일</th>
+                        <th>가격</th>
                         <th>관리</th>
                     </th:block>
                     <th:block th:if="${session.binCate == '4'}">
-                        <!-- 패키지 th 추가해주세요-->
+                        <th>패키지명</th>
+                        <th>최대인원</th>
+                        <th>시작일</th>
+                        <th>종료일</th>
+                        <th>가격</th>
                         <th>관리</th>
                     </th:block>
                 </tr>
-                <tr th:each="list : ${list}">
+                <tr th:each="item : ${item}">
                     <th:block th:if="${session.binCate == '1'}">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
                     <th:block th:if="${session.binCate == '2'}">
+                        <td>[[${item.getHotelCountry}]]</td>
+                        <td>[[${item.getHotelName}]]</td>
+                        <td>[[${item.getHotelTime}]]</td>
+                        <th>[[${#numbers.formatInteger(item.getHotelPrice, 3, 'COMMA')}]]</th>
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
                     <th:block th:if="${session.binCate == '3'}">
+                        <td>[[${item.getTickPlace}]]</td>
+                        <td>[[${item.getCategory}]]</td>
+                        <td>[[${item.getTickTitle}]]</td>
+                        <td>[[${#dates.format(item.getTickDate, 'yyyy-MM-dd')}]]</td>
+                        <td>[[${#numbers.formatInteger(item.getTickPrice, 3, 'COMMA')}]]</td>
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
                     <th:block th:if="${session.binCate == '4'}">
+                        <td>[[${item.getPackTitle}]]</td>
+                        <td>[[${item.getPackMax}]]</td>
+                        <td>[[${item.getPack}]]</td>
+                        <td>[[${item.getPack}]]</td>
+                        <td>[[${#numbers.formatInteger(item.getPackagePrice, 3, 'COMMA')}]]</td>
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
                 </tr>
@@ -114,6 +111,6 @@
     </div>
 
 </main>
-<!--    <div th:replace="header_foter/foter :: foter"></div>-->
+    <div th:replace="header_foter/foter :: foter"></div>
 </body>
 </html>

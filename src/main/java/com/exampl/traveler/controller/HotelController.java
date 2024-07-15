@@ -95,10 +95,11 @@ public class HotelController {
         return "hotel/hotelPayment"; // 결제 페이지 템플릿 이름
     }
 
-    @PostMapping("/hotel/{hotelNO}/order")
+    @PostMapping("hotel/{hotelNO}/order")
     public ResponseEntity<?> orderHotel(@PathVariable("hotelNO") String hotelNO,
                                         @RequestParam(value = "binCate", defaultValue = "2") String binCate,
                                         @RequestParam("peopleCount") int peopleCount,
+                                        @RequestParam("useDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date useDate,
                                         HttpSession session) {
         String userId = (String) session.getAttribute("id");
         if (userId == null) {
@@ -107,7 +108,7 @@ public class HotelController {
         }
 
         try {
-            UserOrderVO order = hotelService.createOrder(userId, hotelNO, binCate, peopleCount);
+            UserOrderVO order = hotelService.createOrder(userId, hotelNO, binCate, peopleCount, useDate);
             return ResponseEntity.ok(Collections.singletonMap("orderId", order.getOrderId()));
         } catch (Exception e) {
             e.printStackTrace();

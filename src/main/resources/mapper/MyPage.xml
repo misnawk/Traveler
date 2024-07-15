@@ -2,13 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exampl.traveler.mapper.MyPageMapper">
+    <!-- 회원별 주문건 select -->
+    <select id="orderSelectID">
+        select * from orders where userID = #{id}
+    </select>
+
     <!-- 수정한 회원정보 업데이트 -->
     <update id="proUpdate">
         update user set userEmail = #{userEmail}, userName = #{userName}, userTell = #{userTell}
         where userID = #{userID}
     </update>
+
     <!-- 수정한 비밀번호 업데이트 -->
     <update id="pwInsert">
         update user set userPW = #{userPW} where userID = #{userID}
     </update>
+
 </mapper>
