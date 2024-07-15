@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/css/mypage/editor.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/header_foter/header.css">
+    <link rel="stylesheet" href="/css/header_foter/foter.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="/js/business/binEditorPW.js" defer></script>
+</head>
+<body>
+<main>
+    <div th:replace="header_foter/header :: header"></div>
+    <form name="f" th:action="@{/binpage/pw/update}" th:object="${vo}" method="post">
+        <input type="hidden" id="id" name="id" th:value="${session.binID}">
+        <div class="body_container">
+            <div class="table_container">
+                <table class="table_content">
+                    <tr class="table_tr">
+                        <th>현재 비밀번호</th>
+                        <td>
+                            <input type="password" class="input_text" name="nowPW" id="nowPW">
+                            <input type="button" class="pw_btn" onclick="nowPWCheck()" value="현재 비밀번호 확인">
+                            <span id="nowMsg"></span>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table_content">
+                    <tr class="table_tr">
+                        <th>새 비밀번호</th>
+                        <td>
+                            <input type="password" class="input_text" name="newPW" id="newPW" onkeydown="pwRange()">
+                            <span id="rangeMsg"></span>
+                        </td>
+                    </tr>
+                    <tr class="table_tr">
+                        <th>새 비밀번호 확인</th>
+                        <td>
+                            <input type="password" class="input_text" name="newPWCheck" id="newPWCheck" onkeydown="pwCheck()">
+                            <span id="checkMsg"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="btn_content">
+                <input type="button" class="save_btn" id="saveBtn" name="saveBtn" onclick="pwEditor()" value="수정하기">
+            </div>
+            <div class="btn_content2">
+                <input type="button" class="back_btn" onclick="back()" value="취소">
+            </div>
+        </div>
+    </form>
+    <div th:replace="header_foter/foter :: foter"></div>
+</main>
+</body>
+</html>
