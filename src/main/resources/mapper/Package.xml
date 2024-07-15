@@ -7,21 +7,28 @@
     </select>
 
     <select id="getPackageById" parameterType="String" resultType="com.exampl.traveler.vo.PackageVO">
-        SELECT * FROM Package WHERE packageNO = #{id}
+        SELECT * FROM Package WHERE packageNo = #{id}
     </select>
 
     <insert id="insertOrder" parameterType="com.exampl.traveler.vo.UserOrderVO" useGeneratedKeys="true" keyProperty="orderId">
-        INSERT INTO orders (userID, comNO, binCate, totalCnt, orderDate, useDate)
-        VALUES (#{userId}, #{comNO}, #{binCate}, #{totalCnt}, #{orderDate}, #{useDate})
+        INSERT INTO orders (userID, comNO, bincate, totalcnt, orderdate)
+        VALUES (#{userId}, #{comNo}, #{bincate}, #{totalCnt}, #{orderDate})
     </insert>
 
-    <insert id="insertDiary" parameterType="java.util.Map">
-        INSERT INTO DIARY (userID, orderID, GoDay, BackDay, DiaryTitle)
-        VALUES (#{userId}, #{orderId}, #{goDay}, #{backDay}, #{diaryTitle})
+    <insert id="insertDiary">
+        INSERT INTO DIARY (userID, ORDERID, GODAY, DIARYTITLE)
+        VALUES (#{userId}, #{orderId}, #{goDay}, #{diaryTitle})
     </insert>
 
-    <select id="getLastInsertId" resultType="java.lang.Integer">
-        SELECT LAST_INSERT_ID()
+    <select id="getPackages" parameterType="com.exampl.traveler.vo.PackageVO">
+        SELECT * FROM Package LIMIT 3
     </select>
 
+
+
+    <select id="getPackagesNat" resultType="com.exampl.traveler.vo.PackageVO">
+        SELECT * FROM Package
+        WHERE packageTitle LIKE CONCAT('%', #{keyword}, '%')
+        OR packageText LIKE CONCAT('%', #{keyword}, '%')
+    </select>
 </mapper>

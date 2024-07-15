@@ -66,33 +66,18 @@
             </div>
         </div>
     </div>
-    <div class="package">
+    <div class="package" >
         <div class="package_top">
             <h3 class="package_text">현재 뜨고 있는 패키지상품들</h3>
         </div>
-        <div class="package_container">
-            <button type="button" class="package_btn">
-                <img src="/imgs/파타야.jpg" alt="도쿄">
-                <h3>방콕&파타야 5/6</h3>
+        <div class="package_container" >
+            <button type="button" class="package_btn" th:each="packages : ${packages}">
+                <img th:src="${packages.imageUrl}" th:alt="${packages.packageTitle}">
+                <h3 th:text="${packages.packageTitle}">방콕&파타야 5/6</h3>
             </button>
         </div>
     </div>
 
-    <div class="more" id="more">
-        <button type="button" class="more_btn">더보기</button>
-    </div>
-
-    <div class="trip_container" id="trip_container" style="display: none;">
-        <div class="package_top">
-            <h3 class="package_text">현재 뜨고 있는 패키지상품들</h3>
-        </div>
-        <div>
-            <button type="button" class="package_btn">
-                <img src="/imgs/파타야.jpg" alt="방콕&파타야 5/6">
-                <h3>방콕&파타야 5/6</h3>
-            </button>
-        </div>
-    </div>
 
 </main>
 <div th:replace="header_foter/foter :: foter"></div>

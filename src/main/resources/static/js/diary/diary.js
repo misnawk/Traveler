@@ -1,11 +1,12 @@
 function allday(date) {
     var adjustedDate = new Date(date);
-    adjustedDate.setDate(adjustedDate.getDate() + 1); // 하루 감소
+    adjustedDate.setDate(adjustedDate.getDate()); // 하루 감소
     return adjustedDate.toISOString().split('T')[0]; // 날짜 부분만 반환
 }
+
 function backday(date) {
     var adjustedDate = new Date(date);
-    adjustedDate.setDate(adjustedDate.getDate() + 2); // 하루 감소
+    adjustedDate.setDate(adjustedDate.getDate() + 1); // 하루 감소
     return adjustedDate.toISOString().split('T')[0]; // 날짜 부분만 반환
 }
 
@@ -28,21 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('User ID not found');
                 failureCallback('User ID not found');
             }
-        },
-        eventDrop: function(info) {
-            alert(info.event.title + "가 " + info.event.start.toISOString().split('T')[0] + "로 이동되었습니다.");
-            updateDiaryEntry(info.event);
-        },
-        eventResize: function(info) {
-            alert(info.event.title + "가 " + info.event.end.toISOString().split('T')[0] + "로 연장되었습니다.");
-            updateDiaryEntry(info.event);
-        },
-        eventClick: function(info) {
-            if (confirm("일정을 삭제하시겠습니까?")) {
-                deleteDiaryEntry(info.event);
-                info.event.remove();
+        }, eventClick: function(info) {
+                       showEditForm(info.event);
             }
-        }
+
     });
 
     calendar.render();
@@ -51,6 +41,50 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         saveDiaryEntry(calendar);
     });
+
+    var editFormContainer = document.getElementById('edit-event-form-container');
+    var cancelEditFormBtn = document.getElementById('cancel-edit-event-form');
+    var deleteEventBtn = document.getElementById('delete-event');
+
+    var showFormBtn = document.getElementById('show-event-form');
+    var formContainer = document.getElementById('event-form-container');
+    var cancelFormBtn = document.getElementById('cancel-event-form');
+    cancelEditFormBtn.addEventListener('click', function() {
+        editFormContainer.style.display = 'none';
+    });
+
+    showFormBtn.addEventListener('click', function() {
+        formContainer.style.display = 'block';
+    });
+
+    cancelFormBtn.addEventListener('click', function() {
+        formContainer.style.display = 'none';
+    });
+
+    // 폼 외부를 클릭하면 폼이 닫히도록 설정
+    window.addEventListener('click', function(event) {
+        if (event.target == formContainer) {
+            formContainer.style.display = 'none';
+        }
+    });
+    deleteEventBtn.addEventListener('click', function() {
+            if (confirm("정말로 이 일정을 삭제하시겠습니까?")) {
+                var eventId = document.getElementById('edit-event-id').value;
+                deleteDiaryEntry(eventId, calendar);
+            }
+        });
+
+        $('#edit-event-form').submit(function(e) {
+            e.preventDefault();
+            updateDiaryEntry(calendar);
+        });
+
+        // 폼 외부를 클릭하면 폼이 닫히도록 설정
+        window.addEventListener('click', function(event) {
+            if (event.target == editFormContainer) {
+                editFormContainer.style.display = 'none';
+            }
+        });
 });
 
 function loadDiaryEntries(userId, successCallback, failureCallback) {
@@ -62,7 +96,7 @@ function loadDiaryEntries(userId, successCallback, failureCallback) {
                 return {
                     id: entry.orderID,
                     title: entry.diaryTitle,
-                    start: entry.allDay || allday(entry.goDay)  , // 시간 정보 제거
+                    start: entry.allDay || allday(entry.goDay), // 시간 정보 제거
                     end: backday(entry.backDay), // 시간 정보 제거
                     color: entry.diaryColor || getRandomColor() // diaryColor null일 경우 랜덤 색상 사용
                 };
@@ -77,42 +111,43 @@ function loadDiaryEntries(userId, successCallback, failureCallback) {
     });
 }
 
- function saveDiaryEntry(calendar) {
-        var userId = $('#id').val();
-        if (!userId) {
-            console.error('User ID not found');
-            return;
-        }
-
-        var diaryEntry = {
-            userId: userId,
-            allDay: $('#start').val(),
-            backDay: $('#end').val(),
-            diaryTitle: $('#title').val(),
-            diaryColor: $('#color').val() // 색상 값을 diaryText로 사용
-        };
-
-        $.ajax({
-            url: '/diary',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(diaryEntry),
-            success: function(response) {
-                alert('일정이 저장되었습니다.');
-                calendar.addEvent({
-                    title: diaryEntry.diaryTitle,
-                    start: diaryEntry.allDay,
-                    end: diaryEntry.backDay,
-                    color: diaryEntry.diaryColor,
-                    editable: true
-                });
-                $('#event-form')[0].reset();
-            },
-            error: function(xhr, status, error) {
-                console.error('Error saving diary entry:', error);
-            }
-        });
+function saveDiaryEntry(calendar) {
+    var userId = $('#id').val();
+    if (!userId) {
+        console.error('User ID not found');
+        return;
     }
+
+    var diaryEntry = {
+        userId: userId,
+        goDay: $('#start').val(),
+        backDay: $('#end').val(),
+        diaryTitle: $('#title').val(),
+        diaryColor: $('#color').val() // 색상 값을 diaryText로 사용
+    };
+    console.log("Sending diary entry: ", JSON.stringify(diaryEntry));
+    $.ajax({
+        url: '/diary',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(diaryEntry),
+        success: function(response) {
+            alert('일정이 저장되었습니다.');
+            calendar.addEvent({
+                title: diaryEntry.diaryTitle,
+                start: diaryEntry.goDay,
+                end: diaryEntry.backDay,
+                color: diaryEntry.diaryColor,
+                editable: true
+            });
+            $('#event-form')[0].reset();
+            document.getElementById('event-form-container').style.display = 'none'; // 폼 숨기기
+        },
+        error: function(xhr, status, error) {
+            console.error('Error saving diary entry:', error);
+        }
+    });
+}
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -122,6 +157,69 @@ function getRandomColor() {
     }
     return color;
 }
+function showEditForm(event) {
+    var editFormContainer = document.getElementById('edit-event-form-container');
+    document.getElementById('edit-event-id').value = event.id;
+    document.getElementById('edit-title').value = event.title;
+    document.getElementById('edit-start').value = event.start.toISOString().split('T')[0];
+    document.getElementById('edit-end').value = event.end ? event.end.toISOString().split('T')[0] : '';
+    document.getElementById('edit-color').value = event.backgroundColor;
+    editFormContainer.style.display = 'block';
+}
 
+function updateDiaryEntry(calendar) {
+    var eventId = document.getElementById('edit-event-id').value;
+    var diaryEntry = {
+        diaryNO: eventId,
+        userId: $('#id').val(),
+        goDay: $('#edit-start').val(),
+        backDay: $('#edit-end').val(),
+        diaryTitle: $('#edit-title').val(),
+        diaryColor: $('#edit-color').val()
+    };
 
+    $.ajax({
+        url: '/diary/' + eventId,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(diaryEntry),
+        success: function(response) {
+            alert('일정이 수정되었습니다.');
+            var event = calendar.getEventById(eventId);
+            if (event) {
+                event.remove();
+            }
+            calendar.addEvent({
+                id: eventId,
+                title: diaryEntry.diaryTitle,
+                start: diaryEntry.goDay,
+                end: diaryEntry.backDay,
+                color: diaryEntry.diaryColor,
+                editable: true
+            });
+            document.getElementById('edit-event-form-container').style.display = 'none';
+        },
+        error: function(xhr, status, error) {
+            console.error('Error updating diary entry:', error);
+        }
+    });
+}
+
+function deleteDiaryEntry(eventId, calendar) {
+    $.ajax({
+        url: '/diary/' + eventId,
+        type: 'DELETE',
+        success: function(response) {
+            alert('일정이 삭제되었습니다.');
+            var event = calendar.getEventById(eventId);
+            if (event) {
+                event.remove();
+            }
+            document.getElementById('edit-event-form-container').style.display = 'none';
+        },
+        error: function(xhr, status, error) {
+            console.error('Error deleting diary entry:', error);
+        }
+    });
+}
 
