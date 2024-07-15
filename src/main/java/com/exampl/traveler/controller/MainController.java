@@ -25,8 +25,10 @@ public class MainController {
     @Autowired
     private CityService cityService;
     private final MyPageService myPageService;
+    private final AirService airService;
     private final HotelService hotelService;
     private final TicketService ticketService;
+    private final PackageService packageService;
     private final AdminService adminService;
 
     @Autowired
@@ -74,7 +76,8 @@ public class MainController {
 
         for(int i =0; i < orders.size(); i++) {
             if(orders.get(i).getComNO().startsWith("A")){
-
+                AirVO item =  airService.getAirByAirlineNo(orders.get(i).getComNO());
+                orders.get(i).setTitle(item.getAirTitle());
             }else if(orders.get(i).getComNO().startsWith("h")){
                 HotelVO item =  hotelService.getHotelById(orders.get(i).getComNO());
                 orders.get(i).setTitle(item.getHotelName());
@@ -82,7 +85,8 @@ public class MainController {
                 TicketVO item = ticketService.getTicketByTickNO(orders.get(i).getComNO());
                 orders.get(i).setTitle(item.getTickTitle());
             }else if(orders.get(i).getComNO().startsWith("P")){
-
+                PackageVO item =  packageService.getPackageById(orders.get(i).getComNO());
+                orders.get(i).setTitle(item.getPackageTitle());
             }
         }
 
