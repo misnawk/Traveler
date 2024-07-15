@@ -21,4 +21,12 @@ public class DiaryService {
         diaryMapper.insertDiaryEntry(diaryVO);
     }
 
+    public void update(DiaryVO diaryVO) {
+        diaryMapper.updateDiaryEntry(diaryVO);
+    }
+
+    public void delete(String diaryNO) {
+        diaryMapper.deleteDiaryEntry(diaryNO);
+    }
+
 }

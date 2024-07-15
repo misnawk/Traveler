@@ -9,7 +9,7 @@ public interface DiaryMapper {
     List<DiaryVO> show(String userId);
     void insertDiaryEntry(DiaryVO diaryVO);
     void updateDiaryEntry(DiaryVO diaryVO);
-    void deleteDiaryEntry(Integer diaryNO);
+    void deleteDiaryEntry(String diaryNO);
 
 
 }

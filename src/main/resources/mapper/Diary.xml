@@ -10,6 +10,14 @@
         INSERT INTO diary (userId, goDay, backDay, DiaryTitle, DiaryColor)
         VALUES (#{userId}, #{goDay}, #{backDay}, #{DiaryTitle}, #{DiaryColor})
     </insert>
+    <update id="updateDiaryEntry" parameterType="com.exampl.traveler.vo.DiaryVO">
+        UPDATE diary
+        SET goDay = #{goDay}, backDay = #{backDay}, DiaryTitle = #{DiaryTitle}, DiaryColor = #{DiaryColor}
+        WHERE diaryNO = #{diaryNO}
+    </update>
 
+    <delete id="deleteDiaryEntry" parameterType="java.lang.Integer">
+        DELETE FROM diary WHERE diaryNO = #{diaryNO}
+    </delete>
 
 </mapper>

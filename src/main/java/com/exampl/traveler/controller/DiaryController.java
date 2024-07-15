@@ -39,4 +39,26 @@ public class DiaryController {
             return ResponseEntity.badRequest().body("일정 저장 중 오류가 발생했습니다: " + e.getMessage());
         }
     }
+    @PutMapping("/{diaryNO}")
+    @ResponseBody
+    public ResponseEntity<String> updateDiaryEntry(@PathVariable("diaryNO") Integer diaryNO, @RequestBody DiaryVO diaryVO) {
+        try {
+            diaryVO.setDiaryNO(diaryNO);
+            diaryService.update(diaryVO);
+            return ResponseEntity.ok("일정이 수정되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("일정 수정 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{diaryNO}")
+    @ResponseBody
+    public ResponseEntity<String> deleteDiaryEntry(@PathVariable("diaryNO") String diaryNO) {
+        try {
+            diaryService.delete(diaryNO);
+            return ResponseEntity.ok("일정이 삭제되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("일정 삭제 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
 }
