@@ -2,6 +2,7 @@ package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.BusinessService;
 import com.exampl.traveler.service.HotelService;
+import com.exampl.traveler.service.LoginService;
 import com.exampl.traveler.vo.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,8 +25,84 @@ import java.util.Map;
 public class BusinessController {
     private final BusinessService businessService;
     private final HotelService hotelService;
+    private final LoginService loginService;
 
+    // 기업정보 수정 페이지
+    @GetMapping("binpage/editor/{id}")
+    public String proEditor(@PathVariable("id") String id, HttpSession httpSession, Model model){
+        String user = (String) httpSession.getAttribute("binID");
 
+        if(ObjectUtils.isEmpty(user) || !user.equals(id)){
+            return "/login/binLogin";
+        } else {
+            BusinessVO vo = loginService.binSelectOne(id);
+            if(vo.getBinCate().equals("1")){
+                vo.setBinCate("항공");
+            } else if(vo.getBinCate().equals("2")){
+                vo.setBinCate("숙박");
+            } else if(vo.getBinCate().equals("3")){
+                vo.setBinCate("티켓");
+            } else if(vo.getBinCate().equals("4")){
+                vo.setBinCate("패키지");
+            }
+            model.addAttribute("vo", vo);
+
+            return "/business/binEditor";
+        }
+    }
+
+    // 수정한 기업정보 업데이트
+    @PostMapping("binpage/editor/update")
+    public String proUpdate(BusinessVO vo){
+        businessService.binProUpdate(vo);
+        return "redirect:/binpage/"+vo.getBinID();
+
+    }
+
+    // 비밀번호 수정 페이지
+    @GetMapping("binpage/pw/{id}")
+    public String PwEditor(HttpSession httpSession, @PathVariable("id") String id){
+        String user = (String) httpSession.getAttribute("binID");
+
+        if(ObjectUtils.isEmpty(user) || !user.equals(id)){
+            return "/login/binLogin";
+        } else {
+            return "/business/binEditorPW";
+        }
+    }
+
+    // 현재 사용중인 비밀번호 확인
+    @PostMapping("binpage/pw/check")
+    public ResponseEntity<Boolean> binPwCheck(@RequestParam("id") String id,
+                                           @RequestParam("pw") String pw,
+                                           BusinessVO vo){
+
+        boolean result = false;
+        vo.setBinID(id);
+        vo.setBinPW(pw);
+
+        if (loginService.binLoginCheck(vo)) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
+    }
+
+    // 수정한 비밀번호 업데이트
+    @PostMapping("binpage/pw/update")
+    public String binPwUpdate(@RequestParam("newPW") String pw ,
+                          @RequestParam("id") String id,
+                          BusinessVO vo){
+        vo.setBinID(id);
+        vo.setBinPW(pw);
+
+        businessService.binPwUpdate(vo);
+        return "redirect:/binpage/" + id;
+
+    }
 
 
 

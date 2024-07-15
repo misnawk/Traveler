@@ -36,10 +36,16 @@ function idCheck(){
 }
 
 function codeCheck(){
-    let code = document.getElementById("binCode").value
+    let binCode = document.getElementById("binCode").value
+    let code = binCode.replace(/[^0-9]/g,"")
 
     if(code == ''){
-        alert("아이디를 입력하세요")
+        alert("사업자등록번호 입력하세요")
+        return
+    }
+
+    if(code.length > 10){
+        alert("사업자등록번호는 10자를 초과하지 않습니다. 다시 확인 부탁드립니다")
         return
     }
 

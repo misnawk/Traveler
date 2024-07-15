@@ -86,12 +86,16 @@ public class LoginController {
     public String userInsert(MemberVO vo,
                               @RequestParam(value="year") String year,
                               @RequestParam(value="month") String month,
-                              @RequestParam(value="day") String day){
+                              @RequestParam(value="day") String day,
+                              @RequestParam(value="userID") String userID,
+                              @RequestParam(value="userTell") String userTell){
 
         month = String.format("%2s", month).replace(" ", "0");
         day = String.format("%2s", day).replace(" ", "0");
 
+        vo.setUserID(userID.trim());
         vo.setUserBirth(year+"-"+month+"-"+day);
+        vo.setUserTell(userTell.replaceAll("[^0-9]","").trim());
 
         loginService.idInsert(vo);
         return "redirect:/login";
@@ -156,7 +160,14 @@ public class LoginController {
 
     // 기업 회원가입
     @PostMapping("bin/insert")
-    public String binInsert(BusinessVO vo){
+    public String binInsert(BusinessVO vo,
+                            @RequestParam(value="binID") String binID,
+                            @RequestParam(value="binTell") String binTell,
+                            @RequestParam(value="binCode") String binCode){
+
+        vo.setBinID(binID.trim());
+        vo.setBinTell(binTell.replaceAll("[^0-9]","").trim());
+        vo.setBinCode(binCode.replaceAll("[^0-9]","").trim());
         loginService.binIdInsert(vo);
         return "redirect:/binLogin";
     }

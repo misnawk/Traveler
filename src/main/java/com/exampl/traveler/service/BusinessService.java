@@ -23,6 +23,16 @@ import java.util.Map;
 public class BusinessService {
     private final BusinessMapper businessMapper;
 
+    // 수정한 기업정보 업데이트
+    public boolean binProUpdate(BusinessVO vo){
+        return businessMapper.binProUpdate(vo);
+    }
+
+    // 수정한 비밀번호 업데이트
+    public boolean binPwUpdate(BusinessVO vo){
+        return businessMapper.binPwUpdate(vo);
+    }
+
     @Value("${imgbb.api.key}")
     private String imgbbApiKey;
 
