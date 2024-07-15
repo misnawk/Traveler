@@ -14,8 +14,9 @@
     <div th:replace="header_foter/header :: header"></div>
 
     <h1>호텔 등록</h1>
-    <form id="businessForm">
+    <form id="hotelForm">
         <input type="hidden" id="binID" name="binID" value="BIN002">
+        <input type="hidden" id="binCate" name="binCate" th:value="${session.binCate}">
         <div class="table_container">
             <table class="table_content">
                 <tr>
@@ -92,34 +93,10 @@
                 </tr>
             </table>
         </div>
-
-        <h1>숙소 등록</h1>
-        <div class="table_container">
-            <table class="table_content">
-                <tr>
-                    <th>숙소 이름</th>
-                    <td><input type="text" id="roomName" name="roomName"></td>
-                </tr>
-                <tr>
-                    <th>숙소 이미지</th>
-                    <td><input type="text" id="roomImg" name="roomImg"></td>
-                </tr>
-                <tr>
-                    <th>숙소 시설</th>
-                    <td><input type="text" id="roomFacility" name="roomFacility"></td>
-                </tr>
-                <tr>
-                    <th>최대 수용 인원</th>
-                    <td><input type="number" id="roomMax" name="roomMax"></td>
-                </tr>
-            </table>
-        </div>
-
-        <input type="button" class="save_btn" id="saveBtn" name="saveBtn" onclick="save()" value="저장하기">
-        <input type="button" class="back_btn" id="backBtn" name="backBtn" onclick="back()" value="뒤로가기">
+        <input type="button" class="save_btn" id="saveHotelBtn" onclick="saveHotel()" value="호텔 저장하기">
     </form>
 
-    <div th:replace="header_foter/foter :: foter"></div>
+    <input type="button" class="back_btn" id="backBtn" name="backBtn" onclick="back()" value="뒤로가기">
 </main>
 </body>
 </html>

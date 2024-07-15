@@ -45,19 +45,4 @@
         SELECT * FROM rooms
     </select>
 
-    <insert id="binInsertHotel" parameterType="com.exampl.traveler.vo.HotelVO" useGeneratedKeys="true" keyProperty="hotelNO">
-        INSERT INTO hotel (
-        hotelNO, hotelName, hotelPrice, hotelImg, hotelImg1, hotelImg2, hotelImg3, hotelImg4, hotelImg5, hotelImg6,
-        hotelText, hotelFacility, hotelCountry, hotelTime, hotelCheck, hotelAddr, hotelDescription, hotelSights, hotelTotal, binID, binCate
-        ) VALUES (
-        #{hotelNO}, #{hotelName}, #{hotelPrice}, #{hotelImg}, #{hotelImg1}, #{hotelImg2}, #{hotelImg3}, #{hotelImg4}, #{hotelImg5}, #{hotelImg6},
-        #{hotelText}, #{hotelFacility}, #{hotelCountry}, #{hotelTime}, #{hotelCheck}, #{hotelAddr}, #{hotelDescription}, #{hotelSights}, #{hotelTotal}, #{binID}, #{binCate}
-        )
-    </insert>
-
-    <insert id="binInsertRoom" parameterType="com.exampl.traveler.vo.RoomtypeVO">
-        INSERT INTO rooms (hotelNO, roomName, roomImg, roomFacility, roomMax)
-        VALUES (#{hotelNO}, #{roomName}, #{roomImg}, #{roomFacility}, #{roomMax})
-    </insert>
-
 </mapper>

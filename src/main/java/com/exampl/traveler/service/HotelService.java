@@ -74,14 +74,4 @@ public class HotelService {
     public List<RoomtypeVO> getRoomsByFacilityAndHotel(String hotelNO, String facility) {
         return hotelMapper.selectRoomsByFacilityAndHotel(hotelNO, facility);
     }
-
-    @Transactional
-    public void createHotelAndRoom(HotelVO hotelVO, RoomtypeVO roomtypeVO) {
-        hotelMapper.binInsertHotel(hotelVO);
-        roomtypeVO.setHotelNO(hotelVO.getHotelNO()); // 방 데이터에 호텔 번호 설정
-        hotelMapper.binInsertRoom(roomtypeVO);
-    }
-
-
-
 }

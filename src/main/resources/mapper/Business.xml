@@ -25,6 +25,11 @@
         VALUES (#{binId}, #{airTitle}, #{departureAirport}, #{arrivalAirport}, #{airCompany}, #{departureDateTime}, #{arrivalDateTime}, #{airPrice}, #{cityNO})
     </insert>
 
+    <insert id="binInsertHotel" parameterType="com.exampl.traveler.vo.HotelVO" useGeneratedKeys="true" keyProperty="hotelNO">
+        INSERT INTO hotel (hotelName, hotelPrice, hotelImg, hotelImg1, hotelImg2, hotelImg3, hotelImg4, hotelImg5, hotelImg6, hotelText, hotelFacility, hotelCountry, hotelTime, hotelCheck, hotelAddr, hotelDescription, hotelSights, hotelTotal, binID, binCate)
+        VALUES (#{hotelName}, #{hotelPrice}, #{hotelImg}, #{hotelImg1}, #{hotelImg2}, #{hotelImg3}, #{hotelImg4}, #{hotelImg5}, #{hotelImg6}, #{hotelText}, #{hotelFacility}, #{hotelCountry}, #{hotelTime}, #{hotelCheck}, #{hotelAddr}, #{hotelDescription}, #{hotelSights}, #{hotelTotal}, #{binID}, #{binCate})
+    </insert>
+
 
     <insert id="insertTicket" parameterType="com.exampl.traveler.vo.TicketVO">
         INSERT INTO tick ( binID, tickImg, tickTitle, tickText, tickOp, tickPrice, tickDate, tickPlace, category)

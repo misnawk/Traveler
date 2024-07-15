@@ -52,10 +52,14 @@
     <p>인원수: <span th:text="${guestCount}"></span></p>
 
     <ul>
-      <li>숙박 요금: <span th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelPrice, 0, 'COMMA', 0, 'POINT')}"></span></li>
+      <li>숙박 요금:
+        <span th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelPrice * guestCount, 0, 'COMMA', 0, 'POINT')}"></span>
+      </li>
       <li>할인: -<span th:text="'₩' + ${#numbers.formatDecimal(4000, 0, 'COMMA', 0, 'POINT')}"></span></li>
     </ul>
-    <h3>총 금액: <span th:text="'₩' + ${#numbers.formatDecimal(hotel.hotelPrice - 4000, 0, 'COMMA', 0, 'POINT')}"></span></h3>
+    <h3>총 금액:
+      <span th:text="'₩' + ${#numbers.formatDecimal((hotel.hotelPrice * guestCount) - 4000, 0, 'COMMA', 0, 'POINT')}"></span>
+    </h3>
   </div>
   <div class="payment-button-container">
     <button id="payment-button"

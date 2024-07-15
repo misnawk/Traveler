@@ -1,9 +1,6 @@
 package com.exampl.traveler.mapper;
 
-import com.exampl.traveler.vo.AirVO;
-import com.exampl.traveler.vo.BusinessVO;
-import com.exampl.traveler.vo.PackageVO;
-import com.exampl.traveler.vo.TicketVO;
+import com.exampl.traveler.vo.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,6 +15,8 @@ public interface BusinessMapper {
     void binIdInsert(BusinessVO businessVO);
 
     void insertAir(AirVO airVO);
+
+    void binInsertHotel(HotelVO hotelVO);
 
     void insertTicket(TicketVO ticketVO);
 
