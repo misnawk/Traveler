@@ -29,7 +29,6 @@ function saveHotel() {
         contentType: 'application/json',
         success: function(response) {
             if (response.status === 'success') {
-                alert('호텔 등록을 완료하였습니다. 호텔 ID: ' + response.hotelNO);
                 $('#hotelNO').val(response.hotelNO); // 호텔 번호를 설정
             } else {
                 alert('데이터 저장 오류: ' + response.message);
@@ -42,5 +41,5 @@ function saveHotel() {
 }
 
 function back() {
-    window.history.back();  // 또는 window.location.href = '/원하는URL';
+    window.history.back();
 }
