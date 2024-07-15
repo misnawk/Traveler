@@ -9,7 +9,7 @@ function save() {
         hotelImg4: document.getElementById('hotelImg4').value,
         hotelImg5: document.getElementById('hotelImg5').value,
         hotelImg6: document.getElementById('hotelImg6').value,
-        hotelText: document.getElementById('hotelText').value,
+        hotelText: document .getElementById('hotelText').value,
         hotelFacility: document.getElementById('hotelFacility').value,
         hotelCountry: document.getElementById('hotelCountry').value,
         hotelTime: document.getElementById('hotelTime').value,

@@ -3,19 +3,19 @@ package com.exampl.traveler.vo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class AirVO {
-    private String airlineNo;
-    private String airNo;
+    private String airlineNO;
+    private String binId;
     private String airTitle;
     private String departureAirport;
     private String arrivalAirport;
     private String airCompany;
-    private LocalDateTime departureDateTime;
-    private LocalDateTime arrivalDateTime;
+    private Date departureDateTime;
+    private Date arrivalDateTime;
     private int airPrice;
-    private String cityNo;
-    private int totalSeats;
-    private int availableSeats;
+    private int cityNO;
+    private String cityName;
 }

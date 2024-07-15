@@ -10,10 +10,9 @@
         <result property="tickText" column="tickText"/>
         <result property="tickOp" column="tickOp"/>
         <result property="tickPrice" column="tickPrice"/>
-        <result property="tickDate" column="tickDate" jdbcType="TIMESTAMP"/>
+        <result property="tickDate" column="tickDate"/>
         <result property="tickPlace" column="tickPlace"/>
         <result property="category" column="category"/>
-        <result property="tickTime" column="tickTime" jdbcType="TIME" javaType="java.time.LocalTime"/>
     </resultMap>
 
     <select id="getAllTickets" resultMap="ticketResultMap">
@@ -25,17 +24,18 @@
     </select>
 
     <insert id="createOrder" parameterType="map" useGeneratedKeys="true" keyProperty="orderID">
-        INSERT INTO orders (userID, comNO, bincate, totalcnt, orderdate)
-        VALUES (#{userId}, #{comNO}, #{bincate}, #{totalcnt}, NOW())
+        INSERT INTO orders (userID, comNO, binCate, totalCnt, orderDate, useDate)
+        VALUES (#{userId}, #{comNO}, #{binCate}, #{totalCnt}, #{orderDate}, #{useDate})
     </insert>
 
     <insert id="createDiary" parameterType="map">
-        INSERT INTO DIARY (userID, ORDERID, GODAY, DIARYTITLE)
-        VALUES (#{userId}, #{orderID}, #{goday}, #{diaryTitle})
+        INSERT INTO DIARY (userID, ORDERID, allday, DIARYTITLE)
+        VALUES (#{userId}, #{orderId}, #{allDay}, #{diaryTitle})
     </insert>
 
-    <select id="getTicketByBinID" resultMap="ticketResultMap">
-        SELECT * FROM tick WHERE binID = #{binID} LIMIT 1
+    <select id="getLastInsertId" resultType="java.lang.Integer">
+        SELECT LAST_INSERT_ID()
     </select>
 
-</mapper>
+
+    </mapper>

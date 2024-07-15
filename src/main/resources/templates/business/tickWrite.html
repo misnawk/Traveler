@@ -2,49 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="/css/business/binWrite.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/css/header_foter/header.css">
-    <link rel="stylesheet" href="/css/header_foter/foter.css" />
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script type="text/javascript" src="/js/business/binWrite.js" defer></script>
+    <title>티켓 등록</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/business/ticketWrite.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/business/ticketWriteInput.js" defer></script>
 </head>
 <body>
-<main>
-    <div th:replace="header_foter/header :: header"></div>
+<div class="container">
+    <h1>티켓 등록</h1>
+    <form id="ticketForm" enctype="multipart/form-data">
+        <input type="hidden" id="binID" name="binID" th:value="${session.binID}">
 
-    <input type="hidden" id="binID" name="binID" th:value="${session.binID}">
+        <div class="form-group">
+            <label for="tickImg">티켓 이미지</label>
+            <input type="file" id="tickImg" name="tickImg" accept="image/*">
+        </div>
 
-    <div class="table_container">
-        <table class="table_content">
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <label for="tickTitle">티켓 제목</label>
+            <input type="text" id="tickTitle" name="tickTitle" required>
+        </div>
 
-        <input type="button" class="save_btn" id="saveBtn" name="saveBtn" onclick="save()" value="저장하기">
-        <input type="button" class="back_btn" id="backBtn" name="backBtn" onclick="back()" value="뒤로가기">
-    </div>
+        <div class="form-group">
+            <label for="tickText">티켓 설명</label>
+            <textarea id="tickText" name="tickText" required></textarea>
+        </div>
 
-    <div th:replace="header_foter/foter :: foter"></div>
-</main>
+        <div class="form-group">
+            <label for="tickOp">시간대</label>
+            <select id="tickOp" name="tickOp" required>
+                <option value="오전">오전</option>
+                <option value="오후">오후</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="tickPrice">가격</label>
+            <input type="number" id="tickPrice" name="tickPrice" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tickDate">날짜 및 시간</label>
+            <input type="datetime-local" id="tickDate" name="tickDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tickPlace">장소</label>
+            <select id="tickPlace" name="tickPlace" required>
+                <option value="">국가 선택</option>
+                <option value="일본">일본</option>
+                <option value="베트남">베트남</option>
+                <option value="대만">대만</option>
+                <option value="필리핀">필리핀</option>
+                <option value="인도네시아">인도네시아</option>
+                <option value="인도">인도</option>
+                <option value="태국">태국</option>
+                <option value="호주">호주</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="category">카테고리</label>
+            <select id="category" name="category" required>
+                <option value="">카테고리 선택</option>
+                <option value="테마파크">테마파크</option>
+                <option value="워터파크">워터파크</option>
+                <option value="박물관 & 미술관">박물관 & 미술관</option>
+                <option value="공원 & 자연">공원 & 자연</option>
+                <option value="아쿠아리움 & 동물원 & 농장">아쿠아리움 & 동물원 & 농장</option>
+                <option value="케이블카">케이블카</option>
+                <option value="전망대">전망대</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">등록하기</button>
+            <button type="button" class="btn btn-secondary" onclick="back()">뒤로가기</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

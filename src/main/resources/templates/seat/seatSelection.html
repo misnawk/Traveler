@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/seat/seatSelection.css" />
+    <title>비행기 좌석 예약</title>
+</head>
+<body>
+<h1>비행기 좌석 예약</h1>
+
+<h2 th:text="${airs.airTitle + ' - ' + airs.airlineNO}">항공편 정보</h2>
+
+<div class="legend">
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: #fff;"></div>
+        <span>이용 가능</span>
+    </div>
+    <div class="legend-item">
+        <div class="legend-color" style="background-color: #4CAF50;"></div>
+        <span>선택됨</span>
+    </div>
+</div>
+
+<div class="seat-map">
+    <th:block th:each="row : ${rows}">
+        <th:block th:each="col : ${columns}">
+            <div class="seat"
+                 th:attr="data-seat=${row + col}"
+                 th:text="${row + col}"></div>
+        </th:block>
+        <div class="aisle" th:if="${row == 'B'}"></div>
+    </th:block>
+</div>
+
+<div id="reservationData"
+     th:data-airline-no="${airs.airlineNO}"
+     th:data-trip-type="${tripType}">
+</div>
+<button type="button" id="reserveButton" disabled>예약하기</button>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let isLoggedIn = /*[[${userId != null}]]*/ false;
+    let loginPageUrl = /*[[@{/login}]]*/ '/login';
+    let userId = /*[[${userId}]]*/ null;
+    let airlineNo = /*[[${airs.airlineNO}]]*/ null;
+    /*]]>*/
+</script>
+
+<script src="/js/seat/seatSelection.js"></script>
+</body>
+</html>

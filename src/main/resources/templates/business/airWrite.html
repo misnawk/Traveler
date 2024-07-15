@@ -2,49 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="/css/business/binWrite.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/css/header_foter/header.css">
-    <link rel="stylesheet" href="/css/header_foter/foter.css" />
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script type="text/javascript" src="/js/business/binWrite.js" defer></script>
+    <title>항공권 등록</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/business/airWrite.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/business/airWriteInput.js" defer></script>
 </head>
 <body>
-<main>
-    <div th:replace="header_foter/header :: header"></div>
+<div class="container">
+    <h1>항공권 등록</h1>
+    <form id="airlineForm">
+        <input type="hidden" id="binID" name="binID" th:value="${session.binID}">
 
-    <input type="hidden" id="binID" name="binID" th:value="${session.binID}">
+        <div class="form-group">
+            <label for="airTitle">항공편명</label>
+            <input type="text" id="airTitle" name="airTitle" required>
+        </div>
 
-    <div class="table_container">
-        <table class="table_content">
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <th>title</th>
-                <td><input type="text"></td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <label for="departureAirport">출발 공항</label>
+            <input type="text" id="departureAirport" name="departureAirport" value="인천국제공항" readonly>
+        </div>
 
-        <input type="button" class="save_btn" id="saveBtn" name="saveBtn" onclick="save()" value="저장하기">
-        <input type="button" class="back_btn" id="backBtn" name="backBtn" onclick="back()" value="뒤로가기">
-    </div>
+        <div class="form-group">
+            <label for="arrivalCountry">도착 국가</label>
+            <select id="arrivalCountry" name="arrivalCountry" required>
+                <option value="">국가 선택</option>
+                <option value="100">일본</option>
+                <option value="200">베트남</option>
+                <option value="300">대만</option>
+                <option value="400">필리핀</option>
+                <option value="500">인도네시아</option>
+                <option value="600">인도</option>
+                <option value="700">태국</option>
+                <option value="800">호주</option>
+            </select>
+        </div>
 
-    <div th:replace="header_foter/foter :: foter"></div>
-</main>
+        <div class="form-group">
+            <label for="arrivalCity">도착 도시</label>
+            <select id="arrivalCity" name="arrivalCity" required>
+                <option value="">도시 선택</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="airCompany">항공사</label>
+            <input type="text" id="airCompany" name="airCompany" required>
+        </div>
+
+        <div class="form-group">
+            <label for="departureDateTime">출발 날짜와 시간</label>
+            <input type="datetime-local" id="departureDateTime" name="departureDateTime" required>
+        </div>
+
+        <div class="form-group">
+            <label for="arrivalDateTime">도착 날짜와 시간</label>
+            <input type="datetime-local" id="arrivalDateTime" name="arrivalDateTime" required>
+        </div>
+
+        <div class="form-group">
+            <label for="airPrice">가격</label>
+            <input type="number" id="airPrice" name="airPrice" required>
+        </div>
+
+        <div class="button-group">
+            <button type="button" id="saveBtn" class="btn btn-primary">등록하기</button>
+            <button type="button" id="backBtn" class="btn btn-secondary" onclick="back()">뒤로가기</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

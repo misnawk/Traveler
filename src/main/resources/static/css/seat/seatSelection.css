@@ -1,0 +1,62 @@
+body { 
+    font-family: Arial, sans-serif; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+h1, h2 { 
+    color: #333; 
+}
+.seat-map { 
+    display: grid; 
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 10px; 
+    margin-bottom: 20px; 
+}
+.seat { 
+    width: 60px; 
+    height: 60px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    border: 1px solid #ccc; 
+    cursor: pointer; 
+}
+.seat.selected { 
+    background-color: #4CAF50; 
+    color: white; 
+}
+.legend { 
+    display: flex; 
+    justify-content: center; 
+    margin-bottom: 20px; 
+}
+.legend-item { 
+    display: flex; 
+    align-items: center; 
+    margin: 0 10px; 
+}
+.legend-color { 
+    width: 20px; 
+    height: 20px; 
+    margin-right: 5px; 
+    border: 1px solid #ccc; 
+}
+button { 
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 16px; 
+}
+button:hover { 
+    background-color: #45a049; 
+}
+button:disabled { 
+    background-color: #cccccc; 
+    cursor: not-allowed; 
+}
+.aisle { 
+    width: 20px; 
+}

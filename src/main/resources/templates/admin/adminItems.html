@@ -28,7 +28,7 @@
             <li><a href="/admin">회원관리</a></li>
             <li><a href="/admin/business">기업관리</a></li>
             <li><a href="/admin/items">상품관리</a></li>
-            <li><a href="/amin/orders">결제관리</a></li>
+            <li><a href="/admin/orders">결제관리</a></li>
         </ul>
     </nav>
 </header>
@@ -76,23 +76,80 @@
         <table class="table_content">
             <tr>
                 <th:block th:if="${type == 'airline'}">
-                    <th>항공사</th>
-                    <th>분류</th>
-                    <th>상호명</th>
-                    <th>사업자등록번호</th>
-                    <th>대표전화번호</th>
-                    <th>대표이메일</th>
-                    <th>관리</th>
+                    <th>기업아이디</th>
+                    <th>국가</th>
+                    <th>항공편명</th>
+                    <th>출발/도착공항</th>
+                    <th>출발정보</th>
+                    <th>도착정보</th>
+                    <th>가격(1인 기준)</th>
+                </th:block>
+                <th:block th:if="${type == 'hotel'}">
+                    <th>기업아이디</th>
+                    <th>국가</th>
+                    <th>호텔명</th>
+                    <th>체크인/체크아웃</th>
+                    <th>가격(1박 기준)</th>
+                </th:block>
+                <th:block th:if="${type == 'tick'}">
+                    <th>기업아이디</th>
+                    <th>국가</th>
+                    <th>카테고리</th>
+                    <th>티켓명</th>
+                    <th>사용일</th>
+                    <th>가격</th>
+                </th:block>
+                <th:block th:if="${type == 'package'}">
+                    <th>기업아이디</th>
+                    <th>패키지명</th>
+                    <th>최대인원</th>
+                    <th>시작일</th>
+                    <th>종료일</th>
+                    <th>가격</th>
                 </th:block>
             </tr>
-            <tr th:each="vo : ${vo}">
-
-                <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
+            <tr th:each="item : ${item}">
+                <th:block th:if="${type == 'airline'}">
+                    <td>[[${item.getBinId}]]</td>
+                    <td>[[${item.getCityName}]]</td>
+                    <td>[[${item.getAirTitle}]]</td>
+                    <td>[[${item.getDepartureAirport}]]/[[${item.getArrivalAirport}]]</td>
+                    <td>[[${#dates.format(item.getDepartureDateTime, 'yyyy-MM-dd HH:mm')}]]
+                    <td>[[${#dates.format(item.getArrivalDateTime, 'yyyy-MM-dd HH:mm')}]]</td>
+                    <td>[[${#numbers.formatInteger(item.getAirPrice, 3, 'COMMA')}]]</td>
+                </th:block>
+                <th:block th:if="${type == 'hotel'}">
+                    <td>[[${item.getBinID}]]</td>
+                    <td>[[${item.getHotelCountry}]]</td>
+                    <td>[[${item.getHotelName}]]</td>
+                    <td>[[${item.getHotelTime}]]</td>
+                    <td>[[${#numbers.formatInteger(item.getHotelPrice, 3, 'COMMA')}]]</td>
+                </th:block>
+                <th:block th:if="${type == 'tick'}">
+                    <td>[[${item.getBinID}]]</td>
+                    <td>[[${item.getTickPlace}]]</td>
+                    <td>[[${item.getCategory}]]</td>
+                    <td>[[${item.getTickTitle}]]</td>
+                    <td>[[${#dates.format(item.getTickDate, 'yyyy-MM-dd')}]]</td>
+                    <td>[[${#numbers.formatInteger(item.getTickPrice, 3, 'COMMA')}]]</td>
+                </th:block>
+                <th:block th:if="${type == 'package'}">
+                    <td>[[${item.getBinId}]]</td>
+                    <th:block th:if="${#strings.length(item.getPackageTitle) > 10}">
+                        <td>[[${#strings.substring(item.getPackageTitle,0,10)}]]...</td>
+                    </th:block>
+                    <th:block th:unless="${#strings.length(item.getPackageTitle) > 10}">
+                        <td>[[${item.getPackageTitle}]]</td>
+                    </th:block>
+                    <td>[[${item.getPackageMax}]]</td>
+                    <td>[[${#dates.format(item.getStartDateTime, 'yyyy-MM-dd')}]]</td>
+                    <td>[[${#dates.format(item.getEndDateTime, 'yyyy-MM-dd')}]]</td>
+                    <td>[[${#numbers.formatInteger(item.getPackagePrice, 3, 'COMMA')}]]</td>
+                </th:block>
             </tr>
         </table>
     </div>
-
-    <!--        <div th:replace="header_foter/foter :: foter"></div>-->
 </main>
+<div th:replace="header_foter/foter :: foter"></div>
 </body>
 </html>

@@ -1,39 +1,20 @@
-
-
-//
-//document.addEventListener('DOMContentLoaded', function() {
-//    document.querySelectorAll('.select-air').forEach(function(button) {
-//        button.addEventListener('click', function() {
-//            const airNo = this.getAttribute('data-airno');
-//            window.location.href = `/seat/selection?airNo=${encodeURIComponent(airNo)}&tripType=oneway`;
-//        });
-//    });
-//});
-
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.select-air').forEach(function(button) {
         button.addEventListener('click', function() {
-            const airNo = this.getAttribute('data-airno');
-            if (airNo) {
-                window.location.href = `/seat/selection?airNo=${encodeURIComponent(airNo)}&tripType=oneway`;
+            const airlineNo = this.getAttribute('data-airno');
+
+            if (airlineNo) {
+                if (!isLoggedIn) {
+                    alert('로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.');
+                    window.location.href = loginPageUrl;
+                    return;
+                }
+
+                // 좌석 선택 페이지로 이동
+                window.location.href = `/air/seatShow?airlineNo=${encodeURIComponent(airlineNo)}&tripType=oneway`;
             } else {
-                console.error('No airNo found on the button element.');
+                console.error('항공편 번호를 찾을 수 없습니다.');
             }
         });
     });
 });
-
-function selectReturnAir(airNo) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const departure = urlParams.get('departure');
-    const destination = urlParams.get('destination');
-    const departureDate = urlParams.get('departureDate');
-    const returnDate = urlParams.get('returnDate');
-    const selectedDepartureAirNo = urlParams.get('selectedAirNo');
-
-    if (airNo) {
-        window.location.href = `/seat/selection?airNo=${encodeURIComponent(airNo)}&departure=${encodeURIComponent(departure)}&destination=${encodeURIComponent(destination)}&departureDate=${encodeURIComponent(departureDate)}&returnDate=${encodeURIComponent(returnDate)}&tripType=roundtrip`;
-    } else {
-        console.error('No airNo found.');
-    }
-}

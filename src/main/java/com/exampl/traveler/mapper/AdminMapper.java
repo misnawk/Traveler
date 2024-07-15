@@ -32,4 +32,7 @@ public interface AdminMapper {
     List<HotelVO> hotelSelectID(String binID);
     List<TicketVO> tickSelectID(String binID);
     List<PackageVO> packSelectID(String binID);
+
+    // 주문관리
+    List<UserOrderVO> orderSelectAll();
 }

@@ -1,4 +1,3 @@
-// script.js
 const images = [
     { title: '일본', filenames: ['일본.webp'] },
     { title: '호주', filenames: ['호주.webp'] },
