@@ -6,9 +6,10 @@
         SELECT * FROM diary WHERE userID = #{userId};
     </select>
 
-    <insert id="insertDiary" parameterType="com.exampl.traveler.vo.DiaryVO">
-        INSERT INTO DIARY (userID,GoDay, BACKDAY, DIARYTITLE, DiaryColor)
-        VALUES (#{userId}, #{goDay}, #{backDay}, #{diaryTitle}, #{diaryColor});
+    <insert id="insertDiaryEntry" parameterType="com.exampl.traveler.vo.DiaryVO">
+        INSERT INTO diary (userId, goDay, backDay, DiaryTitle, DiaryColor)
+        VALUES (#{userId}, #{goDay}, #{backDay}, #{DiaryTitle}, #{DiaryColor})
     </insert>
+
 
 </mapper>

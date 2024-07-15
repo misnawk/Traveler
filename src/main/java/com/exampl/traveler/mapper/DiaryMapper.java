@@ -7,5 +7,9 @@ import java.util.List;
 @Mapper
 public interface DiaryMapper {
     List<DiaryVO> show(String userId);
-    void insertDiary(DiaryVO diary);
+    void insertDiaryEntry(DiaryVO diaryVO);
+    void updateDiaryEntry(DiaryVO diaryVO);
+    void deleteDiaryEntry(Integer diaryNO);
+
+
 }
