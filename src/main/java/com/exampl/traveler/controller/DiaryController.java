@@ -53,9 +53,10 @@ public class DiaryController {
         }
     }
 
-    @DeleteMapping("/{diaryNO}")
+    @DeleteMapping("/delete/{diaryNO}")
     @ResponseBody
     public ResponseEntity<String> deleteDiaryEntry(@PathVariable("diaryNO") String diaryNO) {
+        System.out.println(diaryNO);
         try {
             diaryService.delete(diaryNO);
             return ResponseEntity.ok("일정이 삭제되었습니다.");
