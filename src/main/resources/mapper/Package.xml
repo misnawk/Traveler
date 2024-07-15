@@ -24,7 +24,7 @@
         SELECT LAST_INSERT_ID()
     </select>
     <select id="getPackages" parameterType="com.exampl.traveler.vo.PackageVO">
-        SELECT * FROM Package LIMIT 3
+        SELECT * FROM Package
     </select>
     <select id="getPackagesNat" resultType="com.exampl.traveler.vo.PackageVO">
         SELECT * FROM Package

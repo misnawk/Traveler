@@ -53,7 +53,8 @@ public class MainController {
     }
     @RequestMapping("/nation")
     public String nation(Model model){
-
+        List<PackageVO> packages = packageService.getPackages();
+        model.addAttribute("packages", packages);
         return "/nation/nation";
     }
     @GetMapping("/header")

@@ -156,21 +156,24 @@ body, html {
 }
 
 /*패키지*/
-.package_text{
+.package_text {
     padding-left: 20px;
     margin-bottom: 20px;
     margin-top: 100px;
 }
-.package_top{
+.package_top {
     margin-bottom: 50px;
 }
 .package_container {
     display: flex;
-    gap: 40px;
+    width : auto;
+    gap: 70px;
     justify-content: center;
 }
-.package_btn{
+.package_btn {
     background-color: #fff;
+    max-width : 320px;
+    max-height : 200px;
     border: none;
     padding: 10px;
     border-radius: 10px;
@@ -179,7 +182,7 @@ body, html {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 .package_btn img {
-    width: 400px;
+    width: 300px;
     height: 150px;
     object-fit: cover;
     border-radius: 10px;
@@ -188,7 +191,6 @@ body, html {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
 /*더보기 버튼*/
 .more{
     display: flex;

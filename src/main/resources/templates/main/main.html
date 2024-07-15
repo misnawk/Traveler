@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/css/main/main.css">
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -73,10 +75,11 @@
         <div class="package_container" >
             <button type="button" class="package_btn" th:each="packages : ${packages}">
                 <img th:src="${packages.imageUrl}" th:alt="${packages.packageTitle}">
-                <h3 th:text="${packages.packageTitle}">방콕&파타야 5/6</h3>
+                <h3 th:text="${packages.packageTitle}"></h3>
             </button>
         </div>
     </div>
+
 
 
 </main>
@@ -88,5 +91,21 @@
         const cityNO = button.getAttribute('data-id');
         window.location.href = `/city?cityNO=${cityNO}`;
     }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Slick JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.package_container').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true,
+            arrows: true,
+            autoplay: true,
+            autoplaySpeed: 2000
+        });
+    });
 </script>
 </html>
