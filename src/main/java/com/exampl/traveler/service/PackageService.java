@@ -28,6 +28,10 @@ public class PackageService {
     public PackageVO getPackageById(String id) {
         return packageMapper.getPackageById(id);
     }
+    //메인에서 조회
+    public List<PackageVO> getPackages() {return packageMapper.getPackages();}
+    //국가디테일 페이지에서 조회
+    public List<PackageVO> getPackagesNat(String keyword){return packageMapper.getPackagesNat(keyword);}
 
     @Transactional
     public Integer createOrder(String userId, String packageNO, int peopleCount, Date useDate) {

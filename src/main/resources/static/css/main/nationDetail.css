@@ -48,7 +48,7 @@ body, html {
     width : 950px;
     height: auto;
     position: absolute;
-    top:700px;
+    top:850px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -233,3 +233,37 @@ body, html {
     color: #fff;
     font-weight:bolder;
 }
+
+/*패키지   */
+   .package_text {
+            padding-left: 20px;
+            margin-bottom: 20px;
+            margin-top: 100px;
+        }
+        .package_top {
+            margin-bottom: 50px;
+        }
+        .package_container {
+            display: flex;
+            gap: 70px;
+            justify-content: center;
+        }
+        .package_btn {
+            background-color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .package_btn img {
+            width: 300px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .package_btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }

@@ -23,5 +23,13 @@
     <select id="getLastInsertId" resultType="java.lang.Integer">
         SELECT LAST_INSERT_ID()
     </select>
+    <select id="getPackages" parameterType="com.exampl.traveler.vo.PackageVO">
+        SELECT * FROM Package LIMIT 3
+    </select>
+    <select id="getPackagesNat" resultType="com.exampl.traveler.vo.PackageVO">
+        SELECT * FROM Package
+        WHERE packageTitle LIKE CONCAT('%', #{keyword}, '%')
+        OR packageCountry LIKE CONCAT('%', #{keyword}, '%')
+    </select>
 
 </mapper>
