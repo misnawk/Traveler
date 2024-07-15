@@ -14,13 +14,14 @@
 <body>
 <div th:replace="header_foter/header :: header"></div>
 <main>
-    <div class="bgimg" style="background-image: url('./imgs/serchimg.jpg');">
-        <div class="search-box">
-            <input type="text" placeholder="여행지를 검색해보세요">
-            <button>검색</button>
+    <form action="/search" method="get">
+        <div class="bgimg" style="background-image: url('./imgs/serchimg.jpg');">
+            <div class="search-box">
+                <input class="search-btn-input" type="text" id="data" name="data" placeholder="여행지를 검색해보세요">
+                <input class="search-btn" type="submit" value="검색">
+            </div>
         </div>
-    </div>
-
+    </form>
     <div class="best-container">
         <div class="best_top"><h3 class="best_text">나라 추천</h3></div>
         <div class="best-trip">
@@ -68,11 +69,13 @@
         <div class="package_top">
             <h3 class="package_text">현재 뜨고 있는 패키지상품들</h3>
         </div>
-        <div class="package_container" >
-            <button type="button" class="package_btn" th:each="packages : ${packages}">
-                <img th:src="${packages.imageUrl}" th:alt="${packages.packageTitle}">
-                <h3 th:text="${packages.packageTitle}"></h3>
-            </button>
+        <div class="package_container">
+            <div th:each="packages : ${packages}" >
+                <button type="button" class="package_btn" th:data-package-no="${packages.packageNO}"  onclick="viewPackageDetail(this.getAttribute('data-package-no'))">
+                    <img th:src="${packages.imageUrl}" th:alt="${packages.packageTitle}">
+                    <h3 th:text="${packages.packageTitle}"></h3>
+                </button>
+            </div>
         </div>
     </div>
 </main>
@@ -89,9 +92,12 @@
 <!-- Slick JS -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script>
+    function viewPackageDetail(packageNO) {
+      location.href = '/packages/' + packageNO;
+  }
     $(document).ready(function(){
         $('.package_container').slick({
-            slidesToShow: 3,
+            slidesToShow: 5,
             slidesToScroll: 1,
             infinite: true,
             dots: true,

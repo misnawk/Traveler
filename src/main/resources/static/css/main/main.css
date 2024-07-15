@@ -156,6 +156,7 @@ body, html {
 }
 
 /*패키지*/
+
 .package_text {
     padding-left: 20px;
     margin-bottom: 20px;
@@ -167,7 +168,7 @@ body, html {
 .package_container {
     display: flex;
     width : auto;
-    gap: 70px;
+    gap: 20px;
     justify-content: center;
 }
 .package_btn {
@@ -180,6 +181,10 @@ body, html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 10px;
 }
 .package_btn img {
     width: 300px;

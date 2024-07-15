@@ -26,7 +26,7 @@ body, html {
     display: flex;
     align-items: center;
 }
-.search-box input {
+.search-btn-input {
     border: none;
     width:500px;
     padding: 10px;
@@ -34,7 +34,7 @@ body, html {
     border-radius: 5px 0 0 5px;
     outline: none;
 }
-.search-box button {
+.search-btn {
     background-color: #007bff;
     color: white;
     border: none;
@@ -46,7 +46,10 @@ body, html {
 .search-box button:hover {
     background-color: #0056b3;
 }
-
+.community_detail_btn a{
+    text-decoration: none;
+    color : white;
+}
 /*나라 추천*/
 .best-container{
     margin-top: 80px;
@@ -103,7 +106,7 @@ body, html {
 .package_container {
     display: flex;
     width : auto;
-    gap: 70px;
+    gap: 20px;
     justify-content: center;
 }
 .package_btn {
@@ -116,6 +119,10 @@ body, html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 10px;
 }
 .package_btn img {
     width: 300px;
@@ -127,6 +134,5 @@ body, html {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
-
 
 

@@ -245,19 +245,23 @@ body, html {
 }
 .package_container {
     display: flex;
-
-    gap: 70px;
+    width : auto;
+    gap: 20px;
     justify-content: center;
 }
 .package_btn {
     background-color: #fff;
+    max-width : 320px;
+    max-height : 200px;
     border: none;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .package_btn img {
     width: 300px;
