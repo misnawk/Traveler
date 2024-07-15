@@ -77,11 +77,13 @@
                 </tr>
                 <tr th:each="item : ${item}">
                     <th:block th:if="${session.binCate == '1'}">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>[[${item.getCityName}]]</td>
+                        <td>[[${item.getAirTitle}]]</td>
+                        <td>[[${item.getDepartureAirport}]]</td>
+                        <td>[[${item.getArrivalAirport}]]</td>
+                        <td>[[${#dates.format(item.getDepartureDateTime, 'yyyy-MM-dd HH:mm')}]]
+                        <td>[[${#dates.format(item.getArrivalDateTime, 'yyyy-MM-dd HH:mm')}]]</td>
+                        <td>[[${#numbers.formatInteger(item.getAirPrice, 3, 'COMMA')}]]</td>
                         <td><input type="button" class="item_btn" onclick="#" value="관리"></td>
                     </th:block>
                     <th:block th:if="${session.binCate == '2'}">

@@ -99,10 +99,16 @@ public class MainController {
     @GetMapping("binpage/{id}")
     public String binPage(@PathVariable("id") String id, Model model){
         BusinessVO vo = loginService.binSelectOne(id);
-        System.out.println("binCate : " +vo.getBinCate());
 
         if(vo.getBinCate().equals("1")){
             List<AirVO> item = adminService.airSelectID(id);
+
+            for(int i =0; i < item.size(); i++) {
+                System.out.println(item.get(i).getCityNO());
+                CityVO city = cityService.getCityByNumber(item.get(i).getCityNO());
+                item.get(i).setCityName(city.getCityName());
+            }
+
             model.addAttribute("item",item);
         } else if(vo.getBinCate().equals("2")){
             List<HotelVO> item = adminService.hotelSelectID(id);
