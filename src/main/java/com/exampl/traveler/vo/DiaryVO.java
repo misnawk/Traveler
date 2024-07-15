@@ -2,6 +2,7 @@ package com.exampl.traveler.vo;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Data
 public class DiaryVO {

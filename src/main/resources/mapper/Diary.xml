@@ -7,8 +7,8 @@
     </select>
 
     <insert id="insertDiaryEntry" parameterType="com.exampl.traveler.vo.DiaryVO">
-        INSERT INTO diary (userId, goDay, backDay, DiaryTitle, DiaryColor)
-        VALUES (#{userId}, #{goDay}, #{backDay}, #{DiaryTitle}, #{DiaryColor})
+        INSERT INTO diary (userId, goDay, backDay, diaryTitle, diaryColor)
+        VALUES (#{userId}, #{goDay}, #{backDay}, #{diaryTitle}, #{diaryColor})
     </insert>
     <update id="updateDiaryEntry" parameterType="com.exampl.traveler.vo.DiaryVO">
         UPDATE diary
