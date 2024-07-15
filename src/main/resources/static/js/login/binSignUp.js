@@ -36,10 +36,11 @@ function idCheck(){
 }
 
 function codeCheck(){
-    let code = document.getElementById("binCode").value
+    let binCode = document.getElementById("binCode").value
+    let code = binCode.replace(/[^0-9]/g,"")
 
     if(code == ''){
-        alert("아이디를 입력하세요")
+        alert("사업자등록번호 입력하세요")
         return
     }
 
