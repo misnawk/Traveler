@@ -68,11 +68,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     deleteEventBtn.addEventListener('click', function() {
-            if (confirm("정말로 이 일정을 삭제하시겠습니까?")) {
-                var eventId = document.getElementById('edit-event-id').value;
-                deleteDiaryEntry(eventId, calendar);
-            }
-        });
+        if (confirm("정말로 이 일정을 삭제하시겠습니까?")) {
+            deleteDiaryEntry(calendar);
+        }
+    });
 
         $('#edit-event-form').submit(function(e) {
             e.preventDefault();
@@ -161,7 +160,7 @@ function getRandomColor() {
 }
 function showEditForm(event) {
     var editFormContainer = document.getElementById('edit-event-form-container');
-    document.getElementById('edit-event-id').value = event.diaryNO;  // diaryNO 사용
+    document.getElementById('edit-event-id').value = event.extendedProps.diaryNO;  // diaryNO 사용
     document.getElementById('edit-title').value = event.title;
     document.getElementById('edit-start').value = event.start.toISOString().split('T')[0];
     document.getElementById('edit-end').value = event.end ? event.end.toISOString().split('T')[0] : '';
@@ -170,7 +169,7 @@ function showEditForm(event) {
 }
 
 function updateDiaryEntry(calendar) {
-    var eventId = document.getElementById('edit-event-id').value;
+    var diaryNO = document.getElementById('edit-event-id').value;
     var diaryEntry = {
         diaryNO: diaryNO,
         userId: $('#id').val(),
@@ -187,17 +186,20 @@ function updateDiaryEntry(calendar) {
         data: JSON.stringify(diaryEntry),
         success: function(response) {
             alert('일정이 수정되었습니다.');
-            var event = calendar.getEventById(eventId);
+            var event = calendar.getEventById(diaryNO);
             if (event) {
                 event.remove();
             }
             calendar.addEvent({
-                id: eventId,
+                id: diaryNO,
                 title: diaryEntry.diaryTitle,
                 start: diaryEntry.goDay,
                 end: diaryEntry.backDay,
                 color: diaryEntry.diaryColor,
-                editable: true
+                editable: true,
+                extendedProps: {
+                    diaryNO: diaryNO
+                }
             });
             document.getElementById('edit-event-form-container').style.display = 'none';
         },
@@ -207,13 +209,16 @@ function updateDiaryEntry(calendar) {
     });
 }
 
-function deleteDiaryEntry( calendar) {
+function deleteDiaryEntry(calendar) {
+    var diaryNO = document.getElementById('edit-event-id').value;
+        console.log("Attempting to delete diary entry with diaryNO:", diaryNO);
     $.ajax({
-        url: '/diary/' + diaryNO,
+        url: '/diary/delete/' + diaryNO, // URL 수정: '/delete' 앞에 '/diary'를 추가하고 '/' 추가
         type: 'DELETE',
         success: function(response) {
+            console.log("Delete success:", response);
             alert('일정이 삭제되었습니다.');
-            var event = calendar.getEventById(eventId);
+            var event = calendar.getEventById(diaryNO);
             if (event) {
                 event.remove();
             }
@@ -221,6 +226,10 @@ function deleteDiaryEntry( calendar) {
         },
         error: function(xhr, status, error) {
             console.error('Error deleting diary entry:', error);
+            console.error('Status:', status);
+            console.error('Response:', xhr.responseText);
+            console.error('Error deleting diary entry:', error);
+            alert('일정 삭제 중 오류가 발생했습니다: ' + xhr.responseText);  // 서버에서 보낸 오류 메시지 표시
         }
     });
 }

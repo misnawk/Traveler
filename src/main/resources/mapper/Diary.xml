@@ -16,7 +16,7 @@
         WHERE diaryNO = #{diaryNO}
     </update>
 
-    <delete id="deleteDiaryEntry" parameterType="java.lang.Integer">
+    <delete id="deleteDiaryEntry"  parameterType="String">
         DELETE FROM diary WHERE diaryNO = #{diaryNO}
     </delete>
 
