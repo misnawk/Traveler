@@ -14,7 +14,7 @@
     <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.14/main.min.css' rel='stylesheet' />
 </head>
 <body>
-<div th:replace="header_foter/header :: header"></div>
+<div th:replace="~{header_foter/header :: header}"></div>
 <main>
     <input type="hidden" id="id" name="id" th:value="${userId}">
     <button id="show-event-form" class="show-form-btn">일정 추가</button>

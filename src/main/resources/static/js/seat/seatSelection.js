@@ -71,6 +71,10 @@ document.addEventListener('DOMContentLoaded', function() {
                    alert(data.message);
                    selectedSeat.classList.add('reserved');
                    reserveButton.disabled = true;
+                    alert(data.message);
+                           if (data.redirect) {
+                               window.location.href = data.redirect;
+                           }
                } else {
                    alert(data.message);
                }
