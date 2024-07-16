@@ -1,10 +1,7 @@
 package com.exampl.traveler.service;
 
 import com.exampl.traveler.mapper.BusinessMapper;
-import com.exampl.traveler.vo.AirVO;
-import com.exampl.traveler.vo.BusinessVO;
-import com.exampl.traveler.vo.PackageVO;
-import com.exampl.traveler.vo.TicketVO;
+import com.exampl.traveler.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -23,16 +20,24 @@ import java.util.Map;
 public class BusinessService {
     private final BusinessMapper businessMapper;
 
+    // 수정한 기업정보 업데이트
+    public boolean binProUpdate(BusinessVO vo){
+        return businessMapper.binProUpdate(vo);
+    }
+
+    // 수정한 비밀번호 업데이트
+    public boolean binPwUpdate(BusinessVO vo){
+        return businessMapper.binPwUpdate(vo);
+    }
+
     @Value("${imgbb.api.key}")
     private String imgbbApiKey;
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void saveBusiness(BusinessVO businessVO) {
         businessMapper.binIdInsert(businessVO);
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Transactional
     public void saveAirline(AirVO airVO, String businessId) {
@@ -40,7 +45,11 @@ public class BusinessService {
         businessMapper.insertAir(airVO);
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    // 호텔정보 저장하기
+    @Transactional
+    public void createHotel(HotelVO hotelVO) {
+        businessMapper.binInsertHotel(hotelVO);
+    }
 
     @Transactional
     public void saveTicket(TicketVO ticketVO, String businessId, MultipartFile imageFile) throws Exception {
@@ -53,8 +62,6 @@ public class BusinessService {
 
         businessMapper.insertTicket(ticketVO);
     }
-
-
 
     @Transactional
     public void savePackage(PackageVO packageVO, String businessId, MultipartFile imageFile) throws Exception {
@@ -69,10 +76,6 @@ public class BusinessService {
         businessMapper.insertPackage(packageVO);
     }
 
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
     public String uploadImageToImgbb(MultipartFile file) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://api.imgbb.com/1/upload?key=" + imgbbApiKey;

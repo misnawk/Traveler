@@ -68,7 +68,7 @@
     <div id="edit-event-form-container" class="event-form-container" style="display: none;">
         <h3>일정 수정</h3>
         <form id="edit-event-form">
-            <input type="hidden" id="edit-event-id">
+            <input type="hidden" id="edit-event-id" name="edit-event-id" th:value="${diaryNO}">
             <div class="form-group">
                 <label for="edit-title">제목:</label>
                 <input type="text" id="edit-title" name="edit-title" required>
@@ -117,7 +117,7 @@
 
     <div class="calendar_con" id='calendar'></div>
 </main>
-<div th:replace="header_foter/foter :: foter"></div>
+
 
 
 

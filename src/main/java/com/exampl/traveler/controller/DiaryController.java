@@ -33,9 +33,11 @@ public class DiaryController {
     @ResponseBody
     public ResponseEntity<String> saveDiaryEntry(@RequestBody DiaryVO diaryVO) {
         try {
+            System.out.println("Received diary entry: " + diaryVO);  // 로깅 추가
             diaryService.save(diaryVO);
             return ResponseEntity.ok("일정이 저장되었습니다.");
         } catch (Exception e) {
+            e.printStackTrace();  // 스택 트레이스 출력
             return ResponseEntity.badRequest().body("일정 저장 중 오류가 발생했습니다: " + e.getMessage());
         }
     }

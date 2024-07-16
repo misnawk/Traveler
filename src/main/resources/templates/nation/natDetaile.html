@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css">
     <link rel="stylesheet" href="/css/main/nationDetail.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <script src="/js/city/city.js"></script>
 </head>
 <body>
@@ -65,11 +67,13 @@
             <div class="package_top">
                 <h3 class="package_text">현재 뜨고 있는 패키지상품들</h3>
             </div>
-            <div class="package_container" >
-                <button type="button" class="package_btn" th:each="packages : ${packages}">
-                    <img th:src="${packages.imageUrl}" th:alt="${packages.packageTitle}">
-                    <h3 th:text="${packages.packageTitle}">방콕&파타야 5/6</h3>
-                </button>
+            <div class="package_container">
+                <div th:each="packages : ${packages}" >
+                    <button type="button" class="package_btn" th:data-package-no="${packages.packageNO}"  onclick="viewPackageDetail(this.getAttribute('data-package-no'))">
+                        <img th:src="${packages.imageUrl}" th:alt="${packages.packageTitle}">
+                        <h3 th:text="${packages.packageTitle}"></h3>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -77,28 +81,47 @@
 </main>
 <div th:replace="header_foter/foter :: foter"></div>
 <script th:inline="javascript">
-    var natName = /*[[${nation.natName}]]*/ '일본';
+    function viewPackageDetail(packageNO) {
+      location.href = '/packages/' + packageNO;
+  }
+  var natName = /*[[${nation.natName}]]*/ '일본';
 
-    var images = [
-        { title: '일본', filenames: ['일본2.jpeg', '일본3.jpeg', '일본4.jpeg'] },
-        { title: '베트남', filenames: ['베트남1.jpeg', '베트남2.jpeg','베트남3.jpeg'] },
-        { title: '대만', filenames: ['대만1.jpeg', '대만2.jpeg','대만3.jpeg'] },
-        { title: '필리핀', filenames: ['필리핀1.jpeg', '필리핀2.jpeg','필리핀3.jpeg'] },
-        { title: '인도네시아', filenames: ['인도네시아1.jpeg', '인도네시아2.jpeg','인도네시아3.jpeg'] },
-        { title: '인도', filenames: ['인도1.jpeg', '인도2.jpeg','인도3.jpeg'] },
-        { title: '태국', filenames: ['태국1.jpeg', '태국2.jpeg','태국3.jpeg'] },
-        { title: '호주', filenames: ['호주1.jpeg', '호주2.jpeg','호주3.jpeg'] },
-    ];
+  var images = [
+      { title: '일본', filenames: ['일본2.jpeg', '일본3.jpeg', '일본4.jpeg'] },
+      { title: '베트남', filenames: ['베트남1.jpeg', '베트남2.jpeg','베트남3.jpeg'] },
+      { title: '대만', filenames: ['대만1.jpeg', '대만2.jpeg','대만3.jpeg'] },
+      { title: '필리핀', filenames: ['필리핀1.jpeg', '필리핀2.jpeg','필리핀3.jpeg'] },
+      { title: '인도네시아', filenames: ['인도네시아1.jpeg', '인도네시아2.jpeg','인도네시아3.jpeg'] },
+      { title: '인도', filenames: ['인도1.jpeg', '인도2.jpeg','인도3.jpeg'] },
+      { title: '태국', filenames: ['태국1.jpeg', '태국2.jpeg','태국3.jpeg'] },
+      { title: '호주', filenames: ['호주1.jpeg', '호주2.jpeg','호주3.jpeg'] },
+  ];
 
-    images.forEach(function(item) {
-        if (item.title === natName) {
-            item.filenames.forEach(function(filename) {
-                var imgElement = document.createElement('img');
-                imgElement.src = '/imgs/nat/' + filename;
-                imgElement.alt = natName + ' 사진';
-                document.getElementById('image_con').appendChild(imgElement);
-            });
-        }
+  images.forEach(function(item) {
+      if (item.title === natName) {
+          item.filenames.forEach(function(filename) {
+              var imgElement = document.createElement('img');
+              imgElement.src = '/imgs/nat/' + filename;
+              imgElement.alt = natName + ' 사진';
+              document.getElementById('image_con').appendChild(imgElement);
+          });
+      }
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Slick JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.package_container').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true,
+            arrows: true,
+            autoplay: true,
+            autoplaySpeed: 2000
+        });
     });
 </script>
 </body>

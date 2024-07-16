@@ -9,10 +9,10 @@ public class DiaryVO {
     private Integer diaryNO;
     private Integer orderID;
     private String userId;
-    private Date goDay;  // LocalDate로 변경
-    private Date backDay;    //종료날자
+    private LocalDate GoDay;
+    private LocalDate BackDay;
     private Date AllDay;
-    private String DiaryTitle; //구매상품명 또는 제목
+    private String DiaryTitle;
     private String DiaryColor;
 
 }

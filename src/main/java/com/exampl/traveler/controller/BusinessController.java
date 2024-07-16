@@ -2,6 +2,7 @@ package com.exampl.traveler.controller;
 
 import com.exampl.traveler.service.BusinessService;
 import com.exampl.traveler.service.HotelService;
+import com.exampl.traveler.service.LoginService;
 import com.exampl.traveler.vo.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
@@ -10,11 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -22,12 +26,84 @@ import java.util.Map;
 public class BusinessController {
     private final BusinessService businessService;
     private final HotelService hotelService;
+    private final LoginService loginService;
 
+    // 기업정보 수정 페이지
+    @GetMapping("binpage/editor/{id}")
+    public String proEditor(@PathVariable("id") String id, HttpSession httpSession, Model model){
+        String user = (String) httpSession.getAttribute("binID");
 
+        if(ObjectUtils.isEmpty(user) || !user.equals(id)){
+            return "/login/binLogin";
+        } else {
+            BusinessVO vo = loginService.binSelectOne(id);
+            if(vo.getBinCate().equals("1")){
+                vo.setBinCate("항공");
+            } else if(vo.getBinCate().equals("2")){
+                vo.setBinCate("숙박");
+            } else if(vo.getBinCate().equals("3")){
+                vo.setBinCate("티켓");
+            } else if(vo.getBinCate().equals("4")){
+                vo.setBinCate("패키지");
+            }
+            model.addAttribute("vo", vo);
 
+            return "/business/binEditor";
+        }
+    }
 
+    // 수정한 기업정보 업데이트
+    @PostMapping("binpage/editor/update")
+    public String proUpdate(BusinessVO vo){
+        businessService.binProUpdate(vo);
+        return "redirect:/binpage/"+vo.getBinID();
 
+    }
 
+    // 비밀번호 수정 페이지
+    @GetMapping("binpage/pw/{id}")
+    public String PwEditor(HttpSession httpSession, @PathVariable("id") String id){
+        String user = (String) httpSession.getAttribute("binID");
+
+        if(ObjectUtils.isEmpty(user) || !user.equals(id)){
+            return "/login/binLogin";
+        } else {
+            return "/business/binEditorPW";
+        }
+    }
+
+    // 현재 사용중인 비밀번호 확인
+    @PostMapping("binpage/pw/check")
+    public ResponseEntity<Boolean> binPwCheck(@RequestParam("id") String id,
+                                           @RequestParam("pw") String pw,
+                                           BusinessVO vo){
+
+        boolean result = false;
+        vo.setBinID(id);
+        vo.setBinPW(pw);
+
+        if (loginService.binLoginCheck(vo)) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
+    }
+
+    // 수정한 비밀번호 업데이트
+    @PostMapping("binpage/pw/update")
+    public String binPwUpdate(@RequestParam("newPW") String pw ,
+                          @RequestParam("id") String id,
+                          BusinessVO vo){
+        vo.setBinID(id);
+        vo.setBinPW(pw);
+
+        businessService.binPwUpdate(vo);
+        return "redirect:/binpage/" + id;
+
+    }
 
     @PostMapping("/saveAirline")
     public ResponseEntity<?> saveAirline(@RequestBody Map<String, String> AirlineData,HttpSession session) {
@@ -53,6 +129,52 @@ public class BusinessController {
         }
     }
 
+    // 비즈니스 아이디로 호텔 등록하기
+    @PostMapping("/business/saveHotel")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> saveHotel(@RequestBody Map<String, Object> hotelData) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            HotelVO hotelVO = new HotelVO();
+            hotelVO.setHotelName((String) hotelData.get("hotelName"));
+            hotelVO.setHotelPrice(parseInteger(hotelData.get("hotelPrice")));
+            hotelVO.setHotelImg((String) hotelData.get("hotelImg"));
+            hotelVO.setHotelImg1((String) hotelData.get("hotelImg1"));
+            hotelVO.setHotelImg2((String) hotelData.get("hotelImg2"));
+            hotelVO.setHotelImg3((String) hotelData.get("hotelImg3"));
+            hotelVO.setHotelImg4((String) hotelData.get("hotelImg4"));
+            hotelVO.setHotelImg5((String) hotelData.get("hotelImg5"));
+            hotelVO.setHotelImg6((String) hotelData.get("hotelImg6"));
+            hotelVO.setHotelText((String) hotelData.get("hotelText"));
+            hotelVO.setHotelFacility((String) hotelData.get("hotelFacility"));
+            hotelVO.setHotelCountry((String) hotelData.get("hotelCountry"));
+            hotelVO.setHotelTime((String) hotelData.get("hotelTime"));
+            hotelVO.setHotelCheck((String) hotelData.get("hotelCheck"));
+            hotelVO.setHotelAddr((String) hotelData.get("hotelAddr"));
+            hotelVO.setHotelDescription((String) hotelData.get("hotelDescription"));
+            hotelVO.setHotelSights((String) hotelData.get("hotelSights"));
+            hotelVO.setHotelTotal(parseInteger(hotelData.get("hotelTotal")));
+            hotelVO.setBinID((String) hotelData.get("binID"));
+            hotelVO.setBinCate((String) hotelData.get("binCate"));
+
+            businessService.createHotel(hotelVO);
+
+            response.put("status", "success");
+            response.put("hotelNO", hotelVO.getHotelNO()); // 생성된 호텔 번호 반환
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("status", "error");
+            response.put("message", "데이터 저장 오류: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
+    private int parseInteger(Object value) {
+        if (value == null || value.toString().isEmpty()) {
+            return 0; // 기본값 설정
+        }
+        return Integer.parseInt(value.toString());
+    }
 
     @PostMapping(value = "/saveTicket", consumes = "multipart/form-data")
     public ResponseEntity<?> saveTicket(@RequestPart("ticketData") String ticketDataJson,
@@ -124,17 +246,6 @@ public class BusinessController {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     @GetMapping("/binpage/airline")
     public String airWrite() {
         return "/business/airWrite";
@@ -150,59 +261,6 @@ public class BusinessController {
     public String packageWrite() {
         return "/business/packWrite";
     }
-
-
-
-    @PostMapping("/business/saveHotelAndRoom")
-    @ResponseBody
-    public ResponseEntity<String> saveHotelAndRoom(@RequestBody Map<String, Object> requestData) {
-        try {
-            Map<String, Object> hotelData = (Map<String, Object>) requestData.get("hotel");
-            Map<String, Object> roomData = (Map<String, Object>) requestData.get("room");
-
-            HotelVO hotelVO = new HotelVO();
-            hotelVO.setHotelName((String) hotelData.get("hotelName"));
-            hotelVO.setHotelPrice(parseInteger(hotelData.get("hotelPrice")));
-            hotelVO.setHotelImg((String) hotelData.get("hotelImg"));
-            hotelVO.setHotelImg1((String) hotelData.get("hotelImg1"));
-            hotelVO.setHotelImg2((String) hotelData.get("hotelImg2"));
-            hotelVO.setHotelImg3((String) hotelData.get("hotelImg3"));
-            hotelVO.setHotelImg4((String) hotelData.get("hotelImg4"));
-            hotelVO.setHotelImg5((String) hotelData.get("hotelImg5"));
-            hotelVO.setHotelImg6((String) hotelData.get("hotelImg6"));
-            hotelVO.setHotelText((String) hotelData.get("hotelText"));
-            hotelVO.setHotelFacility((String) hotelData.get("hotelFacility"));
-            hotelVO.setHotelCountry((String) hotelData.get("hotelCountry"));
-            hotelVO.setHotelTime((String) hotelData.get("hotelTime"));
-            hotelVO.setHotelCheck((String) hotelData.get("hotelCheck"));
-            hotelVO.setHotelAddr((String) hotelData.get("hotelAddr"));
-            hotelVO.setHotelDescription((String) hotelData.get("hotelDescription"));
-            hotelVO.setHotelSights((String) hotelData.get("hotelSights"));
-            hotelVO.setHotelTotal(parseInteger(hotelData.get("hotelTotal")));
-            hotelVO.setBinID((String) hotelData.get("binID"));
-            hotelVO.setBinCate((String) hotelData.get("binCate"));
-
-            RoomtypeVO roomVO = new RoomtypeVO();
-            roomVO.setRoomName((String) roomData.get("roomName"));
-            roomVO.setRoomImg((String) roomData.get("roomImg"));
-            roomVO.setRoomFacility((String) roomData.get("roomFacility"));
-            roomVO.setRoomMax(parseInteger(roomData.get("roomMax")));
-
-            hotelService.createHotelAndRoom(hotelVO, roomVO);
-
-            return ResponseEntity.ok("Data saved successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving data: " + e.getMessage());
-        }
-    }
-
-    private int parseInteger(Object value) {
-        if (value == null || value.toString().isEmpty()) {
-            return 0; // 기본값 설정
-        }
-        return Integer.parseInt(value.toString());
-    }
-
 
     @GetMapping("/binpage/tick")
     public String tickWrite() {

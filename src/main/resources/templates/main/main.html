@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="/css/main/main.css">
     <link rel="stylesheet" href="/css/header_foter/header.css">
     <link rel="stylesheet" href="/css/header_foter/foter.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -48,6 +50,11 @@
                 <img src="/imgs/nat/다낭.jpeg" alt="다낭">
                 <h3>다낭</h3>
             </button>
+            <button type="button" class="best_btn" data-id="802" onclick="goToDetail(this)">
+                <img src="/imgs/city/멜버른1.jpeg" alt="다낭">
+                <h3>멜버른</h3>
+            </button>
+
 
         </div>
     </div>
@@ -70,23 +77,46 @@
         <div class="package_top">
             <h3 class="package_text">현재 뜨고 있는 패키지상품들</h3>
         </div>
-        <div class="package_container" >
-            <button type="button" class="package_btn" th:each="packages : ${packages}">
+        <div class="package_container">
+        <div th:each="packages : ${packages}" >
+            <button type="button" class="package_btn" th:data-package-no="${packages.packageNO}"  onclick="viewPackageDetail(this.getAttribute('data-package-no'))">
                 <img th:src="${packages.imageUrl}" th:alt="${packages.packageTitle}">
-                <h3 th:text="${packages.packageTitle}">방콕&파타야 5/6</h3>
+                <h3 th:text="${packages.packageTitle}"></h3>
             </button>
         </div>
+        </div>
     </div>
+
 
 
 </main>
 <div th:replace="header_foter/foter :: foter"></div>
 
 </body>
+
 <script>
     function goToDetail(button) {
         const cityNO = button.getAttribute('data-id');
         window.location.href = `/city?cityNO=${cityNO}`;
     }
+    function viewPackageDetail(packageNO) {
+        location.href = '/packages/' + packageNO;
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Slick JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.package_container').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true,
+            arrows: true,
+            autoplay: true,
+            autoplaySpeed: 2000
+        });
+    });
 </script>
 </html>

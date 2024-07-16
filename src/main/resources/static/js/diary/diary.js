@@ -98,7 +98,10 @@ function loadDiaryEntries(userId, successCallback, failureCallback) {
                     title: entry.diaryTitle,
                     start: entry.allDay || allday(entry.goDay), // 시간 정보 제거
                     end: backday(entry.backDay), // 시간 정보 제거
-                    color: entry.diaryColor || getRandomColor() // diaryColor null일 경우 랜덤 색상 사용
+                    color: entry.diaryColor || getRandomColor(), // diaryColor null일 경우 랜덤 색상 사용
+                    extendedProps: {
+                       diaryNO: entry.diaryNO // 이 부분이 올바르게 설정되어 있는지 확인
+                    }
                 };
             });
 
@@ -148,7 +151,6 @@ function saveDiaryEntry(calendar) {
         }
     });
 }
-
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -159,7 +161,7 @@ function getRandomColor() {
 }
 function showEditForm(event) {
     var editFormContainer = document.getElementById('edit-event-form-container');
-    document.getElementById('edit-event-id').value = event.id;
+    document.getElementById('edit-event-id').value = event.diaryNO;  // diaryNO 사용
     document.getElementById('edit-title').value = event.title;
     document.getElementById('edit-start').value = event.start.toISOString().split('T')[0];
     document.getElementById('edit-end').value = event.end ? event.end.toISOString().split('T')[0] : '';
@@ -170,7 +172,7 @@ function showEditForm(event) {
 function updateDiaryEntry(calendar) {
     var eventId = document.getElementById('edit-event-id').value;
     var diaryEntry = {
-        diaryNO: eventId,
+        diaryNO: diaryNO,
         userId: $('#id').val(),
         goDay: $('#edit-start').val(),
         backDay: $('#edit-end').val(),
@@ -179,7 +181,7 @@ function updateDiaryEntry(calendar) {
     };
 
     $.ajax({
-        url: '/diary/' + eventId,
+        url: '/diary/' + diaryNO,
         type: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify(diaryEntry),
@@ -205,9 +207,9 @@ function updateDiaryEntry(calendar) {
     });
 }
 
-function deleteDiaryEntry(eventId, calendar) {
+function deleteDiaryEntry( calendar) {
     $.ajax({
-        url: '/diary/' + eventId,
+        url: '/diary/' + diaryNO,
         type: 'DELETE',
         success: function(response) {
             alert('일정이 삭제되었습니다.');

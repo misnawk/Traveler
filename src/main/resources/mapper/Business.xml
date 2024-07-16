@@ -3,6 +3,18 @@
 
 <mapper namespace="com.exampl.traveler.mapper.BusinessMapper">
 
+    <!-- 수정한 기업회원 업데이트-->
+    <update id="binProUpdate">
+        update businessUser set
+        binName = #{binName}, binTell = #{binTell}, binEmail = #{binEmail}
+        where binID = #{binID}
+    </update>
+
+    <!-- 수정한 비밀번호 업데이트-->
+    <update id="binPwUpdate">
+        update businessUser set binPW = #{binPW} where binID = #{binID}
+    </update>
+
     <insert id="binIdInsert">
         INSERT INTO businessUser (binID, binPW, binName, binCate, binCode, binEmail, binTell)
         VALUES (#{binID}, #{binPW}, #{binName}, #{binCate}, #{binCode}, #{binEmail}, #{binTell})
@@ -11,6 +23,11 @@
     <insert id="insertAir" parameterType="com.exampl.traveler.vo.AirVO">
         INSERT INTO Airline (binID, airTitle, departureAirport, arrivalAirport, airCompany, departureDateTime, arrivalDateTime, airPrice, cityNO)
         VALUES (#{binId}, #{airTitle}, #{departureAirport}, #{arrivalAirport}, #{airCompany}, #{departureDateTime}, #{arrivalDateTime}, #{airPrice}, #{cityNO})
+    </insert>
+
+    <insert id="binInsertHotel" parameterType="com.exampl.traveler.vo.HotelVO" useGeneratedKeys="true" keyProperty="hotelNO">
+        INSERT INTO hotel (hotelName, hotelPrice, hotelImg, hotelImg1, hotelImg2, hotelImg3, hotelImg4, hotelImg5, hotelImg6, hotelText, hotelFacility, hotelCountry, hotelTime, hotelCheck, hotelAddr, hotelDescription, hotelSights, hotelTotal, binID, binCate)
+        VALUES (#{hotelName}, #{hotelPrice}, #{hotelImg}, #{hotelImg1}, #{hotelImg2}, #{hotelImg3}, #{hotelImg4}, #{hotelImg5}, #{hotelImg6}, #{hotelText}, #{hotelFacility}, #{hotelCountry}, #{hotelTime}, #{hotelCheck}, #{hotelAddr}, #{hotelDescription}, #{hotelSights}, #{hotelTotal}, #{binID}, #{binCate})
     </insert>
 
 
