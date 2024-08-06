@@ -32,9 +32,7 @@ public interface AirMapper {
                                @Param("userId") String userId,
                                @Param("tripType") String tripType);
 
-
     int insertOrder(Map<String, Object> paramMap);
-
 
     int insertDiary(@Param("userId") String userId,
                     @Param("orderId") int orderId,
@@ -43,7 +41,6 @@ public interface AirMapper {
                     @Param("backDay") Date backDay,
                     @Param("diaryTitle") String diaryTitle,
                     @Param("tripType") String tripType);
-
 
     int getLastInsertId();
 }

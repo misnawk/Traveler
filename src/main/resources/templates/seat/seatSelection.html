@@ -46,7 +46,37 @@
     let airlineNo = /*[[${airs.airlineNO}]]*/ null;
     /*]]>*/
 </script>
+<script th:inline="javascript">
+    // ... 기존 코드 ...
 
-<script src="/js/seat/seatSelection.js"></script>
+    $('#reserveButton').click(function() {
+        var airlineNo = /*[[${airs.airlineNO}]]*/ '';
+        var tripType = /*[[${tripType}]]*/ '';
+
+        $.ajax({
+            url: '/air/seat',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                airlineNo: airlineNo,
+                seatNumber: selectedSeat,
+                tripType: tripType
+            }),
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message);
+                    window.location.href = response.redirect;
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                alert('오류가 발생했습니다: ' + error);
+            }
+        });
+    });
+
+</script>
+<!--<script src="/js/seat/seatSelection.js"></script>-->
 </body>
 </html>

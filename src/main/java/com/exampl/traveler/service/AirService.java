@@ -17,33 +17,26 @@ import java.util.Map;
 public class AirService {
     private final AirMapper airMapper;
 
-
-    //편도 비행기찾기
     public List<AirVO> findOneWayAir(String departure, String destination, String departureDate) {
         return airMapper.findOneWayAir(departure, destination, departureDate);
     }
-    //왕복비행기 가는편찾기
+
     public List<AirVO> findRoundTripAirs(String departure, String destination, String departureDate) {
         return airMapper.findRoundTripAir(departure, destination, departureDate);
     }
-    //왕복 오눈편찾기
+
     public List<AirVO> findRoundTripReturnAirs(String departure, String destination, String returnDate) {
         return airMapper.findRoundTripReturnAir(departure, destination, returnDate);
     }
 
-
-    //해당 비행기NO로 해당비행기의 모든정보 가져옴
     public AirVO getAirByAirlineNo(String airlineNO) {
         return airMapper.getAirByAirlineNo(airlineNO);
     }
 
-    //해당 항공편의 해당 비행기NO로 좌석의 여부를 알아냄
     public List<String> getAvailableSeats(String airlineNo) {
         return airMapper.getAvailableSeats(airlineNo);
     }
 
-
-    //좌석 테이블에 해당 비행기와 좌석번호와 좌석여부와 유저의 아이디 와 비행기타입을 보냄
     @Transactional
     public void reserveSeat(String airlineNo, String seatNumber, String userId, String tripType) {
         List<String> availableSeats = getAvailableSeats(airlineNo);
@@ -56,7 +49,7 @@ public class AirService {
             throw new SeatAlreadyReservedException("좌석 예약에 실패했습니다: " + seatNumber);
         }
     }
-    //좌석 예약한것을 order테이블에 넘김
+
     @Transactional
     public int insertOrder(String userId, String seatNumber, String airlineNo, Date useDate) {
         try {
@@ -73,7 +66,6 @@ public class AirService {
         }
     }
 
-    //좌석 예약한것을 diary 테이블에 넘김
     @Transactional
     public boolean insertDiary(String userId, int orderId, Date allDay, Date goDay, Date backDay, String diaryTitle, String tripType) {
         try {
@@ -84,21 +76,19 @@ public class AirService {
         }
     }
 
-
-    //예약한 항공권이 왕복인지 또는 편도인지 구분하고 만들어놓은 insertOrder 메서드와 insertOderDiary 를 구분해서 실행함
     @Transactional
-    public boolean reserveSeatAndCreateDiary(String userId, String airlineNo, String seatNumber, String tripType, Date useDate, Date returnDate, String airTitle) {
+    public boolean reserveSeatAndCreateDiary(String userId, String airlineNo, String seatNumber, String tripType, Date departureDate, Date arrivalDate, String airTitle) {
         try {
-            // 1. Insert order
-            int orderId = insertOrder(userId, seatNumber, airlineNo, useDate);
+            int orderId = insertOrder(userId, seatNumber, airlineNo, departureDate);
 
-            // 2. Insert diary
             Date allDay = null, goDay = null, backDay = null;
             if ("oneway".equals(tripType)) {
-                allDay = useDate;
+                allDay = departureDate;
+                goDay = departureDate;
+                backDay = arrivalDate;
             } else if ("roundtrip".equals(tripType)) {
-                goDay = useDate;
-                backDay = returnDate;
+                goDay = departureDate;
+                backDay = arrivalDate;
             } else {
                 throw new IllegalArgumentException("Invalid trip type: " + tripType);
             }
