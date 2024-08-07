@@ -49,7 +49,7 @@ public class MainController {
         List<PackageVO> packages = packageService.getPackages();
         model.addAttribute("packages", packages);
 
-        return "/main/main";
+        return "/main/main.html";
     }
     @RequestMapping("/nation")
     public String nation(Model model){
