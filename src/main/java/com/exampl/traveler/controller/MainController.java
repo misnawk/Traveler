@@ -1,13 +1,7 @@
 package com.exampl.traveler.controller;
 
-import com.exampl.traveler.service.BoardService;
-import com.exampl.traveler.service.CityService;
-import com.exampl.traveler.service.LoginService;
-import com.exampl.traveler.service.NationService;
-import com.exampl.traveler.vo.*;
 import com.exampl.traveler.service.*;
 import com.exampl.traveler.vo.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-
-import static com.mysql.cj.conf.PropertyKey.logger;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,37 +25,37 @@ public class MainController {
     private final PackageService packageService;
     private final AdminService adminService;
 
-
-
     @Autowired
     BoardService boardService;
 
-
     private final NationService nationService;
+
     //메인페이지 게시판에 5개만 보이게 설정
     @RequestMapping("/")
-    public String main(Model model){
+    public String mainPage(Model model){
         List<BoardVO> board = boardService.getBoard();
         model.addAttribute("board",board);
         List<PackageVO> packages = packageService.getPackages();
         model.addAttribute("packages", packages);
 
-        return "/main/main.html";
+        return "main/main";
     }
+
     @RequestMapping("/nation")
     public String nation(Model model){
         List<PackageVO> packages = packageService.getPackages();
         model.addAttribute("packages", packages);
-        return "/nation/nation";
+        return "nation/nation";
     }
+
     @GetMapping("/header")
     public String Header(Model model) {
         return "header";
-
     }
+
     @GetMapping("/footer")
     public String Footer(Model model){
-        return "foter";
+        return "footer"; // 오타 수정: foter -> footer
     }
 
     // admin 페이지
@@ -72,22 +63,21 @@ public class MainController {
     public String admin(HttpSession httpSession, Model model){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals("admin")){
-            return "/login/login";
+            return "login/login";  // 절대 경로에서 상대 경로로 수정
         } else {
             List<MemberVO> vo = loginService.selectAll();
             model.addAttribute("vo", vo);
-            return "/admin/admin";
+            return "admin/admin";  // 절대 경로에서 상대 경로로 수정
         }
     }
 
     // 일반회원 마이페이지
     @GetMapping("mypage/{id}")
     public String myPage(@PathVariable("id") String id, HttpSession httpSession, Model model){
-
         String user = (String) httpSession.getAttribute("id");
 
         if(ObjectUtils.isEmpty(user) || !user.equals(id)){
-            return "/login/login";
+            return "login/login";  // 절대 경로에서 상대 경로로 수정
         } else {
             MemberVO vo = loginService.selectOne(id);
             model.addAttribute("vo", vo);
@@ -112,7 +102,7 @@ public class MainController {
 
             model.addAttribute("orders", orders);
 
-            return "/mypage/mypage";
+            return "mypage/mypage";  // 절대 경로에서 상대 경로로 수정
         }
     }
 
@@ -122,7 +112,7 @@ public class MainController {
         String user = (String) httpSession.getAttribute("binID");
 
         if(ObjectUtils.isEmpty(user) || !user.equals(id)){
-            return "/login/binLogin";
+            return "login/binLogin";  // 절대 경로에서 상대 경로로 수정
         } else {
             BusinessVO vo = loginService.binSelectOne(id);
 
@@ -149,26 +139,25 @@ public class MainController {
             }
             model.addAttribute("vo", vo);
 
-            return "/business/binpage";
+            return "business/binpage";  // 절대 경로에서 상대 경로로 수정
         }
     }
-
 
     @GetMapping("/search")
     public String search(@RequestParam("data") String query) {
         // 도시 검색
         CityVO city = cityService.getCityByName(query);
         if (city != null) {
-            return "redirect:/city?cityNO=" + city.getCityNO();
+            return "redirect:city?cityNO=" + city.getCityNO();
         }
 
         // 국가 검색
         NationVO nation = nationService.getNationByName(query);
         if (nation != null) {
-            return "redirect:/nation/detail/" + nation.getNatNO();
+            return "redirect:nation/detail/" + nation.getNatNO();
         }
 
         // 검색 결과가 없을 경우
-        return "redirect:/noResults";
+        return "redirect:noResults";
     }
 }

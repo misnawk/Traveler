@@ -43,7 +43,7 @@ public class NationController {
         List<PackageVO> packages =  packageService.getPackagesNat(keyword);
         model.addAttribute("packages",packages);
 
-        return "/nation/natDetaile";
+        return "nation/natDetaile";
     }
 
 }

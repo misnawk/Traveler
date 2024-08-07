@@ -34,7 +34,7 @@ public class BusinessController {
         String user = (String) httpSession.getAttribute("binID");
 
         if(ObjectUtils.isEmpty(user) || !user.equals(id)){
-            return "/login/binLogin";
+            return "login/binLogin";
         } else {
             BusinessVO vo = loginService.binSelectOne(id);
             if(vo.getBinCate().equals("1")){
@@ -48,7 +48,7 @@ public class BusinessController {
             }
             model.addAttribute("vo", vo);
 
-            return "/business/binEditor";
+            return "business/binEditor";
         }
     }
 
@@ -56,8 +56,7 @@ public class BusinessController {
     @PostMapping("binpage/editor/update")
     public String proUpdate(BusinessVO vo){
         businessService.binProUpdate(vo);
-        return "redirect:/binpage/"+vo.getBinID();
-
+        return "redirect:/binpage/" + vo.getBinID();
     }
 
     // 비밀번호 수정 페이지
@@ -66,17 +65,17 @@ public class BusinessController {
         String user = (String) httpSession.getAttribute("binID");
 
         if(ObjectUtils.isEmpty(user) || !user.equals(id)){
-            return "/login/binLogin";
+            return "login/binLogin";
         } else {
-            return "/business/binEditorPW";
+            return "business/binEditorPW";
         }
     }
 
     // 현재 사용중인 비밀번호 확인
     @PostMapping("binpage/pw/check")
     public ResponseEntity<Boolean> binPwCheck(@RequestParam("id") String id,
-                                           @RequestParam("pw") String pw,
-                                           BusinessVO vo){
+                                              @RequestParam("pw") String pw,
+                                              BusinessVO vo){
 
         boolean result = false;
         vo.setBinID(id);
@@ -89,24 +88,22 @@ public class BusinessController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
-
     }
 
     // 수정한 비밀번호 업데이트
     @PostMapping("binpage/pw/update")
-    public String binPwUpdate(@RequestParam("newPW") String pw ,
-                          @RequestParam("id") String id,
-                          BusinessVO vo){
+    public String binPwUpdate(@RequestParam("newPW") String pw,
+                              @RequestParam("id") String id,
+                              BusinessVO vo){
         vo.setBinID(id);
         vo.setBinPW(pw);
 
         businessService.binPwUpdate(vo);
         return "redirect:/binpage/" + id;
-
     }
 
     @PostMapping("/saveAirline")
-    public ResponseEntity<?> saveAirline(@RequestBody Map<String, String> AirlineData,HttpSession session) {
+    public ResponseEntity<?> saveAirline(@RequestBody Map<String, String> AirlineData, HttpSession session) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
@@ -237,7 +234,7 @@ public class BusinessController {
                 packageVO.setImageUrl(imageUrl);
             }
 
-            businessService.savePackage(packageVO, businessId,imageFile);
+            businessService.savePackage(packageVO, businessId, imageFile);
             return ResponseEntity.ok().body(Collections.singletonMap("success", true));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -245,30 +242,28 @@ public class BusinessController {
         }
     }
 
-
     @GetMapping("/binpage/airline")
     public String airWrite() {
-        return "/business/airWrite";
+        return "business/airWrite";
     }
 
     @GetMapping("/binpage/hotel")
     public String hotelWrite() {
-        return "/business/hotelWrite";
+        return "business/hotelWrite";
     }
-
 
     @GetMapping("/binpage/package")
     public String packageWrite() {
-        return "/business/packWrite";
+        return "business/packWrite";
     }
 
     @GetMapping("/binpage/tick")
     public String tickWrite() {
-        return "/business/tickWrite";
+        return "business/tickWrite";
     }
 
     @GetMapping("/binpage/packge")
     public String packWrite() {
-        return "/business/packWrite";
+        return "business/packWrite";
     }
 }

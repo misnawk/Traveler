@@ -63,7 +63,7 @@ public class LoginController {
     // 회원 로그인 페이지
     @GetMapping("signUp")
     public String signUp(){
-        return "/login/signUp";
+        return "login/signUp";
     }
 
     // 아이디 중복체크
@@ -84,11 +84,11 @@ public class LoginController {
     // 회원가입
     @PostMapping("user/insert")
     public String userInsert(MemberVO vo,
-                              @RequestParam(value="year") String year,
-                              @RequestParam(value="month") String month,
-                              @RequestParam(value="day") String day,
-                              @RequestParam(value="userID") String userID,
-                              @RequestParam(value="userTell") String userTell){
+                             @RequestParam(value="year") String year,
+                             @RequestParam(value="month") String month,
+                             @RequestParam(value="day") String day,
+                             @RequestParam(value="userID") String userID,
+                             @RequestParam(value="userTell") String userTell){
 
         month = String.format("%2s", month).replace(" ", "0");
         day = String.format("%2s", day).replace(" ", "0");
@@ -101,18 +101,17 @@ public class LoginController {
         return "redirect:/login";
     }
 
-
     //// 기업회원 로그인 & 회원가입 Controller
     // 기업 로그인 페이지
     @GetMapping("binLogin")
     public String binLogin(){
-        return "/login/binLogin";
+        return "login/binLogin";
     }
 
     // 로그인 체크
     @PostMapping("bin/login")
     public ResponseEntity<Boolean> binLoginCheck(@RequestParam("id") String id,
-                                                @RequestParam("pw") String pw,
+                                                 @RequestParam("pw") String pw,
                                                  BusinessVO vo,
                                                  HttpServletRequest request){
 
@@ -140,7 +139,7 @@ public class LoginController {
     // 기업 회원가입 페이지
     @GetMapping("binSignUp")
     public String binSign(){
-        return "/login/binSignUp";
+        return "login/binSignUp";
     }
 
     // 기업 아이디 중복 체크

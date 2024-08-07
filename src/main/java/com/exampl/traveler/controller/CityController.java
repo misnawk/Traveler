@@ -26,6 +26,6 @@ public class CityController {
         String keyword = city.getCityName();  // 국가명을 키워드로 사용
         List<BoardVO> board = boardService.getBoardByKeyword(keyword);
         model.addAttribute("board", board);
-        return "/nation/city";
+        return "nation/city";
     }
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 @RequiredArgsConstructor
 public class MypageController {
@@ -28,23 +27,20 @@ public class MypageController {
     public String proEditor(@PathVariable("id") String id, HttpSession httpSession, Model model){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals(id)){
-            return "/login/login";
+            return "login/login";
         } else {
             MemberVO vo = loginService.selectOne(id);
             model.addAttribute("vo", vo);
 
-            return "/mypage/editor";
+            return "mypage/editor";
         }
     }
 
     // 수정한 회원정보 업데이트
     @PostMapping("mypage/editor/update")
     public String proUpdate(MemberVO vo){
-
         myPageService.proUpdate(vo);
-
-        return "redirect:/mypage/"+vo.getUserID();
-
+        return "redirect:/mypage/" + vo.getUserID();
     }
 
     // 비밀번호 수정 페이지
@@ -52,9 +48,9 @@ public class MypageController {
     public String PwEditor(HttpSession httpSession, @PathVariable("id") String id){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals(id)){
-            return "/login/login";
+            return "login/login";
         } else {
-            return "/mypage/editorPW";
+            return "mypage/editorPW";
         }
     }
 
@@ -75,21 +71,17 @@ public class MypageController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
-
     }
 
     // 수정한 비밀번호 업데이트
     @PostMapping("mypage/pw/update")
     public String pwUdate(@RequestParam("newPW") String pw ,
-                           @RequestParam("id") String id,
+                          @RequestParam("id") String id,
                           MemberVO vo){
         vo.setUserID(id);
         vo.setUserPW(pw);
 
         myPageService.pwInsert(vo);
         return "redirect:/mypage/" + id;
-
     }
-
 }
-

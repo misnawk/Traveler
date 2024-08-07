@@ -33,7 +33,7 @@ public class AdminController {
                              Model model){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals("admin")){
-            return "/login/login";
+            return "login/login";  // 절대 경로에서 상대 경로로 수정
         } else {
             List<MemberVO> vo = null;
 
@@ -48,7 +48,7 @@ public class AdminController {
             }
 
             model.addAttribute("vo", vo);
-            return "/admin/admin";
+            return "admin/admin";  // 절대 경로에서 상대 경로로 수정
         }
     }
 
@@ -57,11 +57,11 @@ public class AdminController {
     public String business(HttpSession httpSession, Model model){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals("admin")){
-            return "/login/login";
+            return "login/login";  // 절대 경로에서 상대 경로로 수정
         } else {
             List<BusinessVO> vo = loginService.binSelectAll();
             model.addAttribute("vo", vo);
-            return "/admin/adminBin";
+            return "admin/adminBin";  // 절대 경로에서 상대 경로로 수정
         }
     }
 
@@ -73,7 +73,7 @@ public class AdminController {
                             Model model){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals("admin")){
-            return "/login/login";
+            return "login/login";  // 절대 경로에서 상대 경로로 수정
         } else {
             List<BusinessVO> vo = null;
 
@@ -90,7 +90,7 @@ public class AdminController {
             }
 
             model.addAttribute("vo", vo);
-            return "/admin/adminBin";
+            return "admin/adminBin";  // 절대 경로에서 상대 경로로 수정
         }
     }
 
@@ -100,7 +100,7 @@ public class AdminController {
                         HttpSession httpSession,Model model){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals("admin")){
-            return "/login/login";
+            return "login/login";  // 절대 경로에서 상대 경로로 수정
         } else {
             String type = null;
 
@@ -136,7 +136,7 @@ public class AdminController {
                 model.addAttribute("type", type);
             }
 
-            return "/admin/adminItems";
+            return "admin/adminItems";  // 절대 경로에서 상대 경로로 수정
         }
     }
 
@@ -146,7 +146,7 @@ public class AdminController {
                          HttpSession httpSession, Model model){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals("admin")){
-            return "/login/login";
+            return "login/login";  // 절대 경로에서 상대 경로로 수정
         } else {
             BusinessVO vo = loginService.binSelectOne(binID);
 
@@ -165,7 +165,7 @@ public class AdminController {
             }
 
             model.addAttribute("vo", vo);
-            return "/admin/adminDetail";
+            return "admin/adminDetail";  // 절대 경로에서 상대 경로로 수정
         }
     }
 
@@ -174,7 +174,7 @@ public class AdminController {
     public String orders(HttpSession httpSession, Model model){
         String user = (String) httpSession.getAttribute("id");
         if(ObjectUtils.isEmpty(user) || !user.equals("admin")){
-            return "/login/login";
+            return "login/login";  // 절대 경로에서 상대 경로로 수정
         } else {
             List<UserOrderVO> orders = adminService.orderSelectAll();
 
@@ -201,8 +201,7 @@ public class AdminController {
 
             model.addAttribute("orders", orders);
 
-            return "/admin/adminOrders";
+            return "admin/adminOrders";  // 절대 경로에서 상대 경로로 수정
         }
     }
-
 }
