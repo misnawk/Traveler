@@ -2,7 +2,7 @@
 
 ### 여행에 모든것이 담겨있는 사이트
 
-![image](https://github.com/user-attachments/assets/34dab5de-3993-4291-bf22-3588077eba3b)
+https://designerapp.officeapps.live.com/designerapp/document.ashx?path=/7ccac929-73f3-4904-9093-f38dc201e3ee/DallEGeneratedImages/dalle-6436c413-dac9-4978-bc78-eb9456ba77d30251678059313536681500.jpg&dcHint=IndiaCentral&fileToken=f1b7b6c5-cbe6-4e28-b840-11584a093c5e
 
 
 
