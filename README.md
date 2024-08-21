@@ -1,10 +1,10 @@
-![게시판](https://github.com/user-attachments/assets/4f2d49ff-6bbf-4667-a19c-254a9dd9874b)![게시판](https://github.com/user-attachments/assets/f63080e2-4279-4345-9eb8-0ed9ede37eb3)# Traveler
+
 
 ### 여행에 모든것이 담겨있는 사이트
 
 ![image](https://github.com/user-attachments/assets/d2868a55-9da8-490d-8dcf-b3868947d823)
 
-- 배포 URL: [https://gentle-field-017139e00.5.azurestaticapps.net](https://traveler-ssr-htdkfzcjfbdjcbby.koreacentral-01.azurewebsites.net/)
+- 배포 URL: https://traveler-ssr-htdkfzcjfbdjcbby.koreacentral-01.azurewebsites.net/
 - Admin ID: admin
 - Admin PWD: admin1234
 
@@ -33,7 +33,7 @@
 - Front:
   -  HTML, CSS, JS
 - Back:
-  - Java, SpringBoot,
+  - Java, MyBatis, SpringBoot,
 - DataBase:
   - MySQL, Dbeaver
 - TeamSpace:
@@ -77,28 +77,39 @@
 ### 로그인 화면
 ![로그인](https://github.com/user-attachments/assets/f8fc9dfb-b1cb-4ef0-80e1-552e3fd1edf0)
 
+### 항공예약 화면
+![image](https://github.com/user-attachments/assets/3a859518-7e8f-4653-97fa-e3cdccaeab5f)
+
 
 ### 숙박예약 화면
+![image](https://github.com/user-attachments/assets/a24bf30c-5caa-4a70-ba19-849857fcd04d)
 
-### 로그인 화면
-### 로그인 화면
-### 로그인 화면
+
+### 티켓예약 화면
+![image](https://github.com/user-attachments/assets/6c79355d-9cc1-4140-9dcc-5e8e354d90ed)
+
+
+
+### 패키지예약 화면
+![image](https://github.com/user-attachments/assets/430fbd8a-fd4e-4451-a851-77856037789b)
+
+
+### RED 
+![image](https://github.com/user-attachments/assets/a7ebb675-2438-49c3-b54f-b3e1b721da38)
 
 
 
 
 ## 느낀점
 
-- 김용현
-  - 이번 프로젝트를 통해 Spring Boot를 이용한 서버 구현과 React에서 지도 API를 사용하는 것이 처음엔 복잡하고 어려웠습니다. 두 기술을 통합하여 RESTful API를 설계하는 데 많은 어려움이 있었지만, 팀원들과 긴밀히 협력하고 다양한 온라인 자료를 활용하여 성공적으로 프로젝트를 완료할 수 있었습니다.
- 
 - 강민석
-  - 리액트로 첫 프로젝트를 진행하면서 수많은 어려움이있었지만 그만큼 자신이 크게 성장했음을 알았습니다.
-프로젝트 초기에 걱정도많았지만 , 프로젝트를 즐기고 있는 저를 발견하며 뿌듯함을 느꼈습니다. 또한, 팀원들과의 활발한 소통을 통해 다양한 지식과 기술을 습득할 수 있었고, 이러한 과정을 거쳐 프로젝트의 결과물도 만족스럽게 완성될수있었습니다.
+  - HTML, CSS, JS와 Ajax, MyBatis를 사용해 MVC 패턴으로 여행 홈페이지를 만들었습니다. IntelliJ와 MyBatis 사용에 어려움이 있었지만, 팀원들과 함께 익히고 문제를 해결했습니다.
+ 
+- 이의현
+  - 이번 프로젝트를 하면서 알게 된 것은 초반에 데이터베이스를 잘 설계해야 한다는 것을 가장 많이 느꼈습니다. 데이터 베이스를 미흡하게 설계해놨을 때 각자 담당하는 부분에서 계속 수정은 하다 보니 나중에 합치게 되었을 때 문제가 많이 발생한다는 것을 알게 되었습니다.
   
-- 이지원
-  - 찜, 리뷰, 별점 등 쉬워보이는 기능들이 생각보다 복잡하고 유기적으로 엮여있다는 걸 알게 되었다. 또한 프론트와 데이터베이스, 서버간의 연동에 대해서 파악하고 이해하여 공부할 수 있었다. 내가 부족한게 뭐고 무엇을 더 잘할 수 있는지 파악할 수 있었으며 팀원간의 협업과 일정관리의 중요성에 대해 습득할 수 있었다.
+- 하유경
+  -여러 가지 구현해야 할 것들이 많아서 걱정도 많았지만 팀원들과 모여 함께 개발할 수 있어서 즐거웠고 문제들을 해결해 나갈 수 있었다, 스프링부트로 개발하는 것에 있어서 아직 많이 부족한 걸 알지만 서비스를 만드는 것에 조금은 자신감을 얻었다.
   
-- 오승록
-  - 코딩으로 팀 단위의 프로젝트를 한게 처음이라
-새로운 경험이었고 짧은 기간동안 많이 배웠습니다. 프로젝트를 진행하면서 저 자신에게 부족함을 많이 느꼈고 기능 구현에만 집중하느라 제대로 기록을 남기지 못한게 개인적으로 아쉬웠습니다. 그래도 팀원들 덕분에 무사히 프로젝트를 마칠 수 있어서 정말 감사하다고 말씀드리고 싶습니다
+- 허주은
+  - 이번 프로젝트를 통해 서비스 로직에 대해서 제대로 이해할 수 있는 있었습니다. 서비스 구현을 할 때 사용자 입장에서 생각해 보면서 조금 더 편리한 기능을 생각해 보는 시간이 되어 좋았습니다. 어려웠던 점도 많지만 강사님들과 팀원들 덕분에 많이 배우고 성장한 시간이었습니다.
