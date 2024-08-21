@@ -4,10 +4,6 @@
 
 ![image](https://github.com/user-attachments/assets/d2868a55-9da8-490d-8dcf-b3868947d823)
 
-
-
-
-
 - 배포 URL: [https://gentle-field-017139e00.5.azurestaticapps.net](https://traveler-ssr-htdkfzcjfbdjcbby.koreacentral-01.azurewebsites.net/)
 - Admin ID: admin
 - Admin PWD: admin1234
@@ -23,10 +19,10 @@
 
 ## 팀원 구성
 
-- 김용현
 - 강민석
-- 오승록
-- 이지원
+- 이의현
+- 하유경
+- 허주은
 
 ## 개발 기간
 
@@ -35,33 +31,33 @@
 ## 개발환경 및 개발언어
 
 - Front:
-  - React, HTML, tailwindCSS
+  -  HTML, CSS, JS
 - Back:
-  - Java, SpringBoot, JWT, SpringSecurity
+  - Java, SpringBoot,
 - DataBase:
   - MySQL, Dbeaver
 - TeamSpace:
-  - Notion, Github
+  - Notion, Github, Figma
 - 배포 환경:
   - Azure
  
 ## 역할 분담
 
-### 김용현
-- UI: 지도, 마이페이지
-- 기능: 매장 검색, 마이페이지 리뷰와 점 확인기능, 로그인/회원가입, 메인페이지 백엔드 구현
-
 ### 강민석
-- UI: 관리자 페이지
-- 기능: 회원관리, 메뉴등록, 재고 수정, 관리자페이지, 상세페이지 백엔드 구현
+- 
+- 
 
-### 오승록
-- UI: 로그인/회원가입 페이지
-- 기능: 로그인/회원가입 유효성 및 중복 검사
+### 이의현
+-
+- 
 
-### 이지원
-- UI: 매장 상세페이지
-- 기능: 매장 정보 불러오기, 찜하기 기능, 리뷰와 별점 등록, 수정 및 삭제
+### 하유경
+- 
+- 
+
+### 허주은
+- 
+- 
 
 # 프로젝트 페이지별 기능
 
