@@ -1,8 +1,9 @@
 # Traveler
 
-### 밀키트 판매 매장 검색 사이트
+### 여행에 모든것이 담겨있는 사이트
 
-![image](https://github.com/user-attachments/assets/2ebbcbad-e2b6-4d18-9a65-38f963d3274e)
+![image](https://github.com/user-attachments/assets/34dab5de-3993-4291-bf22-3588077eba3b)
+
 
 
 
